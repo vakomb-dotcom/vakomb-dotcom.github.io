@@ -1,275 +1,632 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auto Švara</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Automobilius.lt — Automobilių supirkimas</title>
+  <meta name="description" content="Automobilių supirkimas visoje Lietuvoje. Užpildykite formą per 2 minutes ir gaukite pasiūlymą." />
+  <meta name="theme-color" content="#0a4f13" />
+  <style>
+    :root{
+      --green:#0f6a18;
+      --green2:#1f8a2c;
+      --green3:#4caf50;
+      --bg:#f5f7fb;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --line:#e4e8ee;
+      --card:#ffffff;
+      --shadow:0 18px 50px rgba(15, 23, 42, .10);
+      --radius:26px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(15,106,24,.16), transparent 28%),
+        linear-gradient(180deg, #eef4ef 0%, #ffffff 8%, var(--bg) 100%);
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:16px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 16px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      position:sticky;
+      top:12px;
+      z-index:20;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:0;
+    }
+    .logo{
+      width:46px; height:46px; border-radius:14px;
+      background:linear-gradient(135deg, var(--green), #59b865);
+      display:grid; place-items:center; color:#fff; font-weight:900; flex:0 0 auto;
+      box-shadow:0 10px 20px rgba(15,106,24,.14);
+    }
+    .brand h1{
+      margin:0;
+      font-size:20px;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+    .brand p{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .menu{
+      width:56px; height:56px; border-radius:16px;
+      display:grid; place-items:center;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:0 10px 20px rgba(15,23,42,.06);
+      font-size:28px;
+      color:#111827;
+      flex:0 0 auto;
+    }
 
-<style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    margin: 0;
-    background: #f2f2f7;
-    color: #111;
-}
+    .hero{
+      margin-top:16px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .hero-photo{
+      height:min(30vh, 300px);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.25)),
+        url("https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+    }
+    .hero-copy{
+      background:linear-gradient(180deg, #0a5a13 0%, #0f6a18 100%);
+      color:#fff;
+      text-align:center;
+      padding:34px 18px 42px;
+    }
+    .hero-copy h2{
+      margin:0 0 16px;
+      font-size:clamp(30px, 5vw, 54px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      font-weight:900;
+    }
+    .hero-copy p{
+      margin:0 auto;
+      max-width:760px;
+      font-size:19px;
+      line-height:1.55;
+      color:rgba(255,255,255,.90);
+    }
 
-.header {
-    height: 220px;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    padding-bottom:20px;
-    color:white;
-    font-weight:600;
-    font-size:18px;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-    url('https://dealerinspire-image-library-prod.s3.us-east-1.amazonaws.com/images/HuEh1RqD45cPDAWUGk5UdAY2tDpQal8Zdy7zYm1A.jpg') center/cover;
-}
+    .form-section{
+      margin-top:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .form-head{
+      padding:28px 20px 12px;
+      text-align:center;
+    }
+    .form-head h3{
+      margin:0;
+      font-size:clamp(32px, 5vw, 58px);
+      line-height:1.02;
+      letter-spacing:-.04em;
+      color:#263043;
+      font-weight:900;
+    }
+    .form-head p{
+      margin:12px auto 0;
+      max-width:720px;
+      font-size:20px;
+      line-height:1.55;
+      color:#737b89;
+      font-weight:400;
+    }
 
-.container {
-    max-width: 480px;
-    margin: -60px auto 20px;
-    background: white;
-    padding: 22px;
-    border-radius: 24px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
+    .progress{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin:22px 0 28px;
+    }
+    .step-dot{
+      width:62px;
+      height:62px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#d8dce3;
+      color:#fff;
+      font-size:24px;
+      font-weight:800;
+      user-select:none;
+    }
+    .step-dot.active{
+      background:linear-gradient(180deg, #0d5f16, #14661d);
+      box-shadow:0 12px 24px rgba(15,106,24,.18);
+    }
 
-h1 {
-    text-align:center;
-    margin-bottom:15px;
-}
+    form{
+      padding:0 20px 22px;
+      max-width:760px;
+      margin:0 auto;
+    }
+    .step{display:none}
+    .step.active{display:block}
 
-/* 🔥 NAUJAS PREMIUM BLOKAS */
-.intro-box {
-    background:#f2f2f7;
-    border-radius:16px;
-    padding:14px;
-    margin-bottom:18px;
-}
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:18px;
+    }
+    .label{
+      font-size:18px;
+      font-weight:800;
+      color:#273142;
+      letter-spacing:-.01em;
+    }
 
-.intro-item {
-display:flex;
-align-items:center;
-gap:12px;
-font-size:17px; /* ⬅️ čia didinasi tekstas */
-color:#444;
-margin:8px 0;
-font-weight:500;
-}
+    input, textarea{
+      width:100%;
+      border:1px solid #ccd3dd;
+      border-radius:14px;
+      background:#fff;
+      color:var(--text);
+      outline:none;
+      padding:18px 18px;
+      font-size:18px;
+      line-height:1.35;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    input::placeholder, textarea::placeholder{color:#b1b7c1}
+    input:focus, textarea:focus{
+      border-color:rgba(15,106,24,.45);
+      box-shadow:0 0 0 4px rgba(15,106,24,.08);
+    }
+    textarea{
+      min-height:130px;
+      resize:vertical;
+    }
 
-.icon {
-    font-size:16px;
-}
+    .choice-group{margin-bottom:20px}
+    .choice-title{
+      font-size:18px;
+      font-weight:800;
+      color:#273142;
+      margin:0 0 12px;
+      letter-spacing:-.01em;
+    }
+    .choice-list{
+      display:grid;
+      gap:12px;
+    }
+    .choice{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:66px;
+      padding:14px 16px;
+      border:3px solid #d4d7de;
+      border-radius:14px;
+      background:#fff;
+      color:#263043;
+      font-size:22px;
+      font-weight:700;
+      cursor:pointer;
+      user-select:none;
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .choice:hover{transform:translateY(-1px)}
+    .choice input{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      cursor:pointer;
+    }
+    .choice.selected{
+      border-color:#1b5f1f;
+      box-shadow:0 0 0 1px rgba(27,95,31,.08);
+    }
+    .choice.small{
+      font-size:21px;
+    }
 
-.card {
-    background: #f2f2f7;
-    padding: 16px;
-    border-radius: 16px;
-    margin: 10px 0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    cursor:pointer;
-}
+    .actions{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+    .btn{
+      width:100%;
+      border:0;
+      cursor:pointer;
+      min-height:72px;
+      border-radius:14px;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-.02em;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .12s ease, opacity .12s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(180deg, #0c5b15, #0c5b15);
+      box-shadow:0 14px 24px rgba(15,106,24,.16);
+    }
+    .btn-secondary{
+      background:#fff;
+      color:#273043;
+      border:3px solid #d4d7de;
+    }
 
-input[type="checkbox"] {
-    width:22px;
-    height:22px;
-}
+    .mini{
+      margin-top:18px;
+      text-align:center;
+      color:#7b8391;
+      font-size:15px;
+      line-height:1.45;
+    }
 
-.total {
-    text-align:center;
-    font-size:24px;
-    font-weight:600;
-    margin-top:15px;
-}
+    .success,.error{
+      display:none;
+      margin-top:16px;
+      border-radius:14px;
+      padding:14px 16px;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .success{
+      background:#ecfdf3;
+      color:#166534;
+      border:1px solid #c6efd3;
+    }
+    .error{
+      background:#fff1f2;
+      color:#be123c;
+      border:1px solid #fecdd3;
+    }
+    .success.show,.error.show{display:block}
 
-button {
-    width:100%;
-    padding:16px;
-    margin-top:18px;
-    border:none;
-    border-radius:16px;
-    background:#22c55e;
-    color:white;
-    font-size:17px;
-    font-weight:600;
-}
+    .footer{
+      text-align:center;
+      color:#7b8391;
+      font-size:12px;
+      padding:18px 0 8px;
+    }
 
-.hidden { display:none; }
+    .sticky{
+      position:fixed;
+      left:12px;
+      right:12px;
+      bottom:12px;
+      display:none;
+      z-index:40;
+      background:rgba(255,255,255,.94);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:12px 14px;
+    }
+    .sticky .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .sticky strong{display:block; font-size:14px; color:#273043}
+    .sticky span{display:block; font-size:12px; color:#7b8391; margin-top:2px}
 
-.form {
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
+    .float{
+      position:fixed;
+      right:12px;
+      bottom:84px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, var(--green), #59b865);
+      color:#fff;
+      font-size:22px;
+      z-index:42;
+      box-shadow:0 14px 24px rgba(15,106,24,.18);
+    }
 
-.form input {
-    width:100%;
-    max-width:420px;
-    padding:16px;
-    margin-top:12px;
-    border-radius:14px;
-    border:1px solid #e5e5ea;
-    background:#f9f9fb;
-    font-size:16px;
-    box-sizing:border-box;
-}
-
-#data {
-    width:100%;
-    max-width:420px;
-}
-
-label {
-    margin-top:15px;
-    display:block;
-    font-weight:500;
-    text-align:center;
-}
-
-h3 {
-    margin-top:20px;
-    color:#666;
-}
-</style>
+    @media (max-width: 720px){
+      .wrap{padding:12px}
+      .topbar{position:static}
+      .hero-photo{height:20vh; min-height:140px}
+      .hero-copy{padding:22px 16px 28px}
+      .hero-copy h2{font-size:28px}
+      .hero-copy p{font-size:16px}
+      .form-head{padding:22px 16px 10px}
+      .form-head h3{font-size:30px}
+      .form-head p{font-size:18px}
+      form{padding:0 16px 18px}
+      .progress{gap:10px; margin:18px 0 24px}
+      .step-dot{width:58px; height:58px; font-size:22px}
+      .label,.choice-title{font-size:17px}
+      input, textarea{font-size:17px; padding:16px 16px}
+      .choice{font-size:20px; min-height:62px}
+      .btn{font-size:20px; min-height:66px}
+      .sticky{display:block}
+      .float{bottom:88px}
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">A</div>
+        <div>
+          <h1>Automobilius.lt</h1>
+          <p>Greitas automobilių supirkimas</p>
+        </div>
+      </div>
+      <div class="menu">☰</div>
+    </header>
 
-<div class="header">
+    <section class="hero">
+      <div class="hero-photo"></div>
+      <div class="hero-copy">
+        <h2>Superkame visus automobilius</h2>
+        <p>Užpildykite formą ir gaukite pasiūlymą. Viso užtruksite vos 2 minutes.</p>
+      </div>
+    </section>
 
-</div>
+    <section class="form-section" id="forma">
+      <div class="form-head">
+        <h3>Užtruksite tik 2 minutes!</h3>
+        <p>Užpildykite formą ir jau netrukus sulauksite kainos pasiūlymo</p>
+      </div>
 
-<div class="container" id="servicesPage">
+      <div class="progress" aria-label="Žingsniai">
+        <div class="step-dot active" data-dot="1">1</div>
+        <div class="step-dot" data-dot="2">2</div>
+        <div class="step-dot" data-dot="3">3</div>
+      </div>
 
-<!-- 🔥 NAUJAS APRAŠYMAS -->
-<div class="intro-box">
-    <div class="intro-item"><span class="icon">✨</span> Profesionalus auto valymas Ukmergėje</div>
-    <div class="intro-item"><span class="icon">🧼</span> Vidus + išorė – nuo paprasto iki pilno valymo</div>
-    <div class="intro-item"><span class="icon">⚡</span> Greitas aptarnavimas ir kokybiškos priemonės</div>
-</div>
+      <form id="leadForm" action="https://formspree.io/f/xpqkqbbw" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="source" value="Automobilius.lt" />
+        <input type="hidden" name="_subject" value="Nauja užklausa iš Automobilius.lt" />
 
-<h1>Pasirink paslaugas</h1>
+        <div class="step active" data-step="1">
+          <div class="field">
+            <label class="label" for="marke">Markė</label>
+            <input id="marke" name="marke" type="text" required />
+          </div>
+          <div class="field">
+            <label class="label" for="modelis">Modelis</label>
+            <input id="modelis" name="modelis" type="text" required />
+          </div>
+          <div class="field">
+            <label class="label" for="metai">Metai</label>
+            <input id="metai" name="metai" type="number" min="1980" max="2035" required />
+          </div>
+          <div class="field">
+            <label class="label" for="variklis">Variklio tūris</label>
+            <input id="variklis" name="variklis" type="text" placeholder="pvz. 2.0" required />
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="next1">Tęsti</button>
+          </div>
+        </div>
 
-<h3>Vidus</h3>
-<div class="card"><span>Siurbimas (15€)</span><input type="checkbox" value="15"></div>
-<div class="card"><span>Panelės valymas (10€)</span><input type="checkbox" value="10"></div>
-<div class="card"><span>Stiklų valymas (10€)</span><input type="checkbox" value="10"></div>
-<div class="card"><span>Cheminis valymas (120€)</span><input type="checkbox" value="120"></div>
+        <div class="step" data-step="2">
+          <div class="choice-group">
+            <div class="choice-title">Kuro tipas</div>
+            <div class="choice-list">
+              <label class="choice"><input type="radio" name="kuro_tipas" value="Dyzelinas" checked /> Dyzelinas</label>
+              <label class="choice"><input type="radio" name="kuro_tipas" value="Benzinas" /> Benzinas</label>
+              <label class="choice"><input type="radio" name="kuro_tipas" value="Benzinas / dujos" /> Benzinas / dujos</label>
+            </div>
+          </div>
 
-<h3>Išorė</h3>
-<div class="card"><span>Padangų juodinimas (5€)</span><input type="checkbox" value="5"></div>
-<div class="card"><span>Ratlankių valymas (20€)</span><input type="checkbox" value="20"></div>
-<div class="card"><span>Defektų maskavimas (30€)</span><input type="checkbox" value="30"></div>
-<div class="card"><span>Poliravimas (150€)</span><input type="checkbox" value="150"></div>
+          <div class="choice-group">
+            <div class="choice-title">Pavarų dėžė</div>
+            <div class="choice-list">
+              <label class="choice small"><input type="radio" name="pavaru_deze" value="Mechaninė" checked /> Mechaninė</label>
+              <label class="choice small"><input type="radio" name="pavaru_deze" value="Automatinė" /> Automatinė</label>
+            </div>
+          </div>
 
-<div class="total">Bendra: <span id="total">0</span> €</div>
+          <div class="choice-group">
+            <div class="choice-title">Techninė apžiūra</div>
+            <div class="choice-list">
+              <label class="choice small selected"><input type="radio" name="technine_apziura" value="Galioja" checked /> Galioja</label>
+              <label class="choice small"><input type="radio" name="technine_apziura" value="Negalioja" /> Negalioja</label>
+            </div>
+          </div>
 
-<button onclick="goToForm()">Užsakyti valymą</button>
-</div>
+          <div class="field">
+            <label class="label" for="kaina">Preliminari norima kaina</label>
+            <input id="kaina" name="norima_kaina" type="text" placeholder="pvz. 15000 EUR" />
+          </div>
 
-<!-- likusi tavo dalis NEKEISTA -->
-<div class="container hidden" id="formPage">
-<h1>Registracija</h1>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="next2">Tęsti</button>
+            <button type="button" class="btn btn-secondary" id="back2">Atgal</button>
+          </div>
+        </div>
 
-<form id="bookingForm">
+        <div class="step" data-step="3">
+          <div class="field">
+            <label class="label" for="telefonas">Telefono numeris</label>
+            <input id="telefonas" name="telefonas" type="tel" required />
+          </div>
+          <div class="field">
+            <label class="label" for="komentaras">Komentaras</label>
+            <textarea id="komentaras" name="komentaras" placeholder="Trumpas būklės ar defektų aprašymas"></textarea>
+          </div>
 
-<div class="form">
-<input name="Marke" id="marke" placeholder="Markė">
-<input name="Modelis" id="modelis" placeholder="Modelis">
-<input name="Miestas" id="miestas" placeholder="Miestas">
-<input name="Telefonas" id="tel" placeholder="Telefonas">
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Pateikti pasiūlymą</button>
+            <button type="button" class="btn btn-secondary" id="back3">Atgal</button>
+          </div>
 
-<label>Data</label>
-<input name="Data" id="data" type="date">
-</div>
+          <div class="mini">Atsakysime per 5–30 min. Užklausa siunčiama tiesiai į Formspree.</div>
+          <div class="success" id="successBox"><b>Ačiū, užklausa išsiųsta.</b><div>Susisieksime su jumis artimiausiu metu.</div></div>
+          <div class="error" id="errorBox"></div>
+        </div>
+      </form>
+    </section>
 
-<input type="hidden" id="hiddenTotal">
+    <div class="footer">© <span id="year"></span> Automobilius.lt</div>
+  </div>
 
-<div class="total">Suma: <span id="finalTotal">0</span> €</div>
+  <div class="sticky">
+    <div class="row">
+      <div>
+        <strong>Užtruksite tik 2 minutes</strong>
+        <span>Pateikite pasiūlymą dabar</span>
+      </div>
+      <button class="btn btn-primary" id="stickyBtn" style="padding:12px 14px; min-height:52px;">Dabar</button>
+    </div>
+  </div>
 
-<button type="submit">Registruotis</button>
+  <a href="tel:+37066066096" class="float" aria-label="Skambinti">📞</a>
 
-</form>
-</div>
+  <script>
+    const formspreeEndpoint = "https://formspree.io/f/xpqkqbbw";
+    const form = document.getElementById('leadForm');
+    const successBox = document.getElementById('successBox');
+    const errorBox = document.getElementById('errorBox');
+    const submitBtn = document.getElementById('submitBtn');
+    const year = document.getElementById('year');
+    const steps = [...document.querySelectorAll('.step')];
+    const dots = [...document.querySelectorAll('.step-dot')];
+    let currentStep = 1;
 
-<script>
-// tavo JS paliktas tas pats
-const checkboxes = document.querySelectorAll('#servicesPage input[type="checkbox"]');
-const cards = document.querySelectorAll('.card');
+    year.textContent = new Date().getFullYear();
 
-function calculateTotal(){
-    let total = 0;
-    checkboxes.forEach(c=>{
-        if(c.checked) total += Number(c.value);
-    });
+    function updateStep() {
+      steps.forEach(step => step.classList.toggle('active', Number(step.dataset.step) === currentStep));
+      dots.forEach(dot => dot.classList.toggle('active', Number(dot.dataset.dot) <= currentStep));
+      window.scrollTo({ top: document.getElementById('forma').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth' });
+    }
 
-    document.getElementById('total').innerText = total;
-    const f = document.getElementById('finalTotal');
-    if(f) f.innerText = total;
-}
-
-cards.forEach((card, index)=>{
-    card.addEventListener('click', (e)=>{
-        if(e.target.tagName !== 'INPUT'){
-            const checkbox = checkboxes[index];
-            checkbox.checked = !checkbox.checked;
+    function validateStep(stepNumber) {
+      const step = steps.find(s => Number(s.dataset.step) === stepNumber);
+      const required = [...step.querySelectorAll('[required]')];
+      for (const el of required) {
+        if (!el.checkValidity()) {
+          el.reportValidity();
+          return false;
         }
-        calculateTotal();
+      }
+      return true;
+    }
+
+    function setChoiceStyles() {
+      document.querySelectorAll('.choice').forEach(label => {
+        const input = label.querySelector('input');
+        const update = () => {
+          const group = input.name;
+          document.querySelectorAll(`input[name="${group}"]`).forEach(i => i.closest('.choice').classList.remove('selected'));
+          label.classList.add('selected');
+        };
+        input.addEventListener('change', update);
+        if (input.checked) label.classList.add('selected');
+      });
+    }
+
+    document.getElementById('next1').addEventListener('click', () => {
+      if (!validateStep(1)) return;
+      currentStep = 2;
+      updateStep();
     });
-});
-
-checkboxes.forEach(cb=>{
-    cb.addEventListener('change', calculateTotal);
-});
-
-function goToForm(){
-    calculateTotal();
-    document.getElementById('servicesPage').classList.add('hidden');
-    document.getElementById('formPage').classList.remove('hidden');
-}
-
-document.getElementById("bookingForm").addEventListener("submit", async function(e){
-    e.preventDefault();
-
-    const selectedServices = [];
-    checkboxes.forEach(c=>{
-        if(c.checked){
-            selectedServices.push(c.parentElement.innerText);
-        }
+    document.getElementById('next2').addEventListener('click', () => {
+      if (!validateStep(2)) return;
+      currentStep = 3;
+      updateStep();
+    });
+    document.getElementById('back2').addEventListener('click', () => {
+      currentStep = 1;
+      updateStep();
+    });
+    document.getElementById('back3').addEventListener('click', () => {
+      currentStep = 2;
+      updateStep();
     });
 
-    const data = {
-        Marke: marke.value,
-        Modelis: modelis.value,
-        Miestas: miestas.value,
-        Telefonas: tel.value,
-        Data: dataInput.value,
-        Paslaugos: selectedServices.join(", "),
-        Suma: document.getElementById("finalTotal").innerText + "€"
-    };
+    document.getElementById('stickyBtn').addEventListener('click', () => {
+      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
-    try {
-        await fetch("https://formspree.io/f/xpqkqbbw", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
+    document.querySelector('.hero-copy').addEventListener('click', () => {
+      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    setChoiceStyles();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      successBox.classList.remove('show');
+      errorBox.classList.remove('show');
+
+      const phone = document.getElementById('telefonas');
+      if (!phone.value.trim()) {
+        errorBox.textContent = 'Telefono numeris yra privalomas.';
+        errorBox.classList.add('show');
+        phone.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SIUNČIAMA...';
+
+      try {
+        const fd = new FormData(form);
+        fd.append('submitted_at', new Date().toISOString());
+
+        const res = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
         });
 
-        alert("Jūsų registracija priimta. Susisieksime per 30 min.");
-        
-        document.getElementById("bookingForm").reset();
-    } catch (error) {
-        alert("Klaida siunčiant. Bandykite dar kartą.");
-    }
-});
+        if (!res.ok) throw new Error('Submit failed');
 
-const dataInput = document.getElementById("data");
-</script>
-
+        successBox.classList.add('show');
+        form.reset();
+        setChoiceStyles();
+        currentStep = 1;
+        updateStep();
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        errorBox.textContent = 'Nepavyko išsiųsti užklausos. Patikrink Formspree ryšį.';
+        errorBox.classList.add('show');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Pateikti pasiūlymą';
+      }
+    });
+  </script>
 </body>
 </html>
