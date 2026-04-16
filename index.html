@@ -372,19 +372,6 @@
       text-align:center;
       margin-top:4px;
     }
-    .whatsapp-mini{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:54px;
-      height:54px;
-      border-radius:50%;
-      background:#22c55e;
-      color:#fff;
-      font-size:24px;
-      box-shadow:0 12px 22px rgba(34,197,94,.18);
-      margin-top:14px;
-    }
 
     .footer{
       text-align:center;
@@ -520,6 +507,10 @@
             <input id="telefonas" name="telefonas" type="tel" required />
           </div>
           <div class="field">
+            <label class="label" for="miestas">Miestas</label>
+            <input id="miestas" name="miestas" type="text" placeholder="Pvz. Vilnius" />
+          </div>
+          <div class="field">
             <label class="label" for="komentaras">Komentaras</label>
             <textarea id="komentaras" name="komentaras" placeholder="Trumpas būklės ar defektų aprašymas"></textarea>
           </div>
@@ -556,10 +547,9 @@
     </section>
 
     <section id="bottom" class="bottom-panel">
-      <button class="bottom-button">Parduoti automobilį</button>
+      <button class="bottom-button" id="bottomSellBtn" type="button">Parduoti automobilį</button>
       <div class="divider"></div>
       <div class="contact-phone">066 066 096</div>
-      <a href="https://wa.me/37066066096" target="_blank" rel="noopener" class="whatsapp-mini" aria-label="WhatsApp">◎</a>
     </section>
 
     <div class="footer">© <span id="year"></span> Automobilius.lt</div>
@@ -629,6 +619,10 @@
     });
 
     setChoiceStyles();
+    document.getElementById('bottomSellBtn').addEventListener('click', () => {
+      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -661,6 +655,10 @@
         successBox.classList.add('show');
         form.reset();
         setChoiceStyles();
+    document.getElementById('bottomSellBtn').addEventListener('click', () => {
+      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
         currentStep = 1;
         updateStep();
         successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
