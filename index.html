@@ -1,24 +1,25 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r"""<!DOCTYPE html>
 <html lang="lt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   <title>Automobilius.lt — Automobilių supirkimas</title>
-  <meta name="description" content="Automobilių supirkimas visoje Lietuvoje. Užpildykite formą per 2 minutes ir gaukite pasiūlymą." />
-  <meta name="theme-color" content="#0a4f13" />
+  <meta name="description" content="Automobilių supirkimas visoje Lietuvoje. Pateikite užklausą per 2 minutes." />
+  <meta name="theme-color" content="#ffffff" />
   <style>
     :root{
-      --green:#0f6a18;
-      --green2:#1f8a2c;
-      --green3:#4caf50;
       --bg:#f5f7fb;
+      --card:#ffffff;
       --text:#1f2937;
       --muted:#6b7280;
-      --line:#e4e8ee;
-      --card:#ffffff;
-      --shadow:0 18px 50px rgba(15, 23, 42, .10);
-      --radius:26px;
-      --max:1120px;
+      --line:#e5e7eb;
+      --green:#1e7f33;
+      --green2:#2ea44f;
+      --shadow:0 14px 40px rgba(16,24,40,.08);
+      --radius:22px;
+      --max:1080px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -26,37 +27,36 @@
       margin:0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background:
-        radial-gradient(circle at 50% 0%, rgba(15,106,24,.16), transparent 28%),
-        linear-gradient(180deg, #eef4ef 0%, #ffffff 8%, var(--bg) 100%);
+        radial-gradient(circle at 12% 8%, rgba(30,127,51,.08), transparent 22%),
+        radial-gradient(circle at 88% 12%, rgba(30,127,51,.05), transparent 18%),
+        var(--bg);
       color:var(--text);
       min-height:100vh;
       overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
+    a{color:inherit;text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:16px}
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:14px 16px;
+      padding:12px 14px;
       background:#fff;
       border:1px solid var(--line);
       border-radius:20px;
       box-shadow:var(--shadow);
       position:sticky;
       top:12px;
-      z-index:20;
+      z-index:30;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; min-width:0;
-    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0}
     .logo{
-      width:46px; height:46px; border-radius:14px;
+      width:44px; height:44px; border-radius:14px;
       background:linear-gradient(135deg, var(--green), #59b865);
       display:grid; place-items:center; color:#fff; font-weight:900; flex:0 0 auto;
       box-shadow:0 10px 20px rgba(15,106,24,.14);
     }
     .brand h1{
       margin:0;
-      font-size:20px;
+      font-size:19px;
       line-height:1;
       letter-spacing:-.03em;
     }
@@ -69,7 +69,7 @@
       text-overflow:ellipsis;
     }
     .menu{
-      width:56px; height:56px; border-radius:16px;
+      width:52px; height:52px; border-radius:16px;
       display:grid; place-items:center;
       border:1px solid var(--line);
       background:#fff;
@@ -77,6 +77,7 @@
       font-size:28px;
       color:#111827;
       flex:0 0 auto;
+      cursor:pointer;
     }
 
     .hero{
@@ -88,7 +89,8 @@
       box-shadow:var(--shadow);
     }
     .hero-photo{
-      height:min(30vh, 300px);
+      height:min(28vh, 250px);
+      min-height:150px;
       background:
         linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.25)),
         url("https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
@@ -97,11 +99,11 @@
       background:linear-gradient(180deg, #0a5a13 0%, #0f6a18 100%);
       color:#fff;
       text-align:center;
-      padding:34px 18px 42px;
+      padding:28px 18px 34px;
     }
     .hero-copy h2{
-      margin:0 0 16px;
-      font-size:clamp(30px, 5vw, 54px);
+      margin:0 0 12px;
+      font-size:clamp(28px, 5vw, 52px);
       line-height:1.02;
       letter-spacing:-.04em;
       font-weight:900;
@@ -109,8 +111,8 @@
     .hero-copy p{
       margin:0 auto;
       max-width:760px;
-      font-size:19px;
-      line-height:1.55;
+      font-size:18px;
+      line-height:1.5;
       color:rgba(255,255,255,.90);
     }
 
@@ -123,22 +125,22 @@
       overflow:hidden;
     }
     .form-head{
-      padding:28px 20px 12px;
+      padding:24px 18px 10px;
       text-align:center;
     }
     .form-head h3{
       margin:0;
-      font-size:clamp(32px, 5vw, 58px);
+      font-size:clamp(30px, 5vw, 54px);
       line-height:1.02;
       letter-spacing:-.04em;
       color:#263043;
       font-weight:900;
     }
     .form-head p{
-      margin:12px auto 0;
-      max-width:720px;
-      font-size:20px;
-      line-height:1.55;
+      margin:10px auto 0;
+      max-width:700px;
+      font-size:18px;
+      line-height:1.45;
       color:#737b89;
       font-weight:400;
     }
@@ -146,18 +148,18 @@
     .progress{
       display:flex;
       justify-content:center;
-      gap:12px;
-      margin:22px 0 28px;
+      gap:10px;
+      margin:18px 0 22px;
     }
     .step-dot{
-      width:62px;
-      height:62px;
+      width:54px;
+      height:54px;
       border-radius:50%;
       display:grid;
       place-items:center;
       background:#d8dce3;
       color:#fff;
-      font-size:24px;
+      font-size:22px;
       font-weight:800;
       user-select:none;
     }
@@ -167,8 +169,8 @@
     }
 
     form{
-      padding:0 20px 22px;
-      max-width:760px;
+      padding:0 18px 20px;
+      max-width:660px;
       margin:0 auto;
     }
     .step{display:none}
@@ -177,11 +179,11 @@
     .field{
       display:flex;
       flex-direction:column;
-      gap:10px;
-      margin-bottom:18px;
+      gap:8px;
+      margin-bottom:16px;
     }
     .label{
-      font-size:18px;
+      font-size:16px;
       font-weight:800;
       color:#273142;
       letter-spacing:-.01em;
@@ -190,12 +192,12 @@
     input, textarea{
       width:100%;
       border:1px solid #ccd3dd;
-      border-radius:14px;
+      border-radius:12px;
       background:#fff;
       color:var(--text);
       outline:none;
-      padding:18px 18px;
-      font-size:18px;
+      padding:14px 14px;
+      font-size:16px;
       line-height:1.35;
       box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
     }
@@ -205,38 +207,39 @@
       box-shadow:0 0 0 4px rgba(15,106,24,.08);
     }
     textarea{
-      min-height:130px;
+      min-height:112px;
       resize:vertical;
     }
 
-    .choice-group{margin-bottom:20px}
+    .choice-group{margin-bottom:18px}
     .choice-title{
-      font-size:18px;
+      font-size:16px;
       font-weight:800;
       color:#273142;
-      margin:0 0 12px;
+      margin:0 0 10px;
       letter-spacing:-.01em;
     }
     .choice-list{
       display:grid;
-      gap:12px;
+      gap:10px;
     }
     .choice{
       position:relative;
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height:66px;
-      padding:14px 16px;
-      border:3px solid #d4d7de;
-      border-radius:14px;
+      min-height:60px;
+      padding:12px 14px;
+      border:2px solid #d4d7de;
+      border-radius:12px;
       background:#fff;
       color:#263043;
-      font-size:22px;
+      font-size:18px;
       font-weight:700;
       cursor:pointer;
       user-select:none;
       transition:transform .12s ease, border-color .12s ease, background .12s ease;
+      text-align:center;
     }
     .choice:hover{transform:translateY(-1px)}
     .choice input{
@@ -249,22 +252,19 @@
       border-color:#1b5f1f;
       box-shadow:0 0 0 1px rgba(27,95,31,.08);
     }
-    .choice.small{
-      font-size:21px;
-    }
 
     .actions{
       display:grid;
-      gap:12px;
-      margin-top:18px;
+      gap:10px;
+      margin-top:16px;
     }
     .btn{
       width:100%;
       border:0;
       cursor:pointer;
-      min-height:72px;
-      border-radius:14px;
-      font-size:22px;
+      min-height:64px;
+      border-radius:12px;
+      font-size:18px;
       font-weight:800;
       letter-spacing:-.02em;
       display:flex;
@@ -281,23 +281,15 @@
     .btn-secondary{
       background:#fff;
       color:#273043;
-      border:3px solid #d4d7de;
-    }
-
-    .mini{
-      margin-top:18px;
-      text-align:center;
-      color:#7b8391;
-      font-size:15px;
-      line-height:1.45;
+      border:2px solid #d4d7de;
     }
 
     .success,.error{
       display:none;
-      margin-top:16px;
-      border-radius:14px;
-      padding:14px 16px;
-      font-size:14px;
+      margin-top:14px;
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:13px;
       line-height:1.45;
     }
     .success{
@@ -312,6 +304,103 @@
     }
     .success.show,.error.show{display:block}
 
+    .section-title{
+      margin:24px 0 14px;
+      text-align:center;
+    }
+    .section-title h4{
+      margin:0;
+      font-size:clamp(26px, 4vw, 40px);
+      line-height:1.05;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#1f2937;
+    }
+    .section-title p{
+      margin:10px auto 0;
+      max-width:760px;
+      color:#737b89;
+      font-size:16px;
+      line-height:1.45;
+    }
+
+    .info-cards{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+    .info-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:16px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .icon{
+      width:34px; height:34px;
+      border-radius:50%;
+      display:grid; place-items:center;
+      background:#edf7ef;
+      color:#1e7f33;
+      font-size:16px;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+    .info-card b{display:block; font-size:15px; margin-bottom:0; line-height:1.35}
+    .info-card p{margin:0; color:var(--muted); font-size:13px; line-height:1.35}
+
+    .bottom-panel{
+      margin-top:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .bottom-button{
+      width:100%;
+      min-height:62px;
+      border-radius:12px;
+      border:0;
+      background:linear-gradient(180deg, #18943a, #18943a);
+      color:#fff;
+      font-size:18px;
+      font-weight:800;
+      box-shadow:0 12px 20px rgba(24,148,58,.18);
+    }
+    .divider{
+      height:1px;
+      background:#e5e7eb;
+      margin:18px 0;
+    }
+    .contact{
+      color:#737b89;
+      font-size:16px;
+      margin-bottom:8px;
+    }
+    .contact-phone{
+      color:#1e9b47;
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.03em;
+      margin-bottom:10px;
+    }
+    .whatsapp-mini{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      background:#22c55e;
+      color:#fff;
+      font-size:24px;
+      box-shadow:0 12px 22px rgba(34,197,94,.18);
+    }
+
     .footer{
       text-align:center;
       color:#7b8391;
@@ -319,67 +408,105 @@
       padding:18px 0 8px;
     }
 
-    .sticky{
+    .menu-drawer{
       position:fixed;
-      left:12px;
-      right:12px;
-      bottom:12px;
+      inset:0;
+      z-index:60;
       display:none;
-      z-index:40;
-      background:rgba(255,255,255,.94);
+      background:rgba(15,23,42,.28);
+    }
+    .menu-drawer.open{display:block}
+    .menu-panel{
+      position:absolute;
+      top:0;
+      right:0;
+      width:min(86vw, 380px);
+      height:100%;
+      background:#fff;
+      box-shadow:-18px 0 50px rgba(0,0,0,.14);
+      padding:22px 20px;
+      transform:translateX(100%);
+      transition:transform .22s ease;
+      overflow:auto;
+    }
+    .menu-drawer.open .menu-panel{transform:translateX(0)}
+    .menu-panel .close{
+      width:50px; height:50px;
+      border-radius:16px;
       border:1px solid var(--line);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      padding:12px 14px;
+      background:#fff;
+      display:grid; place-items:center;
+      margin-left:auto;
+      font-size:26px;
+      cursor:pointer;
     }
-    .sticky .row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .sticky strong{display:block; font-size:14px; color:#273043}
-    .sticky span{display:block; font-size:12px; color:#7b8391; margin-top:2px}
-
-    .float{
-      position:fixed;
-      right:12px;
-      bottom:84px;
-      width:56px;
-      height:56px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg, var(--green), #59b865);
+    .menu-panel .menu-title{
+      display:block;
+      margin:18px 0 14px;
+      padding:14px 16px;
+      border-radius:14px;
+      background:#1e9b47;
       color:#fff;
+      font-size:18px;
+      font-weight:800;
+      text-align:center;
+    }
+    .menu-panel .nav{
+      display:grid;
+      gap:24px;
       font-size:22px;
-      z-index:42;
-      box-shadow:0 14px 24px rgba(15,106,24,.18);
+      color:#1f2937;
+      margin-top:26px;
+    }
+    .menu-panel .nav a{display:block}
+    .menu-panel .side-divider{
+      height:1px;
+      background:#e5e7eb;
+      margin:34px 0 22px;
     }
 
     @media (max-width: 720px){
       .wrap{padding:12px}
       .topbar{position:static}
-      .hero-photo{height:20vh; min-height:140px}
+      .hero-photo{height:22vh; min-height:140px}
       .hero-copy{padding:22px 16px 28px}
-      .hero-copy h2{font-size:28px}
-      .hero-copy p{font-size:16px}
-      .form-head{padding:22px 16px 10px}
-      .form-head h3{font-size:30px}
-      .form-head p{font-size:18px}
-      form{padding:0 16px 18px}
-      .progress{gap:10px; margin:18px 0 24px}
-      .step-dot{width:58px; height:58px; font-size:22px}
-      .label,.choice-title{font-size:17px}
-      input, textarea{font-size:17px; padding:16px 16px}
-      .choice{font-size:20px; min-height:62px}
-      .btn{font-size:20px; min-height:66px}
-      .sticky{display:block}
-      .float{bottom:88px}
+      .hero-copy h2{font-size:26px}
+      .hero-copy p{font-size:15px}
+      .form-head{padding:18px 14px 8px}
+      .form-head h3{font-size:28px}
+      .form-head p{font-size:16px}
+      form{padding:0 14px 18px}
+      .progress{gap:8px; margin:16px 0 20px}
+      .step-dot{width:50px; height:50px; font-size:20px}
+      .label,.choice-title{font-size:15px}
+      input, textarea{font-size:15px; padding:13px 13px}
+      .choice{font-size:17px; min-height:56px}
+      .btn{font-size:17px; min-height:60px}
+      .section-title h4{font-size:26px}
+      .section-title p{font-size:15px}
+      .info-card{padding:14px}
+      .bottom-panel{padding:16px}
+      .bottom-button{font-size:17px}
+      .contact-phone{font-size:28px}
+      .menu-panel .nav{font-size:19px}
     }
   </style>
 </head>
 <body>
+  <div class="menu-drawer" id="menuDrawer" aria-hidden="true">
+    <aside class="menu-panel">
+      <button class="close" id="menuClose" aria-label="Uždaryti meniu">×</button>
+      <a href="#" class="menu-title">Parduoti automobilį</a>
+      <nav class="nav">
+        <a href="#forma">Forma</a>
+      </nav>
+      <div class="side-divider"></div>
+      <div class="contact">Susisiekite</div>
+      <div class="contact-phone">066 066 096</div>
+      <div class="whatsapp-mini">◎</div>
+    </aside>
+  </div>
+
   <div class="wrap">
     <header class="topbar">
       <div class="brand">
@@ -389,7 +516,7 @@
           <p>Greitas automobilių supirkimas</p>
         </div>
       </div>
-      <div class="menu">☰</div>
+      <button class="menu" id="menuBtn" aria-label="Atidaryti meniu">☰</button>
     </header>
 
     <section class="hero">
@@ -442,7 +569,7 @@
           <div class="choice-group">
             <div class="choice-title">Kuro tipas</div>
             <div class="choice-list">
-              <label class="choice"><input type="radio" name="kuro_tipas" value="Dyzelinas" checked /> Dyzelinas</label>
+              <label class="choice"><input type="radio" name="kuro_tipas" value="Dyzelinas" /> Dyzelinas</label>
               <label class="choice"><input type="radio" name="kuro_tipas" value="Benzinas" /> Benzinas</label>
               <label class="choice"><input type="radio" name="kuro_tipas" value="Benzinas / dujos" /> Benzinas / dujos</label>
             </div>
@@ -451,16 +578,16 @@
           <div class="choice-group">
             <div class="choice-title">Pavarų dėžė</div>
             <div class="choice-list">
-              <label class="choice small"><input type="radio" name="pavaru_deze" value="Mechaninė" checked /> Mechaninė</label>
-              <label class="choice small"><input type="radio" name="pavaru_deze" value="Automatinė" /> Automatinė</label>
+              <label class="choice"><input type="radio" name="pavaru_deze" value="Mechaninė" /> Mechaninė</label>
+              <label class="choice"><input type="radio" name="pavaru_deze" value="Automatinė" /> Automatinė</label>
             </div>
           </div>
 
           <div class="choice-group">
             <div class="choice-title">Techninė apžiūra</div>
             <div class="choice-list">
-              <label class="choice small selected"><input type="radio" name="technine_apziura" value="Galioja" checked /> Galioja</label>
-              <label class="choice small"><input type="radio" name="technine_apziura" value="Negalioja" /> Negalioja</label>
+              <label class="choice"><input type="radio" name="technine_apziura" value="Galioja" /> Galioja</label>
+              <label class="choice"><input type="radio" name="technine_apziura" value="Negalioja" /> Negalioja</label>
             </div>
           </div>
 
@@ -490,27 +617,46 @@
             <button type="button" class="btn btn-secondary" id="back3">Atgal</button>
           </div>
 
-          <div class="mini">Atsakysime per 5–30 min. Užklausa siunčiama tiesiai į Formspree.</div>
           <div class="success" id="successBox"><b>Ačiū, užklausa išsiųsta.</b><div>Susisieksime su jumis artimiausiu metu.</div></div>
           <div class="error" id="errorBox"></div>
         </div>
       </form>
     </section>
 
+    <section id="superkame" class="section-title">
+      <h4>Kokius automobilius superkame?</h4>
+      <p>Patikrinkite, ar Jūsų automobilis tinka – dauguma atvejų tinka.</p>
+    </section>
+
+    <section class="info-cards">
+      <div class="info-card">
+        <div class="icon">!</div>
+        <div><b>Dyzeliniai ir benzininiai automobiliai</b></div>
+      </div>
+      <div class="info-card">
+        <div class="icon">✓</div>
+        <div><b>Su defektais arba po eismo įvykio</b></div>
+      </div>
+      <div class="info-card">
+        <div class="icon">●</div>
+        <div><b>Su didele rida</b></div>
+      </div>
+    </section>
+
+    <section id="bottom" class="bottom-panel">
+      <button class="bottom-button">Parduoti automobilį</button>
+      <div class="divider"></div>
+
+      <div id="kontaktai">
+        <div class="contact">Susisiekite</div>
+        <div class="contact-phone">066 066 096</div>
+        <div style="color:#7b8391; font-size:16px; margin-bottom:14px;">Atsakome greitai</div>
+        <a href="https://wa.me/37066066096" target="_blank" rel="noopener" class="whatsapp-mini" aria-label="WhatsApp">◎</a>
+      </div>
+    </section>
+
     <div class="footer">© <span id="year"></span> Automobilius.lt</div>
   </div>
-
-  <div class="sticky">
-    <div class="row">
-      <div>
-        <strong>Užtruksite tik 2 minutes</strong>
-        <span>Pateikite pasiūlymą dabar</span>
-      </div>
-      <button class="btn btn-primary" id="stickyBtn" style="padding:12px 14px; min-height:52px;">Dabar</button>
-    </div>
-  </div>
-
-  <a href="tel:+37066066096" class="float" aria-label="Skambinti">📞</a>
 
   <script>
     const formspreeEndpoint = "https://formspree.io/f/xpqkqbbw";
@@ -525,10 +671,20 @@
 
     year.textContent = new Date().getFullYear();
 
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDrawer = document.getElementById('menuDrawer');
+    const menuClose = document.getElementById('menuClose');
+
+    function openMenu(){ menuDrawer.classList.add('open'); menuDrawer.setAttribute('aria-hidden','false'); }
+    function closeMenu(){ menuDrawer.classList.remove('open'); menuDrawer.setAttribute('aria-hidden','true'); }
+    menuBtn.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    menuDrawer.addEventListener('click', (e) => { if (e.target === menuDrawer) closeMenu(); });
+
     function updateStep() {
       steps.forEach(step => step.classList.toggle('active', Number(step.dataset.step) === currentStep));
       dots.forEach(dot => dot.classList.toggle('active', Number(dot.dataset.dot) <= currentStep));
-      window.scrollTo({ top: document.getElementById('forma').getBoundingClientRect().top + window.scrollY - 12, behavior: 'smooth' });
+      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function validateStep(stepNumber) {
@@ -546,12 +702,12 @@
     function setChoiceStyles() {
       document.querySelectorAll('.choice').forEach(label => {
         const input = label.querySelector('input');
-        const update = () => {
+        const sync = () => {
           const group = input.name;
           document.querySelectorAll(`input[name="${group}"]`).forEach(i => i.closest('.choice').classList.remove('selected'));
           label.classList.add('selected');
         };
-        input.addEventListener('change', update);
+        input.addEventListener('change', sync);
         if (input.checked) label.classList.add('selected');
       });
     }
@@ -573,14 +729,6 @@
     document.getElementById('back3').addEventListener('click', () => {
       currentStep = 2;
       updateStep();
-    });
-
-    document.getElementById('stickyBtn').addEventListener('click', () => {
-      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    document.querySelector('.hero-copy').addEventListener('click', () => {
-      document.getElementById('forma').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     setChoiceStyles();
@@ -630,3 +778,8 @@
   </script>
 </body>
 </html>
+"""
+
+path = Path("/mnt/data/automobilius_lt_cleaner_final.html")
+path.write_text(html, encoding="utf-8")
+print(f"Saved to {path}")
