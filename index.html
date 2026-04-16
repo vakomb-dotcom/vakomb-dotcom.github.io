@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="lt">
 <head>
   <meta charset="UTF-8" />
@@ -67,17 +65,6 @@ html = r"""<!DOCTYPE html>
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-    }
-    .menu{
-      width:52px; height:52px; border-radius:16px;
-      display:grid; place-items:center;
-      border:1px solid var(--line);
-      background:#fff;
-      box-shadow:0 10px 20px rgba(15,23,42,.06);
-      font-size:28px;
-      color:#111827;
-      flex:0 0 auto;
-      cursor:pointer;
     }
 
     .hero{
@@ -350,7 +337,6 @@ html = r"""<!DOCTYPE html>
       margin-top:1px;
     }
     .info-card b{display:block; font-size:15px; margin-bottom:0; line-height:1.35}
-    .info-card p{margin:0; color:var(--muted); font-size:13px; line-height:1.35}
 
     .bottom-panel{
       margin-top:18px;
@@ -359,6 +345,7 @@ html = r"""<!DOCTYPE html>
       border-radius:28px;
       box-shadow:var(--shadow);
       padding:20px;
+      text-align:center;
     }
     .bottom-button{
       width:100%;
@@ -376,17 +363,14 @@ html = r"""<!DOCTYPE html>
       background:#e5e7eb;
       margin:18px 0;
     }
-    .contact{
-      color:#737b89;
-      font-size:16px;
-      margin-bottom:8px;
-    }
     .contact-phone{
       color:#1e9b47;
-      font-size:30px;
+      font-size:34px;
       font-weight:900;
       letter-spacing:-.03em;
-      margin-bottom:10px;
+      line-height:1.05;
+      text-align:center;
+      margin-top:4px;
     }
     .whatsapp-mini{
       display:inline-flex;
@@ -399,6 +383,7 @@ html = r"""<!DOCTYPE html>
       color:#fff;
       font-size:24px;
       box-shadow:0 12px 22px rgba(34,197,94,.18);
+      margin-top:14px;
     }
 
     .footer{
@@ -406,63 +391,6 @@ html = r"""<!DOCTYPE html>
       color:#7b8391;
       font-size:12px;
       padding:18px 0 8px;
-    }
-
-    .menu-drawer{
-      position:fixed;
-      inset:0;
-      z-index:60;
-      display:none;
-      background:rgba(15,23,42,.28);
-    }
-    .menu-drawer.open{display:block}
-    .menu-panel{
-      position:absolute;
-      top:0;
-      right:0;
-      width:min(86vw, 380px);
-      height:100%;
-      background:#fff;
-      box-shadow:-18px 0 50px rgba(0,0,0,.14);
-      padding:22px 20px;
-      transform:translateX(100%);
-      transition:transform .22s ease;
-      overflow:auto;
-    }
-    .menu-drawer.open .menu-panel{transform:translateX(0)}
-    .menu-panel .close{
-      width:50px; height:50px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:#fff;
-      display:grid; place-items:center;
-      margin-left:auto;
-      font-size:26px;
-      cursor:pointer;
-    }
-    .menu-panel .menu-title{
-      display:block;
-      margin:18px 0 14px;
-      padding:14px 16px;
-      border-radius:14px;
-      background:#1e9b47;
-      color:#fff;
-      font-size:18px;
-      font-weight:800;
-      text-align:center;
-    }
-    .menu-panel .nav{
-      display:grid;
-      gap:24px;
-      font-size:22px;
-      color:#1f2937;
-      margin-top:26px;
-    }
-    .menu-panel .nav a{display:block}
-    .menu-panel .side-divider{
-      height:1px;
-      background:#e5e7eb;
-      margin:34px 0 22px;
     }
 
     @media (max-width: 720px){
@@ -487,26 +415,11 @@ html = r"""<!DOCTYPE html>
       .info-card{padding:14px}
       .bottom-panel{padding:16px}
       .bottom-button{font-size:17px}
-      .contact-phone{font-size:28px}
-      .menu-panel .nav{font-size:19px}
+      .contact-phone{font-size:30px}
     }
   </style>
 </head>
 <body>
-  <div class="menu-drawer" id="menuDrawer" aria-hidden="true">
-    <aside class="menu-panel">
-      <button class="close" id="menuClose" aria-label="Uždaryti meniu">×</button>
-      <a href="#" class="menu-title">Parduoti automobilį</a>
-      <nav class="nav">
-        <a href="#forma">Forma</a>
-      </nav>
-      <div class="side-divider"></div>
-      <div class="contact">Susisiekite</div>
-      <div class="contact-phone">066 066 096</div>
-      <div class="whatsapp-mini">◎</div>
-    </aside>
-  </div>
-
   <div class="wrap">
     <header class="topbar">
       <div class="brand">
@@ -516,7 +429,6 @@ html = r"""<!DOCTYPE html>
           <p>Greitas automobilių supirkimas</p>
         </div>
       </div>
-      <button class="menu" id="menuBtn" aria-label="Atidaryti meniu">☰</button>
     </header>
 
     <section class="hero">
@@ -646,13 +558,8 @@ html = r"""<!DOCTYPE html>
     <section id="bottom" class="bottom-panel">
       <button class="bottom-button">Parduoti automobilį</button>
       <div class="divider"></div>
-
-      <div id="kontaktai">
-        <div class="contact">Susisiekite</div>
-        <div class="contact-phone">066 066 096</div>
-        <div style="color:#7b8391; font-size:16px; margin-bottom:14px;">Atsakome greitai</div>
-        <a href="https://wa.me/37066066096" target="_blank" rel="noopener" class="whatsapp-mini" aria-label="WhatsApp">◎</a>
-      </div>
+      <div class="contact-phone">066 066 096</div>
+      <a href="https://wa.me/37066066096" target="_blank" rel="noopener" class="whatsapp-mini" aria-label="WhatsApp">◎</a>
     </section>
 
     <div class="footer">© <span id="year"></span> Automobilius.lt</div>
@@ -670,16 +577,6 @@ html = r"""<!DOCTYPE html>
     let currentStep = 1;
 
     year.textContent = new Date().getFullYear();
-
-    const menuBtn = document.getElementById('menuBtn');
-    const menuDrawer = document.getElementById('menuDrawer');
-    const menuClose = document.getElementById('menuClose');
-
-    function openMenu(){ menuDrawer.classList.add('open'); menuDrawer.setAttribute('aria-hidden','false'); }
-    function closeMenu(){ menuDrawer.classList.remove('open'); menuDrawer.setAttribute('aria-hidden','true'); }
-    menuBtn.addEventListener('click', openMenu);
-    menuClose.addEventListener('click', closeMenu);
-    menuDrawer.addEventListener('click', (e) => { if (e.target === menuDrawer) closeMenu(); });
 
     function updateStep() {
       steps.forEach(step => step.classList.toggle('active', Number(step.dataset.step) === currentStep));
@@ -778,8 +675,3 @@ html = r"""<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-path = Path("/mnt/data/automobilius_lt_cleaner_final.html")
-path.write_text(html, encoding="utf-8")
-print(f"Saved to {path}")
