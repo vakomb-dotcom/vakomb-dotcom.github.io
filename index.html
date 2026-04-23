@@ -83,10 +83,11 @@
       margin: 14px 0 14px;
     }
     .subheadline {
-      font-size: clamp(1.02rem, 2vw, 1.2rem);
-      line-height: 1.65;
+      font-size: clamp(.94rem, 1.45vw, 1.08rem);
+      line-height: 1.58;
       color: var(--muted);
       max-width: 62ch;
+      font-weight: 500;
     }
     .topbar {
       position: sticky;
@@ -648,7 +649,7 @@
       bottom: 16px;
       z-index: 1200;
       gap: 10px;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
     .floating-mobile-cta .btn {
       width: 100%;
@@ -808,6 +809,160 @@
         padding-bottom: 96px;
       }
     }
+
+    /* Premium mobile-first refinements */
+    .topbar {
+      position: static !important;
+      top: auto !important;
+      z-index: 10;
+      backdrop-filter: blur(20px);
+      background: rgba(247, 248, 252, 0.94);
+      border-bottom: 1px solid rgba(15,23,42,.08);
+      box-shadow: 0 12px 30px rgba(15,23,42,.04);
+    }
+    .header-inner {
+      width: 100%;
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      padding: 18px 18px 16px;
+    }
+    .brand {
+      gap: 0 !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      letter-spacing: -0.05em;
+    }
+    .brand-mark,
+    .hero-logo,
+    .hero-logo-mark {
+      display: none !important;
+    }
+    .brand-name {
+      font-size: clamp(1.35rem, 4vw, 1.95rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      white-space: nowrap;
+      background: linear-gradient(135deg, #0f172a 0%, #2563eb 42%, #1d4ed8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    .nav {
+      width: min(100%, 980px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 8px 10px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(15,23,42,.06);
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      flex: 0 0 auto;
+      white-space: nowrap;
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(15,23,42,.06);
+      box-shadow: 0 8px 18px rgba(15,23,42,.04);
+    }
+    .nav .cta-nav {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
+      border-color: transparent;
+    }
+    .hero {
+      padding: 0 0 48px;
+    }
+    .hero-shell {
+      border-radius: 0;
+      width: 100%;
+      box-shadow: none;
+      min-height: unset;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,255,255,.86)),
+        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    }
+    .hero-grid {
+      min-height: 78vh;
+      padding: 42px 16px 52px;
+      place-items: center;
+    }
+    .hero-copy {
+      width: min(100%, 920px);
+      padding: 30px 22px;
+      border-radius: 30px;
+      text-align: center;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(37,99,235,.08);
+      border: 1px solid rgba(37,99,235,.14);
+      color: var(--primary-2);
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+    }
+    .headline {
+      max-width: 14ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .subheadline {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 58ch;
+    }
+    .cta-row {
+      justify-content: center;
+    }
+    .floating-mobile-cta {
+      display: none;
+    }
+    @media (max-width: 820px) {
+      .header-inner {
+        gap: 10px;
+        padding: 14px 14px 12px;
+      }
+      .brand-name {
+        font-size: clamp(1.2rem, 6vw, 1.7rem);
+      }
+      .nav {
+        width: 100%;
+        padding: 8px 6px;
+        border-radius: 20px;
+      }
+      .nav a {
+        padding: 10px 13px;
+        font-size: .92rem;
+      }
+      .hero-grid {
+        min-height: auto;
+        padding: 22px 14px 42px;
+      }
+      .hero-copy {
+        padding: 24px 18px;
+        border-radius: 26px;
+      }
+      .headline {
+        max-width: none;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation: none !important;
@@ -815,134 +970,6 @@
         scroll-behavior: auto !important;
       }
     }
-  
-    .topbar {
-      position: relative;
-      top: auto;
-      z-index: 1;
-      background: transparent;
-      border-bottom: none;
-      backdrop-filter: none;
-    }
-    .header-inner {
-      width: min(100% - 28px, var(--max));
-      margin: 0 auto;
-      padding: 16px 0 8px;
-      display: grid;
-      gap: 12px;
-      justify-items: center;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      text-decoration: none;
-      padding: 6px 0;
-    }
-    .brand-name {
-      font-size: clamp(1.45rem, 6vw, 2.05rem);
-      font-weight: 900;
-      letter-spacing: -0.05em;
-      background: linear-gradient(135deg, #0f172a 0%, #2563eb 48%, #1d4ed8 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      white-space: nowrap;
-    }
-    .nav {
-      width: 100%;
-      justify-content: center;
-      background: rgba(255,255,255,.90);
-      border: 1px solid rgba(15,23,42,.08);
-      box-shadow: 0 16px 36px rgba(15,23,42,.06);
-    }
-    .nav a {
-      border: 1px solid rgba(15,23,42,.05);
-      background: rgba(255,255,255,.95);
-    }
-    .nav .cta-nav {
-      border: 0;
-    }
-    .hero-copy {
-      width: min(100%, 820px);
-    }
-    .headline {
-      max-width: 16ch;
-      font-size: clamp(2rem, 4.8vw, 4.1rem);
-    }
-    .subheadline {
-      font-size: clamp(0.98rem, 2vw, 1.14rem);
-      max-width: 58ch;
-    }
-    .cta-row {
-      margin-top: 24px;
-    }
-    .service-controls {
-      display: none !important;
-    }
-    .services-layout {
-      grid-template-columns: 1fr;
-    }
-    .summary-panel {
-      position: relative;
-      top: auto;
-    }
-    @media (max-width: 820px) {
-      .header-inner {
-        width: min(100% - 14px, var(--max));
-        padding: 12px 0 8px;
-        gap: 10px;
-      }
-      .brand-name {
-        font-size: clamp(1.55rem, 8vw, 2.15rem);
-      }
-      .nav {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        width: 100%;
-        padding: 12px;
-        border-radius: 26px;
-      }
-      .nav a {
-        min-height: 48px;
-        padding: 0 12px;
-        font-size: .92rem;
-        border-radius: 18px;
-        box-shadow: 0 8px 20px rgba(15,23,42,.05);
-      }
-      .nav .cta-nav {
-        grid-column: 2 / 3;
-      }
-      .hero-grid {
-        min-height: auto;
-        padding: 18px 12px 28px;
-      }
-      .hero-copy {
-        padding: 22px 16px 24px;
-      }
-      .headline {
-        font-size: clamp(1.85rem, 8vw, 2.7rem);
-        max-width: 12ch;
-      }
-      .subheadline {
-        font-size: .98rem;
-        line-height: 1.7;
-      }
-      .cta-row {
-        margin-top: 20px;
-      }
-      .btn {
-        min-height: 52px;
-        padding: 0 18px;
-        font-size: .96rem;
-      }
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -967,8 +994,8 @@
         <div class="hero-grid">
           <div class="hero-copy fade-in">
             <div class="hero-kicker">Automobilio paruošimas pardavimui · Ukmergė</div>
-            <h1 class="headline">Automobilio paruošimas pardavimui Ukmergėje</h1>
-            <p class="subheadline">Nuo salono sauso valymo ir cheminio valymo iki poliravimo, foto paruošimo ir skelbimų įkėlimo. Kiekviena paslauga sukurta tam, kad pakeltų jūsų automobilio vertę ir padėtų pardavimui įvykti greičiau.</p>
+            <h1 class="headline">Automobilių paruošimas pardavimui Ukmergėje</h1>
+            <p class="subheadline">Paruošiame jūsų automobilį taip, kad jis atrodytų brangesnis ir patrauklesnis pirkėjams. Dažniausiai tai leidžia pakelti kainą 10–20% ir sulaukti iki 70% daugiau susidomėjimo.</p>
             <div class="cta-row">
               <a class="btn btn-primary pulse" href="#paslaugos">Paslaugų pasirinkimas</a>
             </div>
@@ -979,22 +1006,25 @@
     <section id="paslaugos" class="section">
       <div class="container">
         <div class="fade-in">
-          <div class="section-title">Paslaugų pasirinkimas</div>
-          <p class="section-lead">Visos paslaugos orientuotos į automobilio paruošimą pardavimui — nuo salono ir kėbulo iki nuotraukų bei skelbimų įkėlimo. Paspaudus ant kortelės matomas trumpas atlikimo aprašymas.</p>
+          <div class="section-title">Auto paruošimo pardavimui paslaugos</div>
+          <p class="section-lead">Visos paslaugos skirtos tam, kad automobilis būtų pateiktas geriau, greičiau ir patraukliau pirkėjui.</p>
         </div>
         <div class="services-layout">
           <div>
+            <div class="service-controls fade-in">
+              <div style="font-weight:800;color:#334155;">Paslaugų pasirinkimas</div>
+            </div>
             <div class="services-grid" id="servicesGrid"></div>
           </div>
           <aside class="summary-panel fade-in" aria-live="polite">
             <h3 style="margin:0 0 10px;">Dinaminė kaina</h3>
-            <div class="price-note">Bendra suma skaičiuojama real-time pagal pasirinktų paslaugų kiekį.</div>
+            <div class="price-note">Bendra suma atnaujinama iš karto pagal pasirinktų paslaugų skaičių.</div>
             <div class="booking-total">
               <div class="price-note">Bendra suma</div>
               <div class="total-amount" id="totalAmount">0 €</div>
               <div class="price-note" id="selectedCount">Pasirinkta: 0 paslaugų</div>
             </div>
-            <h4 style="margin:18px 0 10px;">Pasirinktos paslaugos</h4>
+            <h4 style="margin:18px 0 10px;">Pasirinktos paslaugos ir darbai</h4>
             <ul class="selected-list" id="selectedList">
               <li class="selected-empty">Kol kas nieko nepasirinkta.</li>
             </ul>
@@ -1006,7 +1036,7 @@
       <div class="container">
         <div class="fade-in">
           <div class="section-title">Registracija</div>
-          <p class="section-lead">Užregistruokite automobilį tiesiogiai iš svetainės. Data ribojama taip, kad vienai dienai būtų tik vienas klientas, o praeities datos – nepasirenkamos.</p>
+          <p class="section-lead">Užregistruokite automobilį tiesiogiai iš svetainės. Pasirinkta data bus priskirta tik vienam klientui, o praeities dienos nėra aktyvios.</p>
         </div>
         <div class="booking-panel fade-in">
           <form id="bookingForm">
@@ -1043,14 +1073,14 @@
                 </div>
               </div>
               <div class="field input-wide">
-                <label>Paslaugos ir registracijos santrauka</label>
+                <label>Pasirinktos paslaugos</label>
                 <textarea id="summaryBox" readonly placeholder="Pasirinktos paslaugos atsiras čia automatiškai."></textarea>
-                <div class="microcopy">Užpildykite laukus, pasirinkite dieną ir spaudkite pateikti.</div>
+                <div class="microcopy">Užpildykite laukus, pasirinkite dieną ir pateikite užklausą.</div>
               </div>
             </div>
             <div class="section-split"></div>
             <div class="cta-row" style="margin-top:18px;">
-              <button class="btn btn-primary" type="submit">Siųsti registraciją</button>
+              <button class="btn btn-primary" type="submit">Pateikti užklausą</button>
               <button class="btn btn-ghost" type="button" id="clearBooking">Išvalyti pasirinkimus</button>
             </div>
           </form>
@@ -1062,8 +1092,8 @@
         <div class="about-grid">
           <div class="about-panel fade-in">
             <div class="section-title">Apie mus</div>
-            <p class="section-lead">Esame orientuoti į tvarkingą rezultatą, greitą procesą ir patogų užsakymą mobiliajame telefone. Dirbame taip, kad klientas iš karto matytų vertę – nuo aiškios kainos iki realaus vaizdo pokyčio.</p>
-            <p class="section-lead">Patirtis, kokybiškos priemonės ir paprasta registracija padeda mums sukurti sprendimą, kuris tinka tiek kasdieniam valymui, tiek automobilių paruošimui pardavimui.</p>
+            <p class="section-lead">Mūsų tikslas – paruošti automobilį pardavimui taip, kad jis atrodytų tvarkingas, prižiūrėtas ir stiprus jau pirmame įspūdyje.</p>
+            <p class="section-lead">Kiekvienas žingsnis suplanuotas praktiškai: nuo sauso salono valymo iki skelbimo įkėlimo į pagrindines platformas.</p>
           </div>
           <div class="about-panel fade-in">
             <div class="section-title">Kodėl rinktis mus</div>
@@ -1085,7 +1115,7 @@
       <div class="container">
         <div class="fade-in">
           <div class="section-title">Atsiliepimai</div>
-          <p class="section-lead">Trumpi, aiškūs ir patikimi komentarai, kurie sustiprina pasitikėjimą prieš registraciją.</p>
+          <p class="section-lead">Trumpi, aiškūs ir patikimi komentarai, kurie sustiprina pasitikėjimą prieš registraciją ir pardavimo paruošimą.</p>
         </div>
         <div class="reviews-grid">
           <article class="review-card fade-in">
@@ -1124,7 +1154,7 @@
         <div class="contact-grid">
           <div class="contact-panel fade-in">
             <div class="section-title">Kontaktai</div>
-            <p class="section-lead">Greitam susisiekimui palikome paprastą, aiškų kontaktų bloką. Tinka tiek skambučiui, tiek Facebook reklamos srautui.</p>
+            <p class="section-lead">Greitam susisiekimui palikome paprastą, aiškų kontaktų bloką. Tinka tiek skambučiui, tiek žinutei iš skelbimo.</p>
             <div class="contact-item">
               <span>Telefonas</span>
               <strong>+370 600 00000</strong>
@@ -1137,7 +1167,7 @@
           </div>
           <div class="contact-panel fade-in">
             <div class="section-title">Kaip veikia registracija</div>
-            <p class="section-lead">Pasirenkate paslaugas, matote bendrą kainą, pasirinksite laisvą dieną ir pateiksite formą. Po submit rodomas patvirtinimas be redirect.</p>
+            <p class="section-lead">Pasirenkate paslaugas, matote bendrą kainą, pasirenkate laisvą dieną ir pateikiate formą. Po pateikimo rodomas patvirtinimas be redirect.</p>
             <div class="faq-list">
               <details class="faq-card">
                 <summary>Ar data tikrai gali būti tik vienam klientui?<span>+</span></summary>
@@ -1154,8 +1184,7 @@
     </section>
   </main>
   <div class="floating-mobile-cta" aria-label="Greiti veiksmai mobile įrenginiuose">
-    <a class="btn btn-ghost" href="#paslaugos" data-service-filter="interior">Įprastas valymas</a>
-    <a class="btn btn-primary" href="#paslaugos" data-service-filter="selling">Pardavimui</a>
+    <a class="btn btn-primary" href="#paslaugos">Paslaugų pasirinkimas</a>
   </div>
   <div class="modal" id="successModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -1169,253 +1198,109 @@
     <div class="container">
       <strong>automobilius.lt</strong>
       <div style="height:8px;"></div>
-      <div>Auto valymas · paruošimas pardavimui · Ukmergė</div>
+      <div>Auto paruošimas pardavimui · Ukmergė</div>
     </div>
   </footer>
   <script>
     (function () {
       'use strict';
 
-      const services = [
+const services = [
         {
           id: 1,
-          title: 'Siurbimas',
-          price: 15,
-          category: 'interior',
-          summary: 'Kruopštus salono siurbimas pašalinant dulkes, smėlį ir smulkias šiukšles.',
-          detail: 'Atliekamas pilnas kilimų, tarpų, sėdynių kraštų ir sunkiau pasiekiamų vietų siurbimas. Naudojami keli antgaliai, kad būtų pasiektos visos detalės ir salonas atrodytų švarus iš karto.'
+          title: 'Salono sausas valymas',
+          price: 30,
+          category: 'selling',
+          summary: 'Greitas ir kruopštus salono atnaujinimas be perteklinės drėgmės.',
+          detail: 'Pirmiausia kruopščiai išsiurbiamos sėdynės, kilimai, grindys ir visi tarpai. Tada sausu mikropluoštu nuvalomos dulkės, trupiniai ir lengvi nešvarumai, kad salonas iš karto atrodytų tvarkingesnis ir tinkamas fotosesijai.'
         },
         {
           id: 2,
-          title: 'Panelės valymas',
-          price: 10,
-          category: 'interior',
-          summary: 'Panelės, konsolės ir plastikų atnaujinimas naudojant saugias priemones.',
-          detail: 'Paviršiai nuriebalinami, nuvalomi ir atnaujinami naudojant profesionalias priemones, kurios neblizgina pertekliniai ir padeda išlaikyti tvarkingą premium įvaizdį.'
+          title: 'Cheminis salono valymas',
+          price: 110,
+          category: 'selling',
+          summary: 'Gilesnis salono atnaujinimas su dėmių ir kvapų mažinimu.',
+          detail: 'Naudojamos aktyvios priemonės pagal medžiagą: tekstilei, odai ar plastikui. Pirmiausia apdorojamos dėmės, po to paviršiai išvalomi ir ištraukiami nešvarumai, kad salonas taptų švaresnis ir gaivesnis.'
         },
         {
           id: 3,
-          title: 'Stiklų valymas',
-          price: 10,
-          category: 'interior',
-          summary: 'Vidaus stiklų valymas be dryžių ir riebalų žymių.',
-          detail: 'Stiklai valomi iš vidaus kruopščiai, naudojant specialų mikropluoštą ir priemones, kurios nepalieka dėmių bei padeda pagerinti matomumą vairuojant.'
+          title: 'Plastikų atnaujinimas',
+          price: 25,
+          category: 'selling',
+          summary: 'Panelės, durų ir salono plastikų vizualinis atgaivinimas.',
+          detail: 'Paviršiai pirmiausia nuriebalinami, tada nuvalomi ir atnaujinami specialiomis priemonėmis, kurios sugrąžina vientisą, tvarkingą išvaizdą be riebaus blizgesio.'
         },
         {
           id: 4,
-          title: 'Cheminis valymas',
-          price: 120,
-          category: 'interior',
-          summary: 'Gilus salono valymas, kai reikia maksimaliai atnaujinti automobilį.',
-          detail: 'Atliekamas daugiasluoksnis giluminis valymas: siurbimas, dėmių apdorojimas, sėdynių ir kilimų valymas, paviršių atnaujinimas. Tinka automobiliams su stipresniais nešvarumais ir paruošimui pardavimui.'
+          title: 'Kėbulo plovimas',
+          price: 20,
+          category: 'selling',
+          summary: 'Kruopštus išorės plovimas prieš poliravimą ar fotografavimą.',
+          detail: 'Kėbulas plaunamas etapais: pašalinami purvai, dulkės, druskos ir kelio nuosėdos. Ypatingas dėmesys skiriamas vietoms aplink ratų arkas, slenksčius ir sunkiau pasiekiamus kampus.'
         },
         {
           id: 5,
-          title: 'Sėdynių valymas',
-          price: 40,
-          category: 'interior',
-          summary: 'Tekstilinių arba kitų sėdynių valymas nuo dėmių ir kasdienio naudojimo žymių.',
-          detail: 'Sėdynės apdorojamos pagal medžiagą, dėmės skaidomos specialiais valikliais, o paviršiai išvalomi taip, kad salonas atrodytų gaivesnis ir tvarkingesnis.'
+          title: 'Poliravimas',
+          price: 160,
+          category: 'selling',
+          summary: 'Lako paviršiaus atgaivinimas ir vizualiai geresnis blizgesys.',
+          detail: 'Atliekamas pagal lako būklę parinktas poliravimo procesas, kuris padeda sumažinti smulkius paviršinius defektus, sustiprinti blizgesį ir padaryti automobilį patrauklesnį nuotraukose.'
         },
         {
           id: 6,
-          title: 'Kilimėlių valymas',
-          price: 15,
-          category: 'interior',
-          summary: 'Gilesnis kilimėlių išvalymas nuo purvo ir druskų.',
-          detail: 'Kilimėliai išimami, išvalomi ir, jei reikia, papildomai apdorojami dėmėms bei įsisenėjusiam purvui pašalinti. Tai pagerina bendrą salono vaizdą.'
+          title: 'Padangų juodinimas',
+          price: 8,
+          category: 'selling',
+          summary: 'Padangoms suteikiama sodresnė ir švaresnė išvaizda.',
+          detail: 'Padangos nuvalomos nuo dulkių ir senų priemonių likučių, tuomet padengiamos juodinimo priemone, kuri vizualiai suvienodina spalvą ir paryškina automobilio stovą.'
         },
         {
           id: 7,
-          title: 'Kvapo šalinimas',
-          price: 20,
-          category: 'interior',
-          summary: 'Nemalonių kvapų sumažinimas ir gaivesnė salono aplinka.',
-          detail: 'Atliekamas kvapų šaltinio įvertinimas, paviršių valymas ir gaivinimas profesionaliomis priemonėmis, kad salonas taptų malonesnis naudoti ir demonstruoti pirkėjui.'
+          title: 'Smulkių defektų maskavimas',
+          price: 45,
+          category: 'selling',
+          summary: 'Vizualinis smulkių įbrėžimų ir nelygumų sumažinimas.',
+          detail: 'Maži defektai įvertinami, lokalizuojami ir koreguojami taip, kad jie mažiau matytųsi gyvai bei nuotraukose. Tikslas – pagerinti bendrą automobilio prezentaciją, neperkraunant paviršiaus.'
         },
         {
           id: 8,
-          title: 'Ozonavimas',
-          price: 30,
-          category: 'interior',
-          summary: 'Salono gaivinimas naudojant ozono procedūrą.',
-          detail: 'Procedūra padeda sumažinti įsisenėjusius kvapus ir suteikti automobiliui gaivesnį pojūtį. Dažnai pasirenkama kartu su salonų valymu ar paruošimu pardavimui.'
+          title: 'Dažų pataisymas pagal spalvos kodą',
+          price: 60,
+          category: 'selling',
+          summary: 'Smulkūs dažų pažeidimai pataisomi pagal konkrečią automobilio spalvą.',
+          detail: 'Pagal automobilio spalvos kodą parenkamas tinkamas atspalvis, tuomet tiksliai pataisomi nedideli nuskilimai ar taškeliai. Taip suformuojamas tvarkingesnis bendras vaizdas.'
         },
         {
           id: 9,
-          title: 'Odos valymas',
-          price: 50,
-          category: 'interior',
-          summary: 'Odos paviršių valymas ir atnaujinimas.',
-          detail: 'Specialios priemonės padeda saugiai pašalinti purvą, prakaito ir kasdienio naudojimo žymes nuo odinių paviršių, išsaugant jų natūralų vaizdą.'
+          title: 'Foto paruošimas',
+          price: 35,
+          category: 'selling',
+          summary: 'Automobilis paruošiamas nuotraukoms, kad skelbimas atrodytų stipriau.',
+          detail: 'Prieš fotosesiją automobilis nusausinamas, peržiūrimos detalės, sulyginami smulkūs trūkumai ir parenkamas švariausias įvaizdis. Tai padeda sukurti geresnį pirmą įspūdį skelbime.'
         },
         {
           id: 10,
-          title: 'Odos impregnavimas',
-          price: 40,
-          category: 'interior',
-          summary: 'Odos apsauga ir minkštumo išlaikymas ilgesniam laikui.',
-          detail: 'Po valymo naudojamos impregnavimo priemonės, kurios padeda apsaugoti odą nuo išsausėjimo ir greitesnio nusidėvėjimo.'
+          title: 'Skelbimo įkėlimas į Autoplius',
+          price: 20,
+          category: 'selling',
+          summary: 'Skelbimas paruošiamas ir sukeliamas į Autoplius platformą.',
+          detail: 'Surenkama pagrindinė informacija, sudėliojami nuotraukų akcentai ir suvedami skelbimo duomenys taip, kad automobilis būtų pateiktas tvarkingai ir aiškiai pirkėjui.'
         },
         {
           id: 11,
-          title: 'Rankinis plovimas',
-          price: 15,
-          category: 'exterior',
-          summary: 'Kruopštus rankinis automobilio plovimas saugiai nuo paviršiaus.',
-          detail: 'Automobilis plaunamas rankomis, kad būtų sumažinta mikrobraižymų rizika. Dėmesys skiriamas sparnams, slenksčiams, arkų zonoms ir sunkiai pasiekiamoms vietoms.'
+          title: 'Skelbimo įkėlimas į Autogidas',
+          price: 20,
+          category: 'selling',
+          summary: 'Skelbimas paruošiamas ir įkeltas į Autogidas sistemą.',
+          detail: 'Informacija suvedama tvarkingai, kad skelbimas atrodytų profesionaliai, o automobilio stiprybės būtų iškart matomos potencialiam pirkėjui.'
         },
         {
           id: 12,
-          title: 'Vaškavimas',
-          price: 25,
-          category: 'exterior',
-          summary: 'Apsauginis sluoksnis ir geresnis blizgesys po plovimo.',
-          detail: 'Vaškas padeda sustiprinti blizgesį ir suteikia papildomą paviršiaus apsaugą nuo kasdienių aplinkos poveikių.'
-        },
-        {
-          id: 13,
-          title: 'Ratlankių valymas',
-          price: 20,
-          category: 'exterior',
-          summary: 'Ratlankių valymas nuo stabdžių dulkių ir nešvarumų.',
-          detail: 'Ratlankiai kruopščiai išvalomi iš vidaus ir išorės, kad automobilio vaizdas taptų ženkliai tvarkingesnis iš pirmo žvilgsnio.'
-        },
-        {
-          id: 14,
-          title: 'Padangų juodinimas',
-          price: 5,
-          category: 'exterior',
-          summary: 'Padangų atnaujinimas suteikiant sodresnę išvaizdą.',
-          detail: 'Naudojamos priemonės, kurios atgaivina padangų spalvą ir suteikia reprezentatyvesnį vizualinį efektą, ypač tinka pardavimui.'
-        },
-        {
-          id: 15,
-          title: 'Langų poliravimas',
-          price: 30,
-          category: 'exterior',
-          summary: 'Stiklų paviršiaus atnaujinimas ir smulkių žymių sumažinimas.',
-          detail: 'Atliekamas kruopštus stiklų paviršiaus poliravimas, siekiant pagerinti skaidrumą ir bendrą automobilio įvaizdį.'
-        },
-        {
-          id: 16,
-          title: 'Kėbulo poliravimas',
-          price: 150,
-          category: 'exterior',
-          summary: 'Kėbulo blizgesio atkūrimas ir vizualinis atnaujinimas.',
-          detail: 'Poliravimo metu siekiama sumažinti paviršinius defektus, atkurti sodresnį lakavimo vaizdą ir paruošti automobilį geresniam pardavimo įspūdžiui.'
-        },
-        {
-          id: 17,
-          title: 'Smulkių defektų maskavimas',
-          price: 30,
-          category: 'exterior',
-          summary: 'Nedidelių vizualinių netobulumų sumažinimas.',
-          detail: 'Smulkūs defektai vizualiai maskuojami taip, kad automobilis atrodytų patraukliau tiek nuotraukose, tiek gyvai apžiūros metu.'
-        },
-        {
-          id: 18,
-          title: 'Bitumo valymas',
-          price: 25,
-          category: 'exterior',
-          summary: 'Bitumo taškų ir kelio nešvarumų pašalinimas.',
-          detail: 'Kėbulo paviršius valomas nuo bitumo likučių ir kitų sunkiau pašalinamų kelių nešvarumų, kurie gadina bendrą automobilio įspūdį.'
-        },
-        {
-          id: 19,
-          title: 'Dervos valymas',
-          price: 25,
-          category: 'exterior',
-          summary: 'Dervos ir lipnių paviršiaus likučių šalinimas.',
-          detail: 'Naudojamos saugios priemonės, padedančios pašalinti dervą ir kitus sunkiai įveikiamus nešvarumus nuo kėbulo paviršių.'
-        },
-        {
-          id: 20,
-          title: 'Nano danga',
-          price: 80,
-          category: 'exterior',
-          summary: 'Ilgesnės apsaugos sluoksnis paviršiui ir lengvesnė priežiūra.',
-          detail: 'Nano danga padeda vandeniui ir nešvarumams mažiau kibti prie paviršiaus, todėl automobilį lengviau prižiūrėti ir jis ilgiau atrodo švarus.'
-        },
-        {
-          id: 21,
-          title: 'Pilnas valymas',
-          price: 180,
+          title: 'Pilnas paruošimo pardavimui paketas',
+          price: 330,
           category: 'selling',
-          summary: 'Kompleksinis sprendimas automobilio paruošimui pardavimui.',
-          detail: 'Atliekamas visapusiškas automobilio sutvarkymas, apjungiant vidaus ir išorės valymą, kad transporto priemonė būtų vizualiai patrauklesnė pirkėjui.'
-        },
-        {
-          id: 22,
-          title: 'Poliravimas + vaškas',
-          price: 200,
-          category: 'selling',
-          summary: 'Blizgesys, apsauga ir geresnė bendra išvaizda.',
-          detail: 'Šis paketas apjungia poliravimą ir vaškavimą, suteikiant automobiliui ryškesnį vizualinį efektą bei geresnį pirmą įspūdį skelbimuose.'
-        },
-        {
-          id: 23,
-          title: 'Salonas + išorė',
-          price: 150,
-          category: 'selling',
-          summary: 'Balansuotas vidaus ir išorės atnaujinimas.',
-          detail: 'Puikus pasirinkimas, kai reikia greitai ir efektyviai pagerinti automobilio vaizdą tiek viduje, tiek išorėje prieš pardavimą.'
-        },
-        {
-          id: 24,
-          title: 'Kvapo pašalinimas',
-          price: 20,
-          category: 'selling',
-          summary: 'Gaivesnis automobilis ir geresnis pirkėjo įspūdis.',
-          detail: 'Kvapai dažnai lemia pirkėjo sprendimą, todėl šis darbas padeda automobiliui atrodyti prižiūrėtam ir vertesniam.'
-        },
-        {
-          id: 25,
-          title: 'Nuotraukų paruošimas',
-          price: 30,
-          category: 'selling',
-          summary: 'Automobilio paruošimas profesionalioms skelbimo nuotraukoms.',
-          detail: 'Automobilis sutvarkomas taip, kad nuotraukose atrodytų švaresnis, tvarkingesnis ir patrauklesnis peržiūrai internete.'
-        },
-        {
-          id: 26,
-          title: 'Skelbimo konsultacija',
-          price: 20,
-          category: 'selling',
-          summary: 'Patarimai, kaip pateikti automobilį skelbime efektyviau.',
-          detail: 'Padedama suprasti, kaip pateikti automobilio stiprybes, kokias nuotraukas daryti ir kaip padidinti susidomėjimą skelbimu.'
-        },
-        {
-          id: 27,
-          title: 'Kompleksinis paketas',
-          price: 250,
-          category: 'selling',
-          summary: 'Pilnas paruošimas pardavimui vienu užsakymu.',
-          detail: 'Kompleksinis paketas sujungia kelias paslaugas į vieną sprendimą, kad automobilis būtų paruoštas maksimaliai efektyviai ir patraukliai.'
-        },
-        {
-          id: 28,
-          title: 'Variklio valymas',
-          price: 40,
-          category: 'selling',
-          summary: 'Tvarkingesnis variklio skyrius ir geresnė bendra priežiūra.',
-          detail: 'Variklio skyrius valomas atsargiai, laikantis saugios procedūros, kad būtų sumažinti nešvarumai ir pagerinta bendra automobilio prezentacija.'
-        },
-        {
-          id: 29,
-          title: 'Bagažinės valymas',
-          price: 20,
-          category: 'selling',
-          summary: 'Tvarkingas bagažo skyrius ir daugiau švaros detalių.',
-          detail: 'Bagažinė išvaloma nuo smulkių šiukšlių, purvo ir senų žymių, kad automobilis atrodytų labiau prižiūrėtas.'
-        },
-        {
-          id: 30,
-          title: 'Premium detailing',
-          price: 300,
-          category: 'selling',
-          summary: 'Aukščiausio lygio detalus automobilio atnaujinimas.',
-          detail: 'Skirta klientams, kurie nori labai aukšto vizualinio rezultato. Procedūra orientuota į maksimalią švarą, estetiką ir pardavimo vertės padidinimą.'
+          summary: 'Kompleksinis pasirinkimas, kai reikia sutvarkyti viską nuo salono iki skelbimo.',
+          detail: 'Į paketą gali būti sudėliotos svarbiausios paslaugos: salono valymas, išorės paruošimas, smulkių defektų korekcija, foto paruošimas ir skelbimo įkėlimas. Patogiausias variantas maksimaliai tvarkingam pardavimui.'
         }
       ];
 
@@ -1441,8 +1326,6 @@
         nextMonth: document.getElementById('nextMonth'),
         dateField: document.getElementById('data'),
         dateHint: document.getElementById('dateHint'),
-        chips: Array.from(document.querySelectorAll('.chip')),
-        filterButtons: Array.from(document.querySelectorAll('[data-service-filter]')),
         fadeIns: Array.from(document.querySelectorAll('.fade-in'))
       };
 
@@ -1469,13 +1352,9 @@
           els.selectedList.innerHTML = selected.map((s) => `<li><span>${s.title}</span><strong>${money(s.price)}</strong></li>`).join('');
         }
         const selectedText = selected.length
-          ? selected.map((s) => `• ${s.title} — ${money(s.price)}`).join('
-')
+          ? selected.map((s) => `• ${s.title} — ${money(s.price)}`).join('\n')
           : 'Nėra pasirinktų paslaugų.';
-        els.summaryBox.value = `Paslaugos:
-${selectedText}
-
-Suma: ${money(total)}`;
+        els.summaryBox.value = `Paslaugos:\n${selectedText}\n\nSuma: ${money(total)}`;
       }
 
       function buildServiceCard(service) {
@@ -1624,11 +1503,6 @@ Suma: ${money(total)}`;
       function closeModal() {
         els.successModal.classList.remove('is-open');
         els.successModal.setAttribute('aria-hidden', 'true');
-      }
-
-      function scrollToTarget(selector) {
-        const target = document.querySelector(selector);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
       els.prevMonth.addEventListener('click', () => {
