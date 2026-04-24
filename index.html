@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-
 <html lang="lt">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="Nekilnojamojo turto supirkimas Ukmergėje. Superkame garažus, sodo sklypus, apleistus sklypus ir apleistas patalpas." name="description"/>
-<meta content="#f5f7f4" name="theme-color"/>
-<title>NT supirkimas Ukmergėje – garažai, sodo sklypai, patalpos</title>
-<style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nekilnojamojo turto supirkimas Ukmergėje. Superkame garažus, sodo sklypus, apleistus sklypus ir apleistas patalpas." />
+  <meta name="theme-color" content="#f5f7f4" />
+  <title>NT supirkimas Ukmergėje – garažai, sodo sklypai, patalpos</title>
+  <style>
     :root{
-      --bg:#f4f7fb;
+      --bg:#f5f7f4;
+      --bg-2:#eef4ef;
       --surface:#ffffff;
-      --surface-soft:#f8fbff;
-      --surface-strong:#eef4ff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --line:rgba(15,23,42,.08);
-      --primary:#2563eb;
-      --primary-2:#1d4ed8;
-      --primary-soft:rgba(37,99,235,.10);
-      --success:#16a34a;
-      --shadow:0 24px 70px rgba(15,23,42,.10);
-      --shadow-soft:0 10px 30px rgba(15,23,42,.06);
-      --shadow-card:0 16px 42px rgba(15,23,42,.08);
+      --surface-2:#fbfcfb;
+      --text:#132019;
+      --muted:#5f7266;
+      --line:rgba(19,32,25,.10);
+      --primary:#2f5b43;
+      --primary-2:#1f3f30;
+      --primary-soft:rgba(47,91,67,.10);
+      --shadow:0 24px 70px rgba(19,32,25,.10);
+      --shadow-soft:0 12px 30px rgba(19,32,25,.06);
+      --shadow-card:0 18px 42px rgba(19,32,25,.08);
       --radius-xl:34px;
       --radius-lg:26px;
       --radius-md:20px;
       --radius-sm:16px;
-      --max:1180px;
+      --max:1240px;
       --transition:280ms cubic-bezier(.2,.8,.2,1);
     }
     *{box-sizing:border-box}
@@ -38,7 +35,10 @@
       width:100%;
       overflow-x:hidden;
       font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(47,91,67,.06), transparent 22%),
+        radial-gradient(circle at top right, rgba(47,91,67,.05), transparent 18%),
+        linear-gradient(180deg, #f7faf7 0%, var(--bg) 28%, #f4f7f4 100%);
       color:var(--text);
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
@@ -49,4665 +49,1030 @@
     details summary{list-style:none}
     details summary::-webkit-details-marker{display:none}
     .container{width:min(100% - 32px,var(--max));margin-inline:auto}
+    .sr-only{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
 
     .topbar{
-      position:sticky; top:0; z-index:1000;
-      backdrop-filter: blur(18px);
-      background:#f8fbff;
-      border-bottom:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 30px rgba(15,23,42,.04);
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(18px);
+      background:rgba(247,250,247,.84);
+      border-bottom:1px solid rgba(19,32,25,.06);
+      box-shadow:0 12px 30px rgba(19,32,25,.04);
     }
     .header-inner{
-      display:grid; gap:10px;
+      display:grid;
+      gap:14px;
       justify-items:center;
-      padding:15px 18px 15px;
+      padding:16px 18px 18px;
     }
     .brand{
       display:flex;
-      width:100%;
-      align-items:center;
       justify-content:center;
-      padding:0;
-      min-height:0;
+      align-items:center;
+      width:100%;
     }
     .brand-logo{
       display:block;
-      width:min(58%,550px);
-      max-width:70%;
+      width:min(52%,620px);
+      max-width:100%;
       height:auto;
-      object-fit:contain;
       margin:0 auto;
-      padding-bottom:25px;
     }
-    .sr-only{
-      position:absolute;
-      width:1px;
-      height:1px;
-      padding:0;
-      margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;
-      border:0;
-    }
-
     .nav{
-      width:min(100%,760px);
+      width:min(100%,980px);
       overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
-      padding:0;
-      border-radius:0;
-      background:transparent;
-      border:0;
-      box-shadow:none;
+      -webkit-overflow-scrolling:touch;
     }
     .nav::-webkit-scrollbar{display:none}
     .nav-row{
-      display:flex;justify-content:center;gap:10px;min-width:max-content;flex-wrap:wrap;
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+      width:100%;
     }
     .nav-item{
-      flex:0 0 auto;
-      white-space:nowrap;
-      padding:12px 18px;
+      min-height:50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:13px 16px;
       border-radius:999px;
-      background:var(--primary);
-      border:1px solid var(--primary-2);
-      box-shadow:0 10px 20px rgba(37,99,235,.16);
-      font-weight:800;font-size:.96rem;
-      color:#fff;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition);
+      border:1px solid rgba(47,91,67,.18);
+      background:linear-gradient(180deg, #ffffff, #f7faf7);
+      color:var(--primary-2);
+      font-weight:850;
+      font-size:.98rem;
+      letter-spacing:-.01em;
+      box-shadow:0 10px 22px rgba(19,32,25,.05);
+      transition:transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+      white-space:nowrap;
     }
     .nav-item:hover,.nav-item.active{
-      background:var(--primary-2);
-      border-color:var(--primary-2);
-      box-shadow:0 14px 24px rgba(37,99,235,.18);
       transform:translateY(-1px);
-    }
-
-    .hero{padding:12px 0 18px}
-    .hero-grid{display:grid;gap:16px;justify-items:center}
-    .hero-copy{
-      width:min(100%,980px);
-      padding:34px 22px 28px;
-      border-radius:32px;
-      text-align:center;
-      background:#f8fbff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);
-      position:relative;overflow:hidden;
-    }
-    .hero-copy::before{content:"";position:absolute;inset:0;pointer-events:none}
-    .hero-badge{
-      position:relative;display:inline-flex;align-items:center;gap:8px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(37,99,235,.10);
-      border:1px solid rgba(37,99,235,.14);
-      color:var(--primary-2);font-weight:850;font-size:.92rem;
-      margin-bottom:14px;
-    }
-    .hero-title{
-      position:relative;margin:0;
-      font-size:clamp(2.15rem,6vw,3.15rem);
-      line-height:1.06;letter-spacing:-.04em;
-      font-weight:950;color:#0f172a;
-    }
-    .hero-title span{
-      display:block;
-      color:var(--primary-2);
-    }
-    .hero-text{
-      position:relative;margin:16px auto 0;
-      color:#334155;font-size:1.06rem;line-height:1.6;
-      max-width:60ch;font-weight:500;
-    }
-    .cta-row{
-      position:relative;display:flex;justify-content:center;gap:12px;
-      margin-top:24px;flex-wrap:wrap;
-    }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      min-height:56px;padding:0 22px;border-radius:999px;
-      border:1px solid transparent;font-weight:850;letter-spacing:-.01em;
-      cursor:pointer;transition:transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition), opacity var(--transition);
-      user-select:none;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{
-      background:var(--primary);
-      color:#fff;box-shadow:0 18px 36px rgba(37,99,235,.20);
-    }
-    .btn-primary:hover{box-shadow:0 22px 40px rgba(37,99,235,.22)}
-    .btn-ghost{
-      background:#fff;
-      color:#0f172a;border-color:rgba(15,23,42,.08);
-      box-shadow:0 14px 28px rgba(15,23,42,.05);
-    }
-    .hero-image{
-      width:min(100%,980px);
-      border-radius:28px;overflow:hidden;
-      box-shadow:0 18px 44px rgba(15,23,42,.07);
+      box-shadow:0 14px 28px rgba(47,91,67,.10);
+      border-color:rgba(47,91,67,.26);
       background:#fff;
     }
-    .hero-image img{width:100%;height:300px;object-fit:cover}
 
-    .section{padding:28px 0}
-    .eyebrow{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(37,99,235,.10);border:1px solid rgba(37,99,235,.14);
-      color:var(--primary-2);font-weight:850;font-size:.92rem;margin-bottom:14px;
-    }
-
-    .section-title{
-      margin:0 0 10px;
-      font-size:clamp(1.62rem,3vw,2.65rem);
-      line-height:1.05;letter-spacing:-.05em;
-      font-weight:950;color:#0f172a;
-    }
-    .section-lead{
-      margin:0 0 18px;color:var(--muted);line-height:1.68;max-width:68ch;
-    }
-    .section-lead.center{margin-left:auto;margin-right:auto;text-align:center}
-    .service-intro-shell{
-      padding:30px 24px 26px;
-      border-radius:34px;
-      background:#ffffff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);
+    .section{padding:36px 0}
+    .hero{padding:30px 0 26px}
+    .hero-shell{
       position:relative;
       overflow:hidden;
+      border:1px solid rgba(19,32,25,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.94), rgba(250,252,250,.92));
+      border-radius:36px;
+      box-shadow:var(--shadow-card);
     }
-    .service-intro-shell::before{
+    .hero-shell::before{
       content:"";
       position:absolute;
-      inset:0 auto 0 0;
-      width:6px;
-      background:var(--primary);
-    }
-    .service-intro-shell::after{
-      content:"";
-      position:absolute;
-      inset:auto 20px 20px auto;
-      width:150px;
-      height:150px;
-      border-radius:999px;
-      background:rgba(37,99,235,.06);
+      inset:-80px auto auto -80px;
+      width:260px;height:260px;border-radius:50%;
+      background:rgba(47,91,67,.08);
       pointer-events:none;
     }
-    .service-intro-card{
+    .hero-shell::after{
+      content:"";
+      position:absolute;
+      right:-110px;top:-90px;
+      width:320px;height:320px;border-radius:50%;
+      background:rgba(47,91,67,.05);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+      gap:20px;
+      align-items:stretch;
+      padding:34px;
       position:relative;
       z-index:1;
-      max-width:920px;
-      margin:0 auto;
-      text-align:center;
     }
-    .service-intro-title{
+    .hero-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:16px;
+      padding:10px 0 10px 4px;
+    }
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      width:fit-content;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(47,91,67,.09);
+      border:1px solid rgba(47,91,67,.14);
+      color:var(--primary-2);
+      font-weight:850;
+      font-size:.92rem;
+      letter-spacing:.01em;
+    }
+    .hero-title{
       margin:0;
-      font-size:clamp(2.25rem,5.8vw,3.55rem);
+      font-size:clamp(2.45rem,5.8vw,4.25rem);
       line-height:.94;
       letter-spacing:-.07em;
       font-weight:950;
+      text-transform:uppercase;
     }
-    .service-intro-line{display:block}
-    .service-intro-line-dark{color:#0f172a}
-    .service-intro-line-blue{color:var(--primary-2)}
-    .service-intro-lead{
+    .hero-blue{display:block;color:var(--primary);}
+    .hero-black{display:block;color:var(--primary-2);}
+    .hero-text{
+      margin:0;
+      max-width:62ch;
+      color:#46594f;
+      line-height:1.8;
       font-size:1.06rem;
-      color:#475569;
-      max-width:86ch;
-      margin:18px auto 0;
-      line-height:1.78;
     }
-    .section-glass{
-      padding:22px 22px 18px;border-radius:30px;
-      background:#ffffff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);position:relative;overflow:hidden;
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:6px;
     }
-    .section-glass::after{content:"";position:absolute;inset:0;pointer-events:none}
-    .section-glass-inner{position:relative;z-index:1}
+    .btn{
+      min-height:54px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:0 20px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:850;
+      letter-spacing:-.01em;
+      cursor:pointer;
+      transition:transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:linear-gradient(180deg, var(--primary), var(--primary-2));
+      color:#fff;
+      box-shadow:0 18px 36px rgba(47,91,67,.18);
+    }
+    .btn-primary:hover{box-shadow:0 22px 42px rgba(47,91,67,.20)}
+    .btn-ghost{
+      background:#fff;
+      color:var(--primary-2);
+      border-color:rgba(47,91,67,.14);
+      box-shadow:0 14px 28px rgba(19,32,25,.05);
+    }
+    .btn-ghost:hover{
+      background:#f8fbf8;
+      border-color:rgba(47,91,67,.18);
+    }
 
-    .services-layout{
+    .hero-visual{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      background:
+        radial-gradient(circle at top right, rgba(47,91,67,.12), transparent 34%),
+        linear-gradient(180deg, #f9fbf9, #eef4ef);
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 18px 40px rgba(19,32,25,.07);
+      min-height:360px;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .hero-visual .mini-badge{
+      display:inline-flex;
+      width:fit-content;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(47,91,67,.14);
+      color:var(--primary-2);
+      font-size:.84rem;
+      font-weight:800;
+    }
+    .property-card{
       display:grid;
-      grid-template-columns:minmax(0,1.45fr) minmax(320px,.75fr);
-      gap:18px;align-items:start;margin-top:10px;
+      gap:14px;
+      padding:20px;
+      border-radius:24px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(47,91,67,.12);
+      box-shadow:0 14px 28px rgba(19,32,25,.05);
     }
-    .summary-panel,.booking-panel,.about-panel,.contact-panel,.review-card,.faq-card,.group-card{
-      background:var(--surface);
-      border:1px solid rgba(15,23,42,.06);
-      border-radius:28px;
-      box-shadow:var(--shadow-soft);
+    .property-card-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
-    .summary-panel{padding:22px;position:sticky;top:16px}
-    .summary-panel ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-    .summary-panel li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid rgba(15,23,42,.06);color:#334155}
-    .summary-panel li span{overflow-wrap:anywhere}
-    .total-box,.booking-total{
-      display:grid;gap:8px;padding:18px;margin-top:18px;
-      border-radius:22px;
-      background:var(--surface-soft);
-      border:1px solid rgba(37,99,235,.10);
+    .property-card-title{
+      margin:0;
+      font-size:1.08rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:#132019;
     }
-    .total-amount{
-      font-size:clamp(1.8rem,4vw,2.75rem);
-      font-weight:950;letter-spacing:-.05em;line-height:1;
+    .property-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(47,91,67,.09);
+      color:var(--primary-2);
+      font-size:.82rem;
+      font-weight:850;
+      border:1px solid rgba(47,91,67,.12);
     }
-    .price-note{color:var(--muted);font-size:.90rem}
-    .selected-list{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px}
-    .selected-list li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid rgba(15,23,42,.06);color:#334155}
-    .selected-list li span{overflow-wrap:anywhere}
-    .selected-empty{color:var(--muted);padding:8px 0 0}
+    .progress-list{display:grid;gap:10px}
+    .progress-item{
+      display:grid;
+      gap:6px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid rgba(19,32,25,.06);
+    }
+    .progress-item strong{
+      color:#132019;
+      font-size:.95rem;
+      letter-spacing:-.02em;
+    }
+    .progress-item span{
+      color:var(--muted);
+      font-size:.88rem;
+      line-height:1.45;
+    }
+    .progress-bar{
+      width:100%;
+      height:8px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#e8eee8;
+      margin-top:6px;
+    }
+    .progress-bar i{
+      display:block;
+      height:100%;
+      width:100%;
+      border-radius:inherit;
+      background:linear-gradient(90deg, var(--primary), #547960);
+    }
 
-    .services-stack{display:grid;gap:16px}
-    .group-card{overflow:hidden}
-    .group-head{
-      width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:20px;border:0;cursor:pointer;text-align:left;
-      background:#f8fbff;
+    .section-head{
+      margin:0 auto 18px;
+      max-width:760px;
+      text-align:center;
     }
-    .group-head-left{display:grid;gap:5px;min-width:0}
-    .group-title{
-      font-size:1.08rem;font-weight:950;letter-spacing:-.03em;color:#0f172a;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(47,91,67,.08);
+      border:1px solid rgba(47,91,67,.12);
+      color:var(--primary-2);
+      font-weight:850;
+      font-size:.86rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
     }
-    .group-subtitle{color:var(--muted);font-size:.93rem;line-height:1.4}
+    .section-title{
+      margin:0;
+      font-size:clamp(1.8rem,4vw,3rem);
+      line-height:1.02;
+      letter-spacing:-.06em;
+      font-weight:950;
+      color:#132019;
+    }
+    .section-lead{
+      margin:14px auto 0;
+      color:#516155;
+      line-height:1.78;
+      max-width:68ch;
+      font-size:1.03rem;
+    }
 
-    .group-subtitle,
-    .group-note{display:none !important;}
-    .group-pill{
-      flex:0 0 auto;padding:9px 12px;border-radius:999px;
-      background:rgba(37,99,235,.10);color:var(--primary-2);
-      font-size:.88rem;font-weight:850;border:1px solid rgba(37,99,235,.12);
-    }
-    .chev{
-      width:38px;height:38px;border-radius:13px;display:grid;place-items:center;
-      border:1px solid rgba(15,23,42,.08);background:#fff;color:#334155;
-      flex:0 0 auto;transition:transform var(--transition);
-    }
-    .group-card.is-open .chev{transform:rotate(180deg)}
-    .group-content{display:none;padding:0 20px 20px}
-    .group-card.is-open .group-content{display:block;animation:fadeUp .28s ease both}
-    .group-note{margin:0 0 16px;color:var(--muted);line-height:1.6;font-size:.96rem}
     .cards-grid{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-      align-items:stretch;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
     }
-
     .service-card{
       position:relative;
       overflow:hidden;
-      padding:16px 16px 14px;
-      border-radius:22px;
-      background:#ffffff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 24px rgba(15,23,42,.04);
-      transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
-      display:flex;
-      flex-direction:column;
-      height:100%;
+      padding:22px;
+      border-radius:26px;
+      background:linear-gradient(180deg, #ffffff, #f9fbf9);
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 14px 30px rgba(19,32,25,.06);
+      transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
-    .service-card:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(15,23,42,.08);border-color:rgba(37,99,235,.12)}
-    .service-card.selected{border-color:rgba(37,99,235,.26);box-shadow:0 18px 34px rgba(37,99,235,.10);background:#f6f9ff}
-    .service-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start}
-    .check{width:22px;height:22px;accent-color:var(--primary);margin-top:3px;cursor:pointer}
-    .service-title{
+    .service-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 20px 38px rgba(19,32,25,.08);
+      border-color:rgba(47,91,67,.16);
+    }
+    .service-icon{
+      width:54px;height:54px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(180deg, rgba(47,91,67,.12), rgba(47,91,67,.05));
+      border:1px solid rgba(47,91,67,.10);
+      color:var(--primary-2);
+      margin-bottom:14px;
+      flex:0 0 auto;
+    }
+    .service-card h3{
+      margin:0 0 8px;
+      font-size:1.08rem;
+      line-height:1.15;
+      letter-spacing:-.03em;
+      color:#132019;
+    }
+    .service-card p{
       margin:0;
-      font-size:clamp(.98rem,2.2vw,1.04rem);
-      line-height:1.18;
+      color:#5b6c61;
+      line-height:1.68;
+      font-size:.95rem;
+    }
+    .service-note{
+      display:inline-flex;
+      margin-top:14px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(47,91,67,.08);
+      color:var(--primary-2);
+      font-size:.82rem;
+      font-weight:850;
+    }
+
+    .benefit-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .benefit-card{
+      padding:22px;
+      border-radius:26px;
+      background:#fff;
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 14px 30px rgba(19,32,25,.06);
+    }
+    .benefit-card strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:1.02rem;
+      color:#132019;
       letter-spacing:-.02em;
-      font-weight:850;
-      color:#0f172a;
+    }
+    .benefit-card span{
+      display:block;
+      color:#516155;
+      line-height:1.74;
+      font-size:.95rem;
+    }
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    .step{
+      padding:22px;
+      border-radius:26px;
+      background:linear-gradient(180deg, #ffffff, #f9fbf9);
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 14px 30px rgba(19,32,25,.05);
+    }
+    .step-num{
+      width:40px;height:40px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:rgba(47,91,67,.10);
+      color:var(--primary-2);
+      font-weight:900;
+      margin-bottom:12px;
+    }
+    .step strong{
+      display:block;
+      margin-bottom:8px;
+      color:#132019;
+      font-size:1.02rem;
+      letter-spacing:-.02em;
+    }
+    .step span{
+      display:block;
+      color:#516155;
+      line-height:1.7;
+      font-size:.95rem;
+    }
+
+    .form-shell{
+      position:relative;
       overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:3;
-      -webkit-box-orient:vertical;
+      border-radius:34px;
+      border:1px solid rgba(47,91,67,.10);
+      background:
+        radial-gradient(circle at top right, rgba(47,91,67,.08), transparent 28%),
+        linear-gradient(180deg, #ffffff, #f9fbf9);
+      box-shadow:var(--shadow-card);
+      padding:26px;
     }
-    .service-price{
-      font-weight:950;
-      font-size:.96rem;
-      color:var(--primary-2);
-      white-space:nowrap;
-      justify-self:end;
-      align-self:start;
-      background:rgba(37,99,235,.10);
-      padding:8px 10px;
-      border-radius:999px;
-      line-height:1;
-    }
-    .service-summary{margin:8px 0 0;color:var(--muted);line-height:1.55;font-size:.95rem;overflow-wrap:anywhere}
-    .service-details{margin-top:12px;border-top:1px solid rgba(15,23,42,.06);padding-top:12px;color:#334155;line-height:1.65;display:none;font-size:.96rem}
-    .service-card.is-open .service-details{display:block;animation:fadeUp .28s ease both}
-    .service-card .service-details{
-      margin-top:12px;
-      border-top:1px solid rgba(15,23,42,.06);
-      padding-top:12px;
-    }
-    .service-toggle{
-      margin-top:auto;
-      width:fit-content;
-      text-align:left;
-      border:1px solid rgba(37,99,235,.12);
-      background:rgba(37,99,235,.08);
-      color:var(--primary-2);
-      font-weight:850;
-      cursor:pointer;
-      padding:10px 14px;
-      border-radius:999px;
-    }
-
-    .booking-panel{padding:22px;margin-top:18px}
-    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .field{display:grid;gap:8px}
-    .field label{font-size:.92rem;font-weight:850;color:#334155}
-    .field input,.field select,.field textarea{
-      width:100%;border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.96);
-      border-radius:18px;padding:15px 16px;outline:none;
-      transition:border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-    }
-    .field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(37,99,235,.35);box-shadow:0 0 0 5px rgba(37,99,235,.10)}
-    .field textarea{min-height:120px;resize:vertical}
-    .input-wide{grid-column:1/-1}
-    .date-picker{margin-top:10px;display:grid;gap:12px;padding:16px;border-radius:28px;background:#f8fbff;border:1px solid rgba(15,23,42,.06);box-shadow:0 18px 40px rgba(15,23,42,.06)}
-    .calendar-head{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:10px 12px;border-radius:20px;
-      background:#ffffff;
-      border:1px solid rgba(15,23,42,.08);
-    }
-    .calendar-month{font-weight:950;letter-spacing:-.02em;color:#0f172a}
-    .calendar-nav{display:flex;gap:8px}
-    .icon-btn{
-      width:44px;height:44px;border-radius:14px;border:1px solid rgba(15,23,42,.08);
-      background:#fff;cursor:pointer;display:grid;place-items:center;
-      transition:transform var(--transition), box-shadow var(--transition), background var(--transition)
-    }
-    .icon-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(15,23,42,.08)}
-    .calendar-wrap{overflow:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
-    .calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;min-width:420px;padding-top:2px}
-    .weekday,.day{text-align:center;border-radius:16px;min-height:50px;display:grid;place-items:center;font-weight:800}
-    .weekday{color:#64748b;font-size:.82rem;min-height:28px}
-    .day{border:1px solid rgba(15,23,42,.06);background:#fff;cursor:pointer;transition:transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition)}
-    .day:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(15,23,42,.08)}
-    .day.is-empty{background:transparent;border-color:transparent;cursor:default}
-    .day.is-past,.day.is-disabled{opacity:.38;cursor:not-allowed;text-decoration:line-through}
-    .day.is-selected{background:var(--primary);color:#fff;border-color:transparent;box-shadow:0 14px 28px rgba(37,99,235,.22)}
-    .day.is-booked{background:rgba(239,68,68,.08);color:#b91c1c;border-color:rgba(239,68,68,.18)}
-    .selected-date-chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 14px;border-radius:999px;
-      background:rgba(37,99,235,.10);
-      border:1px solid rgba(37,99,235,.14);
-      color:var(--primary-2);font-weight:850;font-size:.92rem;
-      width:fit-content;
-    }
-    .microcopy{margin-top:8px;font-size:.88rem;color:#64748b}
-    .section-split{margin-top:18px;height:1px;background:rgba(15,23,42,.10)}
-
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch;margin-top:6px}
-    .about-panel,.contact-panel,.faq-card{padding:24px}
-    .reviews-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .review-card{padding:20px}
-    .review-card p{color:#334155;line-height:1.7}
-    .review-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-    .stars{letter-spacing:2px;color:#f59e0b;font-size:1rem}
-
-    .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .contact-item{
-      padding:18px;border-radius:20px;background:rgba(255,255,255,.92);
-      border:1px solid rgba(15,23,42,.06);display:grid;gap:6px;
-    }
-    .contact-item span{color:var(--muted);font-size:.9rem}
-    .why-grid{
+    .form-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .field{display:grid;gap:8px}
+    .field label{
+      font-size:.92rem;
+      font-weight:850;
+      color:#27382f;
+    }
+    .field input,.field select,.field textarea{
+      width:100%;
+      border:1px solid rgba(47,91,67,.14);
+      background:rgba(255,255,255,.96);
+      color:#132019;
+      border-radius:18px;
+      padding:15px 16px;
+      outline:none;
+      transition:border-color var(--transition), box-shadow var(--transition), transform var(--transition), background var(--transition);
+    }
+    .field input::placeholder,.field textarea::placeholder{color:#93a298}
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:rgba(47,91,67,.28);
+      box-shadow:0 0 0 5px rgba(47,91,67,.08);
+      background:#fff;
+    }
+    .field textarea{
+      min-height:132px;
+      resize:vertical;
+    }
+    .input-wide{grid-column:1/-1}
+    .form-actions{
+      display:flex;
       gap:12px;
-      margin-top:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+      align-items:center;
     }
-    .why-item{
-      padding:18px 18px 17px;
-      border-radius:20px;
-      background:#f8fbff;
-      border:1px solid rgba(37,99,235,.08);
-      box-shadow:0 10px 24px rgba(15,23,42,.04);
+    .form-note{
+      color:#5d6d63;
+      font-size:.9rem;
+      line-height:1.6;
     }
-    .why-item strong{
+    .mini-stack{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .mini-stat{
+      padding:16px;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 10px 24px rgba(19,32,25,.05);
+    }
+    .mini-stat strong{
       display:block;
-      margin-bottom:6px;
       color:var(--primary-2);
-      font-size:.98rem;
+      font-size:.95rem;
+      margin-bottom:4px;
+    }
+    .mini-stat span{
+      display:block;
+      color:#5b6c61;
+      line-height:1.6;
+      font-size:.92rem;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      gap:18px;
+      align-items:stretch;
+    }
+    .contact-panel,.faq-panel{
+      padding:26px;
+      border-radius:30px;
+      background:#fff;
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 14px 30px rgba(19,32,25,.06);
+    }
+    .contact-item{
+      display:grid;
+      gap:6px;
+      padding:16px;
+      border-radius:20px;
+      background:linear-gradient(180deg, #ffffff, #f8fbf8);
+      border:1px solid rgba(47,91,67,.08);
+      margin-top:14px;
+    }
+    .contact-item span{
+      color:#65766c;
+      font-size:.9rem;
+    }
+    .contact-item strong{
+      color:#132019;
+      font-size:1.02rem;
       letter-spacing:-.02em;
     }
-    .why-item p{
+
+    .faq-list{display:grid;gap:12px;margin-top:14px}
+    .faq-card{
+      border-radius:22px;
+      background:#fff;
+      border:1px solid rgba(47,91,67,.10);
+      box-shadow:0 10px 24px rgba(19,32,25,.04);
+      overflow:hidden;
+    }
+    .faq-card summary{
+      cursor:pointer;
+      padding:18px 18px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      font-weight:850;
+      color:#132019;
+      background:linear-gradient(180deg, #ffffff, #f9fbf9);
+    }
+    .faq-card p{
       margin:0;
-      color:#475569;
-      line-height:1.68;
-      font-size:.94rem;
+      padding:0 18px 18px;
+      color:#516155;
+      line-height:1.7;
+    }
+    .faq-card summary span{
+      flex:0 0 auto;
+      width:34px;height:34px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:rgba(47,91,67,.08);
+      color:var(--primary-2);
+      font-size:1.1rem;
     }
 
-    .faq-list{display:grid;gap:14px;margin-top:18px}
-    .faq-card summary{cursor:pointer;font-weight:850;display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .faq-card p{color:#334155;line-height:1.7;margin-bottom:0;padding-top:12px}
-
-    .footer{padding:24px 0 40px;color:#64748b;border-top:1px solid rgba(15,23,42,.06);margin-top:18px}
-
-    .floating-mobile-cta{
-      display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:1200;gap:10px;grid-template-columns:1fr;
+    .footer{
+      padding:28px 0 42px;
+      border-top:1px solid rgba(19,32,25,.08);
+      color:#5f7266;
+      margin-top:18px;
     }
-    .floating-mobile-cta .btn{width:100%;min-height:54px;border-radius:16px}
+    .footer-inner{
+      display:grid;
+      gap:8px;
+      justify-items:center;
+      text-align:center;
+    }
+    .footer strong{color:#132019}
+    .footer small{font-size:.92rem;line-height:1.6}
 
-    .modal{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;
-      background:rgba(15,23,42,.42);z-index:2000;
+    .fade-in{
+      opacity:0;
+      transform:translateY(14px);
+      transition:opacity .55s ease, transform .55s ease;
     }
-    .modal.is-open{display:flex;animation:fade .2s ease both}
-    .modal-card{
-      width:min(100%,440px);border-radius:28px;background:white;padding:24px;
-      box-shadow:0 30px 90px rgba(15,23,42,.28);text-align:center;
+    .fade-in.is-visible{
+      opacity:1;
+      transform:translateY(0);
     }
-    .modal-card h3{margin-top:10px;margin-bottom:10px}
-    .modal-card p{color:var(--muted);line-height:1.6}
-    .modal-icon{
-      width:70px;height:70px;border-radius:22px;margin:0 auto;
-      background:rgba(22,163,74,.12);
-      display:grid;place-items:center;color:var(--success);font-size:2rem;font-weight:900;
-    }
-
-    .fade-in{opacity:0;transform:translateY(12px);transition:opacity .55s ease, transform .55s ease}
-    .fade-in.is-visible{opacity:1;transform:translateY(0)}
-    .hidden{display:none !important}
 
     @keyframes fade{from{opacity:0}to{opacity:1}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
     @media (max-width:1060px){
-      .services-layout,.about-grid{grid-template-columns:1fr}
-      .summary-panel,.booking-panel{position:static}
+      .hero-grid{grid-template-columns:1fr}
+      .cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .benefit-grid,.steps,.mini-stack,.contact-grid{grid-template-columns:1fr}
+      .hero-visual{min-height:unset}
     }
 
     @media (max-width:860px){
-      .cards-grid{grid-template-columns:1fr}
-      .group-card .group-content{padding:0 14px}
-      .group-card.is-open .group-content{padding:0 14px 14px}
-      .group-content-inner{padding-top:2px}
-      .calendar-subtitle{font-size:.84rem;line-height:1.4}
-      .calendar-grid{min-width:0;gap:5px}
-      .calendar-wrap{overflow:visible}
-      .weekday,.day{min-height:42px;border-radius:14px}
-      .service-card .service-top{grid-template-columns:auto minmax(0,1fr) auto;gap:10px}
-      .service-summary{font-size:.9rem;line-height:1.55}
-      .service-actions{margin-top:12px}
-      .about-shell{grid-template-columns:1fr;padding:16px;border-radius:24px;gap:14px}
-      .about-hero{padding-right:0}
-      .about-stat{padding:14px;border-radius:18px}
-      .about-accordion-card summary{padding:16px}
-      .about-accordion-body > div{padding:0 16px 16px}
-      .about-accordion-icon{width:36px;height:36px;border-radius:12px}
-
-      .container{
-        width:100%;
-        padding-inline:8px;
-      }
-
-      .header-inner{
-        gap:8px;
-        padding:15px 8px 15px;
-      }
-      .brand-logo{
-        width:min(58%,470px);
-      }
-
-      .hero{
-        padding:8px 0 12px;
-      }
-      .hero-grid{
-        gap:12px;
-      }
-      .hero-copy{
-        width:100%;
-        padding:22px 14px 18px;
-        border-radius:22px;
-      }
-      .hero-title{
-        font-size:clamp(1.9rem,7.4vw,2.6rem);
-        line-height:1.02;
-      }
-      .hero-text{
-        font-size:1rem;
-        line-height:1.72;
-        max-width:none;
-        margin-top:12px;
-      }
-      .cta-row{
-        margin-top:18px;
-        gap:10px;
-      }
-      .btn{
-        min-height:52px;
-        padding:0 18px;
-      }
-      .hero-image{
-        width:100%;
-        border-radius:22px;
-      }
-      .hero-image img{
-        height:210px;
-      }
-
-      .section{
-        padding:20px 0;
-      }
-      .section-glass,
-      .service-intro-shell{
-        padding:16px 14px;
-        border-radius:22px;
-      }
-      .service-intro-title{
-        font-size:clamp(1.9rem,8vw,2.8rem);
-        line-height:1.02;
-      }
-      .service-intro-lead{
-        font-size:1rem;
-        line-height:1.7;
-        margin-top:14px;
-      }
-
-      .services-layout,
-      .about-grid,
-      .reviews-grid,
-      .contact-grid,
-      .form-grid,
-      .why-grid{
-        grid-template-columns:1fr;
-        gap:12px;
-      }
-
-      .summary-panel,
-      .booking-panel,
-      .about-panel,
-      .contact-panel,
-      .review-card,
-      .faq-card{
-        padding:16px;
-        border-radius:22px;
-      }
-      .summary-panel{
-        position:static;
-      }
-      .booking-panel{
-        margin-top:14px;
-      }
-      .section-title{
-        font-size:clamp(1.5rem,5.8vw,2.15rem);
-        line-height:1.05;
-      }
-      .section-lead{
-        line-height:1.72;
-        max-width:none;
-      }
-
-      .group-head{
-        padding:16px;
-        gap:12px;
-      }
-      .group-title{
-        font-size:1rem;
-      }
-      .group-subtitle{
-        font-size:.9rem;
-        line-height:1.45;
-      }
-      .group-pill{
-        padding:8px 10px;
-        font-size:.82rem;
-      }
-      .group-content{
-        padding:0 14px 14px;
-      }
-      .group-note{
-        margin-bottom:12px;
-      }
-      .cards-grid{
-        gap:10px;
-      }
-
-      .service-card{
-        padding:14px 14px 12px;
-        border-radius:18px;
-      }
-      .service-top{
-        grid-template-columns:auto minmax(0,1fr) auto;
+      .container{width:100%;padding-inline:8px}
+      .header-inner{padding:14px 10px 16px;gap:10px}
+      .brand-logo{width:min(82%,560px)}
+      .nav{width:100%}
+      .nav-row{
+        grid-template-columns:repeat(2,minmax(0,1fr));
         gap:8px;
       }
-      .check{
-        width:20px;
-        height:20px;
-        margin-top:2px;
-      }
-      .service-title{
-        font-size:1rem;
-        line-height:1.18;
-        -webkit-line-clamp:3;
-      }
-      .service-price{
-        font-size:.88rem;
-        padding:7px 9px;
-      }
-      .service-toggle{
-        padding:9px 12px;
-        font-size:.92rem;
-      }
-      .service-summary,
-      .service-details{
-        line-height:1.62;
-        font-size:.92rem;
-      }
-
-      .package-grid{
-        gap:12px;
-      }
-      .package-card{
-        padding:16px;
-        border-radius:22px;
-      }
-      .package-top{
-        grid-template-columns:1fr;
-        gap:10px;
-      }
-      .package-price-wrap{
-        justify-items:start;
-        padding-left:0;
-      }
-      .package-price{
-        font-size:clamp(1.5rem,8vw,2.1rem);
-      }
-      .package-features{
-        margin-top:14px;
-      }
-      .package-features li,
-      .package-detail-list li{
-        padding:10px 12px;
-        border-radius:14px;
-      }
-      .package-card .service-details{
-        margin-top:14px;
-        padding:14px;
-        border-radius:16px;
-      }
-      .package-actions{
-        margin-top:14px;
-        align-items:flex-start;
-      }
-
-      .field label{
-        font-size:.9rem;
-      }
-      .field input,
-      .field select,
-      .field textarea{
-        padding:14px 14px;
-        border-radius:16px;
-      }
-      .field textarea{
-        min-height:110px;
-      }
-
-      .date-picker{
-        padding:12px;
-        border-radius:22px;
-      }
-      .calendar-head{
-        padding:10px;
-        border-radius:16px;
-        gap:8px;
-      }
-      .calendar-month{
-        font-size:1rem;
-      }
-      .calendar-nav{
-        gap:6px;
-      }
-      .icon-btn{
-        width:40px;
-        height:40px;
-        border-radius:12px;
-      }
-      .quick-date-row{
-        gap:8px;
-      }
-      .quick-date-chip{
-        min-width:calc(50% - 4px);
-        flex:1 1 calc(50% - 4px);
-        padding:11px 12px;
-        border-radius:16px;
-      }
-      .quick-date-chip strong{
-        font-size:.88rem;
-      }
-      .quick-date-chip span{
-        font-size:.74rem;
-      }
-      .calendar-grid{
-        min-width:380px;
-        gap:6px;
-      }
-      .weekday,
-      .day{
+      .nav-item{
         min-height:44px;
-        border-radius:14px;
+        padding:12px 10px;
+        font-size:.87rem;
+        white-space:normal;
+        line-height:1.15;
+        text-align:center;
       }
-
-      .total-box,
-      .booking-total{
-        padding:16px;
-        border-radius:18px;
-      }
-      .total-amount{
-        font-size:clamp(1.6rem,8vw,2.3rem);
-      }
-      .selected-list li,
-      .summary-panel li{
-        gap:10px;
-      }
-
-      .contact-item,
-      .why-item,
-      .review-card{
-        border-radius:18px;
-      }
-      .why-item{
-        padding:16px;
-      }
-
-      .floating-mobile-cta{
-        left:10px;
-        right:10px;
-        bottom:10px;
-      }
-      .floating-mobile-cta .btn{
-        min-height:52px;
-        border-radius:14px;
-      }
-      .footer{
-        padding-bottom:90px;
-      }
-    }
-
-    /* About section premium redesign */
-    .about-vip{
-      position:relative;
-      overflow:hidden;
-      padding:34px 26px 28px;
-      border-radius:34px;
-      border:1px solid rgba(15,23,42,.06);
-      background:
-        radial-gradient(circle at top center, rgba(37,99,235,.10), transparent 26%),
-        linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,250,255,.98));
-      box-shadow:var(--shadow-card);
-      text-align:center;
-    }
-    .about-vip::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at top right, rgba(37,99,235,.08), transparent 26%),
-        radial-gradient(circle at bottom left, rgba(15,23,42,.04), transparent 24%);
-      pointer-events:none;
-    }
-    .about-vip > *{position:relative; z-index:1}
-    .about-center-title{
-      max-width:16ch;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .about-center-lead{
-      margin-left:auto;
-      margin-right:auto;
-      text-align:center;
-      max-width:66ch;
-    }
-    .about-visual-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-      margin:28px auto 0;
-      width:min(100%,1080px);
-    }
-    .about-visual-card{
-      margin:0;
-      position:relative;
-      overflow:hidden;
-      border-radius:28px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 18px 38px rgba(15,23,42,.08);
-      transform:translateY(0);
-      transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-    }
-    .about-visual-card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 24px 48px rgba(15,23,42,.12);
-      border-color:rgba(37,99,235,.14);
-    }
-    .about-visual-card img,
-    .about-visual-card svg{
-      width:100%;
-      aspect-ratio:16/10;
-      display:block;
-      background:#fff;
-    }
-    .about-visual-card img{object-fit:cover;}
-    .about-visual-copy{
-      padding:16px 18px 18px;
-      text-align:left;
-    }
-    .about-visual-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(37,99,235,.10);
-      color:var(--primary-2);
-      font-size:.82rem;
-      font-weight:900;
-      border:1px solid rgba(37,99,235,.14);
-      margin-bottom:10px;
-    }
-    .about-visual-copy h3{
-      margin:0 0 8px;
-      font-size:1.08rem;
-      line-height:1.15;
-      letter-spacing:-.03em;
-      color:#0f172a;
-    }
-    .about-visual-copy p{
-      margin:0;
-      color:#475569;
-      line-height:1.7;
-      font-size:.95rem;
-    }
-    .about-spotlight-grid{
-      width:min(100%,1080px);
-      margin:18px auto 0;
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-    }
-    .about-spotlight{
-      padding:18px 18px 17px;
-      border-radius:22px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 24px rgba(15,23,42,.05);
-      text-align:left;
-    }
-    .about-spotlight strong{
-      display:block;
-      margin-bottom:6px;
-      color:var(--primary-2);
-      font-size:.98rem;
-      letter-spacing:-.02em;
-    }
-    .about-spotlight span{
-      display:block;
-      color:#475569;
-      line-height:1.7;
-      font-size:.94rem;
-    }
-    .about-accordion-list-center{
-      width:min(100%,1080px);
-      margin:18px auto 0;
-      gap:12px;
-    }
-    .about-accordion-list-center .about-accordion-card summary{
-      justify-content:flex-start;
-      text-align:left;
-    }
-    .about-accordion-list-center .about-accordion-card summary span:first-child{
-      flex:1 1 auto;
-    }
-    @media (max-width:860px){
-      .about-vip{
-        padding:18px 14px;
-        border-radius:22px;
-      }
-      .about-visual-grid,
-      .about-spotlight-grid{
-        grid-template-columns:1fr;
-        gap:10px;
-      }
-      .about-visual-card{
-        border-radius:22px;
-      }
-      .about-visual-copy{
-        padding:14px 14px 16px;
-      }
-      .about-spotlight{
-        padding:16px;
-        border-radius:18px;
-      }
-    }
-
-    /* Premium overrides for packages */
-    .group-card[data-group-type="packages"] .group-head {
-      background:#f8fafc;
-      color:#0f172a;
-    }
-    .group-card[data-group-type="packages"] .group-title,
-    .group-card[data-group-type="packages"] .group-subtitle,
-    .group-card[data-group-type="packages"] .chev {
-      color:#0f172a;
-    }
-    .group-card[data-group-type="packages"] .group-subtitle {
-      opacity:.84;
-    }
-    .group-card[data-group-type="packages"] .group-pill {
-      background:rgba(37,99,235,.10);
-      border-color:rgba(37,99,235,.14);
-      color:var(--primary-2);
-    }
-    .group-card[data-group-type="packages"] .chev {
-      background:#fff;
-      border-color:rgba(15,23,42,.08);
-    }
-
-    .package-grid {
-      display:grid;
-      gap:16px;
-    }
-    .package-card {
-      position:relative;
-      overflow:hidden;
-      padding:22px;
-      border-radius:28px;
-      border:1px solid rgba(37,99,235,.12);
-      background:#ffffff;
-      box-shadow:0 18px 40px rgba(15,23,42,.08);
-    }
-    .package-card::after{display:none}
-    .package-card.is-featured {
-      border-color:rgba(37,99,235,.22);
-      box-shadow:0 24px 50px rgba(37,99,235,.12);
-      background:#f7faff;
-    }
-    .package-card.is-premium {
-      border-color:rgba(37,99,235,.22);
-      background:#f4f9ff;
-      box-shadow:0 26px 56px rgba(37,99,235,.12);
-    }
-    .package-top {
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:16px;
-      align-items:start;
-      position:relative;
-      z-index:1;
-    }
-    .package-copy{min-width:0}
-    .package-badge {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(37,99,235,.10);
-      border:1px solid rgba(37,99,235,.14);
-      color:var(--primary-2);
-      font-size:.84rem;
-      font-weight:900;
-      width:fit-content;
-    }
-    .package-title {
-      margin:12px 0 10px;
-      font-size:clamp(1.18rem, 2.2vw, 1.52rem);
-      line-height:1.15;
-      letter-spacing:-.04em;
-      font-weight:950;
-      color:#0f172a;
-      overflow-wrap:anywhere;
-    }
-    .package-summary {
-      margin:0;
-      color:#475569;
-      line-height:1.65;
-      max-width:66ch;
-      overflow-wrap:anywhere;
-    }
-    .package-price-wrap {
-      flex:0 0 auto;
-      display:grid;
-      justify-items:end;
-      gap:6px;
-      padding-left:8px;
-    }
-    .package-price-label {
-      font-size:.82rem;
-      color:var(--muted);
-      font-weight:850;
-    }
-    .package-price {
-      font-size:clamp(1.8rem, 4vw, 2.8rem);
-      font-weight:950;
-      letter-spacing:-.06em;
-      line-height:1;
-      color:var(--primary-2);
-      white-space:nowrap;
-    }
-    .package-features {
-      position:relative;
-      z-index:1;
-      margin:18px 0 0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:10px;
-    }
-    .package-features li {
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:16px;
-      background:#f8fbff;
-      border:1px solid rgba(15,23,42,.06);
-      color:#0f172a;
-      line-height:1.45;
-      font-size:.93rem;
-      overflow-wrap:anywhere;
-    }
-    .package-features li::before {
-      content:"✓";
-      flex:0 0 auto;
-      width:22px;
-      height:22px;
-      border-radius:999px;
-      display:grid;
-      place-items:center;
-      background:rgba(37,99,235,.10);
-      color:var(--primary-2);
-      font-weight:900;
-      font-size:.8rem;
-      margin-top:1px;
-    }
-
-    .package-card .service-details {
-      margin-top:16px;
-      padding:16px;
-      border-top:1px solid rgba(37,99,235,.10);
-      background:#f8fbff;
-      border-radius:18px;
-      color:#334155;
-      line-height:1.75;
-    }
-    .package-detail-title{
-      margin:0 0 8px;
-      color:#0f172a;
-      font-size:1rem;
-      font-weight:900;
-      letter-spacing:-.02em;
-    }
-    .package-detail-copy{
-      margin:0 0 12px;
-      color:#475569;
-      line-height:1.72;
-      font-size:.96rem;
-    }
-    .package-detail-list{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:8px;
-    }
-    .package-detail-list li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:11px 12px;
-      border-radius:14px;
-      background:#ffffff;
-      border:1px solid rgba(15,23,42,.06);
-      color:#0f172a;
-      line-height:1.5;
-      font-size:.92rem;
-      overflow-wrap:anywhere;
-    }
-    .package-detail-list li::before{
-      content:"•";
-      color:var(--primary-2);
-      font-weight:900;
-      line-height:1;
-      margin-top:1px;
-    }
-    .package-actions {
-      margin-top:18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      position:relative;
-      z-index:1;
-    }
-    .package-select {
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      color:#0f172a;
-      cursor:pointer;
-    }
-    .package-select .check {
-      margin-top:0;
-    }
-
-    .package-card .service-toggle {
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(37,99,235,.08);
-      border:1px solid rgba(37,99,235,.12);
-      box-shadow:0 10px 20px rgba(15,23,42,.05);
-      width:auto;
-      margin-top:0;
-    }
-    .package-card .service-toggle:hover {
-      background:rgba(37,99,235,.12);
-    }
-
-    .quick-date-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .quick-date-chip {
-      display:grid;
-      gap:2px;
-      text-align:left;
-      padding:12px 14px;
-      min-width:142px;
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.08);
-      background:#fff;
-      box-shadow:0 10px 22px rgba(15,23,42,.05);
-      cursor:pointer;
-      transition:transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
-    }
-    .quick-date-chip strong {
-      font-size:.92rem;
-      line-height:1.2;
-      color:#0f172a;
-    }
-    .quick-date-chip span {
-      font-size:.78rem;
-      color:var(--muted);
-      font-weight:800;
-    }
-    .quick-date-chip:hover,
-    .quick-date-chip.is-active {
-      transform:translateY(-1px);
-      border-color:rgba(37,99,235,.22);
-      background:#f6f9ff;
-      box-shadow:0 14px 26px rgba(37,99,235,.10);
-    }
-    .quick-date-chip:disabled {
-      opacity:.45;
-      cursor:not-allowed;
-      box-shadow:none;
-    }
-
-    .calendar-subtitle{
-      margin-top:4px;
-      color:#64748b;
-      font-size:.88rem;
-      line-height:1.45;
-      font-weight:600;
-    }
-
-    .group-card .group-content{
-      display:grid;
-      grid-template-rows:0fr;
-      padding:0 20px;
-      transition:grid-template-rows .35s ease, padding .35s ease;
-    }
-    .group-card.is-open .group-content{
-      display:grid;
-      grid-template-rows:1fr;
-      padding:0 20px 20px;
-    }
-    .group-content > *{overflow:hidden}
-    .group-card .group-content > :first-child{overflow:hidden}
-
-    .service-summary{
-      margin:10px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:.92rem;
-      overflow-wrap:anywhere;
-    }
-    .service-actions{
-      margin-top:14px;
-      display:flex;
-      justify-content:flex-start;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .service-card .service-details,
-    .package-card .service-details{
-      display:grid;
-      grid-template-rows:0fr;
-      margin-top:12px;
-      padding-top:0;
-      border-top:1px solid rgba(15,23,42,.06);
-      transition:grid-template-rows .35s ease, margin-top .35s ease, padding-top .35s ease;
-    }
-    .service-card.is-open .service-details,
-    .package-card.is-open .service-details{
-      grid-template-rows:1fr;
-      margin-top:14px;
-      padding-top:14px;
-    }
-    .service-details > div,
-    .service-details > p,
-    .service-details > ul{
-      overflow:hidden;
-    }
-    .service-card.is-open .service-toggle,
-    .package-card.is-open .service-toggle{
-      background:rgba(37,99,235,.14);
-      border-color:rgba(37,99,235,.18);
-    }
-    .service-card .service-top{
-      align-items:start;
-      grid-template-columns:auto minmax(0,1fr) auto;
-      gap:12px;
-    }
-    .service-card .service-price{
-      margin-top:2px;
-    }
-    .service-card .service-toggle{
-      margin-top:auto;
-    }
-
-    .about-shell{
-      display:grid;
-      grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-      gap:18px;
-      padding:24px;
-      border-radius:34px;
-      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(248,251,255,.98));
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);
-    }
-    .about-hero{
-      padding:4px 2px 4px 0;
-    }
-    .about-stats{
-      display:grid;
-      gap:12px;
-      margin-top:18px;
-    }
-    .about-stat{
-      padding:16px 16px 15px;
-      border-radius:20px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 24px rgba(15,23,42,.05);
-    }
-    .about-stat strong{
-      display:block;
-      margin-bottom:6px;
-      color:var(--primary-2);
-      font-size:1rem;
-      letter-spacing:-.02em;
-    }
-    .about-stat span{
-      display:block;
-      color:#475569;
-      line-height:1.7;
-      font-size:.95rem;
-    }
-    .about-accordion-list{
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-    .about-accordion-card{
-      border-radius:22px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 26px rgba(15,23,42,.05);
-      overflow:hidden;
-      transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-    }
-    .about-accordion-card:hover{
-      transform:translateY(-1px);
-      box-shadow:0 16px 32px rgba(15,23,42,.07);
-      border-color:rgba(37,99,235,.12);
-    }
-    .about-accordion-card summary{
-      list-style:none;
-      cursor:pointer;
-      padding:18px 18px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      background:linear-gradient(180deg, #ffffff, #f8fbff);
-      font-weight:850;
-    }
-    .about-accordion-card summary::-webkit-details-marker{display:none}
-    .about-accordion-card summary span:first-child{
-      display:grid;
-      gap:4px;
-      min-width:0;
-    }
-    .about-accordion-card summary strong{
-      font-size:1.02rem;
-      letter-spacing:-.02em;
-      color:#0f172a;
-    }
-    .about-accordion-card summary small{
-      color:#64748b;
-      font-size:.9rem;
-      line-height:1.45;
-      font-weight:600;
-    }
-    .about-accordion-icon{
-      flex:0 0 auto;
-      width:40px;
-      height:40px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(15,23,42,.08);
-      background:#fff;
-      color:#334155;
-      transition:transform .3s ease, background .3s ease, color .3s ease;
-    }
-    .about-accordion-card[open] .about-accordion-icon{
-      transform:rotate(180deg);
-      background:rgba(37,99,235,.08);
-      color:var(--primary-2);
-      border-color:rgba(37,99,235,.12);
-    }
-    .about-accordion-body{
-      display:grid;
-      grid-template-rows:0fr;
-      transition:grid-template-rows .35s ease;
-      border-top:1px solid rgba(15,23,42,.06);
-    }
-    .about-accordion-card[open] .about-accordion-body{
-      grid-template-rows:1fr;
-    }
-    .about-accordion-body > div{
-      overflow:hidden;
-      padding:0 18px 18px;
-    }
-    .about-accordion-body p{
-      margin:14px 0 0;
-      color:#475569;
-      line-height:1.75;
-      font-size:.96rem;
-    }
-
-    .cards-grid{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    .calendar-subtitle{
-      margin-top:4px;
-      color:#64748b;
-      font-size:.88rem;
-      line-height:1.45;
-      font-weight:600;
-    }
-
-    .group-card .group-content{
-      display:grid;
-      grid-template-rows:0fr;
-      padding:0 20px;
-      transition:grid-template-rows .35s ease, padding .35s ease;
-    }
-    .group-card.is-open .group-content{
-      display:grid;
-      grid-template-rows:1fr;
-      padding:0 20px 20px;
-    }
-    .group-content-inner{
-      overflow:hidden;
-    }
-    .group-note{
-      margin:0 0 16px;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:.96rem;
-    }
-
-    .service-summary{
-      margin:10px 0 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:.92rem;
-      overflow-wrap:anywhere;
-    }
-    .service-actions{
-      margin-top:14px;
-      display:flex;
-      justify-content:flex-start;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .service-card .service-details,
-    .package-card .service-details{
-      display:grid;
-      grid-template-rows:0fr;
-      margin-top:12px;
-      padding-top:0;
-      border-top:1px solid rgba(15,23,42,.06);
-      transition:grid-template-rows .35s ease, margin-top .35s ease, padding-top .35s ease;
-    }
-    .service-card.is-open .service-details,
-    .package-card.is-open .service-details{
-      grid-template-rows:1fr;
-      margin-top:14px;
-      padding-top:14px;
-    }
-    .service-details-inner{
-      overflow:hidden;
-    }
-    .service-card.is-open .service-toggle,
-    .package-card.is-open .service-toggle{
-      background:rgba(37,99,235,.14);
-      border-color:rgba(37,99,235,.18);
-    }
-    .service-card .service-top{
-      align-items:start;
-      grid-template-columns:auto minmax(0,1fr) auto;
-      gap:12px;
-    }
-    .service-card .service-price{
-      margin-top:2px;
-    }
-    .service-card .service-toggle{
-      margin-top:auto;
-    }
-
-    .about-shell{
-      display:grid;
-      grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-      gap:18px;
-      padding:24px;
-      border-radius:34px;
-      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(248,251,255,.98));
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);
-    }
-    .about-hero{
-      padding:4px 2px 4px 0;
-    }
-    .about-stats{
-      display:grid;
-      gap:12px;
-      margin-top:18px;
-    }
-    .about-stat{
-      padding:16px 16px 15px;
-      border-radius:20px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 24px rgba(15,23,42,.05);
-    }
-    .about-stat strong{
-      display:block;
-      margin-bottom:6px;
-      color:var(--primary-2);
-      font-size:1rem;
-      letter-spacing:-.02em;
-    }
-    .about-stat span{
-      display:block;
-      color:#475569;
-      line-height:1.7;
-      font-size:.95rem;
-    }
-    .about-accordion-list{
-      display:grid;
-      gap:12px;
-      align-content:start;
-    }
-    .about-accordion-card{
-      border-radius:22px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 12px 26px rgba(15,23,42,.05);
-      overflow:hidden;
-      transition:transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-    }
-    .about-accordion-card:hover{
-      transform:translateY(-1px);
-      box-shadow:0 16px 32px rgba(15,23,42,.07);
-      border-color:rgba(37,99,235,.12);
-    }
-    .about-accordion-card summary{
-      list-style:none;
-      cursor:pointer;
-      padding:18px 18px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      background:linear-gradient(180deg, #ffffff, #f8fbff);
-      font-weight:850;
-    }
-    .about-accordion-card summary::-webkit-details-marker{display:none}
-    .about-accordion-card summary span:first-child{
-      display:grid;
-      gap:4px;
-      min-width:0;
-    }
-    .about-accordion-card summary strong{
-      font-size:1.02rem;
-      letter-spacing:-.02em;
-      color:#0f172a;
-    }
-    .about-accordion-card summary small{
-      color:#64748b;
-      font-size:.9rem;
-      line-height:1.45;
-      font-weight:600;
-    }
-    .about-accordion-icon{
-      flex:0 0 auto;
-      width:40px;
-      height:40px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(15,23,42,.08);
-      background:#fff;
-      color:#334155;
-      transition:transform .3s ease, background .3s ease, color .3s ease;
-    }
-    .about-accordion-card[open] .about-accordion-icon{
-      transform:rotate(180deg);
-      background:rgba(37,99,235,.08);
-      color:var(--primary-2);
-      border-color:rgba(37,99,235,.12);
-    }
-    .about-accordion-body{
-      display:grid;
-      grid-template-rows:0fr;
-      transition:grid-template-rows .35s ease;
-      border-top:1px solid rgba(15,23,42,.06);
-    }
-    .about-accordion-card[open] .about-accordion-body{
-      grid-template-rows:1fr;
-    }
-    .about-accordion-body > div{
-      overflow:hidden;
-      padding:0 18px 18px;
-    }
-    .about-accordion-body p{
-      margin:14px 0 0;
-      color:#475569;
-      line-height:1.75;
-      font-size:.96rem;
-    }
-
-    .cards-grid{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-
-
-    /* Comfort + premium layout overrides */
-    :root{--max:1240px;}
-    .section{padding:42px 0;}
-    .hero{padding:28px 0 34px;}
-    .hero-copy{padding:46px 34px 36px;}
-    .hero-text{max-width:68ch;}
-    .service-intro-shell{padding:38px 30px 32px;}
-    .section-title{letter-spacing:-.055em;}
-    .about-vip{padding:42px 32px 34px;}
-    .about-eyebrow-boost{font-size:1.1rem;padding:12px 16px;}
-    .about-title-blue{font-size:clamp(2.8rem,6.7vw,3.45rem);line-height:.98;color:var(--primary-2);}
-    .about-lead-boost{font-size:1.16rem;line-height:1.82;max-width:72ch;}
-    .about-visual-grid{margin-top:26px;grid-template-columns:minmax(0,1fr);width:min(100%,880px);}
-    .about-visual-card-single{box-shadow:0 22px 48px rgba(15,23,42,.10);}
-    .about-visual-card-single img,
-    .about-visual-card-single svg{aspect-ratio:16/9;}
-    .about-visual-copy{padding:18px 20px 20px;}
-    .about-visual-copy h3{font-size:1.22rem;color:var(--primary-2);}
-    .about-visual-copy p{font-size:1rem;line-height:1.8;color:#475569;}
-.about-accordion-list-center{margin-top:22px;}
-    .about-accordion-card summary{padding:20px 20px 18px;}
-    .about-accordion-body > div{padding:0 20px 20px;}
-    .about-accordion-card summary strong{font-size:1.08rem;}
-    .about-accordion-card summary small{font-size:.95rem;}
-    .group-head{padding:22px;}
-    .cards-grid,.package-grid{gap:14px;}
-    .service-card,.package-card,.review-card,.faq-card,.contact-panel,.about-panel{border-radius:30px;}
-    .summary-panel,.booking-panel{padding:26px;}
-    .container{width:min(100% - 36px,var(--max));}
-    @media (max-width:860px){
-      .section{padding:20px 0;}
-      .hero{padding:10px 0 14px;}
-      .hero-copy{padding:24px 14px 18px;}
-      .service-intro-shell{padding:16px 14px;}
-      .about-vip{padding:18px 14px;}
-      .about-title-blue{font-size:clamp(2rem,8vw,2.8rem);}
-      .about-lead-boost{font-size:1rem;line-height:1.75;}
-.about-visual-copy h3{font-size:1.08rem;}
-      .about-visual-copy p,
-.group-head{padding:14px 12px;}
-      .summary-panel,.booking-panel{padding:16px;}
-    }
-
-    /* About section adjustments for the provided visual */
-    .about-visual-grid{
-      width:min(100%,760px);
-      margin-top:18px;
-    }
-    .about-visual-card-single{
-      overflow:hidden;
-      border-radius:26px;
-      background:#fff;
-      box-shadow:0 18px 42px rgba(15,23,42,.10);
-    }
-    .about-visual-card-single img{
-      width:100%;
-      display:block;
-      aspect-ratio:16/9;
-      object-fit:cover;
-      object-position:center;
-      background:#fff;
-    }
-    .about-visual-copy{
-      padding:14px 16px 16px;
-    }
-    .about-visual-copy h3{
-      margin:0 0 8px;
-      font-size:1.12rem;
-      line-height:1.15;
-    }
-    .about-visual-copy p{
-      line-height:1.72;
-      font-size:.96rem;
-    }
-.about-accordion-list-center{
-      display:none !important;
-    }
-
-
-    .about-intro{
-      margin:0 auto 18px;
-      text-align:center;
-      max-width:860px;
-    }
-    .about-intro-kicker{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:9px 14px;
-      border-radius:999px;
-      background:rgba(15,23,42,.05);
-      color:#475569;
-      border:1px solid rgba(15,23,42,.06);
-      font-size:.84rem;
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin-bottom:14px;
-    }
-    .about-intro-title{
-      margin:0;
-      font-size:clamp(2.4rem,6.5vw,4.1rem);
-      line-height:.96;
-      letter-spacing:-.07em;
-      font-weight:950;
-      text-transform:uppercase;
-    }
-    .about-intro-blue{display:block;color:var(--primary-2);}
-    .about-intro-black{display:block;color:#0f172a;}
-    @media (max-width:860px){
-      .about-intro{margin-bottom:14px;}
-      .about-intro-kicker{padding:8px 12px;font-size:.8rem;}
-      .about-intro-title{font-size:clamp(2rem,8vw,3rem);line-height:1;}
+      .hero{padding:12px 0 18px}
+      .hero-shell{border-radius:26px}
+      .hero-grid{gap:14px;padding:18px}
+      .hero-copy{padding:6px 0 0}
+      .hero-title{font-size:clamp(2rem,9vw,3rem);line-height:1}
+      .hero-text{font-size:.99rem;line-height:1.7}
+      .cta-row{gap:10px}
+      .btn{min-height:50px;padding:0 18px}
+      .hero-visual{border-radius:22px;padding:18px}
+      .property-card{padding:16px;border-radius:20px}
+      .cards-grid{grid-template-columns:1fr;gap:10px}
+      .service-card,.benefit-card,.step,.contact-panel,.faq-panel,.form-shell{border-radius:22px}
+      .service-card,.benefit-card,.step{padding:18px}
+      .form-shell{padding:18px}
+      .form-grid{grid-template-columns:1fr;gap:12px}
+      .section{padding:24px 0}
+      .service-icon{width:50px;height:50px;border-radius:16px}
+      .section-title{font-size:clamp(1.6rem,7vw,2.25rem)}
+      .section-lead{font-size:.98rem;line-height:1.72}
+      .mini-stack{grid-template-columns:1fr}
     }
 
     @media (prefers-reduced-motion:reduce){
       *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
     }
-
-    /* Final polish overrides */
-    .group-head{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto auto;
-      align-items:center;
-      gap:14px;
-    }
-    .group-head-left{
-      grid-column:1;
-    }
-    .group-pill{
-      grid-column:2;
-      justify-self:end;
-      margin-left:0;
-    }
-    .chev{
-      grid-column:3;
-      justify-self:end;
-    }
-    .cards-grid{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    .service-card{
-      width:100%;
-    }
-
-    .about-shell{
-      display:grid;
-      grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-      gap:18px;
-      padding:24px;
-      border-radius:34px;
-      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,250,255,.98));
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);
-      position:relative;
-      overflow:hidden;
-    }
-    .about-shell::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at top right, rgba(37,99,235,.12), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(15,23,42,.05), transparent 30%);
-      pointer-events:none;
-    }
-    .about-hero,
-    .about-feature-panel{
-      position:relative;
-      z-index:1;
-    }
-    .about-pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
-    }
-    .about-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid rgba(37,99,235,.12);
-      color:#0f172a;
-      box-shadow:0 10px 22px rgba(15,23,42,.05);
-      font-size:.92rem;
-      font-weight:800;
-    }
-    .about-feature-panel{
-      border-radius:28px;
-      background:linear-gradient(180deg, rgba(15,23,42,.96), rgba(37,99,235,.94));
-      color:#fff;
-      padding:22px;
-      box-shadow:0 22px 50px rgba(15,23,42,.16);
-      display:grid;
-      align-content:start;
-      gap:14px;
-    }
-    .about-feature-head{
-      font-size:1.02rem;
-      font-weight:900;
-      letter-spacing:-.02em;
-      color:#fff;
-    }
-    .about-feature-grid{
-      display:grid;
-      gap:12px;
-    }
-    .about-feature-card{
-      padding:16px;
-      border-radius:20px;
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter:blur(10px);
-    }
-    .about-feature-card strong{
-      display:block;
-      margin-bottom:6px;
-      color:#fff;
-      font-size:.98rem;
-      letter-spacing:-.02em;
-    }
-    .about-feature-card span{
-      display:block;
-      color:rgba(255,255,255,.86);
-      line-height:1.7;
-      font-size:.95rem;
-    }
-    .about-feature-card-accent{
-      background:rgba(255,255,255,.16);
-      border-color:rgba(255,255,255,.20);
-    }
-
-    @media (max-width:860px){
-      .container{
-        width:100%;
-        padding-inline:6px;
-      }
-      .section{
-        padding:16px 0;
-      }
-      .hero-copy{
-        padding:20px 12px 16px;
-        border-radius:22px;
-      }
-      .hero-image img{
-        height:200px;
-      }
-      .section-glass,
-      .service-intro-shell,
-      .summary-panel,
-      .booking-panel,
-      .about-shell,
-      .contact-panel,
-      .review-card,
-      .faq-card,
-      .group-card{
-        border-radius:20px;
-      }
-      .services-layout{
-        gap:10px;
-      }
-      .summary-panel,
-      .booking-panel{
-        padding:14px;
-      }
-      .group-head{
-        padding:14px 12px;
-        gap:10px;
-        grid-template-columns:minmax(0,1fr) auto auto;
-      }
-      .group-title{
-        font-size:1rem;
-      }
-      .group-subtitle{
-        font-size:.9rem;
-        line-height:1.45;
-      }
-      .group-pill{
-        padding:8px 10px;
-        font-size:.8rem;
-      }
-      .group-content{
-        padding:0 12px 12px;
-      }
-      .cards-grid,
-      .package-grid{
-        grid-template-columns:1fr;
-        gap:10px;
-      }
-      .service-card{
-        padding:12px;
-        border-radius:18px;
-        box-shadow:0 10px 18px rgba(15,23,42,.04);
-      }
-      .service-top{
-        gap:8px;
-      }
-      .service-title{
-        font-size:.98rem;
-        line-height:1.18;
-      }
-      .service-summary{
-        font-size:.9rem;
-        line-height:1.55;
-      }
-      .service-actions{
-        margin-top:10px;
-      }
-      .service-toggle{
-        padding:9px 12px;
-        font-size:.92rem;
-      }
-      .date-picker{
-        padding:10px;
-        border-radius:18px;
-      }
-      .calendar-head{
-        padding:10px;
-        border-radius:14px;
-        gap:8px;
-        align-items:flex-start;
-      }
-      .calendar-grid{
-        min-width:0;
-        gap:4px;
-      }
-      .calendar-wrap{
-        overflow:visible;
-      }
-      .weekday,
-      .day{
-        min-height:40px;
-        border-radius:12px;
-      }
-      .about-shell{
-        grid-template-columns:1fr;
-        padding:14px;
-        gap:12px;
-      }
-      .about-pill-row{
-        gap:8px;
-        margin-top:14px;
-      }
-      .about-pill{
-        padding:9px 12px;
-        font-size:.84rem;
-      }
-      .about-feature-panel{
-        padding:16px;
-        border-radius:22px;
-      }
-      .about-feature-card{
-        padding:14px;
-        border-radius:18px;
-      }
-      .form-grid,
-      .contact-grid,
-      .reviews-grid,
-      .why-grid{
-        gap:10px;
-      }
-      .footer{
-        padding-bottom:88px;
-      }
-    }
-
-    @media (max-width:480px){
-      .hero-title{
-        font-size:clamp(1.78rem,8vw,2.45rem);
-      }
-      .service-intro-title{
-        font-size:clamp(1.72rem,8.3vw,2.5rem);
-      }
-      .section-title{
-        font-size:clamp(1.45rem,6.2vw,2rem);
-      }
-      .service-card .service-top{
-        grid-template-columns:auto minmax(0,1fr) auto;
-      }
-    }
-
-  
-    /* Overrides for list-style services and tighter mobile layout */
-    .cards-grid,
-    .package-grid{
-      grid-template-columns:1fr !important;
-      gap:12px !important;
-    }
-    .service-card{
-      display:block;
-      padding:14px 16px;
-    }
-    .service-top{
-      grid-template-columns:auto minmax(0,1fr) auto !important;
-      align-items:start;
-      gap:10px;
-    }
-    .service-copy{
-      min-width:0;
-    }
-    .service-title{
-      display:block;
-      -webkit-line-clamp:unset;
-      overflow:visible;
-      font-size:1rem;
-      line-height:1.18;
-    }
-    .service-summary{
-      margin-top:8px;
-      font-size:.93rem;
-      line-height:1.55;
-    }
-    .package-card{
-      padding:18px 16px;
-    }
-    .package-title{
-      margin:10px 0 0;
-    }
-    .package-summary{
-      display:none !important;
-    }
-    .package-actions{
-      margin-top:14px;
-      justify-content:flex-start;
-    }
-    .group-head{
-      grid-template-columns:minmax(0,1fr) auto auto !important;
-    }
-    .group-pill{
-      justify-self:end;
-      margin-left:0;
-    }
-    @media (max-width:860px){
-      .container{
-        width:100%;
-        padding-inline:4px;
-      }
-      .section{
-        padding:14px 0;
-      }
-      .section-glass,
-      .service-intro-shell,
-      .about-shell,
-      .summary-panel,
-      .booking-panel,
-      .contact-panel,
-      .review-card,
-      .faq-card,
-      .group-card{
-        border-radius:20px;
-      }
-      .services-layout{
-        gap:10px;
-      }
-      .group-head{
-        padding:14px 12px;
-        gap:10px;
-      }
-      .group-content{
-        padding:0 10px 10px !important;
-      }
-      .service-card,
-      .package-card{
-        padding:12px 12px 11px;
-      }
-      .service-top{
-        gap:8px;
-      }
-      .service-summary{
-        font-size:.9rem;
-      }
-      .package-features li{
-        padding:10px 12px;
-      }
-      .about-shell{
-        padding:14px;
-        gap:12px;
-      }
-      .about-feature-panel{
-        padding:16px;
-      }
-      .about-feature-card{
-        padding:14px;
-      }
-    }
-
-  
-
-    /* Premium polish overrides */
-    .topbar{
-      background:rgba(244,247,251,.88);
-      border-bottom:1px solid rgba(15,23,42,.05);
-      box-shadow:0 10px 30px rgba(15,23,42,.03);
-    }
-    .header-inner{
-      padding:18px 18px 18px;
-    }
-    .brand-logo{
-      padding-bottom:18px;
-    }
-    .hero{
-      padding:24px 0 26px;
-    }
-    .hero-grid{
-      gap:22px;
-    }
-    .hero-copy{
-      padding:42px 30px 34px;
-      border-radius:36px;
-      background:linear-gradient(180deg, #f8fbff, #f3f7fb);
-    }
-    .hero-text{
-      max-width:64ch;
-      line-height:1.72;
-      margin-top:18px;
-    }
-    .hero-image{
-      width:min(100%,1000px);
-      border-radius:32px;
-    }
-    .hero-image img{
-      height:375px;
-    }
-    .section{
-      padding:34px 0;
-    }
-    .service-intro-shell{
-      padding:34px 28px 30px;
-    }
-    .service-intro-lead{
-      line-height:1.82;
-    }
-    .services-layout{
-      gap:22px;
-      margin-top:14px;
-    }
-    .summary-panel{
-      padding:24px;
-      border-radius:30px;
-      background:linear-gradient(180deg, #ffffff, #f7faff);
-    }
-    .summary-panel h3{
-      letter-spacing:-.03em;
-    }
-    .total-box,.booking-total{
-      position:relative;
-      overflow:hidden;
-      background:linear-gradient(180deg, #f8fbff, #eef4ff);
-      border:1px solid rgba(37,99,235,.16);
-      box-shadow:0 18px 34px rgba(37,99,235,.08);
-    }
-    .total-box::after,.booking-total::after{
-      content:"";
-      position:absolute;
-      inset:auto -20px -30px auto;
-      width:160px;
-      height:160px;
-      border-radius:999px;
-      background:rgba(37,99,235,.08);
-      pointer-events:none;
-    }
-    .total-amount{
-      color:var(--primary-2);
-      text-shadow:0 1px 0 rgba(255,255,255,.55);
-    }
-    .price-note{
-      font-weight:700;
-    }
-    .service-price{
-      background:linear-gradient(180deg, rgba(37,99,235,.14), rgba(37,99,235,.10));
-      border:1px solid rgba(37,99,235,.16);
-      box-shadow:0 10px 18px rgba(37,99,235,.08);
-    }
-    .group-head{
-      padding:23px 24px;
-      background:linear-gradient(180deg, #fbfcff, #f2f6ff);
-    }
-    .group-title{
-      font-size:1.24rem;
-      line-height:1.12;
-    }
-    .group-pill{
-      padding:10px 14px;
-      font-size:.95rem;
-    }
-    .chev{
-      width:44px;
-      height:44px;
-      border-radius:15px;
-    }
-    .group-subtitle,
-    .group-note{
-      display:none !important;
-    }
-    .group-content{
-      padding:0 24px 24px;
-    }
-    .cards-grid,
-    .package-grid{
-      gap:14px;
-    }
-    .service-card{
-      padding:18px 18px 16px;
-      border-radius:24px;
-    }
-    .service-title{
-      font-size:1.08rem;
-    }
-    .service-summary{
-      font-size:.96rem;
-      line-height:1.7;
-    }
-    .review-card,
-    .contact-panel,
-    .about-shell,
-    .faq-card{
-      background:linear-gradient(180deg, #ffffff, #f8fbff);
-    }
-    .about-shell{
-      padding:28px;
-    }
-    .about-hero .section-title{
-      max-width:12ch;
-    }
-    .about-feature-panel{
-      background:linear-gradient(180deg, rgba(15,23,42,.98), rgba(37,99,235,.96));
-    }
-    .review-card p{
-      line-height:1.75;
-    }
-    .booking-panel{
-      margin-top:22px;
-    }
-    .date-picker{
-      padding:18px;
-      border-radius:30px;
-      background:linear-gradient(180deg, #f8fbff, #f4f8ff);
-    }
-    .calendar-head{
-      padding:12px 14px;
-    }
-    .calendar-subtitle{
-      margin-top:6px;
-      font-size:.92rem;
-    }
-    .calendar-grid{
-      gap:10px;
-    }
-    .weekday,.day{
-      min-height:54px;
-      border-radius:18px;
-    }
-    .time-picker{
-      display:grid;
-      gap:12px;
-      padding:16px;
-      border-radius:24px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:0 14px 28px rgba(15,23,42,.05);
-    }
-    .time-picker-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .time-picker-title{
-      font-weight:900;
-      letter-spacing:-.02em;
-      color:#0f172a;
-    }
-    .time-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));
-      gap:10px;
-    }
-    .time-chip{
-      padding:12px 14px;
-      border-radius:18px;
-      border:1px solid rgba(15,23,42,.08);
-      background:#fff;
-      cursor:pointer;
-      font-weight:850;
-      color:#0f172a;
-      box-shadow:0 10px 20px rgba(15,23,42,.04);
-      transition:transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
-    }
-    .time-chip:hover,
-    .time-chip.is-active{
-      transform:translateY(-1px);
-      border-color:rgba(37,99,235,.22);
-      background:#f6f9ff;
-      box-shadow:0 14px 26px rgba(37,99,235,.10);
-      color:var(--primary-2);
-    }
-    .time-chip:disabled{
-      opacity:.42;
-      cursor:not-allowed;
-      box-shadow:none;
-      text-decoration:line-through;
-    }
-    .selected-date-chip{
-      background:rgba(37,99,235,.12);
-      border-color:rgba(37,99,235,.18);
-      color:var(--primary-2);
-    }
-    .selected-time-chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid rgba(15,23,42,.08);
-      color:#0f172a;
-      font-weight:850;
-      font-size:.92rem;
-      width:fit-content;
-      box-shadow:0 10px 22px rgba(15,23,42,.05);
-    }
-    .field.input-wide .microcopy{
-      margin-top:10px;
-    }
-    .hero-shell{
-      padding-top:4px;
-    }
-    .about-pill{
-      background:#f8fbff;
-    }
-    .review-meta strong,
-    .contact-item strong{
-      letter-spacing:-.02em;
-    }
-    .summary-panel li,
-    .selected-list li{
-      font-size:.98rem;
-    }
-    .modal-card{
-      border:1px solid rgba(37,99,235,.10);
-    }
-    @media (max-width:860px){
-      .hero{
-        padding:18px 0 20px;
-      }
-      .hero-copy{
-        padding:24px 16px 18px;
-      }
-      .hero-image img{
-        height:260px;
-      }
-      .section{
-        padding:20px 0;
-      }
-      .service-intro-shell{
-        padding:18px 16px;
-      }
-      .summary-panel{
-        padding:16px;
-      }
-      .group-head{
-        padding:18px 16px;
-      }
-      .group-title{
-        font-size:1.08rem;
-      }
-      .group-pill{
-        font-size:.86rem;
-      }
-      .group-content{
-        padding:0 16px 16px;
-      }
-      .service-card{
-        padding:14px;
-      }
-      .time-grid{
-        grid-template-columns:repeat(2, minmax(0, 1fr));
-      }
-      .time-chip{
-        padding:11px 12px;
-      }
-      .weekday,.day{
-        min-height:46px;
-      }
-    }
-
-  
-    /* Premium final overrides */
-    .topbar{
-      background:rgba(244,247,251,.88) !important;
-      border-bottom:1px solid rgba(15,23,42,.05) !important;
-      box-shadow:none !important;
-    }
-    .brand{
-      background:transparent !important;
-      padding:0 !important;
-    }
-    .brand-logo{
-      width:min(72%,700px) !important;
-      max-width:72% !important;
-      padding-bottom:18px !important;
-      background:transparent !important;
-      filter:none !important;
-    }
-    .nav-item{
-      background:linear-gradient(180deg, var(--primary), var(--primary-2)) !important;
-      box-shadow:none !important;
-      border-color:rgba(29,78,216,.4) !important;
-    }
-    .nav-item:hover,.nav-item.active{
-      box-shadow:none !important;
-    }
-    .hero{
-      padding:22px 0 30px !important;
-    }
-    .hero-grid{
-      gap:18px !important;
-    }
-    .hero-copy{
-      padding:40px 28px 34px !important;
-    }
-    .hero-image img{
-      height:375px !important;
-    }
-    .service-intro-shell{
-      background:linear-gradient(180deg, #ffffff, #f8fbff) !important;
-    }
-    .service-intro-shell::before,
-    .service-intro-shell::after{
-      display:none !important;
-    }
-    .service-intro-title{
-      line-height:1 !important;
-    }
-    .summary-panel{
-      padding:24px !important;
-    }
-    .booking-total{
-      background:linear-gradient(180deg, #f8fbff, #eef4ff) !important;
-    }
-    .total-amount{
-      font-size:clamp(2rem,4.6vw,3rem) !important;
-    }
-    .group-card{
-      border-radius:30px !important;
-      background:transparent !important;
-      border:none !important;
-      box-shadow:none !important;
-    }
-    .group-head{
-      padding:24px !important;
-      gap:16px !important;
-      background:linear-gradient(135deg, var(--primary), var(--primary-2)) !important;
-      color:#fff !important;
-      align-items:center !important;
-      border-radius:30px !important;
-    }
-    .group-title{
-      font-size:1.24rem !important;
-      color:#fff !important;
-    }
-    .group-pill{
-      padding:10px 14px !important;
-      font-size:.92rem !important;
-      background:rgba(255,255,255,.16) !important;
-      border-color:rgba(255,255,255,.24) !important;
-      color:#fff !important;
-    }
-    .chev{
-      width:44px !important;
-      height:44px !important;
-      border-radius:16px !important;
-      background:rgba(255,255,255,.14) !important;
-      border-color:rgba(255,255,255,.20) !important;
-      color:#fff !important;
-    }
-    .group-card.is-open .chev{
-      transform:rotate(180deg) !important;
-    }
-    .group-content{
-      padding:0 18px 18px !important;
-      background:transparent !important;
-    }
-    .group-card.is-open .group-content{
-      padding:0 18px 18px !important;
-    }
-    .cards-grid{
-      gap:14px !important;
-    }
-    .service-card{
-      padding:16px 16px 14px !important;
-      border-radius:22px !important;
-    }
-    .service-title{
-      font-size:1.02rem !important;
-    }
-    .service-price{
-      padding:8px 11px !important;
-    }
-    .service-toggle{
-      padding:10px 14px !important;
-    }
-    .selected-date-chip,
-    .selected-time-chip{
-      box-shadow:0 10px 22px rgba(15,23,42,.05) !important;
-    }
-    .about-shell{
-      gap:18px !important;
-      padding:24px !important;
-    }
-    .about-hero .section-title{
-      margin-bottom:10px !important;
-    }
-    .about-accordion-list{
-      gap:12px !important;
-    }
-    .about-accordion-card summary{
-      padding:18px 18px 16px !important;
-    }
-    .about-accordion-body > div{
-      padding:0 18px 18px !important;
-    }
-    .reviews-grid{
-      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-      gap:14px !important;
-    }
-    .review-card{
-      padding:18px !important;
-    }
-    @media (max-width:1060px){
-      .reviews-grid{grid-template-columns:1fr 1fr !important;}
-    }
-    @media (max-width:860px){
-      .hero{
-        padding:16px 0 20px !important;
-      }
-      .hero-copy{
-        padding:22px 14px 18px !important;
-      }
-      .hero-image img{
-        height:250px !important;
-      }
-      .group-head{
-        padding:18px 16px !important;
-        border-radius:22px !important;
-      }
-      .group-title{
-        font-size:1.08rem !important;
-      }
-      .group-pill{
-        padding:8px 10px !important;
-        font-size:.82rem !important;
-      }
-      .chev{
-        width:38px !important;
-        height:38px !important;
-        border-radius:13px !important;
-      }
-      .group-content{
-        padding:0 12px 12px !important;
-      }
-      .cards-grid{gap:10px !important;}
-      .reviews-grid{grid-template-columns:1fr !important;}
-    }
-
-  
-    /* Ultra-final luxury spacing and smoothness polish */
-    :root{
-      --max:1200px;
-      --bg:#f5f7fc;
-      --shadow:0 20px 55px rgba(15,23,42,.08);
-      --shadow-soft:0 12px 34px rgba(15,23,42,.05);
-      --shadow-card:0 18px 46px rgba(15,23,42,.07);
-    }
-
-    html{
-      scroll-behavior:smooth;
-      scroll-padding-top:110px;
-    }
-
-    body{
-      background:
-        radial-gradient(circle at top, rgba(37,99,235,.04), transparent 22%),
-        linear-gradient(180deg, #f8fbff 0%, #f4f7fb 100%);
-    }
-
-    .topbar{
-      background:rgba(248,251,255,.88);
-      backdrop-filter:saturate(180%) blur(20px);
-      border-bottom:1px solid rgba(15,23,42,.05);
-      box-shadow:0 10px 26px rgba(15,23,42,.04);
-    }
-
-    .header-inner{
-      gap:12px;
-      padding:18px 18px 14px;
-    }
-
-    .brand-logo{
-      width:min(62%,520px);
-      max-width:62%;
-      padding-bottom:16px;
-    }
-
-    .nav{
-      width:min(100%,720px);
-    }
-
-    .nav-row{
-      gap:12px;
-    }
-
-    .nav-item{
-      padding:13px 20px;
-      font-size:1rem;
-      letter-spacing:-.01em;
-      box-shadow:0 10px 22px rgba(37,99,235,.15);
-    }
-
-    .hero,
-    .section{
-      padding:34px 0;
-    }
-
-    .hero{
-      padding-top:22px;
-    }
-
-    .hero-grid{
-      gap:18px;
-    }
-
-    .hero-copy,
-    .service-intro-shell,
-    .about-vip,
-    .about-shell,
-    .summary-panel,
-    .booking-panel,
-    .contact-panel,
-    .review-card,
-    .faq-card,
-    .group-card,
-    .package-card{
-      border-radius:30px;
-    }
-
-    .hero-copy{
-      padding:42px 30px 34px;
-      box-shadow:var(--shadow-card);
-    }
-
-    .hero-title{
-      line-height:1.02;
-      letter-spacing:-.055em;
-    }
-
-    .hero-text{
-      max-width:64ch;
-      line-height:1.78;
-      font-size:1.05rem;
-    }
-
-    .cta-row{
-      margin-top:22px;
-      gap:14px;
-    }
-
-    .btn{
-      min-height:54px;
-      padding:0 24px;
-    }
-
-    .hero-image{
-      border-radius:30px;
-      box-shadow:0 16px 42px rgba(15,23,42,.07);
-    }
-
-    .hero-image img{
-      height:290px;
-    }
-
-    .section-glass{
-      padding:26px 26px 22px;
-      border-radius:32px;
-      box-shadow:var(--shadow-card);
-    }
-
-    .service-intro-shell{
-      padding:36px 28px 30px;
-      box-shadow:var(--shadow-card);
-    }
-
-    .service-intro-lead{
-      max-width:74ch;
-      line-height:1.82;
-      margin-top:16px;
-    }
-
-    .services-layout{
-      gap:22px;
-      margin-top:14px;
-    }
-
-    .summary-panel{
-      padding:24px;
-      top:18px;
-    }
-
-    .summary-panel ul,
-    .selected-list{
-      gap:12px;
-    }
-
-    .summary-panel li,
-    .selected-list li{
-      padding:12px 0;
-    }
-
-    .total-box,
-    .booking-total{
-      padding:20px;
-      border-radius:24px;
-      margin-top:20px;
-    }
-
-    .total-amount{
-      letter-spacing:-.06em;
-    }
-
-    .group-head{
-      padding:20px 22px;
-    }
-
-    .group-content{
-      padding:0 22px 22px;
-    }
-
-    .cards-grid{
-      gap:14px;
-    }
-
-    .service-card{
-      padding:18px;
-      border-radius:22px;
-      box-shadow:0 14px 30px rgba(15,23,42,.05);
-    }
-
-    .service-card.selected{
-      box-shadow:0 18px 34px rgba(37,99,235,.10);
-    }
-
-    .service-top{
-      gap:12px;
-    }
-
-    .service-title{
-      line-height:1.22;
-      letter-spacing:-.025em;
-    }
-
-    .service-summary,
-    .service-details{
-      line-height:1.68;
-      font-size:.95rem;
-    }
-
-    .service-toggle{
-      padding:11px 16px;
-    }
-
-    .booking-panel{
-      padding:24px;
-      margin-top:20px;
-    }
-
-    .form-grid{
-      gap:16px;
-    }
-
-    .field input,
-    .field select,
-    .field textarea{
-      padding:16px 18px;
-      border-radius:18px;
-    }
-
-    .date-picker{
-      padding:18px;
-      border-radius:30px;
-    }
-
-    .calendar-head{
-      padding:12px 14px;
-      border-radius:18px;
-    }
-
-    .calendar-grid{
-      gap:10px;
-      min-width:440px;
-    }
-
-    .weekday,
-    .day{
-      min-height:52px;
-      border-radius:16px;
-    }
-
-    .about-shell{
-      gap:20px;
-      padding:28px;
-      border-radius:34px;
-    }
-
-    .about-hero{
-      padding-right:8px;
-    }
-
-    .about-pill-row{
-      gap:12px;
-      margin-top:20px;
-    }
-
-    .about-pill{
-      padding:11px 15px;
-    }
-
-    .about-feature-panel{
-      padding:24px;
-      border-radius:30px;
-    }
-
-    .about-feature-card{
-      padding:17px;
-      border-radius:22px;
-    }
-
-    .about-visual-grid{
-      margin-top:24px;
-      gap:20px;
-    }
-
-    .about-visual-card{
-      border-radius:30px;
-    }
-
-    .about-visual-card-single{
-      border-radius:30px;
-      box-shadow:0 20px 44px rgba(15,23,42,.10);
-    }
-
-    .about-visual-copy{
-      padding:18px 20px 20px;
-    }
-.reviews-grid,
-    .contact-grid,
-    .why-grid{
-      gap:16px;
-    }
-
-    .review-card,
-    .contact-panel,
-    .faq-card{
-      padding:22px;
-      border-radius:24px;
-    }
-
-    .faq-list{
-      gap:16px;
-    }
-
-    .footer{
-      padding:32px 0 54px;
-      margin-top:24px;
-    }
-
-    .floating-mobile-cta .btn{
-      min-height:56px;
-      border-radius:16px;
-    }
-
-    @media (max-width:860px){
-      .container{
-        width:100%;
-        padding-inline:12px;
-      }
-
-      .header-inner{
-        padding:14px 12px 12px;
-        gap:10px;
-      }
-
-      .brand-logo{
-        width:min(76%,430px);
-        max-width:76%;
-        padding-bottom:12px;
-      }
-
-      .nav{
-        width:100%;
-      }
-
-      .nav-row{
-        gap:8px;
-      }
-
-      .nav-item{
-        padding:11px 15px;
-        font-size:.92rem;
-      }
-
-      .hero,
-      .section{
-        padding:18px 0;
-      }
-
-      .hero{
-        padding-top:12px;
-      }
-
-      .hero-grid{
-        gap:12px;
-      }
-
-      .hero-copy{
-        padding:22px 14px 18px;
-        border-radius:24px;
-      }
-
-      .hero-title{
-        font-size:clamp(1.9rem,7.4vw,2.7rem);
-      }
-
-      .hero-text{
-        font-size:1rem;
-        line-height:1.72;
-        max-width:none;
-      }
-
-      .cta-row{
-        margin-top:18px;
-        gap:10px;
-      }
-
-      .btn{
-        min-height:52px;
-        padding:0 18px;
-      }
-
-      .hero-image{
-        border-radius:22px;
-      }
-
-      .hero-image img{
-        height:210px;
-      }
-
-      .section-glass,
-      .service-intro-shell,
-      .summary-panel,
-      .booking-panel,
-      .about-shell,
-      .contact-panel,
-      .review-card,
-      .faq-card,
-      .group-card,
-      .package-card{
-        border-radius:22px;
-      }
-
-      .section-glass,
-      .service-intro-shell,
-      .summary-panel,
-      .booking-panel{
-        padding:16px 14px;
-      }
-
-      .service-intro-title{
-        font-size:clamp(1.9rem,8vw,2.8rem);
-        line-height:1.02;
-      }
-
-      .service-intro-lead{
-        font-size:1rem;
-        line-height:1.7;
-        margin-top:14px;
-      }
-
-      .services-layout,
-      .about-grid,
-      .reviews-grid,
-      .contact-grid,
-      .form-grid,
-      .why-grid{
-        gap:12px;
-      }
-
-      .group-head{
-        padding:14px 12px;
-        gap:10px;
-      }
-
-      .group-title{
-        font-size:1rem;
-      }
-
-      .group-pill{
-        padding:8px 10px;
-        font-size:.8rem;
-      }
-
-      .group-content{
-        padding:0 12px 12px;
-      }
-
-      .cards-grid,
-      .package-grid{
-        gap:10px;
-      }
-
-      .service-card{
-        padding:12px;
-        border-radius:18px;
-        box-shadow:0 10px 20px rgba(15,23,42,.04);
-      }
-
-      .service-top{
-        gap:8px;
-      }
-
-      .service-title{
-        font-size:.98rem;
-        line-height:1.18;
-      }
-
-      .service-summary{
-        font-size:.9rem;
-        line-height:1.6;
-      }
-
-      .service-actions{
-        margin-top:10px;
-      }
-
-      .package-card{
-        padding:14px;
-      }
-
-      .package-top{
-        gap:10px;
-      }
-
-      .package-title{
-        margin-top:10px;
-      }
-
-      .package-features{
-        margin-top:14px;
-      }
-
-      .booking-panel{
-        margin-top:14px;
-      }
-
-      .field input,
-      .field select,
-      .field textarea{
-        padding:14px 14px;
-        border-radius:16px;
-      }
-
-      .date-picker{
-        padding:12px;
-        border-radius:22px;
-      }
-
-      .calendar-head{
-        padding:10px 12px;
-        border-radius:16px;
-      }
-
-      .calendar-grid{
-        min-width:380px;
-        gap:6px;
-      }
-
-      .weekday,
-      .day{
-        min-height:44px;
-        border-radius:14px;
-      }
-
-      .about-shell{
-        padding:16px;
-        gap:14px;
-      }
-
-      .about-pill-row{
-        gap:8px;
-        margin-top:14px;
-      }
-
-      .about-pill{
-        padding:9px 12px;
-        font-size:.86rem;
-      }
-
-      .about-feature-panel{
-        padding:16px;
-        border-radius:22px;
-      }
-
-      .about-feature-grid{
-        gap:10px;
-      }
-
-      .about-feature-card{
-        padding:14px;
-        border-radius:18px;
-      }
-
-      .about-visual-grid{
-        margin-top:18px;
-        gap:10px;
-      }
-
-      .about-visual-card,
-      .about-visual-card-single{
-        border-radius:20px;
-      }
-
-      .about-visual-copy{
-        padding:14px 14px 16px;
-      }
-.review-card,
-      .contact-panel,
-      .faq-card{
-        padding:16px;
-      }
-
-      .faq-list{
-        gap:12px;
-      }
-
-      .footer{
-        padding:24px 0 92px;
-        margin-top:18px;
-      }
-    }
-
-  
-
-    /* Final mobile polish: wider, calmer, faster */
-    @media (max-width: 860px) {
-      .container {
-        width: 100%;
-        padding-inline: 6px;
-      }
-
-      .nav,
-      .nav-row {
-        width: 100%;
-        justify-content: center;
-      }
-      .nav-row {
-        gap: 8px;
-      }
-      .nav-item {
-        padding: 11px 16px;
-      }
-
-      .hero-copy,
-      .service-intro-shell,
-      .section-glass,
-      .summary-panel,
-      .booking-panel,
-      .about-shell,
-      .contact-panel,
-      .review-card,
-      .faq-card,
-      .group-card,
-      .package-card {
-        border-radius: 22px;
-      }
-
-      .hero {
-        padding: 12px 0 16px;
-      }
-      .hero-copy {
-        padding: 22px 12px 18px;
-      }
-      .hero-text,
-      .service-intro-lead,
-      .section-lead,
-      .about-lead-boost,
-      .about-center-lead,
-
-      .package-summary,
-      .group-note,
-      .service-summary,
-      .review-card p,
-      .faq-card p,
-      .contact-panel p,
-      .contact-item,
-      .why-item p {
-        max-width: none;
-      }
-
-      .section {
-        padding: 18px 0;
-      }
-      .section-glass,
-      .service-intro-shell,
-      .summary-panel,
-      .booking-panel,
-      .about-shell,
-      .contact-panel,
-      .review-card,
-      .faq-card {
-        padding: 16px 12px;
-      }
-
-      .section-title,
-      .service-intro-title,
-      .hero-title,
-      .about-title-blue {
-        text-wrap: balance;
-      }
-
-      .group-head {
-        padding: 14px 12px;
-        gap: 10px;
-      }
-      .group-pill {
-        padding: 8px 10px;
-      }
-      .group-content,
-      .group-card.is-open .group-content {
-        padding: 0 12px 12px;
-      }
-
-      .cards-grid,
-      .package-grid,
-      .reviews-grid,
-      .contact-grid,
-      .form-grid,
-      .why-grid,
-      .about-grid,
-      .about-spotlight-grid {
-        gap: 10px;
-      }
-
-      .service-card,
-      .package-card {
-        padding: 12px;
-        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
-        transform: translateZ(0);
-        contain: layout paint;
-      }
-      .service-card .service-top {
-        gap: 8px;
-      }
-      .service-title {
-        font-size: 0.98rem;
-      }
-      .service-price {
-        padding: 7px 9px;
-      }
-
-      .package-top {
-        gap: 10px;
-      }
-      .package-price-wrap {
-        padding-left: 0;
-      }
-
-      .date-picker {
-        padding: 12px;
-        border-radius: 20px;
-      }
-      .calendar-head {
-        padding: 10px;
-        border-radius: 16px;
-      }
-      .calendar-grid {
-        min-width: 0;
-        gap: 6px;
-      }
-      .weekday,
-      .day {
-        min-height: 42px;
-        border-radius: 14px;
-      }
-      .quick-date-chip {
-        min-width: calc(50% - 4px);
-        flex: 1 1 calc(50% - 4px);
-      }
-
-      .about-visual-card-single,
-      .about-visual-card,
-      .about-spotlight,
-      .about-stat,
-      .contact-item,
-      .why-item {
-        border-radius: 18px;
-      }
-      .about-visual-copy,
-
-      .about-spotlight,
-      .about-stat,
-      .contact-item,
-      .why-item,
-      .review-card {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-      .about-visual-copy {
-        padding-top: 12px;
-        padding-bottom: 14px;
-      }
-
-      .service-card,
-      .package-card,
-      .group-card,
-      .about-accordion-card,
-      .review-card,
-      .faq-card,
-      .contact-panel {
-        backface-visibility: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      .group-card .group-content,
-      .service-card .service-details,
-      .package-card .service-details,
-      .about-accordion-body {
-        transition-duration: 220ms;
-        transition-timing-function: cubic-bezier(.2,.8,.2,1);
-      }
-
-      .service-card:hover,
-      .package-card:hover,
-      .group-card:hover,
-      .about-accordion-card:hover {
-        transform: none;
-      }
-
-      .footer {
-        padding-bottom: 88px;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .container {
-        padding-inline: 6px;
-      }
-      .nav-item {
-        padding: 10px 14px;
-        font-size: 0.92rem;
-      }
-      .hero-title,
-      .service-intro-title,
-      .about-title-blue {
-        letter-spacing: -0.055em;
-      }
-      .hero-copy,
-      .service-intro-shell {
-        padding-left: 11px;
-        padding-right: 11px;
-      }
-      .group-head,
-      .service-card,
-      .package-card {
-        padding-left: 11px;
-        padding-right: 11px;
-      }
-      .summary-panel,
-      .booking-panel,
-      .about-shell,
-      .contact-panel,
-      .review-card,
-      .faq-card {
-        padding-left: 11px;
-        padding-right: 11px;
-      }
-    }
-
-    /* Final requested overrides */
-    .brand-logo{
-      width:min(63%,594px);
-      max-width:63%;
-    }
-    .nav-item{
-      padding:13px 20px;
-      font-size:1.05rem;
-    }
-    .hero-title{
-      font-size:clamp(2.47rem,6.9vw,3.62rem);
-    }
-    .hero-text{
-      font-size:1.06rem;
-    }
-    .service-intro-title{
-      font-size:clamp(2.48rem,6.38vw,3.90rem);
-    }
-    .service-intro-lead{
-      font-size:1.17rem;
-    }
-    .container{
-      width:min(100% - 10px,var(--max));
-    }
-    .summary-total-wrap{
-      display:grid;
-      gap:6px;
-      margin:0 0 6px;
-    }
-    .summary-panel{
-      padding:22px;
-    }
-    @media (max-width:860px){
-      .container{
-        padding-inline:5px;
-      }
-      .brand-logo{
-        width:min(63%,520px);
-      }
-      .nav-item{
-        padding:11px 15px;
-        font-size:1rem;
-      }
-      .hero-title{
-        font-size:clamp(2.05rem,7.8vw,2.99rem);
-      }
-      .service-intro-title{
-        font-size:clamp(2.15rem,8.5vw,3.35rem);
-      }
-      .service-intro-lead{
-        font-size:1.02rem;
-      }
-    }
-    @media (max-width:430px){
-      .container{
-        padding-inline:5px;
-      }
-    }
-
-
-    /* Requested final overrides */
-    .brand-logo{
-      width:min(54%,510px) !important;
-      max-width:54% !important;
-    }
-    @media (max-width:860px){
-      .brand-logo{
-        width:min(54%,420px) !important;
-        max-width:54% !important;
-      }
-    }
-
-    .hero-title{
-      display:flex !important;
-      flex-direction:column;
-      align-items:center;
-      gap:4px;
-    }
-    .hero-title .hero-blue{
-      color:var(--primary-2) !important;
-    }
-    .hero-title .hero-black{
-      color:#0f172a !important;
-    }
-
-    .contact-grid .contact-panel{
-      padding:26px;
-      border-radius:30px;
-      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,251,255,.98));
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-card);
-    }
-    .contact-grid .contact-panel .section-title{
-      margin-bottom:10px;
-    }
-    .contact-grid .contact-item{
-      background:#fff;
-      border:1px solid rgba(15,23,42,.08);
-      box-shadow:0 10px 24px rgba(15,23,42,.05);
-      padding:18px 18px 17px;
-      border-radius:20px;
-    }
-    .contact-grid .contact-item span{
-      font-size:.82rem;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      color:#64748b;
-    }
-    .contact-grid .contact-item strong{
-      font-size:1.03rem;
-      color:#0f172a;
-    }
-
-    .about-vip{
-      background:linear-gradient(180deg, rgba(255,255,255,.99), rgba(250,248,244,.99)) !important;
-      border:1px solid rgba(15,23,42,.06) !important;
-      box-shadow:0 18px 44px rgba(15,23,42,.08) !important;
-    }
-    .about-vip::before{
-      background:
-        radial-gradient(circle at top right, rgba(15,23,42,.04), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(37,99,235,.03), transparent 30%) !important;
-    }
-    .about-eyebrow-boost,
-    .about-title-blue{
-      display:none !important;
-    }
-    .about-lead-boost{
-      color:#475569;
-      max-width:72ch;
-    }
-    .about-visual-badge{
-      background:rgba(15,23,42,.06) !important;
-      color:#0f172a !important;
-      border-color:rgba(15,23,42,.08) !important;
-    }
-    .about-visual-copy h3{
-      color:#0f172a !important;
-    }
-.footer{
-      text-align:center !important;
-      padding:28px 0 44px !important;
-      color:#64748b !important;
-    }
-    .footer .container{
-      display:grid !important;
-      justify-items:center !important;
-      gap:6px !important;
-      text-align:center !important;
-    }
-    .footer strong{
-      font-size:1rem;
-      letter-spacing:-.02em;
-      color:#0f172a;
-    }
-    .footer .container > div:last-child{
-      font-size:.95rem;
-      color:#64748b;
-    }
-
   </style>
-<style id="rebrand-overrides">
-  :root{
-    --bg:#f5f7f4;
-    --surface:#ffffff;
-    --surface-soft:#eef5ee;
-    --surface-strong:#dde8df;
-    --text:#132019;
-    --muted:#5c6f61;
-    --line:rgba(19,32,25,.08);
-    --primary:#2f5b43;
-    --primary-2:#1f3f30;
-    --primary-soft:rgba(47,91,67,.10);
-    --success:#1b7a4b;
-    --shadow:0 24px 70px rgba(19,32,25,.10);
-    --shadow-soft:0 10px 30px rgba(19,32,25,.06);
-    --shadow-card:0 16px 42px rgba(19,32,25,.08);
-    --max:1240px;
-  }
-
-  body{background:var(--bg);color:var(--text);}
-  .topbar{background:#fff !important;border-bottom:1px solid rgba(19,32,25,.06) !important;box-shadow:0 12px 30px rgba(19,32,25,.04) !important;}
-  .nav-item,.btn-primary{background:var(--primary) !important;border-color:var(--primary-2) !important;}
-  .nav-item:hover,.nav-item.active,.btn-primary:hover{background:var(--primary-2) !important;}
-  .brand-logo{width:min(74%,740px) !important;max-width:74% !important;padding-bottom:16px !important;}
-  .brand-logo-svg{display:block;height:auto;}
-  .hero-copy,.section-glass,.summary-panel,.booking-panel,.about-vip,.about-shell,.contact-panel,.review-card,.faq-card,.group-card,.service-card,.package-card{background:#fff !important;border-color:rgba(19,32,25,.08) !important;}
-  .hero-badge,.eyebrow,.about-visual-badge,.package-badge,.selected-date-chip,.selected-time-chip,.quick-date-chip.is-active,.quick-date-chip:hover,.day.is-selected{background:rgba(47,91,67,.10) !important;border-color:rgba(47,91,67,.16) !important;color:var(--primary-2) !important;}
-  .hero-title span.hero-blue,.service-intro-line-blue,.about-intro-blue{color:var(--primary-2) !important;}
-  .hero-title span.hero-black,.service-intro-line-dark,.section-title,.service-title,.package-title,.about-intro-black,.about-feature-head,.about-spotlight strong,.about-stat strong{color:#132019 !important;}
-  .hero-text,.section-lead,.service-summary,.service-details,.package-summary,.package-detail-copy,.package-detail-list li,.why-item p,.about-visual-copy p,.about-result-box p,.review-card p,.faq-card p,.contact-item span,.microcopy,.price-note,.calendar-subtitle,.selected-list li{color:var(--muted) !important;}
-  .service-price{background:rgba(47,91,67,.10) !important;color:var(--primary-2) !important;}
-  .service-card.selected,.package-card.is-featured,.package-card.is-premium{border-color:rgba(47,91,67,.18) !important;box-shadow:0 18px 34px rgba(47,91,67,.09) !important;background:#f8fbf8 !important;}
-  .package-card.is-featured,.package-card.is-premium{background:#f8fbf8 !important;}
-  .about-feature-panel{background:linear-gradient(180deg, rgba(31,63,48,.98), rgba(47,91,67,.96)) !important;box-shadow:0 22px 50px rgba(19,32,25,.16) !important;}
-  .about-feature-card{background:rgba(255,255,255,.10) !important;border-color:rgba(255,255,255,.14) !important;}
-  .about-feature-card-accent{background:rgba(255,255,255,.16) !important;border-color:rgba(255,255,255,.20) !important;}
-  .about-shell::before{background:radial-gradient(circle at top right, rgba(47,91,67,.12), transparent 28%), radial-gradient(circle at bottom left, rgba(19,32,25,.05), transparent 30%) !important;}
-  .about-vip::before{background:radial-gradient(circle at top center, rgba(47,91,67,.10), transparent 26%), linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,250,255,.98)) !important;}
-  .about-vip{background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,250,255,.98)) !important;}
-  .about-intro-kicker{background:rgba(19,32,25,.05) !important;color:var(--muted) !important;border-color:rgba(19,32,25,.06) !important;}
-  .about-result-box,.about-visual-card,.about-visual-card-single,.review-card,.faq-card,.contact-item,.service-card,.package-card{box-shadow:0 16px 34px rgba(19,32,25,.06) !important;}
-  .footer{color:var(--muted) !important;border-top:1px solid rgba(19,32,25,.06) !important;text-align:center;}
-  .footer strong{color:var(--primary-2);}
-  .footer .container{display:grid;justify-items:center;gap:8px;}
-  .floating-mobile-cta .btn{border-radius:16px;}
-  .modal-card{box-shadow:0 30px 90px rgba(19,32,25,.24) !important;}
-  .selected-time-chip{display:inline-flex;}
-  .group-pill,.package-price-label,.about-visual-badge,.hero-badge,.eyebrow{font-weight:900;}
-  .group-card[data-group-type="packages"] .group-head,
-  .group-card[data-group-type="packages"] .group-subtitle,
-  .group-card[data-group-type="packages"] .chev{color:#132019 !important;}
-  .group-card[data-group-type="packages"] .group-pill{background:rgba(47,91,67,.10) !important;border-color:rgba(47,91,67,.16) !important;color:var(--primary-2) !important;}
-  .group-card[data-group-type="packages"] .chev{background:#fff !important;border-color:rgba(19,32,25,.08) !important;}
-  .group-head{background:#fbfcfb !important;}
-  .section-split{background:rgba(47,91,67,.12) !important;}
-  .selected-list li,.summary-panel li{border-bottom-color:rgba(19,32,25,.08) !important;}
-  .quick-date-chip{background:#fff !important;}
-  .quick-date-chip:hover{box-shadow:0 14px 26px rgba(47,91,67,.10) !important;border-color:rgba(47,91,67,.22) !important;background:#f7faf7 !important;}
-  .day.is-booked{background:rgba(177,84,84,.08) !important;color:#9a3232 !important;border-color:rgba(177,84,84,.18) !important;}
-  .day.is-selected{box-shadow:0 14px 28px rgba(47,91,67,.20) !important;color:#fff !important;}
-  .btn-ghost{background:#fff !important;color:#132019 !important;border-color:rgba(19,32,25,.08) !important;}
-  .hero-image, .about-visual-card-single{overflow:hidden;}
-  .hero-image img, .about-visual-card-single img{object-fit:cover;}
-  @media (max-width:860px){
-    .brand-logo{width:min(84%,520px) !important;max-width:84% !important;padding-bottom:12px !important;}
-    .container{padding-inline:6px;}
-  }
-</style>
 </head>
 <body>
 
 <header class="topbar">
-<div class="header-inner container">
-<a aria-label="NT Supirkimas pradžia" class="brand" href="#pagrindinis">
-<svg aria-label="NT Supirkimas Ukmergė" class="brand-logo brand-logo-svg" role="img" viewbox="0 0 960 180" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<lineargradient id="g1" x1="0" x2="1">
-<stop offset="0%" stop-color="#1f3f30"></stop>
-<stop offset="100%" stop-color="#2f5b43"></stop>
-</lineargradient>
-<lineargradient id="g2" x1="0" x2="1">
-<stop offset="0%" stop-color="#ffffff"></stop>
-<stop offset="100%" stop-color="#eef4ef"></stop>
-</lineargradient>
-</defs>
-<rect fill="url(#g2)" height="180" rx="34" width="960" x="0" y="0"></rect>
-<g transform="translate(36,30)">
-<rect fill="url(#g1)" height="90" rx="22" width="120" x="0" y="20"></rect>
-<path d="M12 54 L60 18 L108 54" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path>
-<rect fill="#ffffff" height="42" opacity="0.18" rx="10" width="48" x="36" y="58"></rect>
-<circle cx="30" cy="100" fill="#ffffff" r="10"></circle>
-<circle cx="90" cy="100" fill="#ffffff" r="10"></circle>
-</g>
-<text fill="#132019" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="900" letter-spacing="-1.2" x="180" y="78">NT</text>
-<text fill="#2f5b43" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="900" letter-spacing="-1.2" x="282" y="78">SUPIRKIMAS</text>
-<text fill="#5c6f61" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="4.2" x="182" y="128">GARAŽAI · SODO SKLYPAI · PATALPOS</text>
-</svg>
-</a>
-<nav aria-label="Pagrindinė navigacija" class="nav">
-<div class="nav-row">
-<a class="nav-item active" href="#pagrindinis">Pagrindinis</a>
-<a class="nav-item" href="#paslaugos">Ką superkame</a>
-<a class="nav-item" href="#apie">Kodėl verta</a>
-<a class="nav-item" href="#kontaktai">Kontaktai</a>
-</div>
-</nav>
-</div>
+  <div class="header-inner container">
+    <a class="brand" href="#pagrindinis" aria-label="NT supirkimas Ukmergėje">
+      <svg class="brand-logo" viewBox="0 0 980 180" role="img" aria-label="NT supirkimas Ukmergėje logo" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="brandGreen" x1="0" x2="1">
+            <stop offset="0%" stop-color="#1f3f30"/>
+            <stop offset="100%" stop-color="#2f5b43"/>
+          </linearGradient>
+        </defs>
+        <rect width="980" height="180" fill="none"/>
+        <g transform="translate(24,24)">
+          <circle cx="52" cy="52" r="52" fill="#eef4ef" stroke="rgba(47,91,67,.14)" />
+          <path d="M22 68 L52 32 L82 68" fill="none" stroke="url(#brandGreen)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M34 68 V92 H70 V68" fill="none" stroke="url(#brandGreen)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <text x="150" y="72" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="2.6" fill="#132019">NT SUPIRKIMAS</text>
+        <text x="150" y="116" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="4.5" fill="#5f7266">UKMERGĖJE</text>
+      </svg>
+    </a>
+    <nav class="nav" aria-label="Pagrindinė navigacija">
+      <div class="nav-row">
+        <a class="nav-item active" href="#pagrindinis">Pagrindinis</a>
+        <a class="nav-item" href="#superkame">Ką superkame</a>
+        <a class="nav-item" href="#privalumai">Kodėl verta</a>
+        <a class="nav-item" href="#registracija">Parduoti mums?</a>
+      </div>
+    </nav>
+  </div>
 </header>
 
 <main id="pagrindinis">
 
-<section class="hero">
-<div class="container hero-shell">
-<div class="hero-grid">
-<div class="hero-copy fade-in">
-<div class="hero-badge">Greitas įvertinimas Ukmergėje</div>
-<h1 class="hero-title">
-<span class="hero-blue">Nekilnojamojo turto</span>
-<span class="hero-black">supirkimas Ukmergėje</span>
-</h1>
-<p class="hero-text">
-          Superkame garažus, sodo sklypus, apleistus sklypus, apleistas patalpas ir kitus nenaudojamus objektus. Aiškus pasiūlymas, be skelbimų, bereikalingų derybų ir laukimo.
-        </p>
-<div class="cta-row">
-<a class="btn btn-primary" href="#registracija">Pateikti objektą</a>
-<a class="btn btn-ghost" href="#paslaugos">Peržiūrėti, ką superkame</a>
-</div>
-<div class="about-pill-row" style="justify-content:center;margin-top:18px;">
-<span class="about-pill">Garažai</span>
-<span class="about-pill">Sodo sklypai</span>
-<span class="about-pill">Apleistos patalpos</span>
-</div>
-</div>
-<div class="hero-image fade-in">
-<img alt="Nekilnojamojo turto supirkimo vizualas" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20820%22%20role%3D%22img%22%20aria-label%3D%22Nekilnojamojo%20turto%20supirkimo%20vizualas%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7faf7%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e6efe7%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22green%22%20x1%3D%220%22%20x2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231f3f30%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%232f5b43%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22soft%22%20x1%3D%220%22%20x2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ffffff%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23eef4ef%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22shadow%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%0A%20%20%20%20%20%20%3CfeDropShadow%20dx%3D%220%22%20dy%3D%2218%22%20stdDeviation%3D%2222%22%20flood-color%3D%22%23132019%22%20flood-opacity%3D%22.10%22/%3E%0A%20%20%20%20%3C/filter%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%221200%22%20height%3D%22820%22%20fill%3D%22url%28%23bg%29%22/%3E%0A%20%20%3Ccircle%20cx%3D%221020%22%20cy%3D%22150%22%20r%3D%22170%22%20fill%3D%22%23dce8de%22/%3E%0A%20%20%3Ccircle%20cx%3D%22138%22%20cy%3D%22126%22%20r%3D%2276%22%20fill%3D%22%23dce8de%22/%3E%0A%20%20%3Crect%20x%3D%2284%22%20y%3D%2290%22%20width%3D%22210%22%20height%3D%2256%22%20rx%3D%2228%22%20fill%3D%22url%28%23green%29%22%20filter%3D%22url%28%23shadow%29%22/%3E%0A%20%20%3Ctext%20x%3D%22189%22%20y%3D%22126%22%20text-anchor%3D%22middle%22%20font-family%3D%22Inter%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20font-weight%3D%22800%22%20letter-spacing%3D%223%22%20fill%3D%22%23ffffff%22%3EUKMERG%C4%96%3C/text%3E%0A%0A%20%20%3Cg%20transform%3D%22translate%2890%20205%29%22%20filter%3D%22url%28%23shadow%29%22%3E%0A%20%20%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%221020%22%20height%3D%22470%22%20rx%3D%2242%22%20fill%3D%22%23ffffff%22/%3E%0A%20%20%20%20%3Crect%20x%3D%2238%22%20y%3D%2238%22%20width%3D%22944%22%20height%3D%22394%22%20rx%3D%2234%22%20fill%3D%22%23f8fbf8%22%20stroke%3D%22%23d8e3d9%22/%3E%0A%20%20%20%20%3Cg%20transform%3D%22translate%2882%2082%29%22%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%220%22%20y%3D%22118%22%20width%3D%22250%22%20height%3D%22190%22%20rx%3D%2226%22%20fill%3D%22url%28%23green%29%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M24%20118%20L125%2048%20L226%20118%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%2218%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2242%22%20y%3D%22164%22%20width%3D%2272%22%20height%3D%2284%22%20rx%3D%2212%22%20fill%3D%22%23ffffff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%22140%22%20y%3D%22160%22%20width%3D%2270%22%20height%3D%2288%22%20rx%3D%2212%22%20fill%3D%22%23ffffff%22%20opacity%3D%22.15%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%2266%22%20cy%3D%22286%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22184%22%20cy%3D%22286%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22125%22%20y%3D%22354%22%20text-anchor%3D%22middle%22%20font-family%3D%22Inter%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20font-weight%3D%22800%22%20fill%3D%22%231f3f30%22%3EGARA%C5%BDAI%3C/text%3E%0A%20%20%20%20%3C/g%3E%0A%20%20%20%20%3Cg%20transform%3D%22translate%28390%2074%29%22%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%220%22%20y%3D%22124%22%20width%3D%22250%22%20height%3D%22184%22%20rx%3D%2228%22%20fill%3D%22%23ffffff%22%20stroke%3D%22%23d8e3d9%22%20stroke-width%3D%223%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M26%20124%20L125%2056%20L224%20124%22%20fill%3D%22%23eef4ef%22%20stroke%3D%22%231f3f30%22%20stroke-width%3D%2212%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2238%22%20y%3D%22160%22%20width%3D%22174%22%20height%3D%2292%22%20rx%3D%2218%22%20fill%3D%22%23dfe9e0%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2264%22%20y%3D%22178%22%20width%3D%22124%22%20height%3D%2218%22%20rx%3D%229%22%20fill%3D%22%232f5b43%22%20opacity%3D%22.75%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2264%22%20y%3D%22208%22%20width%3D%2298%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%232f5b43%22%20opacity%3D%22.45%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22125%22%20y%3D%22354%22%20text-anchor%3D%22middle%22%20font-family%3D%22Inter%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20font-weight%3D%22800%22%20fill%3D%22%231f3f30%22%3ESODO%20SKLYPAI%3C/text%3E%0A%20%20%20%20%3C/g%3E%0A%20%20%20%20%3Cg%20transform%3D%22translate%28698%2074%29%22%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%220%22%20y%3D%22104%22%20width%3D%22240%22%20height%3D%22204%22%20rx%3D%2228%22%20fill%3D%22%23f2f7f2%22%20stroke%3D%22%23d8e3d9%22%20stroke-width%3D%223%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M28%20104%20H210%22%20stroke%3D%22%231f3f30%22%20stroke-width%3D%2212%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2244%22%20y%3D%22142%22%20width%3D%22152%22%20height%3D%2218%22%20rx%3D%229%22%20fill%3D%22%232f5b43%22%20opacity%3D%22.7%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2244%22%20y%3D%22174%22%20width%3D%22176%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%232f5b43%22%20opacity%3D%22.45%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2244%22%20y%3D%22206%22%20width%3D%22134%22%20height%3D%2214%22%20rx%3D%227%22%20fill%3D%22%232f5b43%22%20opacity%3D%22.32%22/%3E%0A%20%20%20%20%20%20%3Ccircle%20cx%3D%22190%22%20cy%3D%22248%22%20r%3D%2230%22%20fill%3D%22%232f5b43%22%20opacity%3D%22.18%22/%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M190%20218%20C198%20195%20218%20184%20230%20176%22%20fill%3D%22none%22%20stroke%3D%22%232f5b43%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22120%22%20y%3D%22354%22%20text-anchor%3D%22middle%22%20font-family%3D%22Inter%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2226%22%20font-weight%3D%22800%22%20fill%3D%22%231f3f30%22%3EAPLEISTI%20NT%3C/text%3E%0A%20%20%20%20%3C/g%3E%0A%20%20%3C/g%3E%0A%0A%20%20%3Cg%20transform%3D%22translate%28108%20720%29%22%3E%0A%20%20%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22984%22%20height%3D%2248%22%20rx%3D%2224%22%20fill%3D%22url%28%23green%29%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22492%22%20y%3D%2232%22%20text-anchor%3D%22middle%22%20font-family%3D%22Inter%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2224%22%20font-weight%3D%22800%22%20fill%3D%22%23ffffff%22%3EGreitas%20%C4%AFvertinimas%20%E2%80%A2%20Ai%C5%A1kus%20pasi%C5%ABlymas%20%E2%80%A2%20Joki%C5%B3%20skelbim%C5%B3%3C/text%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E"/>
-</div>
-</div>
-</div>
-</section>
-
-
-<section class="section" id="paslaugos">
-<div class="container">
-<div class="section-glass service-intro-shell fade-in" style="margin-bottom:18px;">
-<div class="section-glass-inner service-intro-card">
-<h2 class="service-intro-title">
-<span class="service-intro-line service-intro-line-dark">Ką</span>
-<span class="service-intro-line service-intro-line-blue">superkame</span>
-</h2>
-<p class="service-intro-lead">
-          Pažymėkite objektą, kurį norite parduoti, ir pateikite užklausą. Įvertinimas nemokamas, o atsakymą gausite aiškiai ir be bereikalingo laukimo.
-        </p>
-</div>
-</div>
-<div class="services-layout">
-<div class="services-stack" id="servicesStack"></div>
-<aside aria-live="polite" class="summary-panel fade-in">
-<div class="eyebrow" style="margin-bottom:12px;">Nemokamas įvertinimas</div>
-<h3 style="margin:0 0 10px;">Jūsų objektai</h3>
-<div class="summary-total-wrap">
-<div class="price-note">Bendra pasiūlymo vertė</div>
-<div class="total-amount" id="totalAmount">Nemokamai</div>
-<div class="price-note" id="selectedCount">Pasirinkta: 0 objektų</div>
-</div>
-<h4 style="margin:18px 0 10px;">Pasirinkti objektai</h4>
-<ul id="selectedList">
-<li class="selected-empty">Kol kas nieko nepasirinkta.</li>
-</ul>
-<div class="section-split"></div>
-<div class="microcopy" style="margin-top:14px;">
-          Garažai, sodo sklypai, apleisti sklypai ir apleistos patalpos – vertinimas be įsipareigojimų.
+  <section class="hero">
+    <div class="container hero-shell">
+      <div class="hero-grid">
+        <div class="hero-copy fade-in">
+          <div class="hero-badge">Greitas įvertinimas Ukmergėje</div>
+          <h1 class="hero-title">
+            <span class="hero-blue">Nekilnojamojo turto</span>
+            <span class="hero-black">supirkimas Ukmergėje</span>
+          </h1>
+          <p class="hero-text">
+            Superkame garažus, sodo sklypus, apleistus sklypus, apleistas patalpas ir kitus nenaudojamus objektus.
+            Aiškus pasiūlymas, be bereikalingų derybų ir ilgų laukimų.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#registracija">Pateikti objektą</a>
+            <a class="btn btn-ghost" href="#superkame">Peržiūrėti objektų tipus</a>
+          </div>
         </div>
-</aside>
-</div>
-<div class="booking-panel fade-in" id="registracija">
-<div class="section-title" style="margin-bottom:8px;">Pateikite objektą</div>
-<p class="section-lead" style="margin-bottom:18px;">
-        Užpildykite pagrindinę informaciją – susisieksime dėl įvertinimo, apžiūros ir tolesnių veiksmų.
-      </p>
-<form action="https://formspree.io/f/xpqkqbbw" id="bookingForm" method="POST">
-<div class="form-grid">
-<div class="field">
-<label for="markė">Vardas ir pavardė</label>
-<input id="markė" name="Vardas" placeholder="Pvz. Tomas Petrauskas" required="" type="text"/>
-</div>
-<div class="field">
-<label for="telefonas">Telefonas</label>
-<input id="telefonas" name="Telefonas" placeholder="Pvz. +3706..." required="" type="tel"/>
-</div>
-<div class="field">
-<label for="miestas">Miestas / vietovė</label>
-<input id="miestas" name="Miestas" readonly="" required="" type="text" value="Ukmergė"/>
-</div>
-<div class="field">
-<label for="modelis">Objekto tipas</label>
-<select id="modelis" name="Objekto tipas" required="">
-<option value="">Pasirinkite tipą</option>
-<option>Garažas</option>
-<option>Sodo sklypas</option>
-<option>Apleistas sklypas</option>
-<option>Apleistos patalpos</option>
-<option>Kitas objektas</option>
-</select>
-</div>
-<div class="field">
-<label for="plotas">Apytikslis plotas / dydis</label>
-<input id="plotas" name="Plotas / dydis" placeholder="Pvz. 24 m², 6 a ar pan." type="text"/>
-</div>
-<div class="field">
-<label for="būklė">Būklė</label>
-<select id="būklė" name="Būklė">
-<option>Tvarkingas</option>
-<option>Reikalingas paprastas sutvarkymas</option>
-<option>Apleistas / remontuotinas</option>
-</select>
-</div>
-<div class="field input-wide">
-<label for="pastabos">Pastabos</label>
-<textarea id="pastabos" name="Pastabos" placeholder="Trumpai aprašykite objektą, privažiavimą, dokumentus ar kitą svarbią informaciją."></textarea>
-</div>
-<div class="field input-wide">
-<label>Pageidaujama apžiūros data ir laikas</label>
-<div class="date-picker">
-<div class="calendar-head">
-<div>
-<div class="calendar-month" id="calendarMonth">2026 m.</div>
-<div class="calendar-subtitle">Pasirinkite dieną, kada patogiausia apžiūra arba susitikimas.</div>
-</div>
-<div class="calendar-nav">
-<button aria-label="Ankstesnis mėnuo" class="icon-btn" id="prevMonth" type="button">‹</button>
-<button aria-label="Kitas mėnuo" class="icon-btn" id="nextMonth" type="button">›</button>
-</div>
-</div>
-<div class="calendar-wrap">
-<div class="calendar-grid" id="calendarGrid"></div>
-</div>
-<div class="time-picker" id="timePicker">
-<div class="time-picker-head">
-<div class="time-picker-title">Pageidaujamas laikas</div>
-<div class="microcopy" style="margin:0;">Susisiekimo langai matomi tik pasirinktai dienai</div>
-</div>
-<div class="time-grid" id="timeGrid"></div>
-</div>
-<div class="selected-date-chip" id="selectedDateChip" style="display:none;"></div>
-<div class="selected-time-chip" id="selectedTimeChip" style="display:none;"></div>
-<input id="data" name="Data" required="" type="hidden"/>
-<input id="laikas" name="Laikas" required="" type="hidden"/>
-<div class="microcopy" id="dateHint">Pasirinkite datą kalendoriuje.</div>
-</div>
-</div>
-<div class="field input-wide">
-<label>Trumpa suvestinė</label>
-<textarea id="summaryBox" placeholder="Pasirinkti objektai atsiras čia automatiškai." readonly=""></textarea>
-<div class="microcopy">Užpildykite laukus, pasirinkite dieną ir pateikite užklausą.</div>
-</div>
-</div>
-<div class="section-split"></div>
-<div class="cta-row" style="margin-top:18px;">
-<button class="btn btn-primary" type="submit">Pateikti užklausą</button>
-<button class="btn btn-ghost" id="clearBooking" type="button">Išvalyti pasirinkimus</button>
-</div>
-</form>
-</div>
-</div>
-</section>
 
+        <div class="hero-visual fade-in">
+          <div class="mini-badge">Paprastas procesas • Aiškus pasiūlymas • Be įsipareigojimų</div>
+          <div class="property-card">
+            <div class="property-card-top">
+              <h2 class="property-card-title">Greitas įvertinimas</h2>
+              <span class="property-tag">Ukmergė</span>
+            </div>
+            <div class="progress-list">
+              <div class="progress-item">
+                <strong>1. Pateikiate objektą</strong>
+                <span>Trumpai aprašote garažą, sklypą ar patalpą.</span>
+                <div class="progress-bar"><i style="width:100%"></i></div>
+              </div>
+              <div class="progress-item">
+                <strong>2. Gaunate pasiūlymą</strong>
+                <span>Susisiekiame ir pateikiame aiškų įvertinimą.</span>
+                <div class="progress-bar"><i style="width:100%"></i></div>
+              </div>
+              <div class="progress-item">
+                <strong>3. Sutariame sandorį</strong>
+                <span>Jei tinka pasiūlymas, judame link sandorio be streso.</span>
+                <div class="progress-bar"><i style="width:100%"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="mini-badge">Sąžiningai • Greitai • Tvarkingai</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section" id="apie">
-<div class="container">
-<div class="about-vip fade-in">
-<div class="about-intro">
-<div class="about-intro-kicker">Kodėl verta</div>
-<h2 class="about-intro-title">
-<span class="about-intro-blue">Parduoti</span>
-<span class="about-intro-black">mums?</span>
-</h2>
-</div>
-<p class="section-lead about-center-lead about-lead-boost">
-        Dirbame su garažais, sodo sklypais, apleistais sklypais ir apleistomis patalpomis. Mūsų tikslas – pateikti aiškų pasiūlymą, sutaupyti jūsų laiką ir padaryti procesą paprastą nuo pirmo skambučio iki sandorio.
-      </p>
-<div class="about-visual-grid">
-<figure class="about-visual-card about-visual-card-single">
-<img alt="NT supirkimo vizualas" decoding="async" loading="lazy" src="{visual_data_uri}"/>
-<div class="about-visual-copy">
-<div class="about-visual-badge">Greitas įvertinimas</div>
-<h3>Aiškiai, paprastai ir be uždelstų derybų</h3>
-<p>Pateikiame pasiūlymą pagal objekto tipą, būklę ir vietą. Be bereikalingų skelbimų, be skambinėjimo ir be papildomo streso.</p>
-</div>
-</figure>
-</div>
-<div class="about-spotlight-grid">
-<div class="about-spotlight">
-<strong>Greitas pasiūlymas</strong>
-<span>Atsakome aiškiai ir stengiamės pasiūlymą pateikti kuo greičiau.</span>
-</div>
-<div class="about-spotlight">
-<strong>Perkame sudėtingus objektus</strong>
-<span>Tinka apleisti, seniai nenaudojami ar remontuotini objektai.</span>
-</div>
-<div class="about-spotlight">
-<strong>Jokių skelbimų</strong>
-<span>Jums nereikia fotografuoti, talpinti ar derėtis su pirkėjais.</span>
-</div>
-</div>
-<div class="about-result-box">
-<strong>Rezultatas</strong>
-<p>Greitesnis pardavimas, mažiau rūpesčių ir aiškesnė eiga nuo pirmo susisiekimo iki galutinio sprendimo.</p>
-</div>
-</div>
-</div>
-</section>
-
-
-<section class="section">
-<div class="container">
-<div class="eyebrow">Atsiliepimai</div>
-<div class="section-title" style="margin-bottom:18px;">Ką sako pardavėjai</div>
-<div class="reviews-grid">
-<article class="review-card fade-in">
-<div class="review-meta">
-<strong>Mantas, Ukmergė</strong>
-<span class="stars">⭐⭐⭐⭐⭐</span>
-</div>
-<p>Per garažą gavau aiškų pasiūlymą labai greitai. Patiko paprastas procesas ir tai, kad nereikėjo nieko papildomai skelbti.</p>
-</article>
-<article class="review-card fade-in">
-<div class="review-meta">
-<strong>Rūta, Širvintos</strong>
-<span class="stars">⭐⭐⭐⭐⭐</span>
-</div>
-<p>Sodo sklypo įvertinimas buvo konkretus, be bereikalingų pažadų. Viskas vyko ramiai ir profesionaliai.</p>
-</article>
-<article class="review-card fade-in">
-<div class="review-meta">
-<strong>Vytautas, Anykščiai</strong>
-<span class="stars">⭐⭐⭐⭐⭐</span>
-</div>
-<p>Apleistoms patalpoms reikėjo sprendimo be ilgų derybų. Pateikė aiškų variantą ir viską sutvarkė sklandžiai.</p>
-</article>
-</div>
-</div>
-</section>
-
-
-<section class="section" id="kontaktai">
-<div class="container">
-<div class="contact-grid">
-<div class="contact-panel fade-in">
-<div class="section-title">Kontaktai</div>
-<p class="section-lead">
-          Susisiekite telefonu arba pateikite užklausą iš karto. Dirbame Ukmergėje ir aplinkiniuose rajonuose, o į užklausas atsakome aiškiai bei greitai.
+  <section class="section" id="superkame">
+    <div class="container">
+      <div class="section-head fade-in">
+        <div class="eyebrow">Ką superkame</div>
+        <h2 class="section-title">Tinka įvairūs nenaudojami objektai</h2>
+        <p class="section-lead">
+          Dirbame su mažesniais ir sudėtingesniais NT objektais, kuriuos norisi parduoti greitai,
+          be papildomų investicijų į remontą ar ilgo skelbimo laukimo.
         </p>
-<div class="contact-item">
-<span>Telefonas</span>
-<strong>+370 660 66096</strong>
-</div>
-<div style="height:14px;"></div>
-<div class="contact-item">
-<span>Miestas</span>
-<strong>Ukmergė</strong>
-</div>
-<div style="height:14px;"></div>
-<div class="contact-item">
-<span>El. paštas</span>
-<strong>info@ntsupirkimas.lt</strong>
-</div>
-</div>
-<div class="contact-panel fade-in">
-<div class="section-title">DUK</div>
-<p class="section-lead">
-          Greiti atsakymai į dažniausius klausimus apie supirkimą, įvertinimą ir dokumentus.
+      </div>
+
+      <div class="cards-grid">
+        <article class="service-card fade-in">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+              <path d="M3 11.5L12 4l9 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 10.5V20h12v-9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 20v-5h6v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Garažai</h3>
+          <p>Perkame garažus, garažų eilutes ir kitus nedidelius objektus, kuriuos norite parduoti be uždelsimo.</p>
+          <span class="service-note">Paprastas pardavimas</span>
+        </article>
+
+        <article class="service-card fade-in">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+              <path d="M4 20h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 20V8l6-4 6 4v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 20v-5h6v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Sodo sklypai</h3>
+          <p>Vertiname sodo sklypus, sodo bendrijų sklypus ir objektus su senesniais statiniais.</p>
+          <span class="service-note">Greitas įvertinimas</span>
+        </article>
+
+        <article class="service-card fade-in">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+              <path d="M4 20h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 19V7.5l6-3.5 6 3.5V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 19v-4h6v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M15.5 12.5l2.5 2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Apleisti sklypai</h3>
+          <p>Nenaudojami, paveldėti ar sunkiau parduodami sklypai įvertinami be papildomo vargo.</p>
+          <span class="service-note">Be įsipareigojimų</span>
+        </article>
+
+        <article class="service-card fade-in">
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+              <path d="M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 19V8l5-3 5 3v11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 11h6M9 14h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M16.5 11.5c1.4 1 2.5 2.1 2.5 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Apleistos patalpos</h3>
+          <p>Sandėliai, ūkiniam naudojimui skirti pastatai ir senesnės patalpos – aiškus sprendimas greitam pardavimui.</p>
+          <span class="service-note">Tinkama daugeliui objektų</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="privalumai">
+    <div class="container">
+      <div class="section-head fade-in">
+        <div class="eyebrow">Kodėl verta</div>
+        <h2 class="section-title">Parduoti mums paprasta ir saugu</h2>
+        <p class="section-lead">
+          Siūlome aiškų procesą, trumpą komunikaciją ir sprendimą tiems objektams, kurie dažnai ilgai stovi be judėjimo.
         </p>
-<div class="faq-list">
-<details class="faq-card">
-<summary>Ar superkate ir apleistus objektus? <span>+</span></summary>
-<p>Taip, perkame ir tuos objektus, kuriems reikalingas papildomas sutvarkymas arba kurie ilgą laiką nenaudoti.</p>
-</details>
-<details class="faq-card">
-<summary>Ar įvertinimas nemokamas? <span>+</span></summary>
-<p>Taip. Pirmas įvertinimas yra nemokamas ir be įsipareigojimų.</p>
-</details>
-<details class="faq-card">
-<summary>Ar perkate tik Ukmergėje? <span>+</span></summary>
-<p>Dirbame Ukmergėje ir aplinkiniuose rajonuose, todėl galite siųsti užklausą ir iš netoliese esančių vietovių.</p>
-</details>
-<details class="faq-card">
-<summary>Per kiek laiko pateikiate pasiūlymą? <span>+</span></summary>
-<p>Dažniausiai susisiekiame greitai po užklausos gavimo ir pasakome kitą žingsnį.</p>
-</details>
-<details class="faq-card">
-<summary>Ar padedate su dokumentais? <span>+</span></summary>
-<p>Taip, kai suderiname sandorį, padedame viską sutvarkyti aiškiai ir tvarkingai.</p>
-</details>
-<details class="faq-card">
-<summary>Ar reikia ruoštis prieš susisiekimą? <span>+</span></summary>
-<p>Ne. Užtenka pateikti pagrindinę informaciją apie objektą, o toliau viską suderinsime kartu.</p>
-</details>
-</div>
-</div>
-</div>
-</div>
-</section>
+      </div>
+
+      <div class="benefit-grid">
+        <article class="benefit-card fade-in">
+          <strong>Greitas įvertinimas</strong>
+          <span>Trumpai aprašote objektą, o mes pateikiame pirmą orientacinį vertinimą be bereikalingo delsimo.</span>
+        </article>
+        <article class="benefit-card fade-in">
+          <strong>Aiškus pasiūlymas</strong>
+          <span>Kalbame paprastai ir tiesiai – be perteklinių žingsnių, kurių nereikia nei jums, nei mums.</span>
+        </article>
+        <article class="benefit-card fade-in">
+          <strong>Sandoris be streso</strong>
+          <span>Procesą suderiname taip, kad viskas būtų tvarkinga, suprantama ir patogu nuo pirmo kontakto.</span>
+        </article>
+      </div>
+
+      <div class="steps">
+        <article class="step fade-in">
+          <div class="step-num">1</div>
+          <strong>Užpildote trumpą formą</strong>
+          <span>Įrašykite pagrindinę informaciją apie garažą, sklypą ar patalpą.</span>
+        </article>
+        <article class="step fade-in">
+          <div class="step-num">2</div>
+          <strong>Peržiūrime ir susisiekiame</strong>
+          <span>Įvertiname situaciją ir pateikiame pirmą realų pasiūlymą.</span>
+        </article>
+        <article class="step fade-in">
+          <div class="step-num">3</div>
+          <strong>Suderiname tolimesnius veiksmus</strong>
+          <span>Jei pasiūlymas tinka, sutariame dėl apžiūros ir sandorio.</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="registracija">
+    <div class="container">
+      <div class="section-head fade-in">
+        <div class="eyebrow">Parduoti mums?</div>
+        <h2 class="section-title">Pateikite objektą vertinimui</h2>
+        <p class="section-lead">
+          Užpildykite formą, ir susisieksime dėl garažo, sodo sklypo, apleisto sklypo ar apleistos patalpos įvertinimo.
+        </p>
+      </div>
+
+      <div class="form-shell fade-in">
+        <form action="https://formspree.io/f/xpqkqbbw" method="POST" id="bookingForm">
+          <input type="hidden" name="_subject" value="NT supirkimo užklausa – Ukmergė" />
+          <div class="form-grid">
+            <div class="field">
+              <label for="vardas">Vardas ir pavardė *</label>
+              <input id="vardas" name="Vardas ir pavardė" type="text" placeholder="Įrašykite vardą" required />
+            </div>
+            <div class="field">
+              <label for="telefonas">Telefonas *</label>
+              <input id="telefonas" name="Telefonas" type="tel" placeholder="+370 ..." required />
+            </div>
+            <div class="field">
+              <label for="elpastas">El. paštas</label>
+              <input id="elpastas" name="El. paštas" type="email" placeholder="jusu@email.lt" />
+            </div>
+            <div class="field">
+              <label for="tipas">Objekto tipas *</label>
+              <select id="tipas" name="Objekto tipas" required>
+                <option value="" selected disabled>Pasirinkite tipą</option>
+                <option>Garažas</option>
+                <option>Sodo sklypas</option>
+                <option>Apleistas sklypas</option>
+                <option>Apleistos patalpos</option>
+                <option>Kitas objektas</option>
+              </select>
+            </div>
+            <div class="field input-wide">
+              <label for="vieta">Vieta / adresas *</label>
+              <input id="vieta" name="Vieta" type="text" placeholder="Ukmergė, rajonas, kaimas ar tikslesnė vieta" required />
+            </div>
+            <div class="field">
+              <label for="plotas">Orientacinis plotas</label>
+              <input id="plotas" name="Plotas" type="text" placeholder="Pvz. 24 m²" />
+            </div>
+            <div class="field">
+              <label for="bukle">Objekto būklė</label>
+              <select id="bukle" name="Būklė">
+                <option value="" selected>Pasirinkite būklę</option>
+                <option>Tvarkingas</option>
+                <option>Reikalingas sutvarkymas</option>
+                <option>Apleistas</option>
+                <option>Labai apleistas</option>
+                <option>Nežinoma</option>
+              </select>
+            </div>
+            <div class="field input-wide">
+              <label for="kaina">Jūsų lūkestis dėl kainos</label>
+              <input id="kaina" name="Kainos lūkestis" type="text" placeholder="Jei norite, įrašykite orientacinę sumą" />
+            </div>
+            <div class="field input-wide">
+              <label for="pastabos">Papildoma informacija</label>
+              <textarea id="pastabos" name="Pastabos" placeholder="Trumpai aprašykite privažiavimą, dokumentus, būklę ar kitą svarbią informaciją."></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Siųsti užklausą</button>
+            <span class="form-note">Atsakome aiškiai ir greitai. Duomenys siunčiami per Formspree.</span>
+          </div>
+        </form>
+
+        <div class="mini-stack">
+          <div class="mini-stat">
+            <strong>Greita reakcija</strong>
+            <span>Dažniausiai susisiekiame tą pačią arba kitą darbo dieną.</span>
+          </div>
+          <div class="mini-stat">
+            <strong>Be bereikalingų žingsnių</strong>
+            <span>Trumpa forma, aiškus vertinimas ir paprastas procesas.</span>
+          </div>
+          <div class="mini-stat">
+            <strong>Tinka įvairūs objektai</strong>
+            <span>Garažai, sodo sklypai, apleisti sklypai ir apleistos patalpos.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kontaktai">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-panel fade-in">
+          <div class="eyebrow">Kontaktai</div>
+          <h2 class="section-title" style="text-align:left">Susisiekite patogiai</h2>
+          <p class="section-lead" style="text-align:left;margin-left:0">
+            Jei turite garažą, sodo sklypą ar apleistą objektą, parašykite arba paskambinkite – pateiksime pirmą žingsnį be jokio spaudimo.
+          </p>
+
+          <div class="contact-item">
+            <span>Telefonas</span>
+            <strong>+370 660 66096</strong>
+          </div>
+          <div class="contact-item">
+            <span>Miestas</span>
+            <strong>Ukmergė</strong>
+          </div>
+          <div class="contact-item">
+            <span>Darbo principas</span>
+            <strong>Aiškiai • Greitai • Tvarkingai</strong>
+          </div>
+        </div>
+
+        <div class="faq-panel fade-in">
+          <div class="eyebrow">DUK</div>
+          <h2 class="section-title" style="text-align:left">Dažniausi klausimai</h2>
+          <div class="faq-list">
+            <details class="faq-card">
+              <summary>Ar superkate ir apleistus objektus?<span>+</span></summary>
+              <p>Taip, vertiname ir sunkiau parduodamus, ir apleistus objektus – svarbiausia pateikti pagrindinę informaciją.</p>
+            </details>
+            <details class="faq-card">
+              <summary>Ar reikia iškart pateikti daug detalių?<span>+</span></summary>
+              <p>Ne. Užtenka pagrindinės informacijos, o likusius klausimus suderiname pokalbio metu.</p>
+            </details>
+            <details class="faq-card">
+              <summary>Kiek laiko užtrunka atsakymas?<span>+</span></summary>
+              <p>Stengiamės atsakyti greitai, kad galėtumėte judėti toliau be bereikalingo laukimo.</p>
+            </details>
+            <details class="faq-card">
+              <summary>Ar vertinate tik Ukmergėje?<span>+</span></summary>
+              <p>Ukmergė yra pagrindinė zona, bet dėl konkretaus objekto visada verta susisiekti ir pasitikslinti.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
-<div aria-label="Greiti veiksmai mobile įrenginiuose" class="floating-mobile-cta">
-<a class="btn btn-primary" href="#paslaugos">Objekto pasirinkimas</a>
-</div>
-
-<div aria-hidden="true" class="modal" id="successModal">
-<div aria-labelledby="modalTitle" aria-modal="true" class="modal-card" role="dialog">
-<div class="modal-icon">✓</div>
-<h3 id="modalTitle">Užklausa priimta</h3>
-<p>Jūsų užklausa gauta. Susisieksime artimiausiu metu ir aptarsime tolimesnius veiksmus.</p>
-<button class="btn btn-primary" id="closeModal" style="margin-top:12px;" type="button">Gerai</button>
-</div>
-</div>
-
 
 <footer class="footer">
-<div class="container">
-<strong>NT supirkimas Ukmergėje</strong>
-<div>Garažai · sodo sklypai · apleistos patalpos</div>
-</div>
+  <div class="container footer-inner">
+    <strong>NT supirkimas Ukmergėje</strong>
+    <small>Garažai · sodo sklypai · apleisti sklypai · apleistos patalpos</small>
+    <small>© <span id="year"></span> Visiškai paprastas ir tvarkingas kelias į sandorį.</small>
+  </div>
 </footer>
 
 <script>
-    (function () {
-      'use strict';
-
-      
-const groups = [
-  {
-    "id": "nt-objektai",
-    "title": "Superkame objektus",
-    "subtitle": "",
-    "pill": "Nemokamas įvertinimas",
-    "note": "",
-    "services": [
-      {
-        "id": 101,
-        "title": "Garažai",
-        "price": 0,
-        "summary": "Perkame garažus, garažų eilutes ir nenaudojamus objektus.",
-        "detail": "Tinka seni, apleisti, remontui reikalingi arba ilgą laiką nenaudojami garažai. Greitai įvertiname ir pateikiame aiškų pasiūlymą."
-      },
-      {
-        "id": 102,
-        "title": "Sodo sklypai",
-        "price": 0,
-        "summary": "Sodo bendrijų sklypai ir sklypai su senais statiniais.",
-        "detail": "Perkame sodo sklypus su įvairia būkle – nuo tvarkingų iki ilgą laiką nenaudojamų ar dalinai apleistų."
-      },
-      {
-        "id": 103,
-        "title": "Apleisti sklypai",
-        "price": 0,
-        "summary": "Nenaudojami, paveldėti arba sunkiau parduodami sklypai.",
-        "detail": "Padedame parduoti sklypus, kuriems reikalingas papildomas dėmesys, tvarkymas arba aiškus sprendimas be ilgų derybų."
-      },
-      {
-        "id": 104,
-        "title": "Apleistos patalpos",
-        "price": 0,
-        "summary": "Sandėliukai, ūkiniai pastatai ir senos komercinės vietos.",
-        "detail": "Superkame apleistas patalpas bei kitus objektus, kuriems reikia greito ir aiškaus sprendimo."
-      },
-      {
-        "id": 105,
-        "title": "Kiti objektai",
-        "price": 0,
-        "summary": "Konsultuojame dėl kitų mažesnių NT objektų.",
-        "detail": "Jeigu objektas nepatenka į sąrašą, vis tiek galite atsiųsti užklausą – įvertinsime situaciją individualiai."
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       }
-    ]
-  },
-  {
-    "id": "pirkimo-eiga",
-    "type": "packages",
-    "title": "Kaip vyksta pirkimas",
-    "subtitle": "",
-    "pill": "3 žingsniai",
-    "note": "",
-    "services": [
-      {
-        "id": 201,
-        "title": "Užklausa ir įvertinimas",
-        "price": 0,
-        "badge": "1 žingsnis",
-        "featured": true,
-        "features": [
-          "Užpildote trumpą formą",
-          "Peržiūrime pateiktą informaciją",
-          "Atsakome aiškiai ir be vilkinimo"
-        ]
-      },
-      {
-        "id": 202,
-        "title": "Apžiūra vietoje",
-        "price": 0,
-        "badge": "2 žingsnis",
-        "features": [
-          "Suderiname patogų laiką",
-          "Įvertiname objekto būklę",
-          "Pateikiame konkretų pasiūlymą"
-        ]
-      },
-      {
-        "id": 203,
-        "title": "Sandoris ir dokumentai",
-        "price": 0,
-        "badge": "3 žingsnis",
-        "premium": true,
-        "features": [
-          "Sutvarkome pirkimo eigą",
-          "Padedame su dokumentais",
-          "Apmokėjimas ir užbaigimas be streso"
-        ]
-      }
-    ]
-  }
-];
+    });
+  }, { threshold: 0.14 });
 
-      const state = {
-        selected: new Set(),
-        currentMonth: new Date(),
-        bookedSlots: new Set(JSON.parse(localStorage.getItem('automobiliusBookedSlots') || '[]'))
-      };
+  document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 
-      const els = {
-        servicesStack: document.getElementById('servicesStack'),
-        totalAmount: document.getElementById('totalAmount'),
-        selectedList: document.getElementById('selectedList'),
-        selectedCount: document.getElementById('selectedCount'),
-        summaryBox: document.getElementById('summaryBox'),
-        bookingForm: document.getElementById('bookingForm'),
-        successModal: document.getElementById('successModal'),
-        closeModal: document.getElementById('closeModal'),
-        clearBooking: document.getElementById('clearBooking'),
-        calendarGrid: document.getElementById('calendarGrid'),
-        calendarMonth: document.getElementById('calendarMonth'),
-        prevMonth: document.getElementById('prevMonth'),
-        nextMonth: document.getElementById('nextMonth'),
-        dateField: document.getElementById('data'),
-        dateHint: document.getElementById('dateHint'),
-        selectedDateChip: document.getElementById('selectedDateChip'),
-        selectedTimeChip: document.getElementById('selectedTimeChip'),
-        timeGrid: document.getElementById('timeGrid'),
-        timeField: document.getElementById('laikas'),
-        quickDateRow: document.getElementById('quickDateRow')
-      };
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+</script>
 
-      const cityField = document.getElementById('miestas');
-      if (cityField) {
-        cityField.value = 'Ukmergė';
-        cityField.readOnly = true;
-      }
-
-      const money = (amount) => (Number(amount) === 0 ? 'Nemokamai' : `${amount} €`);
-
-      function saveBookedDates() {
-        localStorage.setItem('automobiliusBookedSlots', JSON.stringify(Array.from(state.bookedSlots)));
-      }
-
-      function getSelectedServices() {
-        const all = [];
-        groups.forEach((group) => {
-          group.services.forEach((service) => {
-            if (state.selected.has(service.id)) all.push(service);
-          });
-        });
-        return all.sort((a, b) => a.price - b.price || a.title.localeCompare(b.title, 'lt'));
-      }
-
-      function updateSummary() {
-        const selected = getSelectedServices();
-        const total = selected.reduce((sum, service) => sum + service.price, 0);
-        const dateValue = els.dateField.value ? formatSelectedDate(els.dateField.value) : null;
-        const timeValue = els.timeField?.value || '';
-
-        els.totalAmount.textContent = money(total);
-        els.selectedCount.textContent = `Pasirinkta: ${selected.length} objekt${selected.length === 1 ? 'as' : 'ų'}`;
-
-        els.selectedList.innerHTML = selected.length
-          ? selected.map((s) => `<li><span>${s.title}</span><strong>${money(s.price)}</strong></li>`).join('')
-          : '<li class="selected-empty">Kol kas nieko nepasirinkta.</li>';
-
-        const dateLine = dateValue ? `Data: ${dateValue}` : 'Data: nepasirinkta';
-        const timeLine = timeValue ? `Laikas: ${timeValue}` : 'Laikas: nepasirinktas';
-
-        els.summaryBox.value = selected.length
-          ? `Pasirinkti objektai:
-${selected.map((s) => `• ${s.title} — ${money(s.price)}`).join('
-')}
-
-${dateLine}
-${timeLine}
-
-Įvertinimas: ${money(total)}`
-          : `Pasirinkti objektai:
-Nėra pasirinktų objektų.
-
-${dateLine}
-${timeLine}
-
-Įvertinimas: ${money(total)}`;
-      }
-
-      function buildServiceCard(service) {
-        const card = document.createElement('article');
-        card.className = 'service-card fade-in';
-        card.dataset.serviceId = service.id;
-        card.innerHTML = `
-          <div class="service-top">
-            <input class="check" type="checkbox" aria-label="Pasirinkti ${service.title}" data-service-id="${service.id}">
-            <div class="service-copy">
-              <h3 class="service-title">${service.title}</h3>
-              <p class="service-summary">${service.summary}</p>
-            </div>
-            <div class="service-price">${money(service.price)}</div>
-          </div>
-        `;
-
-        const checkbox = card.querySelector('input[type="checkbox"]');
-
-        card.addEventListener('click', (event) => {
-          if (event.target.closest('input')) return;
-          checkbox.checked = !checkbox.checked;
-          checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-        });
-
-        checkbox.addEventListener('change', () => {
-          if (checkbox.checked) state.selected.add(service.id);
-          else state.selected.delete(service.id);
-          card.classList.toggle('selected', checkbox.checked);
-          updateSummary();
-        });
-
-        return card;
-      }
-
-      function buildPackageCard(service) {
-        const card = document.createElement('article');
-        card.className = `package-card fade-in ${service.premium ? 'is-premium' : service.featured ? 'is-featured' : ''}`;
-        card.dataset.serviceId = service.id;
-        const detailPoints = Array.isArray(service.detailPoints) ? service.detailPoints : [];
-        card.innerHTML = `
-          <div class="package-top">
-            <div class="package-copy">
-              <div class="package-badge">${service.badge || 'Paketas'}</div>
-              <h3 class="package-title">${service.title}</h3>
-            </div>
-            <div class="package-price-wrap">
-              <div class="package-price-label">Kaina</div>
-              <div class="package-price">${money(service.price)}</div>
-            </div>
-          </div>
-
-          <ul class="package-features">
-            ${(service.features || []).map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-
-          <div class="package-actions">
-            <label class="package-select">
-              <input class="check" type="checkbox" aria-label="Pasirinkti ${service.title}" data-service-id="${service.id}">
-              <span>Pasirinkti paketą</span>
-            </label>
-          </div>
-        `;
-
-        const checkbox = card.querySelector('input[type="checkbox"]');
-
-        card.addEventListener('click', (event) => {
-          if (event.target.closest('input')) return;
-          checkbox.checked = !checkbox.checked;
-          checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-        });
-
-        checkbox.addEventListener('change', () => {
-          if (checkbox.checked) state.selected.add(service.id);
-          else state.selected.delete(service.id);
-          card.classList.toggle('selected', checkbox.checked);
-          updateSummary();
-        });
-
-        return card;
-      }
-
-      function formatDateLabel(date) {
-
-        return date.toLocaleDateString('lt-LT', {
-          weekday: 'short',
-          day: 'numeric',
-          month: 'short'
-        });
-      }
-
-      function renderQuickDates() {
-        if (!els.quickDateRow) return;
-
-        const presets = [
-          { label: 'Šiandien', offset: 0 },
-          { label: 'Rytoj', offset: 1 },
-          { label: '+3 d.', offset: 3 },
-          { label: '+7 d.', offset: 7 },
-          { label: '+14 d.', offset: 14 }
-        ];
-
-        const today = todayStart();
-        els.quickDateRow.innerHTML = presets.map((preset) => {
-          const d = new Date(today);
-          d.setDate(d.getDate() + preset.offset);
-          const key = dateKey(d);
-          const booked = state.bookedSlots.has(key);
-          const selected = els.dateField.value === key;
-          return `
-            <button class="quick-date-chip ${selected ? 'is-active' : ''}" type="button" data-quick-date="${key}" ${booked ? 'disabled' : ''}>
-              <span>${preset.label}</span>
-              <strong>${formatDateLabel(d)}</strong>
-            </button>
-          `;
-        }).join('');
-
-        els.quickDateRow.querySelectorAll('[data-quick-date]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const key = btn.dataset.quickDate;
-            if (!key || state.bookedSlots.has(key)) return;
-            setSelectedDate(key);
-            renderCalendar();
-      renderTimeSlots();
-            document.getElementById('registracija')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-        });
-      }
-
-      function buildGroupCard(group) {
-        const card = document.createElement('section');
-        card.className = 'group-card fade-in';
-        card.dataset.groupId = group.id;
-        card.dataset.groupType = group.type || 'services';
-
-        const isPackageGroup = group.type === 'packages';
-        const sortedServices = [...group.services].sort((a, b) => a.price - b.price || a.title.localeCompare(b.title, 'lt'));
-        card.innerHTML = `
-          <button class="group-head" type="button" aria-expanded="false">
-            <div class="group-head-left">
-              <div class="group-title">${group.title}</div>
-            </div>
-            <div class="group-pill">${group.pill}</div>
-            <div class="chev" aria-hidden="true">⌄</div>
-          </button>
-          <div class="group-content">
-            <div class="group-content-inner">
-              <div class="${isPackageGroup ? 'package-grid' : 'cards-grid'}"></div>
-            </div>
-          </div>
-        `;
-
-        const head = card.querySelector('.group-head');
-        const cardsGrid = card.querySelector('.group-content .package-grid, .group-content .cards-grid');
-
-        if (isPackageGroup) {
-          sortedServices.forEach((service) => cardsGrid.appendChild(buildPackageCard(service)));
-        } else {
-          sortedServices.forEach((service) => cardsGrid.appendChild(buildServiceCard(service)));
-        }
-
-        head.addEventListener('click', () => {
-          const open = card.classList.toggle('is-open');
-          head.setAttribute('aria-expanded', String(open));
-        });
-
-        return card;
-      }
-
-      function renderServices() {
-        els.servicesStack.innerHTML = '';
-        groups.forEach((group) => els.servicesStack.appendChild(buildGroupCard(group)));
-        observeFadeIns();
-      }
-
-      function getMonthLabel(date) {
-        return date.toLocaleDateString('lt-LT', { month: 'long', year: 'numeric' });
-      }
-
-      function pad(n) {
-        return String(n).padStart(2, '0');
-      }
-
-      function dateKey(date) {
-        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-      }
-
-      function parseDateKey(key) {
-        const [y, m, d] = key.split('-').map(Number);
-        return new Date(y, m - 1, d);
-      }
-
-      function startOfDay(date) {
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      }
-
-      function todayStart() {
-        return startOfDay(new Date());
-      }
-
-      function isPastDate(date) {
-        return startOfDay(date) < todayStart();
-      }
-
-      const TIME_SLOTS = ['09:00', '10:30', '12:00', '13:30', '15:00', '16:30', '18:00'];
-
-      function formatSelectedDate(key) {
-        const picked = parseDateKey(key);
-        return picked.toLocaleDateString('lt-LT', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        });
-      }
-
-      function timeSlotKey(dateKeyValue, timeValue) {
-        return `${dateKeyValue}|${timeValue}`;
-      }
-
-      function renderTimeSlots() {
-        if (!els.timeGrid || !els.timeField) return;
-        const dateKeyValue = els.dateField.value;
-        const hasDate = Boolean(dateKeyValue);
-        const currentTime = els.timeField.value;
-
-        els.timeGrid.innerHTML = TIME_SLOTS.map((time) => {
-          const slotKey = hasDate ? timeSlotKey(dateKeyValue, time) : '';
-          const booked = hasDate ? state.bookedSlots.has(slotKey) : true;
-          const active = currentTime === time;
-          return `<button type="button" class="time-chip ${active ? 'is-active' : ''}" data-time-slot="${time}" ${!hasDate || booked ? 'disabled' : ''}>${time}</button>`;
-        }).join('');
-
-        els.timeGrid.querySelectorAll('[data-time-slot]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const time = btn.dataset.timeSlot;
-            if (!time || !els.dateField.value) return;
-            if (state.bookedSlots.has(timeSlotKey(els.dateField.value, time))) return;
-            setSelectedTime(time);
-          });
-        });
-      }
-
-      function setSelectedDate(key) {
-        els.dateField.value = key;
-        const nice = formatSelectedDate(key);
-        state.currentMonth = new Date(parseDateKey(key).getFullYear(), parseDateKey(key).getMonth(), 1);
-        els.dateHint.textContent = `Pasirinkta data: ${nice}`;
-        els.selectedDateChip.style.display = 'inline-flex';
-        els.selectedDateChip.textContent = `Pasirinkta data: ${nice}`;
-        if (els.timeField && els.timeField.value && state.bookedSlots.has(timeSlotKey(key, els.timeField.value))) {
-          clearSelectedTime();
-        }
-        renderQuickDates();
-        renderTimeSlots();
-        updateSummary();
-      }
-
-      function setSelectedTime(time) {
-        if (!els.timeField) return;
-        els.timeField.value = time;
-        els.selectedTimeChip.style.display = 'inline-flex';
-        els.selectedTimeChip.textContent = `Pasirinktas laikas: ${time}`;
-        renderTimeSlots();
-        updateSummary();
-      }
-
-      function clearSelectedTime() {
-        if (!els.timeField) return;
-        els.timeField.value = '';
-        els.selectedTimeChip.style.display = 'none';
-        renderTimeSlots();
-        updateSummary();
-      }
-
-      function clearSelectedDate() {
-        const today = todayStart();
-        state.currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        els.dateField.value = '';
-        els.dateHint.textContent = 'Pasirinkite datą kalendoriuje.';
-        els.selectedDateChip.style.display = 'none';
-        clearSelectedTime();
-        renderQuickDates();
-        renderTimeSlots();
-        updateSummary();
-      }
-
-      function renderCalendar() {
-        const date = new Date(state.currentMonth.getFullYear(), state.currentMonth.getMonth(), 1);
-        els.calendarMonth.textContent = getMonthLabel(date);
-
-        const firstDay = (date.getDay() + 6) % 7;
-        const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-        const weekdays = ['Pr', 'An', 'Tr', 'Kt', 'Pn', 'Št', 'Sk'];
-        const cells = [];
-
-        weekdays.forEach((day) => cells.push(`<div class="weekday">${day}</div>`));
-
-        for (let i = 0; i < firstDay; i += 1) {
-          cells.push('<button class="day is-empty" type="button" tabindex="-1" aria-hidden="true"></button>');
-        }
-
-        for (let day = 1; day <= daysInMonth; day += 1) {
-          const d = new Date(date.getFullYear(), date.getMonth(), day);
-          const key = dateKey(d);
-          const selected = els.dateField.value === key;
-          const disabled = isPastDate(d);
-          const classes = ['day'];
-
-          if (disabled && !selected) classes.push('is-disabled');
-          if (isPastDate(d)) classes.push('is-past');
-          if (selected) classes.push('is-selected');
-
-          const label = d.toLocaleDateString('lt-LT', { year: 'numeric', month: 'long', day: 'numeric' });
-          cells.push(`<button class="${classes.join(' ')}" type="button" data-date="${key}" ${disabled && !selected ? 'disabled' : ''} aria-label="${label}">${day}</button>`);
-        }
-
-        els.calendarGrid.innerHTML = cells.join('');
-        els.calendarGrid.querySelectorAll('[data-date]').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const key = btn.dataset.date;
-            setSelectedDate(key);
-            renderCalendar();
-          });
-        });
-        renderQuickDates();
-        renderTimeSlots();
-      }
-
-      function observeFadeIns() {
-        const targets = document.querySelectorAll('.fade-in:not(.is-visible)');
-        if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.12 });
-          targets.forEach((target) => observer.observe(target));
-        } else {
-          targets.forEach((target) => target.classList.add('is-visible'));
-        }
-      }
-
-      function openModal() {
-        els.successModal.classList.add('is-open');
-        els.successModal.setAttribute('aria-hidden', 'false');
-      }
-
-      function closeModal() {
-        els.successModal.classList.remove('is-open');
-        els.successModal.setAttribute('aria-hidden', 'true');
-      }
-
-      els.prevMonth.addEventListener('click', () => {
-        state.currentMonth.setMonth(state.currentMonth.getMonth() - 1);
-        const minMonth = new Date(todayStart().getFullYear(), todayStart().getMonth(), 1);
-        if (state.currentMonth < minMonth) state.currentMonth = minMonth;
-        renderCalendar();
-      });
-
-      els.nextMonth.addEventListener('click', () => {
-        state.currentMonth.setMonth(state.currentMonth.getMonth() + 1);
-        renderCalendar();
-      });
-
-      els.clearBooking.addEventListener('click', () => {
-        state.selected.clear();
-        els.bookingForm.reset();
-        clearSelectedDate();
-        clearSelectedTime();
-        document.querySelectorAll('.service-card').forEach((card) => {
-          card.classList.remove('selected');
-          const check = card.querySelector('input[type="checkbox"]');
-          if (check) check.checked = false;
-        });
-        document.querySelectorAll('.group-card').forEach((card) => {
-          card.classList.remove('is-open');
-          const head = card.querySelector('.group-head');
-          if (head) head.setAttribute('aria-expanded', 'false');
-        });
-        updateSummary();
-        renderCalendar();
-        renderTimeSlots();
-      });
-
-      els.closeModal.addEventListener('click', closeModal);
-      els.successModal.addEventListener('click', (event) => {
-        if (event.target === els.successModal) closeModal();
-      });
-
-      els.bookingForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const form = new FormData(els.bookingForm);
-        const payloadServices = getSelectedServices();
-        const total = payloadServices.reduce((sum, service) => sum + service.price, 0);
-        const bookingDate = form.get('Data');
-        const bookingTime = form.get('Laikas');
-
-        if (!bookingDate) {
-          alert('Pasirinkite datą.');
-          return;
-        }
-        if (!bookingTime) {
-          alert('Pasirinkite laiką.');
-          return;
-        }
-        if (state.bookedSlots.has(timeSlotKey(bookingDate, bookingTime))) {
-          alert('Šis laiko langas jau užimtas. Pasirinkite kitą laiką.');
-          return;
-        }
-
-        const serviceNames = payloadServices.map((s) => s.title).join(', ');
-
-        els.bookingForm.querySelector('#data').value = bookingDate;
-        els.bookingForm.querySelector('#laikas').value = bookingTime;
-        const summaryBoxEl = document.getElementById('summaryBox');
-        if (summaryBoxEl) {
-          summaryBoxEl.value = `${serviceNames || 'Nenurodyta'}\nĮvertinimas: ${money(total)}`;
-        }
-
-        try {
-          const formData = new FormData(els.bookingForm);
-          const response = await fetch('https://formspree.io/f/xpqkqbbw', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json'
-            },
-            body: formData
-          });
-
-          const data = await response.json().catch(() => ({}));
-          if (!response.ok) {
-            throw new Error(data?.error || 'Nepavyko išsiųsti formos');
-          }
-
-          state.bookedSlots.add(timeSlotKey(bookingDate, bookingTime));
-          saveBookedDates();
-          openModal();
-          state.selected.clear();
-          els.bookingForm.reset();
-          clearSelectedDate();
-          clearSelectedTime();
-          document.querySelectorAll('.service-card').forEach((card) => {
-            card.classList.remove('selected');
-            const check = card.querySelector('input[type="checkbox"]');
-            if (check) check.checked = false;
-          });
-          document.querySelectorAll('.group-card').forEach((card) => {
-            card.classList.remove('is-open');
-            const head = card.querySelector('.group-head');
-            if (head) head.setAttribute('aria-expanded', 'false');
-          });
-          updateSummary();
-          renderCalendar();
-          renderTimeSlots();
-        } catch (error) {
-          console.error(error);
-          alert('Klaida siunčiant registraciją. Patikrinkite interneto ryšį arba Formspree nustatymus.');
-        }
-      });
-
-      function initDateDefaults() {
-        const today = todayStart();
-        state.currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        els.dateField.value = '';
-        els.dateHint.textContent = 'Pasirinkite datą kalendoriuje.';
-        els.selectedDateChip.style.display = 'none';
-        renderCalendar();
-        renderTimeSlots();
-      }
-
-      function initReveal() {
-        requestAnimationFrame(() => {
-          observeFadeIns();
-          document.querySelectorAll('.fade-in').forEach((el) => el.classList.add('is-visible'));
-        });
-      }
-
-      renderServices();
-      updateSummary();
-      initDateDefaults();
-      initReveal();
-    })();
-  </script>
 </body>
 </html>
