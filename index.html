@@ -3,46 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <title>Žaisk Gyvenimą — Premium gyvenimo žaidimas</title>
+  <title>Žaisk Gyvenimą — paprasta versija</title>
   <style>
     :root{
-      --bg:#f4f8ff;
-      --bg2:#ffffff;
-      --card:rgba(255,255,255,.80);
-      --card-strong:rgba(255,255,255,.94);
-      --text:#10203b;
-      --muted:#5e6b84;
-      --muted2:#7a869f;
-      --line:rgba(16,32,59,.08);
-      --shadow:0 18px 50px rgba(72,94,144,.12);
-      --shadow-soft:0 10px 24px rgba(72,94,144,.08);
-      --accent:#7c5cff;
-      --accent2:#21c7a8;
-      --accent3:#28a7ff;
-      --accent4:#ffb703;
-      --accent5:#ff6b8b;
+      --bg:#f6f7fb;
+      --surface:#ffffff;
+      --surface-2:#f1f4f9;
+      --surface-3:#e9eef6;
+      --text:#101828;
+      --muted:#667085;
+      --muted-2:#98a2b3;
+      --line:#e4e9f1;
+      --shadow:0 10px 30px rgba(16,24,40,.08);
+      --shadow-soft:0 6px 18px rgba(16,24,40,.05);
+      --accent:#2563eb;
+      --accent-2:#0f766e;
       --success:#16a34a;
       --warn:#f59e0b;
       --danger:#ef4444;
-      --radius:24px;
-      --radius2:18px;
-      --glass: blur(18px) saturate(150%);
-      --nav:#ffffffd9;
-      --navBorder:rgba(16,32,59,.08);
+      --radius:22px;
+      --radius2:16px;
+      --nav:#ffffff;
+      --navBorder:#e4e9f1;
     }
     html[data-theme="dark"]{
-      --bg:#0d1630;
-      --bg2:#111b36;
-      --card:rgba(13,22,48,.72);
-      --card-strong:rgba(16,26,54,.92);
-      --text:#eef4ff;
-      --muted:#afbbd3;
-      --muted2:#93a4c4;
-      --line:rgba(255,255,255,.08);
-      --shadow:0 18px 50px rgba(0,0,0,.28);
-      --shadow-soft:0 10px 24px rgba(0,0,0,.18);
-      --nav:#101a34db;
-      --navBorder:rgba(255,255,255,.08);
+      --bg:#0f172a;
+      --surface:#111827;
+      --surface-2:#162033;
+      --surface-3:#1e293b;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --muted-2:#94a3b8;
+      --line:#263247;
+      --shadow:0 10px 30px rgba(0,0,0,.24);
+      --shadow-soft:0 6px 18px rgba(0,0,0,.16);
+      --nav:#111827;
+      --navBorder:#263247;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -50,102 +46,79 @@
       margin:0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(circle at 15% 12%, rgba(124,92,255,.20), transparent 24%),
-        radial-gradient(circle at 84% 14%, rgba(33,199,168,.18), transparent 24%),
-        radial-gradient(circle at 18% 82%, rgba(40,167,255,.16), transparent 24%),
-        radial-gradient(circle at 82% 84%, rgba(255,183,3,.13), transparent 24%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      background:var(--bg);
       overflow-x:hidden;
       -webkit-tap-highlight-color:transparent;
     }
     .app{
-      max-width: 480px;
+      max-width:430px;
       margin:0 auto;
       min-height:100%;
-      padding: 16px 14px 132px;
+      padding:12px 12px 118px;
       position:relative;
     }
     .topbar{
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:12px;
       padding-top: env(safe-area-inset-top);
-      margin-bottom:14px;
+      margin-bottom:12px;
       text-align:center;
     }
-    .brand{
-      display:flex;align-items:center;gap:12px;min-width:0;
+    .topbar h1{
+      margin:0;
+      font-size:18px !important;
+      line-height:1.1;
+      letter-spacing:.16em;
+      font-weight:900;
     }
-    .avatar{
-      width:52px;height:52px;border-radius:18px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, #7c5cff, #28a7ff 48%, #21c7a8 100%);
-      color:#fff;font-weight:900;font-size:18px;
-      box-shadow:0 14px 28px rgba(124,92,255,.28);
-      border:1px solid rgba(255,255,255,.22);
-    }
-    .brand h1{margin:0;font-size:19px;line-height:1.05}
-    .brand p{margin:3px 0 0;font-size:12px;color:var(--muted);max-width:240px}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{
-      padding:8px 11px;border-radius:999px;
-      background:var(--card);
-      border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-      font-size:12px;font-weight:700;
-      backdrop-filter:var(--glass);
-    }
-    .view{display:none;animation:fade .24s ease}
+    .view{display:none;animation:fade .18s ease}
     .view.active{display:block}
-    @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-    .section{margin-top:14px}
+    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .section{margin-top:12px}
     .sectionHead{
       display:flex;align-items:flex-end;justify-content:space-between;
-      margin:0 2px 10px;
+      margin:0 2px 8px;
+      gap:10px;
     }
-    .sectionHead h2{margin:0;font-size:15px}
-    .sectionHead span{font-size:12px;color:var(--muted)}
+    .sectionHead h2{margin:0;font-size:15px;line-height:1.2}
+    .sectionHead span{font-size:12px;color:var(--muted);text-align:right}
     .panel{
-      background:linear-gradient(180deg, var(--card-strong), var(--card));
+      background:var(--surface);
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      backdrop-filter:var(--glass);
       overflow:hidden;
     }
-    .panel.pad{padding:16px}
-    .hero{display:grid;grid-template-columns:1fr;gap:12px}
+    .panel.pad{padding:14px}
+    .hero{display:grid;grid-template-columns:1fr;gap:10px}
     .heroCard{
-      min-height:196px;
-      padding:16px;
+      min-height:auto;
+      padding:14px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(124,92,255,.22), transparent 32%),
-        radial-gradient(circle at 90% 10%, rgba(40,167,255,.18), transparent 24%),
-        linear-gradient(160deg, rgba(124,92,255,.12), rgba(33,199,168,.06));
+      gap:14px;
+      background:var(--surface);
     }
     .subtle{font-size:12px;color:var(--muted)}
     .topStats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .miniStat{
-      padding:13px;border-radius:18px;background:var(--card);
+      padding:12px;border-radius:18px;background:var(--surface-2);
       border:1px solid var(--line);
       box-shadow:var(--shadow-soft);
     }
     .miniStat .label{font-size:12px;color:var(--muted);margin-bottom:8px}
     .miniStat .value{font-size:20px;font-weight:900;line-height:1}
-    .miniStat .hint{margin-top:5px;font-size:12px;color:var(--muted2)}
-    .xpWrap{margin-top:8px}
+    .miniStat .hint{margin-top:5px;font-size:12px;color:var(--muted-2)}
+    .xpWrap{margin-top:2px}
     .xpLine{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:12px;color:var(--muted)}
     .xpLine strong{display:block;font-size:18px;color:var(--text);margin-top:3px}
     .bar{
-      height:12px;border-radius:999px;background:rgba(127,146,180,.16);
+      height:12px;border-radius:999px;background:var(--surface-3);
       border:1px solid var(--line);overflow:hidden;
     }
-    .bar .fill{height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));transition:width .45s ease}
+    .bar .fill{height:100%;width:0%;border-radius:inherit;background:var(--accent);transition:width .35s ease}
     .ringBox{
       min-height:196px;
       display:flex;flex-direction:column;justify-content:space-between;
@@ -163,18 +136,13 @@
       display:inline-flex;align-items:center;gap:6px;
       padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;
       letter-spacing:.2px; text-transform:uppercase;
-      border:1px solid transparent;
+      border:1px solid var(--line);
+      background:var(--surface-2);
     }
-    .tag.rare{background:rgba(40,167,255,.16);border-color:rgba(40,167,255,.22)}
-    .tag.epic{background:rgba(124,92,255,.16);border-color:rgba(124,92,255,.22)}
-    .tag.legendary{background:rgba(255,183,3,.18);border-color:rgba(255,183,3,.28)}
-    .tag.good{background:rgba(22,163,74,.16);border-color:rgba(22,163,74,.22)}
+    .tag.rare,.tag.epic,.tag.legendary,.tag.good{background:var(--surface-2)}
     .dailyCard{
-      padding:16px;
-      background:
-        radial-gradient(circle at 18% 10%, rgba(255,183,3,.18), transparent 25%),
-        radial-gradient(circle at 88% 0%, rgba(124,92,255,.16), transparent 22%),
-        linear-gradient(135deg, rgba(124,92,255,.14), rgba(40,167,255,.08));
+      padding:14px;
+      background:var(--surface);
     }
     .dailyCard h3{margin:10px 0 6px;font-size:18px}
     .dailyCard p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
@@ -182,110 +150,100 @@
     .btn{
       border:none;cursor:pointer;font:inherit;font-weight:800;
       padding:12px 14px;border-radius:16px;
-      background:linear-gradient(135deg, var(--accent), var(--accent3));
-      color:#fff;box-shadow:0 14px 26px rgba(124,92,255,.22);
-      transition:transform .15s ease, opacity .15s ease, filter .15s ease;
+      background:var(--accent);
+      color:#fff;box-shadow:var(--shadow-soft);
+      transition:transform .12s ease, opacity .12s ease, filter .12s ease, background .12s ease;
     }
     .btn.secondary{
-      background:var(--card);color:var(--text);border:1px solid var(--line);box-shadow:var(--shadow-soft);
+      background:var(--surface-2);color:var(--text);border:1px solid var(--line);box-shadow:var(--shadow-soft);
     }
     .btn.ghost{
       background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none;
     }
     .btn.danger{
-      background:linear-gradient(135deg, var(--danger), #ff7b7b);
+      background:var(--danger);
       color:#fff;
-      box-shadow:0 14px 26px rgba(239,68,68,.22);
     }
     .smallBtn{
       width:34px;height:34px;border-radius:12px;
-      border:1px solid var(--line);background:var(--card);color:var(--text);
+      border:1px solid var(--line);background:var(--surface);color:var(--text);
       display:grid;place-items:center;cursor:pointer;font:inherit;font-weight:900;
       box-shadow:var(--shadow-soft);
     }
     .smallBtn.danger{
-      background:rgba(239,68,68,.12);
+      background:#fff1f2;
       color:var(--danger);
-      border-color:rgba(239,68,68,.18);
+      border-color:#fecdd3;
     }
     .btn:active,.navBtn:active,.taskCard:active,.carCard:active,.zoneCard:active,.rewardCard:active,.smallBtn:active,.achievement:active{transform:scale(.985)}
     .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
-    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .taskGroupHead{
       display:flex;justify-content:space-between;align-items:center;
       margin:12px 2px 8px;
     }
     .taskGroupHead h3{
-      margin:0;font-size:13px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);
+      margin:0;font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);
     }
-    .taskGroupHead span{font-size:12px;color:var(--muted2)}
+    .taskGroupHead span{font-size:12px;color:var(--muted-2)}
     .taskList{display:grid;gap:10px}
     .taskCard{
       display:flex;align-items:center;gap:12px;
-      padding:14px 14px;border-radius:18px;
-      background:var(--card);
+      padding:13px 14px;border-radius:18px;
+      background:var(--surface);
       border:1px solid var(--line);
       box-shadow:var(--shadow-soft);
       position:relative;overflow:hidden;
-      transition:transform .15s ease, opacity .15s ease, border-color .15s ease;
+      transition:transform .12s ease, opacity .12s ease, border-color .12s ease;
     }
     .taskCard.done{
-      opacity:.88;
-      border-color:rgba(22,163,74,.22);
-      background:
-        linear-gradient(135deg, rgba(22,163,74,.08), rgba(40,167,255,.05)),
-        var(--card);
+      opacity:.92;
+      border-color:#bbf7d0;
+      background:var(--surface);
     }
     .taskCard.done .check{
-      background:rgba(22,163,74,.18);border-color:rgba(22,163,74,.32);color:var(--success);
+      background:#dcfce7;border-color:#86efac;color:var(--success);
     }
-    .taskCard::after{
-      content:"";position:absolute;inset:auto -16% -60% auto;width:140px;height:140px;border-radius:50%;
-      background:radial-gradient(circle, rgba(124,92,255,.12), transparent 70%);
-      pointer-events:none;
-    }
+    .taskCard::after{content:none}
     .check{
       width:26px;height:26px;border-radius:9px;flex:0 0 auto;
       display:grid;place-items:center;
-      border:1.5px solid rgba(127,146,180,.26);
-      color:transparent;background:rgba(255,255,255,.35);
+      border:1.5px solid var(--line);
+      color:transparent;background:var(--surface-2);
       font-size:16px;font-weight:900;
     }
     .taskMain{flex:1;min-width:0}
     .taskMain strong{display:block;font-size:14px;margin-bottom:4px}
     .taskMeta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
     .rewardPills{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:0 0 auto}
-    .rewardPills .xp{font-size:12px;font-weight:900;color:#6b4eff}
+    .rewardPills .xp{font-size:12px;font-weight:900;color:var(--accent)}
     .rewardPills .coins{font-size:12px;font-weight:900;color:#a16207}
-    .taskCard.done .rewardPills .xp{color:#5a43e8}
-    .taskCard.done .rewardPills .coins{color:#8c5b00}
+    .taskCard.done .rewardPills .xp{color:var(--accent)}
+    .taskCard.done .rewardPills .coins{color:#a16207}
     .cardNotice{
-      padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.50);
+      padding:12px 14px;border-radius:16px;background:var(--surface-2);
       border:1px solid var(--line);font-size:12px;color:var(--muted);
     }
     .smallStatBox{
-      padding:14px;border-radius:18px;background:var(--card);
+      padding:14px;border-radius:18px;background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow-soft);
       min-height:92px;
     }
     .smallStatBox .label{font-size:12px;color:var(--muted);margin-bottom:10px}
     .smallStatBox .value{font-size:20px;font-weight:900;line-height:1.05}
-    .smallStatBox .hint{font-size:12px;color:var(--muted2);margin-top:6px}
+    .smallStatBox .hint{font-size:12px;color:var(--muted-2);margin-top:6px}
     .mapGrid{
       display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
     }
     .zoneCard{
       min-height:92px;padding:12px;border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.55));
+      background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow-soft);overflow:hidden;position:relative;
     }
-    .zoneCard.active{
-      outline:1px solid rgba(124,92,255,.26);
-      box-shadow:0 0 0 1px rgba(124,92,255,.08), var(--shadow-soft);
-    }
+    .zoneCard.active{outline:1px solid #bfdbfe}
     .zoneCard.locked{
-      opacity:.58;filter:saturate(.72);
+      opacity:.58;filter:saturate(.9);
     }
     .zoneCard i{font-style:normal;font-size:18px}
     .zoneCard strong{display:block;margin-top:18px;font-size:12px}
@@ -293,24 +251,24 @@
     .zoneCard .req{
       position:absolute;top:10px;right:10px;
       font-size:10px;font-weight:800;padding:4px 7px;border-radius:999px;
-      background:rgba(255,255,255,.72);border:1px solid var(--line)
+      background:var(--surface-2);border:1px solid var(--line)
     }
     .historyList{display:grid;gap:10px}
     .historyItem{
       display:flex;gap:12px;align-items:flex-start;
       padding:12px 14px;border-radius:16px;
-      background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-soft);
+      background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-soft);
     }
     .histIcon{
       width:32px;height:32px;border-radius:11px;
       display:grid;place-items:center;flex:0 0 auto;
-      background:linear-gradient(135deg, rgba(124,92,255,.16), rgba(40,167,255,.14));
+      background:var(--surface-2);
     }
     .historyItem strong{display:block;font-size:13px;margin-bottom:2px}
     .historyItem span{display:block;font-size:12px;color:var(--muted)}
     .shopGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     .rewardCard{
-      padding:14px;border-radius:18px;background:var(--card);
+      padding:14px;border-radius:18px;background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow-soft);
       display:flex;flex-direction:column;gap:10px;min-height:138px;
     }
@@ -319,22 +277,19 @@
     }
     .rewardCard .ico{
       width:38px;height:38px;border-radius:14px;display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(124,92,255,.14), rgba(40,167,255,.12));
+      background:var(--surface-2);
       font-size:18px;
     }
     .rewardCard strong{display:block;font-size:14px;margin-top:2px}
     .rewardCard p{margin:0;font-size:12px;color:var(--muted);line-height:1.45}
     .rewardCard .cost{
       display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;
-      background:rgba(255,183,3,.16);font-size:11px;font-weight:900;border:1px solid rgba(255,183,3,.18)
+      background:#fef3c7;font-size:11px;font-weight:900;border:1px solid #fde68a
     }
-    .rewardCard .buy{
-      margin-top:auto;
-      width:100%;
-    }
+    .rewardCard .buy{margin-top:auto;width:100%}
     .skillGrid{display:grid;gap:12px}
     .skillCard{
-      padding:14px;border-radius:20px;background:var(--card);
+      padding:14px;border-radius:20px;background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow-soft);
     }
     .skillTop{
@@ -345,62 +300,66 @@
     .skillDesc{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
     .achGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     .achievement{
-      padding:14px;border-radius:20px;background:var(--card);
+      padding:14px;border-radius:20px;background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow-soft);min-height:120px;
       position:relative;overflow:hidden;
     }
-    .achievement.locked{opacity:.55;filter:saturate(.72)}
+    .achievement.locked{opacity:.55;filter:saturate(.9)}
     .achievement .ico{font-size:24px}
     .achievement strong{display:block;margin:10px 0 4px;font-size:14px}
     .achievement span{font-size:12px;color:var(--muted)}
     .badge{
       display:inline-flex;align-items:center;gap:6px;
       padding:7px 10px;border-radius:999px;font-size:11px;
-      background:rgba(255,255,255,.72);border:1px solid var(--line);font-weight:800;
+      background:var(--surface-2);border:1px solid var(--line);font-weight:800;
     }
-    .badge.good{background:rgba(22,163,74,.16)}
-    .badge.info{background:rgba(40,167,255,.16)}
-    .badge.warn{background:rgba(255,183,3,.18)}
+    .badge.good{background:#dcfce7}
+    .badge.info{background:#dbeafe}
+    .badge.warn{background:#fef3c7}
     .switch{
       display:flex;justify-content:space-between;align-items:center;gap:12px;
       padding:13px 14px;border-radius:16px;
-      background:var(--card);border:1px solid var(--line);margin-bottom:10px;
+      background:var(--surface);border:1px solid var(--line);margin-bottom:10px;
     }
     .switch strong{display:block;font-size:14px}
     .switch .sub{font-size:12px;color:var(--muted);margin-top:3px}
     .toggle{
       width:54px;height:32px;border-radius:999px;
-      position:relative;background:rgba(127,146,180,.18);border:1px solid var(--line);flex:0 0 auto;
+      position:relative;background:var(--surface-3);border:1px solid var(--line);flex:0 0 auto;
       transition:background .18s ease;
     }
     .toggle::after{
       content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;
-      background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.16);transition:transform .18s ease;
+      background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.14);transition:transform .18s ease;
     }
-    .toggle.on{background:linear-gradient(90deg, var(--accent), var(--accent3))}
+    .toggle.on{background:var(--accent)}
     .toggle.on::after{transform:translateX(22px)}
     .field{margin-bottom:12px}
     .field label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px 2px}
     .input{
       width:100%;padding:13px 14px;border-radius:16px;
-      background:var(--card);border:1px solid var(--line);color:var(--text);outline:none;font:inherit;
+      background:var(--surface);border:1px solid var(--line);color:var(--text);outline:none;font:inherit;
     }
     .navWrap{
       position:fixed;left:0;right:0;bottom:0;z-index:30;
-      padding:10px 14px calc(12px + env(safe-area-inset-bottom));
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,.20) 8%, rgba(0,0,0,.34));
+      padding:10px 12px calc(12px + env(safe-area-inset-bottom));
+      background:rgba(255,255,255,.82);
+      border-top:1px solid var(--line);
       pointer-events:none;
+      backdrop-filter:saturate(140%) blur(14px);
     }
+    html[data-theme="dark"] .navWrap{background:rgba(15,23,42,.9)}
     .nav{
-      max-width:450px;margin:0 auto;padding:10px;border-radius:24px;
-      background:var(--nav);border:1px solid var(--navBorder);box-shadow:var(--shadow);backdrop-filter:var(--glass);
-      display:grid;grid-template-columns:repeat(5,1fr);gap:8px;pointer-events:auto;
+      max-width:430px;margin:0 auto;padding:8px;border-radius:22px;
+      background:var(--nav);border:1px solid var(--navBorder);box-shadow:var(--shadow);
+      display:grid;grid-template-columns:repeat(5,1fr);gap:6px;pointer-events:auto;
     }
     .navBtn{
-      padding:10px 8px;border-radius:18px;background:transparent;border:1px solid transparent;
+      padding:9px 6px;border-radius:16px;background:transparent;border:1px solid transparent;
       display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:11px;
     }
-    .navBtn.active{color:var(--text);background:rgba(124,92,255,.16);border-color:rgba(124,92,255,.18)}
+    .navBtn.active{color:var(--text);background:#eff6ff;border-color:#bfdbfe}
+    html[data-theme="dark"] .navBtn.active{background:#1e293b;border-color:#334155}
     .navBtn .ico{font-size:18px;line-height:1}
     .toastWrap{
       position:fixed;left:50%;bottom:124px;transform:translateX(-50%);z-index:60;
@@ -408,13 +367,13 @@
     }
     .toast{
       padding:12px 14px;border-radius:16px;
-      background:rgba(16,26,54,.92);color:#fff;border:1px solid rgba(255,255,255,.10);
-      box-shadow:var(--shadow);backdrop-filter:blur(16px);
+      background:#111827;color:#fff;border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
       display:flex;justify-content:space-between;gap:12px;align-items:center;
       animation:toastIn .22s ease;
       font-size:13px;
     }
-    html[data-theme="light"] .toast{background:rgba(255,255,255,.92);color:var(--text)}
+    html[data-theme="light"] .toast{background:#ffffff;color:var(--text);border-color:var(--line)}
     @keyframes toastIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
     .spark{
       position:fixed;pointer-events:none;z-index:9999;font-size:22px;
@@ -424,72 +383,66 @@
     .pulse{animation:pulse .55s ease}
     @keyframes pulse{0%{transform:scale(1)}35%{transform:scale(1.04)}100%{transform:scale(1)}}
     .modalBackdrop{
-      position:fixed;inset:0;z-index:50;background:rgba(3,10,28,.60);
+      position:fixed;inset:0;z-index:50;background:rgba(15,23,42,.48);
       display:none;align-items:flex-end;justify-content:center;
     }
     .modalBackdrop.show{display:flex}
     .sheet{
-      width:min(100%,450px);
+      width:min(100%,430px);
       max-height:88vh;overflow:auto;
-      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,251,255,.98));
+      background:var(--surface);
       color:var(--text);
-      border-radius:28px 28px 0 0;border:1px solid var(--line);
-      box-shadow:var(--shadow);padding:16px;backdrop-filter:var(--glass);
-    }
-    html[data-theme="dark"] .sheet{
-      background:linear-gradient(180deg, rgba(17,27,54,.98), rgba(12,20,43,.98));
+      border-radius:26px 26px 0 0;border:1px solid var(--line);
+      box-shadow:var(--shadow);padding:16px;
     }
     .sheetHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
     .sheetHead h3{margin:0;font-size:18px}
     .closeBtn{
-      width:40px;height:40px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:18px
+      width:40px;height:40px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:18px
     }
     .carGrid{display:grid;gap:12px}
     .carCard{
-      overflow:hidden;border-radius:22px;background:var(--card);
+      overflow:hidden;border-radius:22px;background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow-soft)
     }
     .carHero{
       height:148px;position:relative;
-      background:linear-gradient(135deg, rgba(124,92,255,.22), rgba(40,167,255,.18), rgba(33,199,168,.12));
+      background-color:var(--surface-2);
       display:flex;align-items:flex-end;justify-content:space-between;padding:14px;
       background-size:cover;background-position:center;
     }
     .carHero .pill{
       padding:6px 10px;border-radius:999px;
-      background:rgba(0,0,0,.34);color:#fff;font-size:11px;font-weight:800;
+      background:rgba(15,23,42,.68);color:#fff;font-size:11px;font-weight:800;
     }
     .carBody{padding:14px}
     .carBody h4{margin:0 0 6px;font-size:16px}
     .carLine{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
     .miniBar{
-      height:10px;border-radius:999px;background:rgba(127,146,180,.16);border:1px solid var(--line);overflow:hidden;margin:10px 0
+      height:10px;border-radius:999px;background:var(--surface-3);border:1px solid var(--line);overflow:hidden;margin:10px 0
     }
-    .miniBar .fill{height:100%;border-radius:inherit;background:linear-gradient(90deg, var(--accent2), var(--accent3));width:0%;transition:width .35s ease}
+    .miniBar .fill{height:100%;border-radius:inherit;background:var(--accent-2);width:0%;transition:width .35s ease}
     .list{display:grid;gap:8px}
     .listItem{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:11px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);
+      padding:11px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);
     }
     .listItem label{display:flex;gap:10px;align-items:center;flex:1;min-width:0}
     .listItem input{width:18px;height:18px}
     .listItem .small{font-size:11px;color:var(--muted)}
     .emptyState{
-      padding:16px;border-radius:18px;background:var(--card);border:1px dashed var(--line);color:var(--muted);font-size:13px;line-height:1.5
+      padding:16px;border-radius:18px;background:var(--surface);border:1px dashed var(--line);color:var(--muted);font-size:13px;line-height:1.5
     }
     .footerSpace{height:10px}
 
     .menuIntro{
       padding:16px;border-radius:24px;
-      background:
-        radial-gradient(circle at 15% 18%, rgba(124,92,255,.16), transparent 30%),
-        radial-gradient(circle at 90% 18%, rgba(40,167,255,.14), transparent 24%),
-        linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,.68));
+      background:var(--surface);
       border:1px solid var(--line);box-shadow:var(--shadow);
     }
     .menuLinks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
     .menuLink{
-      padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-soft);
+      padding:14px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-soft);
       display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;cursor:pointer;
       border:none;font:inherit;appearance:none
     }
@@ -518,12 +471,12 @@
       appearance:none;
     }
     .taskGroupHead h3{margin:0;font-size:14px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
-    .taskGroupHead .sub{display:block;font-size:12px;color:var(--muted2);margin-top:4px}
+    .taskGroupHead .sub{display:block;font-size:12px;color:var(--muted-2);margin-top:4px}
     .taskGroupBody{display:none;padding:0 16px 16px}
     .taskGroupBody.open{display:block}
     .chev{
       width:32px;height:32px;border-radius:12px;display:grid;place-items:center;
-      background:rgba(127,146,180,.12);border:1px solid var(--line);color:var(--muted);flex:0 0 auto;
+      background:var(--surface-2);border:1px solid var(--line);color:var(--muted);flex:0 0 auto;
       font-size:18px
     }
     .historyToggle{
@@ -541,19 +494,354 @@
     .historyBody.open{display:block}
     .historyHeadLine{
       display:flex;justify-content:space-between;align-items:center;gap:10px;
-      padding:14px 16px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-soft)
+      padding:14px 16px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-soft)
     }
     .historyHeadLine strong{font-size:15px}
     .historyHeadLine span{font-size:12px;color:var(--muted)}
 
+
+    /* Garažas */
+    .garageHero{
+      padding:16px;
+      display:grid;
+      gap:14px;
+    }
+    .garageHeroTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .garageHeroTop h3{
+      margin:6px 0 0;
+      font-size:20px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+    .garagePill{
+      flex:0 0 auto;
+      padding:8px 10px;
+      border-radius:999px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:11px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .garageSummaryGrid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    .garageStatCard{
+      padding:13px;
+      border-radius:18px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      min-height:94px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .garageStatCard .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:10px;
+    }
+    .garageStatCard .value{
+      font-size:22px;
+      font-weight:900;
+      line-height:1;
+      letter-spacing:-.02em;
+    }
+    .garageStatCard .hint{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted-2);
+      line-height:1.35;
+    }
+    .garageTaskPanel{
+      display:grid;
+      gap:12px;
+    }
+    .garageTaskHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .garageTaskHead h3{
+      margin:5px 0 0;
+      font-size:18px;
+      line-height:1.15;
+    }
+    .garageTaskCounter{
+      padding:8px 10px;
+      border-radius:999px;
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
+      color:#1d4ed8;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    html[data-theme="dark"] .garageTaskCounter{
+      background:#172554;
+      border-color:#1e3a8a;
+      color:#bfdbfe;
+    }
+    .garageTaskComposer{
+      display:grid;
+      gap:10px;
+    }
+    .garageTaskComposer .field{margin:0}
+    .garageTaskComposer .field label{
+      font-size:11px;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+      color:var(--muted-2);
+    }
+    .garageTaskComposer .input{
+      background:var(--surface-2);
+    }
+    .garageTaskHelper{
+      padding:12px 14px;
+      border-radius:16px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .garageTaskList{
+      display:grid;
+      gap:10px;
+    }
+    .garageTaskItem{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 14px;
+      border-radius:18px;
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .garageTaskItem.done{
+      background:#f8fafc;
+      border-color:#c7eed3;
+    }
+    html[data-theme="dark"] .garageTaskItem.done{
+      background:#0f172a;
+      border-color:#14532d;
+    }
+    .garageTaskMain{
+      flex:1;
+      min-width:0;
+    }
+    .garageTaskMain strong{
+      display:block;
+      font-size:14px;
+      line-height:1.3;
+      margin-bottom:5px;
+    }
+    .garageTaskMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      font-size:11px;
+      color:var(--muted);
+    }
+    .garageTaskMeta .metaChip{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:5px 8px;
+      border-radius:999px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      font-weight:700;
+      white-space:nowrap;
+    }
+    .garageTaskActions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex:0 0 auto;
+    }
+    .garageTaskBtn{
+      width:38px;
+      height:38px;
+      border-radius:13px;
+      border:1px solid var(--line);
+      background:var(--surface-2);
+      color:var(--text);
+      font-size:18px;
+      font-weight:900;
+      box-shadow:var(--shadow-soft);
+    }
+    .garageTaskBtn.done{
+      background:#dcfce7;
+      border-color:#86efac;
+      color:var(--success);
+    }
+    .garageTaskBtn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+    .garageTaskEmpty{
+      padding:16px;
+      border-radius:18px;
+      background:var(--surface-2);
+      border:1px dashed var(--line);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .garageMicroStats{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+    .garageMicroStat{
+      padding:12px;
+      border-radius:18px;
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      min-height:88px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .garageMicroStat .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+    .garageMicroStat .value{
+      font-size:18px;
+      font-weight:900;
+      line-height:1;
+    }
+    .garageMicroStat .hint{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted-2);
+      line-height:1.35;
+    }
+    .carCard{
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .carCard:hover{
+      transform:translateY(-1px);
+    }
+    .carHero{
+      background-size:cover;
+      background-position:center;
+      position:relative;
+    }
+    .carHero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(15,23,42,.02), rgba(15,23,42,.18));
+      pointer-events:none;
+    }
+    .carHero .pill{
+      position:relative;
+      z-index:1;
+    }
+    .carBody h4{
+      letter-spacing:-.01em;
+    }
+    .carBody .carLine:last-of-type{
+      color:var(--muted-2);
+    }
+
+
+    .garageToggleBtn{
+      width:100%;
+      border:none;
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow-soft);
+      padding:13px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor:pointer;
+      text-align:left;
+      color:var(--text);
+      font:inherit;
+      appearance:none;
+      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .garageToggleBtn:active{transform:scale(.99)}
+    .garageToggleBtn .left{display:flex;flex-direction:column;gap:4px;min-width:0}
+    .garageToggleBtn .title{font-size:14px;font-weight:900;line-height:1.25}
+    .garageToggleBtn .sub{font-size:12px;color:var(--muted);line-height:1.35}
+    .garageChev{
+      width:32px;height:32px;border-radius:12px;
+      display:grid;place-items:center;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--muted);
+      flex:0 0 auto;
+      font-size:18px;
+      font-weight:900;
+    }
+    .garageFold{display:none}
+    .garageFold.open{display:block}
+    .garageBottomNote{
+      padding:16px;
+      border-radius:20px;
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+    }
+    .garageBottomNote h3{
+      margin:10px 0 6px;
+      font-size:18px;
+      line-height:1.25;
+      letter-spacing:-.02em;
+    }
+    .garageBottomNote p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .garageBottomNote .noteRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .garageBottomNote .noteChip{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--surface-2);
+      color:var(--muted);
+      font-size:11px;
+      font-weight:800;
+    }
+
     @media (max-width: 430px){
-      .hero{grid-template-columns:1fr}
       .grid2,.achGrid,.shopGrid,.mapGrid{grid-template-columns:1fr 1fr}
       .topStats{grid-template-columns:1fr 1fr}
     }
     @media (min-width: 900px){
-      .app{max-width:520px}
+      .app{max-width:430px}
     }
+
   </style>
 </head>
 <body>
@@ -631,16 +919,89 @@
   </div>
 
 
+  
+  
   <div class="view" id="view-garage">
-    <div class="sectionHead"><h2>Garažas</h2><span>Automobiliai ir jų finansai</span></div>
-    <div class="panel pad">
-      <div class="subtle">Pridėti automobilį</div>
-      <div class="field"><label>Pavadinimas</label><input class="input" id="carName" placeholder="Nissan X-Trail" /></div>
-      <div class="grid2">
-        <div class="field"><label>Pirkimo kaina</label><input class="input" id="carBuyPrice" type="number" min="0" step="1" placeholder="4500" /></div>
-        <div class="field"><label>Nuotrauka</label><input class="input" id="carPhoto" type="file" accept="image/*" /></div>
+    <div class="sectionHead"><h2>Garažas</h2><span>Automobiliai, užduotys ir skaičiai</span></div>
+
+    <div class="panel garageHero">
+      <div class="garageHeroTop">
+        <div>
+          <div class="subtle">Garažo suvestinė</div>
+          <h3>Tvarkingai matyk automobilius, vertę ir pelną vienoje vietoje.</h3>
+        </div>
+        <div class="garagePill" id="garageTaskDate">Šiandien</div>
       </div>
-      <button class="btn" id="addCarBtn" style="width:100%">Pridėti automobilį</button>
+
+      <div class="garageSummaryGrid" id="garageSummaryGrid"></div>
+      <div class="garageMicroStats" id="garageMicroStats"></div>
+    </div>
+
+    <div class="section">
+      <div class="panel pad garageTaskPanel">
+        <div class="garageTaskHead">
+          <div>
+            <div class="subtle">Garažo dienos užduotys</div>
+            <h3>Pridėk darbus ir gauk XP už kiekvieną atliktą veiksmą.</h3>
+          </div>
+          <div class="garageTaskCounter" id="garageTaskCounter">0/0</div>
+        </div>
+
+        <button class="garageToggleBtn" type="button" data-garage-toggle="taskComposerOpen" aria-expanded="false">
+          <div class="left">
+            <span class="title">+ Pridėti užduotį</span>
+            <span class="sub">Atidaryti naujos garažo užduoties pridėjimą</span>
+          </div>
+          <div class="garageChev" id="garageTaskComposerChev">+</div>
+        </button>
+
+        <div class="garageFold" id="garageTaskComposerWrap">
+          <div class="garageTaskComposer">
+            <div class="field">
+              <label>Užduotis</label>
+              <input class="input" id="garageTaskTitle" placeholder="Pvz. nufotografuoti vieną auto" />
+            </div>
+            <div class="grid2">
+              <div class="field">
+                <label>XP</label>
+                <input class="input" id="garageTaskXp" type="number" min="0" step="1" value="20" />
+              </div>
+              <div class="field">
+                <label>Monetos</label>
+                <input class="input" id="garageTaskCoins" type="number" min="0" step="1" value="10" />
+              </div>
+            </div>
+            <button class="btn" id="addGarageTaskBtn" style="width:100%">Pridėti garažo užduotį</button>
+          </div>
+        </div>
+
+        <div class="garageTaskHelper">
+          Užduotys galioja tik iki 00:00. Atlikta užduotis lieka su varnele iki vidurnakčio, tada automatiškai dingsta iš garažo, bet įrašas lieka pagrindiniame veiksmų loge.
+        </div>
+
+        <div class="garageTaskList" id="garageTasksRoot"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <button class="garageToggleBtn" type="button" data-garage-toggle="addCarOpen" aria-expanded="false">
+        <div class="left">
+          <span class="title">+ Pridėti automobilį</span>
+          <span class="sub">Atidaryti automobilio pridėjimo formą</span>
+        </div>
+        <div class="garageChev" id="garageCarComposerChev">+</div>
+      </button>
+      <div class="garageFold" id="garageCarFormWrap">
+        <div class="panel pad" style="margin-top:10px">
+          <div class="subtle">Pridėti automobilį</div>
+          <div class="field"><label>Pavadinimas</label><input class="input" id="carName" placeholder="Nissan X-Trail" /></div>
+          <div class="grid2">
+            <div class="field"><label>Pirkimo kaina</label><input class="input" id="carBuyPrice" type="number" min="0" step="1" placeholder="4500" /></div>
+            <div class="field"><label>Nuotrauka</label><input class="input" id="carPhoto" type="file" accept="image/*" /></div>
+          </div>
+          <button class="btn" id="addCarBtn" style="width:100%">Pridėti automobilį</button>
+        </div>
+      </div>
     </div>
 
     <div class="section">
@@ -662,18 +1023,52 @@
     </div>
 
     <div class="section">
-      <div class="sectionHead"><h2>Aktyvūs automobiliai</h2><span id="activeCarCount">0 auto</span><span id="carCount" style="display:none"></span></div>
-      <div class="carGrid" id="activeCarGrid"></div>
+      <button class="garageToggleBtn" type="button" data-garage-toggle="activeCarsOpen" aria-expanded="false">
+        <div class="left">
+          <span class="title">Aktyvūs automobiliai</span>
+          <span class="sub" id="activeCarHint">Paliesk, kad išskleistum aktyvių automobilių sąrašą</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="garagePill" id="activeCarCount">0 auto</div>
+          <div class="garageChev" id="garageActiveChev">+</div>
+        </div>
+      </button>
+      <div class="garageFold" id="activeCarsWrap">
+        <div class="carGrid" id="activeCarGrid" style="margin-top:10px"></div>
+      </div>
     </div>
 
     <div class="section">
-      <div class="sectionHead"><h2>Parduoti automobiliai</h2><span id="soldCarCount">0 auto</span></div>
-      <div class="carGrid" id="soldCarGrid"></div>
+      <button class="garageToggleBtn" type="button" data-garage-toggle="soldCarsOpen" aria-expanded="false">
+        <div class="left">
+          <span class="title">Parduoti automobiliai</span>
+          <span class="sub" id="soldCarHint">Paliesk, kad išskleistum parduotų automobilių sąrašą</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="garagePill" id="soldCarCount">0 auto</div>
+          <div class="garageChev" id="garageSoldChev">+</div>
+        </div>
+      </button>
+      <div class="garageFold" id="soldCarsWrap">
+        <div class="carGrid" id="soldCarGrid" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="panel garageBottomNote">
+        <div class="subtle">Garažo taisyklė</div>
+        <h3>Viskas, ko reikia vienoje vietoje: auto, vertė, užduotys ir pelnas.</h3>
+        <p>Viršuje matosi svarbiausi skaičiai, o apačioje palikta greita taisyklė ir priminimas, kad garažas liktų švarus, aiškus ir patogus naudoti vienu nykščiu.</p>
+        <div class="noteRow">
+          <div class="noteChip">+ Užduotys viršuje</div>
+          <div class="noteChip">+ Auto formos išskleidžiamos</div>
+          <div class="noteChip">+ Sąrašai suskleidžiami</div>
+        </div>
+      </div>
     </div>
   </div>
+<div class="view" id="view-menu">
 
-
-  <div class="view" id="view-menu">
     <div class="sectionHead"><h2>Meniu</h2><span>Pagrindinės sistemos</span></div>
 
     <div class="panel pad menuIntro">
@@ -730,7 +1125,7 @@
     <div class="sectionHead"><h2>Nustatymai</h2><span>Premium valdymas</span></div>
     <div class="panel pad">
       <div class="switch">
-        <div><strong>Šviesus / tamsus režimas</strong><div class="sub">Paliekame šviesų kaip pagrindą</div></div>
+        <div><strong>Šviesus / tamsus režimas</strong><div class="sub">Šviesus režimas yra numatytas</div></div>
         <div class="toggle on" id="themeToggle"></div>
       </div>
       <div class="switch">
@@ -918,6 +1313,14 @@
     worldsUnlocked:[],
     shopPurchases:[],
     cars:[],
+    garageTasks:[],
+    garageTasksDate: todayISO(),
+    garageUi:{
+      taskComposerOpen:false,
+      addCarOpen:false,
+      activeCarsOpen:false,
+      soldCarsOpen:false
+    },
     history:[],
     ui:{
       taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false},
@@ -944,6 +1347,14 @@
         worldsUnlocked: Array.isArray(parsed.worldsUnlocked) ? parsed.worldsUnlocked : [],
         shopPurchases: Array.isArray(parsed.shopPurchases) ? parsed.shopPurchases : [],
         cars: Array.isArray(parsed.cars) ? parsed.cars : [],
+        garageTasks: Array.isArray(parsed.garageTasks) ? parsed.garageTasks : [],
+        garageTasksDate: parsed.garageTasksDate || todayISO(),
+        garageUi: {
+          taskComposerOpen: !!parsed.garageUi?.taskComposerOpen,
+          addCarOpen: !!parsed.garageUi?.addCarOpen,
+          activeCarsOpen: !!parsed.garageUi?.activeCarsOpen,
+          soldCarsOpen: !!parsed.garageUi?.soldCarsOpen
+        },
         history: Array.isArray(parsed.history) ? parsed.history : [],
         completedToday: parsed.completedToday || {},
         importantTasks: Array.isArray(parsed.importantTasks) ? parsed.importantTasks : [],
@@ -1113,6 +1524,39 @@
     const d = new Date();
     d.setDate(d.getDate() - 1);
     return d.toISOString().slice(0,10);
+  }
+
+  function checkGarageDateReset(){
+    const today = todayISO();
+    if(!Array.isArray(state.garageTasks)) state.garageTasks = [];
+    if(state.garageTasksDate !== today){
+      state.garageTasks = [];
+      state.garageTasksDate = today;
+    }
+  }
+
+  function ensureGarageUi(){
+    state.garageUi = {
+      taskComposerOpen: !!state.garageUi?.taskComposerOpen,
+      addCarOpen: !!state.garageUi?.addCarOpen,
+      activeCarsOpen: !!state.garageUi?.activeCarsOpen,
+      soldCarsOpen: !!state.garageUi?.soldCarsOpen
+    };
+  }
+
+  let midnightTimer = null;
+  function scheduleMidnightRefresh(){
+    if(midnightTimer) clearTimeout(midnightTimer);
+    const now = new Date();
+    const next = new Date(now);
+    next.setHours(24, 0, 0, 80);
+    midnightTimer = setTimeout(() => {
+      checkDateReset();
+      checkGarageDateReset();
+      saveState();
+      render();
+      scheduleMidnightRefresh();
+    }, Math.max(1000, next - now));
   }
 
   function markStreakOnFirstCompletion(){
@@ -1377,6 +1821,44 @@
     openCar(carId);
   }
 
+  function addGarageTask(title, xp, coins){
+    checkGarageDateReset();
+    const cleanTitle = String(title || '').trim();
+    const rewardXp = Math.max(0, Number(xp) || 0);
+    const rewardCoins = Math.max(0, Number(coins) || 0);
+    if(!cleanTitle){
+      toast('Įrašyk garažo užduotį', '✍️');
+      return;
+    }
+    const task = {
+      id: uid(),
+      title: cleanTitle,
+      xp: rewardXp,
+      coins: rewardCoins,
+      done: false,
+      createdAt: nowLabel(),
+      completedAt: null
+    };
+    state.garageTasks.unshift(task);
+    addHistory('Garažo užduotis', `Pridėta: ${task.title}`, '➕');
+    toast('Garažo užduotis pridėta', '➕');
+    saveState();
+    render();
+  }
+
+  function completeGarageTask(taskId){
+    checkGarageDateReset();
+    const task = (state.garageTasks || []).find(t => t.id === taskId);
+    if(!task || task.done) return;
+    task.done = true;
+    task.completedAt = nowLabel();
+    state.stats.tasksCompleted += 1;
+    logTaskCompletion(task.title);
+    markStreakOnFirstCompletion();
+    addXpAndCoins(task.xp, task.coins, 'Garažo užduotis atlikta', 'Business', '🚗');
+    addHistory('Garažo užduotis', `Atlikta: ${task.title}`, '✅');
+  }
+
   function addCar(name, imageSrc, buyPrice){
     const car = {
       id: uid(),
@@ -1419,38 +1901,48 @@
     const isSold = car.status === 'parduotas';
     const soldPrice = Number(car.soldPrice || 0);
     const netProfit = isSold ? carNetProfit(car) : 0;
+    const remainingChecks = Math.max(0, (car.checklist?.length || 0) - doneCount);
+    const estResult = isSold ? netProfit : Math.max(0, soldPrice - currentCost);
     const html = `
       <div class="sheetHead">
         <h3>${escapeHTML(car.name)}</h3>
         <button class="closeBtn" id="closeSheet">✕</button>
       </div>
       <div class="carCard">
-        <div class="carHero" style="background-image:url('${car.imageSrc || ''}')">
+        <div class="carHero" style="background-color:var(--surface-2);background-image:url('${car.imageSrc || ''}')">
           <div class="pill">${isSold ? 'Parduotas' : pct === 100 ? 'Paruoštas pardavimui' : pct >= 50 ? 'Beveik paruoštas' : 'Ruošiamas'}</div>
           <div class="pill">${pct}%</div>
         </div>
         <div class="carBody">
-          <div class="grid2" style="margin-bottom:10px">
-            <div class="smallStatBox">
+          <div class="garageMicroStats" style="margin-bottom:10px">
+            <div class="garageMicroStat">
               <div class="label">Pirkimo kaina</div>
               <div class="value">${moneyFmt(car.buyPrice)}</div>
               <div class="hint">Pradinė investicija</div>
             </div>
-            <div class="smallStatBox">
+            <div class="garageMicroStat">
               <div class="label">Šiuo metu stovi</div>
               <div class="value">${moneyFmt(currentCost)}</div>
               <div class="hint">Pirkimas + išlaidos</div>
             </div>
+            <div class="garageMicroStat">
+              <div class="label">Likutis</div>
+              <div class="value">${remainingChecks}</div>
+              <div class="hint">${isSold ? 'Auto jau parduotas' : 'Dar laukia užduotys'}</div>
+            </div>
           </div>
+
           <div class="carLine"><span>Progresas</span><span>${doneCount}/${car.checklist.length} punktų</span></div>
           <div class="miniBar"><div class="fill" style="width:${pct}%"></div></div>
+
           <div class="sectionHead" style="margin:14px 0 8px"><h2>Užduočių sąrašas</h2><span>XP + monetos + išlaidos</span></div>
           <div class="list" id="carChecklist"></div>
+
           <div class="grid2" style="margin-top:12px">
             <div class="smallStatBox">
               <div class="label">Grynas pelnas</div>
-              <div class="value">${isSold ? (netProfit >= 0 ? '+' : '') + moneyFmt(netProfit) : moneyFmt(0)}</div>
-              <div class="hint">${isSold ? 'Galutinis rezultatas' : 'Atsiras pardavus'}</div>
+              <div class="value">${isSold ? (netProfit >= 0 ? '+' : '') + moneyFmt(netProfit) : moneyFmt(estResult)}</div>
+              <div class="hint">${isSold ? 'Galutinis rezultatas' : 'Jei parduotum dabar'}</div>
             </div>
             <div class="smallStatBox">
               <div class="label">Pardavimo kaina</div>
@@ -1458,6 +1950,7 @@
               <div class="hint">${isSold ? 'Jau parduota' : 'Įrašyk prieš parduodant'}</div>
             </div>
           </div>
+
           ${isSold ? `
             <div class="cardNotice" style="margin-top:12px">
               Automobilis parduotas ${escapeHTML(car.soldAt || '')}. Grynasis pelnas: <strong>${(netProfit >= 0 ? '+' : '') + moneyFmt(netProfit)}</strong>.
@@ -1495,6 +1988,7 @@
   }
 
   function openAddChecklistForm(carId){
+
 
     const car = state.cars.find(c => c.id === carId);
     if(!car) return;
@@ -1585,6 +2079,7 @@
 
 
   function sellCar(carId){
+
     const car = state.cars.find(c => c.id === carId);
     if(!car) return;
     if(!car.checklist.every(i => i.done)){
@@ -1795,14 +2290,125 @@
 
 
     // garažas
+    checkGarageDateReset();
     ensureMonthlyCycle();
     const activeCars = state.cars.filter(car => car.status !== 'parduotas');
     const soldCars = state.cars.filter(car => car.status === 'parduotas');
+    const totalCars = state.cars.length;
+    const totalActiveValue = activeCars.reduce((sum, car) => sum + carTotalCost(car), 0);
+    const totalInvested = state.cars.reduce((sum, car) => sum + carTotalCost(car), 0);
+    const totalSoldRevenue = soldCars.reduce((sum, car) => sum + Number(car.soldPrice || 0), 0);
+    const totalSoldProfit = soldCars.reduce((sum, car) => sum + carNetProfit(car), 0);
+    const garageTasksToday = Array.isArray(state.garageTasks) ? state.garageTasks : [];
+    const garageDone = garageTasksToday.filter(t => t.done).length;
+    const garageRewardXP = garageTasksToday.reduce((sum, t) => sum + Number(t.xp || 0), 0);
+    const garageRewardCoins = garageTasksToday.reduce((sum, t) => sum + Number(t.coins || 0), 0);
+
     document.getElementById('carCount').textContent = `${activeCars.length} aktyvūs / ${soldCars.length} parduoti`;
     document.getElementById('activeCarCount').textContent = `${activeCars.length} auto`;
     document.getElementById('soldCarCount').textContent = `${soldCars.length} auto`;
+    const activeCarHint = document.getElementById('activeCarHint');
+    if(activeCarHint) activeCarHint.textContent = activeCars.length ? `Garaže yra ${activeCars.length} aktyvūs automobiliai` : 'Kol kas nėra aktyvių automobilių';
+    const soldCarHint = document.getElementById('soldCarHint');
+    if(soldCarHint) soldCarHint.textContent = soldCars.length ? `Parduota ${soldCars.length} automobiliai` : 'Dar nėra parduotų automobilių';
     document.getElementById('monthlyProfitValue').textContent = moneyFmt(state.finances.monthlyNetProfit);
     document.getElementById('monthlyProfitFill').style.width = `${clamp((state.finances.monthlyNetProfit / 10000) * 100, 0, 100)}%`;
+
+    const garageSummaryGrid = document.getElementById('garageSummaryGrid');
+    if(garageSummaryGrid){
+      garageSummaryGrid.innerHTML = `
+        <div class="garageStatCard">
+          <div class="label">Viso automobilių</div>
+          <div class="value">${totalCars}</div>
+          <div class="hint">Aktyvūs + parduoti</div>
+        </div>
+        <div class="garageStatCard">
+          <div class="label">Dabar garaže</div>
+          <div class="value">${moneyFmt(totalActiveValue)}</div>
+          <div class="hint">Kiek kainuoja aktyvūs auto</div>
+        </div>
+        <div class="garageStatCard">
+          <div class="label">Bendra investicija</div>
+          <div class="value">${moneyFmt(totalInvested)}</div>
+          <div class="hint">Pirkimai + visos išlaidos</div>
+        </div>
+        <div class="garageStatCard">
+          <div class="label">Realizuota</div>
+          <div class="value">${moneyFmt(totalSoldRevenue)}</div>
+          <div class="hint">Parduotų auto pajamos</div>
+        </div>
+      `;
+    }
+
+    const garageMicroStats = document.getElementById('garageMicroStats');
+    if(garageMicroStats){
+      garageMicroStats.innerHTML = `
+        <div class="garageMicroStat">
+          <div class="label">Grynasis pelnas</div>
+          <div class="value">${moneyFmt(totalSoldProfit)}</div>
+          <div class="hint">Visų pardavimų rezultatas</div>
+        </div>
+        <div class="garageMicroStat">
+          <div class="label">Aktyvūs / parduoti</div>
+          <div class="value">${activeCars.length} / ${soldCars.length}</div>
+          <div class="hint">Garažo struktūra dabar</div>
+        </div>
+      `;
+    }
+
+    const garageTaskDate = document.getElementById('garageTaskDate');
+    if(garageTaskDate) garageTaskDate.textContent = new Date().toLocaleDateString('lt-LT', {weekday:'long', day:'2-digit', month:'long'});
+    const garageTaskCounter = document.getElementById('garageTaskCounter');
+    if(garageTaskCounter) garageTaskCounter.textContent = `${garageDone}/${garageTasksToday.length}`;
+
+    ensureGarageUi();
+
+    const garageTaskComposerWrap = document.getElementById('garageTaskComposerWrap');
+    const garageCarFormWrap = document.getElementById('garageCarFormWrap');
+    const activeCarsWrap = document.getElementById('activeCarsWrap');
+    const soldCarsWrap = document.getElementById('soldCarsWrap');
+    const garageTaskComposerChev = document.getElementById('garageTaskComposerChev');
+    const garageCarComposerChev = document.getElementById('garageCarComposerChev');
+    const garageActiveChev = document.getElementById('garageActiveChev');
+    const garageSoldChev = document.getElementById('garageSoldChev');
+    const garageTaskComposerBtn = document.querySelector('[data-garage-toggle="taskComposerOpen"]');
+    const garageCarComposerBtn = document.querySelector('[data-garage-toggle="addCarOpen"]');
+    const garageActiveBtn = document.querySelector('[data-garage-toggle="activeCarsOpen"]');
+    const garageSoldBtn = document.querySelector('[data-garage-toggle="soldCarsOpen"]');
+
+    const applyGarageToggle = (wrap, chev, btn, open) => {
+      if(wrap) wrap.classList.toggle('open', open);
+      if(chev) chev.textContent = open ? '−' : '+';
+      if(btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    applyGarageToggle(garageTaskComposerWrap, garageTaskComposerChev, garageTaskComposerBtn, !!state.garageUi.taskComposerOpen);
+    applyGarageToggle(garageCarFormWrap, garageCarComposerChev, garageCarComposerBtn, !!state.garageUi.addCarOpen);
+    applyGarageToggle(activeCarsWrap, garageActiveChev, garageActiveBtn, !!state.garageUi.activeCarsOpen);
+    applyGarageToggle(soldCarsWrap, garageSoldChev, garageSoldBtn, !!state.garageUi.soldCarsOpen);
+
+    const garageTasksRoot = document.getElementById('garageTasksRoot');
+    if(garageTasksRoot){
+      garageTasksRoot.innerHTML = garageTasksToday.length ? garageTasksToday.map(task => `
+        <div class="garageTaskItem ${task.done ? 'done' : ''}">
+          <div class="garageTaskMain">
+            <strong>${task.done ? '✓ ' : ''}${escapeHTML(task.title)}</strong>
+            <div class="garageTaskMeta">
+              <span class="metaChip">+${task.xp} XP</span>
+              <span class="metaChip">+${task.coins} 🪙</span>
+              <span class="metaChip">${task.done ? 'Atlikta' : 'Laukiama'}</span>
+              <span class="metaChip">${task.done ? `Baigta ${escapeHTML(task.completedAt || '')}` : 'Galioja iki 00:00'}</span>
+            </div>
+          </div>
+          <div class="garageTaskActions">
+            <button class="garageTaskBtn ${task.done ? 'done' : ''}" data-garage-task-done="${task.id}" ${task.done ? 'disabled' : ''}>${task.done ? '✓' : '✓'}</button>
+          </div>
+        </div>
+      `).join('') : `<div class="garageTaskEmpty">Kol kas nėra garažo užduočių. Pridėk pirmą darbą viršuje ir užbaik jį šiandien.</div>`;
+      garageTasksRoot.querySelectorAll('[data-garage-task-done]').forEach(btn => {
+        btn.onclick = () => completeGarageTask(btn.dataset.garageTaskDone);
+      });
+    }
 
     document.getElementById('activeCarGrid').innerHTML = activeCars.length ? activeCars.map(car => {
       const done = carDoneCount(car);
@@ -1810,7 +2416,7 @@
       const totalCost = carTotalCost(car);
       return `
         <div class="carCard" data-open-car="${car.id}">
-          <div class="carHero" style="background-image:url('${car.imageSrc || ''}')">
+          <div class="carHero" style="background-color:var(--surface-2);background-image:url('${car.imageSrc || ''}')">
             <div class="pill">Aktyvus</div>
             <div class="pill">${pct}%</div>
           </div>
@@ -1827,7 +2433,7 @@
       const pct = carProgress(car);
       return `
         <div class="carCard" data-open-car="${car.id}">
-          <div class="carHero" style="background-image:url('${car.imageSrc || ''}')">
+          <div class="carHero" style="background-color:var(--surface-2);background-image:url('${car.imageSrc || ''}')">
             <div class="pill">Parduotas</div>
             <div class="pill">${pct}%</div>
           </div>
@@ -1940,6 +2546,32 @@
     render();
   };
 
+  document.querySelectorAll('[data-garage-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      ensureGarageUi();
+      const key = btn.dataset.garageToggle;
+      state.garageUi[key] = !state.garageUi[key];
+      saveState();
+      render();
+    });
+  });
+
+  document.getElementById('addGarageTaskBtn').onclick = () => {
+    const title = document.getElementById('garageTaskTitle').value.trim();
+    const xp = Number(document.getElementById('garageTaskXp').value || 0);
+    const coins = Number(document.getElementById('garageTaskCoins').value || 0);
+    addGarageTask(title, xp, coins);
+    document.getElementById('garageTaskTitle').value = '';
+    document.getElementById('garageTaskXp').value = '20';
+    document.getElementById('garageTaskCoins').value = '10';
+  };
+  document.getElementById('garageTaskTitle').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      document.getElementById('addGarageTaskBtn').click();
+    }
+  });
+
   document.getElementById('addCarBtn').onclick = async () => {
     const name = document.getElementById('carName').value.trim();
     const buyPrice = Number(document.getElementById('carBuyPrice').value || 0);
@@ -2017,11 +2649,15 @@
   // init
   if(!state.dailyQuest) state.dailyQuest = rand(dailyQuestPool);
   if(!state.dailyQuestDate) state.dailyQuestDate = todayISO();
+  if(!state.garageTasksDate) state.garageTasksDate = todayISO();
+  if(!Array.isArray(state.garageTasks)) state.garageTasks = [];
   if(state.selectedView === 'skills') state.selectedView = 'menu';
   if(!state.history.length) state.history.push({title:'Sveiki atvykę', desc:'Žaidimas paruoštas startui', icon:'🎮', time: nowLabel()});
   checkDateReset();
+  checkGarageDateReset();
   ensureMonthlyCycle();
   checkWorldUnlocks();
+  scheduleMidnightRefresh();
   checkAchievements();
   saveState();
   render();
