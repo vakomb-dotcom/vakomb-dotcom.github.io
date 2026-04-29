@@ -2528,6 +2528,16 @@
   }));
 
   document.addEventListener('click', (e) => {
+    const garageToggle = e.target.closest('[data-garage-toggle]');
+    if(garageToggle){
+      ensureGarageUi();
+      const key = garageToggle.dataset.garageToggle;
+      state.garageUi[key] = !state.garageUi[key];
+      saveState();
+      render();
+      return;
+    }
+
     const btn = e.target.closest('[data-jump]');
     if(!btn) return;
     const target = document.getElementById(btn.dataset.jump);
@@ -2546,15 +2556,6 @@
     render();
   };
 
-  document.querySelectorAll('[data-garage-toggle]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      ensureGarageUi();
-      const key = btn.dataset.garageToggle;
-      state.garageUi[key] = !state.garageUi[key];
-      saveState();
-      render();
-    });
-  });
 
   document.getElementById('addGarageTaskBtn').onclick = () => {
     const title = document.getElementById('garageTaskTitle').value.trim();
