@@ -3,922 +3,1141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <title>Žaisk Gyvenimą — Premium gyvenimo žaidimas</title>
+  <title>AutoFlip Pro</title>
   <style>
     :root{
-      --bg:#f4f8ff;
-      --bg2:#ffffff;
-      --card:rgba(255,255,255,.80);
-      --card-strong:rgba(255,255,255,.94);
-      --text:#10203b;
-      --muted:#5e6b84;
-      --muted2:#7a869f;
-      --line:rgba(16,32,59,.08);
-      --shadow:0 18px 50px rgba(72,94,144,.12);
-      --shadow-soft:0 10px 24px rgba(72,94,144,.08);
-      --accent:#7c5cff;
-      --accent2:#21c7a8;
-      --accent3:#28a7ff;
-      --accent4:#ffb703;
-      --accent5:#ff6b8b;
-      --success:#16a34a;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --radius:24px;
-      --radius2:18px;
-      --glass: blur(18px) saturate(150%);
-      --nav:#ffffffd9;
-      --navBorder:rgba(16,32,59,.08);
-    }
-    html[data-theme="dark"]{
-      --bg:#0d1630;
-      --bg2:#111b36;
-      --card:rgba(13,22,48,.72);
-      --card-strong:rgba(16,26,54,.92);
-      --text:#eef4ff;
-      --muted:#afbbd3;
-      --muted2:#93a4c4;
-      --line:rgba(255,255,255,.08);
-      --shadow:0 18px 50px rgba(0,0,0,.28);
-      --shadow-soft:0 10px 24px rgba(0,0,0,.18);
-      --nav:#101a34db;
-      --navBorder:rgba(255,255,255,.08);
+      --bg:#f7f9fc;
+      --bg2:#eef3f9;
+      --card:#ffffff;
+      --card-soft:#fbfcfe;
+      --text:#132238;
+      --muted:#607086;
+      --muted2:#7a889d;
+      --line:#e4eaf2;
+      --line2:#d9e1ec;
+      --blue:#2f6bff;
+      --blue2:#1f57ef;
+      --blueSoft:#eaf1ff;
+      --green:#14a44d;
+      --yellow:#d58d00;
+      --red:#e24b4b;
+      --shadow:0 10px 26px rgba(19,34,56,.08);
+      --shadow2:0 6px 16px rgba(19,34,56,.06);
+      --radius:20px;
+      --radius2:16px;
+      --nav:#ffffffea;
+      --overlay:rgba(13,23,40,.5);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
       color:var(--text);
-      background:
-        radial-gradient(circle at 15% 12%, rgba(124,92,255,.20), transparent 24%),
-        radial-gradient(circle at 84% 14%, rgba(33,199,168,.18), transparent 24%),
-        radial-gradient(circle at 18% 82%, rgba(40,167,255,.16), transparent 24%),
-        radial-gradient(circle at 82% 84%, rgba(255,183,3,.13), transparent 24%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      overflow-x:hidden;
       -webkit-tap-highlight-color:transparent;
+      overflow-x:hidden;
     }
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
     .app{
-      max-width: 480px;
+      width:min(100%,430px);
       margin:0 auto;
       min-height:100%;
-      padding: 16px 14px 132px;
+      padding:14px 12px 112px;
       position:relative;
     }
     .topbar{
       display:flex;
-      justify-content:center;
-      align-items:center;
+      align-items:flex-start;
+      justify-content:space-between;
       gap:12px;
       padding-top: env(safe-area-inset-top);
       margin-bottom:14px;
-      text-align:center;
     }
     .brand{
-      display:flex;align-items:center;gap:12px;min-width:0;
+      min-width:0;
     }
-    .avatar{
-      width:52px;height:52px;border-radius:18px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg, #7c5cff, #28a7ff 48%, #21c7a8 100%);
-      color:#fff;font-weight:900;font-size:18px;
-      box-shadow:0 14px 28px rgba(124,92,255,.28);
-      border:1px solid rgba(255,255,255,.22);
+    .brand h1{
+      margin:0;
+      font-size:22px;
+      line-height:1.02;
+      letter-spacing:-.03em;
     }
-    .brand h1{margin:0;font-size:19px;line-height:1.05}
-    .brand p{margin:3px 0 0;font-size:12px;color:var(--muted);max-width:240px}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{
-      padding:8px 11px;border-radius:999px;
+    .brand p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+    .miniPills{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
       background:var(--card);
       border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-      font-size:12px;font-weight:700;
-      backdrop-filter:var(--glass);
+      box-shadow:var(--shadow2);
+      font-size:12px;
+      font-weight:700;
+      color:var(--text);
+      white-space:nowrap;
     }
-    .view{display:none;animation:fade .24s ease}
+    .pill.blue{background:var(--blueSoft);border-color:#d7e4ff;color:var(--blue2)}
+    .pill.good{background:#eaf8ef;border-color:#d6eedc;color:var(--green)}
+    .pill.warn{background:#fff8e6;border-color:#f2e4bc;color:#996100}
+    .view{display:none;animation:fadeIn .22s ease}
     .view.active{display:block}
-    @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
     .section{margin-top:14px}
     .sectionHead{
-      display:flex;align-items:flex-end;justify-content:space-between;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
       margin:0 2px 10px;
     }
-    .sectionHead h2{margin:0;font-size:15px}
-    .sectionHead span{font-size:12px;color:var(--muted)}
-    .panel{
-      background:linear-gradient(180deg, var(--card-strong), var(--card));
+    .sectionHead h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:-.02em;
+    }
+    .sectionHead span{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .card{
+      background:var(--card);
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      backdrop-filter:var(--glass);
       overflow:hidden;
     }
-    .panel.pad{padding:16px}
-    .hero{display:grid;grid-template-columns:1fr;gap:12px}
-    .heroCard{
-      min-height:196px;
-      padding:16px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(124,92,255,.22), transparent 32%),
-        radial-gradient(circle at 90% 10%, rgba(40,167,255,.18), transparent 24%),
-        linear-gradient(160deg, rgba(124,92,255,.12), rgba(33,199,168,.06));
-    }
-    .subtle{font-size:12px;color:var(--muted)}
-    .topStats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .miniStat{
-      padding:13px;border-radius:18px;background:var(--card);
-      border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-    }
-    .miniStat .label{font-size:12px;color:var(--muted);margin-bottom:8px}
-    .miniStat .value{font-size:20px;font-weight:900;line-height:1}
-    .miniStat .hint{margin-top:5px;font-size:12px;color:var(--muted2)}
-    .xpWrap{margin-top:8px}
-    .xpLine{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:12px;color:var(--muted)}
-    .xpLine strong{display:block;font-size:18px;color:var(--text);margin-top:3px}
-    .bar{
-      height:12px;border-radius:999px;background:rgba(127,146,180,.16);
-      border:1px solid var(--line);overflow:hidden;
-    }
-    .bar .fill{height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));transition:width .45s ease}
-    .ringBox{
-      min-height:196px;
-      display:flex;flex-direction:column;justify-content:space-between;
-      padding:16px;
-    }
-    .ring{
-      width:128px;height:128px;position:relative;margin:0 auto;
-      display:grid;place-items:center;
-    }
-    .ring svg{transform:rotate(-90deg)}
-    .ring .center{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
-    .ring .center strong{display:block;font-size:28px;line-height:1}
-    .ring .center span{font-size:11px;color:var(--muted)}
-    .tag{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;
-      letter-spacing:.2px; text-transform:uppercase;
-      border:1px solid transparent;
-    }
-    .tag.rare{background:rgba(40,167,255,.16);border-color:rgba(40,167,255,.22)}
-    .tag.epic{background:rgba(124,92,255,.16);border-color:rgba(124,92,255,.22)}
-    .tag.legendary{background:rgba(255,183,3,.18);border-color:rgba(255,183,3,.28)}
-    .tag.good{background:rgba(22,163,74,.16);border-color:rgba(22,163,74,.22)}
-    .dailyCard{
-      padding:16px;
-      background:
-        radial-gradient(circle at 18% 10%, rgba(255,183,3,.18), transparent 25%),
-        radial-gradient(circle at 88% 0%, rgba(124,92,255,.16), transparent 22%),
-        linear-gradient(135deg, rgba(124,92,255,.14), rgba(40,167,255,.08));
-    }
-    .dailyCard h3{margin:10px 0 6px;font-size:18px}
-    .dailyCard p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      border:none;cursor:pointer;font:inherit;font-weight:800;
-      padding:12px 14px;border-radius:16px;
-      background:linear-gradient(135deg, var(--accent), var(--accent3));
-      color:#fff;box-shadow:0 14px 26px rgba(124,92,255,.22);
-      transition:transform .15s ease, opacity .15s ease, filter .15s ease;
-    }
-    .btn.secondary{
-      background:var(--card);color:var(--text);border:1px solid var(--line);box-shadow:var(--shadow-soft);
-    }
-    .btn.ghost{
-      background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none;
-    }
-    .btn.danger{
-      background:linear-gradient(135deg, var(--danger), #ff7b7b);
-      color:#fff;
-      box-shadow:0 14px 26px rgba(239,68,68,.22);
-    }
-    .smallBtn{
-      width:34px;height:34px;border-radius:12px;
-      border:1px solid var(--line);background:var(--card);color:var(--text);
-      display:grid;place-items:center;cursor:pointer;font:inherit;font-weight:900;
-      box-shadow:var(--shadow-soft);
-    }
-    .smallBtn.danger{
-      background:rgba(239,68,68,.12);
-      color:var(--danger);
-      border-color:rgba(239,68,68,.18);
-    }
-    .btn:active,.navBtn:active,.taskCard:active,.carCard:active,.zoneCard:active,.rewardCard:active,.smallBtn:active,.achievement:active{transform:scale(.985)}
-    .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
-    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card.soft{background:var(--card-soft)}
+    .card.pad{padding:14px}
+    .row{display:flex;gap:10px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .taskGroupHead{
-      display:flex;justify-content:space-between;align-items:center;
-      margin:12px 2px 8px;
-    }
-    .taskGroupHead h3{
-      margin:0;font-size:13px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);
-    }
-    .taskGroupHead span{font-size:12px;color:var(--muted2)}
-    .taskList{display:grid;gap:10px}
-    .taskCard{
-      display:flex;align-items:center;gap:12px;
-      padding:14px 14px;border-radius:18px;
+    .metric{
+      padding:14px;
+      border-radius:18px;
       background:var(--card);
       border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-      position:relative;overflow:hidden;
-      transition:transform .15s ease, opacity .15s ease, border-color .15s ease;
+      box-shadow:var(--shadow2);
     }
-    .taskCard.done{
-      opacity:.88;
-      border-color:rgba(22,163,74,.22);
-      background:
-        linear-gradient(135deg, rgba(22,163,74,.08), rgba(40,167,255,.05)),
-        var(--card);
+    .metric .label{font-size:12px;color:var(--muted);margin-bottom:8px}
+    .metric .value{font-size:22px;font-weight:900;letter-spacing:-.03em;line-height:1}
+    .metric .hint{font-size:12px;color:var(--muted2);margin-top:6px;line-height:1.35}
+    .btn{
+      border:none;
+      background:var(--blue);
+      color:#fff;
+      border-radius:16px;
+      padding:13px 14px;
+      font-weight:800;
+      box-shadow:0 8px 18px rgba(47,107,255,.20);
+      transition:transform .12s ease, opacity .12s ease, background .12s ease;
     }
-    .taskCard.done .check{
-      background:rgba(22,163,74,.18);border-color:rgba(22,163,74,.32);color:var(--success);
-    }
-    .taskCard::after{
-      content:"";position:absolute;inset:auto -16% -60% auto;width:140px;height:140px;border-radius:50%;
-      background:radial-gradient(circle, rgba(124,92,255,.12), transparent 70%);
-      pointer-events:none;
-    }
-    .check{
-      width:26px;height:26px;border-radius:9px;flex:0 0 auto;
-      display:grid;place-items:center;
-      border:1.5px solid rgba(127,146,180,.26);
-      color:transparent;background:rgba(255,255,255,.35);
-      font-size:16px;font-weight:900;
-    }
-    .taskMain{flex:1;min-width:0}
-    .taskMain strong{display:block;font-size:14px;margin-bottom:4px}
-    .taskMeta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
-    .rewardPills{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:0 0 auto}
-    .rewardPills .xp{font-size:12px;font-weight:900;color:#6b4eff}
-    .rewardPills .coins{font-size:12px;font-weight:900;color:#a16207}
-    .taskCard.done .rewardPills .xp{color:#5a43e8}
-    .taskCard.done .rewardPills .coins{color:#8c5b00}
-    .cardNotice{
-      padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.50);
-      border:1px solid var(--line);font-size:12px;color:var(--muted);
-    }
-    .smallStatBox{
-      padding:14px;border-radius:18px;background:var(--card);
-      border:1px solid var(--line);box-shadow:var(--shadow-soft);
-      min-height:92px;
-    }
-    .smallStatBox .label{font-size:12px;color:var(--muted);margin-bottom:10px}
-    .smallStatBox .value{font-size:20px;font-weight:900;line-height:1.05}
-    .smallStatBox .hint{font-size:12px;color:var(--muted2);margin-top:6px}
-    .mapGrid{
-      display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
-    }
-    .zoneCard{
-      min-height:92px;padding:12px;border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.55));
-      border:1px solid var(--line);box-shadow:var(--shadow-soft);overflow:hidden;position:relative;
-    }
-    .zoneCard.active{
-      outline:1px solid rgba(124,92,255,.26);
-      box-shadow:0 0 0 1px rgba(124,92,255,.08), var(--shadow-soft);
-    }
-    .zoneCard.locked{
-      opacity:.58;filter:saturate(.72);
-    }
-    .zoneCard i{font-style:normal;font-size:18px}
-    .zoneCard strong{display:block;margin-top:18px;font-size:12px}
-    .zoneCard span{font-size:11px;color:var(--muted)}
-    .zoneCard .req{
-      position:absolute;top:10px;right:10px;
-      font-size:10px;font-weight:800;padding:4px 7px;border-radius:999px;
-      background:rgba(255,255,255,.72);border:1px solid var(--line)
-    }
-    .historyList{display:grid;gap:10px}
-    .historyItem{
-      display:flex;gap:12px;align-items:flex-start;
-      padding:12px 14px;border-radius:16px;
-      background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-soft);
-    }
-    .histIcon{
-      width:32px;height:32px;border-radius:11px;
-      display:grid;place-items:center;flex:0 0 auto;
-      background:linear-gradient(135deg, rgba(124,92,255,.16), rgba(40,167,255,.14));
-    }
-    .historyItem strong{display:block;font-size:13px;margin-bottom:2px}
-    .historyItem span{display:block;font-size:12px;color:var(--muted)}
-    .shopGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .rewardCard{
-      padding:14px;border-radius:18px;background:var(--card);
-      border:1px solid var(--line);box-shadow:var(--shadow-soft);
-      display:flex;flex-direction:column;gap:10px;min-height:138px;
-    }
-    .rewardCard .top{
-      display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
-    }
-    .rewardCard .ico{
-      width:38px;height:38px;border-radius:14px;display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(124,92,255,.14), rgba(40,167,255,.12));
-      font-size:18px;
-    }
-    .rewardCard strong{display:block;font-size:14px;margin-top:2px}
-    .rewardCard p{margin:0;font-size:12px;color:var(--muted);line-height:1.45}
-    .rewardCard .cost{
-      display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;
-      background:rgba(255,183,3,.16);font-size:11px;font-weight:900;border:1px solid rgba(255,183,3,.18)
-    }
-    .rewardCard .buy{
-      margin-top:auto;
-      width:100%;
-    }
-    .skillGrid{display:grid;gap:12px}
-    .skillCard{
-      padding:14px;border-radius:20px;background:var(--card);
-      border:1px solid var(--line);box-shadow:var(--shadow-soft);
-    }
-    .skillTop{
-      display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px;
-    }
-    .skillTop strong{font-size:15px}
-    .skillTop span{font-size:12px;color:var(--muted)}
-    .skillDesc{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
-    .achGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .achievement{
-      padding:14px;border-radius:20px;background:var(--card);
-      border:1px solid var(--line);box-shadow:var(--shadow-soft);min-height:120px;
-      position:relative;overflow:hidden;
-    }
-    .achievement.locked{opacity:.55;filter:saturate(.72)}
-    .achievement .ico{font-size:24px}
-    .achievement strong{display:block;margin:10px 0 4px;font-size:14px}
-    .achievement span{font-size:12px;color:var(--muted)}
-    .badge{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:7px 10px;border-radius:999px;font-size:11px;
-      background:rgba(255,255,255,.72);border:1px solid var(--line);font-weight:800;
-    }
-    .badge.good{background:rgba(22,163,74,.16)}
-    .badge.info{background:rgba(40,167,255,.16)}
-    .badge.warn{background:rgba(255,183,3,.18)}
-    .switch{
-      display:flex;justify-content:space-between;align-items:center;gap:12px;
-      padding:13px 14px;border-radius:16px;
-      background:var(--card);border:1px solid var(--line);margin-bottom:10px;
-    }
-    .switch strong{display:block;font-size:14px}
-    .switch .sub{font-size:12px;color:var(--muted);margin-top:3px}
-    .toggle{
-      width:54px;height:32px;border-radius:999px;
-      position:relative;background:rgba(127,146,180,.18);border:1px solid var(--line);flex:0 0 auto;
-      transition:background .18s ease;
-    }
-    .toggle::after{
-      content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;
-      background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.16);transition:transform .18s ease;
-    }
-    .toggle.on{background:linear-gradient(90deg, var(--accent), var(--accent3))}
-    .toggle.on::after{transform:translateX(22px)}
-    .field{margin-bottom:12px}
-    .field label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px 2px}
-    .input{
-      width:100%;padding:13px 14px;border-radius:16px;
-      background:var(--card);border:1px solid var(--line);color:var(--text);outline:none;font:inherit;
-    }
-    .navWrap{
-      position:fixed;left:0;right:0;bottom:0;z-index:30;
-      padding:10px 14px calc(12px + env(safe-area-inset-bottom));
-      background:linear-gradient(180deg, transparent, rgba(0,0,0,.20) 8%, rgba(0,0,0,.34));
-      pointer-events:none;
-    }
-    .nav{
-      max-width:450px;margin:0 auto;padding:10px;border-radius:24px;
-      background:var(--nav);border:1px solid var(--navBorder);box-shadow:var(--shadow);backdrop-filter:var(--glass);
-      display:grid;grid-template-columns:repeat(5,1fr);gap:8px;pointer-events:auto;
-    }
-    .navBtn{
-      padding:10px 8px;border-radius:18px;background:transparent;border:1px solid transparent;
-      display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:11px;
-    }
-    .navBtn.active{color:var(--text);background:rgba(124,92,255,.16);border-color:rgba(124,92,255,.18)}
-    .navBtn .ico{font-size:18px;line-height:1}
-    .toastWrap{
-      position:fixed;left:50%;bottom:124px;transform:translateX(-50%);z-index:60;
-      width:min(92vw,420px);display:grid;gap:10px;pointer-events:none;
-    }
-    .toast{
-      padding:12px 14px;border-radius:16px;
-      background:rgba(16,26,54,.92);color:#fff;border:1px solid rgba(255,255,255,.10);
-      box-shadow:var(--shadow);backdrop-filter:blur(16px);
-      display:flex;justify-content:space-between;gap:12px;align-items:center;
-      animation:toastIn .22s ease;
-      font-size:13px;
-    }
-    html[data-theme="light"] .toast{background:rgba(255,255,255,.92);color:var(--text)}
-    @keyframes toastIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
-    .spark{
-      position:fixed;pointer-events:none;z-index:9999;font-size:22px;
-      transform:translate(-50%,-50%);animation:spark .8s ease forwards;
-    }
-    @keyframes spark{0%{opacity:0;transform:translate(-50%,-50%) scale(.7)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-130%) scale(1.35)}}
-    .pulse{animation:pulse .55s ease}
-    @keyframes pulse{0%{transform:scale(1)}35%{transform:scale(1.04)}100%{transform:scale(1)}}
-    .modalBackdrop{
-      position:fixed;inset:0;z-index:50;background:rgba(3,10,28,.60);
-      display:none;align-items:flex-end;justify-content:center;
-    }
-    .modalBackdrop.show{display:flex}
-    .sheet{
-      width:min(100%,450px);
-      max-height:88vh;overflow:auto;
-      background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(247,251,255,.98));
+    .btn:active,.miniBtn:active,.navBtn:active,.taskItem:active,.carCard:active,.leadCard:active,.goalCard:active{transform:scale(.985)}
+    .btn:hover{background:var(--blue2)}
+    .btn.secondary{
+      background:#fff;
       color:var(--text);
-      border-radius:28px 28px 0 0;border:1px solid var(--line);
-      box-shadow:var(--shadow);padding:16px;backdrop-filter:var(--glass);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow2);
     }
-    html[data-theme="dark"] .sheet{
-      background:linear-gradient(180deg, rgba(17,27,54,.98), rgba(12,20,43,.98));
+    .btn.ghost{
+      background:transparent;
+      color:var(--blue2);
+      border:1px solid var(--line);
+      box-shadow:none;
     }
-    .sheetHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
-    .sheetHead h3{margin:0;font-size:18px}
-    .closeBtn{
-      width:40px;height:40px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:18px
+    .btn.danger{
+      background:var(--red);
+      box-shadow:0 8px 18px rgba(226,75,75,.18);
     }
-    .carGrid{display:grid;gap:12px}
-    .carCard{
-      overflow:hidden;border-radius:22px;background:var(--card);
-      border:1px solid var(--line);box-shadow:var(--shadow-soft)
+    .btn.small{padding:10px 12px;border-radius:14px;font-size:13px}
+    .miniBtn{
+      width:36px;height:36px;border-radius:13px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      display:grid;place-items:center;
+      box-shadow:var(--shadow2);
+      flex:0 0 auto;
     }
-    .carHero{
-      height:148px;position:relative;
-      background:linear-gradient(135deg, rgba(124,92,255,.22), rgba(40,167,255,.18), rgba(33,199,168,.12));
-      display:flex;align-items:flex-end;justify-content:space-between;padding:14px;
-      background-size:cover;background-position:center;
+    .input, .select, .textarea{
+      width:100%;
+      border:1px solid var(--line2);
+      background:#fff;
+      color:var(--text);
+      border-radius:14px;
+      padding:13px 14px;
+      outline:none;
+      transition:border-color .12s ease, box-shadow .12s ease;
     }
-    .carHero .pill{
-      padding:6px 10px;border-radius:999px;
-      background:rgba(0,0,0,.34);color:#fff;font-size:11px;font-weight:800;
+    .textarea{min-height:86px;resize:vertical}
+    .input:focus,.select:focus,.textarea:focus{border-color:#b7ccff;box-shadow:0 0 0 4px rgba(47,107,255,.08)}
+    .field{margin-bottom:10px}
+    .field label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px 2px}
+    .fieldRow{display:grid;grid-template-columns:1.1fr .9fr;gap:10px}
+    .notice{
+      padding:12px 14px;
+      background:#f8fbff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
     }
-    .carBody{padding:14px}
-    .carBody h4{margin:0 0 6px;font-size:16px}
-    .carLine{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-    .miniBar{
-      height:10px;border-radius:999px;background:rgba(127,146,180,.16);border:1px solid var(--line);overflow:hidden;margin:10px 0
+    .statBar{
+      height:10px;
+      border-radius:999px;
+      background:#e9edf4;
+      overflow:hidden;
+      border:1px solid var(--line);
     }
-    .miniBar .fill{height:100%;border-radius:inherit;background:linear-gradient(90deg, var(--accent2), var(--accent3));width:0%;transition:width .35s ease}
-    .list{display:grid;gap:8px}
-    .listItem{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:11px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);
+    .statBar > div{
+      height:100%;
+      width:0%;
+      background:var(--blue);
+      border-radius:inherit;
+      transition:width .3s ease;
     }
-    .listItem label{display:flex;gap:10px;align-items:center;flex:1;min-width:0}
-    .listItem input{width:18px;height:18px}
-    .listItem .small{font-size:11px;color:var(--muted)}
-    .emptyState{
-      padding:16px;border-radius:18px;background:var(--card);border:1px dashed var(--line);color:var(--muted);font-size:13px;line-height:1.5
+    .statBar.good > div{background:var(--green)}
+    .statBar.warn > div{background:var(--yellow)}
+    .statBar.red > div{background:var(--red)}
+    .accordion{overflow:hidden}
+    .accordionToggle{
+      width:100%;
+      border:none;
+      background:#fff;
+      color:var(--text);
+      padding:14px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      text-align:left;
+      font-weight:800;
     }
-    .footerSpace{height:10px}
-
-    .menuIntro{
-      padding:16px;border-radius:24px;
-      background:
-        radial-gradient(circle at 15% 18%, rgba(124,92,255,.16), transparent 30%),
-        radial-gradient(circle at 90% 18%, rgba(40,167,255,.14), transparent 24%),
-        linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,.68));
-      border:1px solid var(--line);box-shadow:var(--shadow);
+    .accordionToggle .sub{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:3px;
+      font-weight:600;
     }
-    .menuLinks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-    .menuLink{
-      padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-soft);
-      display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;cursor:pointer;
-      border:none;font:inherit;appearance:none
+    .chev{
+      width:34px;height:34px;border-radius:12px;
+      display:grid;place-items:center;
+      border:1px solid var(--line);
+      background:var(--card-soft);
+      color:var(--muted);
+      flex:0 0 auto;
+      transition:transform .18s ease;
     }
-    .menuLink strong{font-size:14px}
-    .menuLink span{font-size:12px;color:var(--muted);line-height:1.35}
-    .menuLink .ico{font-size:22px}
-    .taskGroup{
-      padding:0;overflow:hidden;
-      margin-bottom:10px;
-      border-radius:22px;
+    .accordion.open .chev{transform:rotate(180deg)}
+    .accordionBody{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height .26s ease, opacity .2s ease;
     }
-    .taskGroupHead{
+    .accordion.open .accordionBody{
+      max-height:1400px;
+      opacity:1;
+    }
+    .accordionBodyInner{
+      padding:0 14px 14px;
+    }
+    .summaryStrip{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+    .summaryCard{
+      padding:13px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
+    }
+    .summaryCard .label{font-size:11px;color:var(--muted);margin-bottom:8px}
+    .summaryCard .value{font-size:18px;font-weight:900;line-height:1.05;letter-spacing:-.02em}
+    .summaryCard .hint{font-size:11px;color:var(--muted2);margin-top:5px;line-height:1.3}
+    .carGrid,.leadGrid,.logList,.goalList,.soldGrid{display:grid;gap:10px}
+    .carCard,.leadCard,.logItem,.goalCard{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .carTop{
+      display:flex;gap:12px;padding:12px;
+    }
+    .carPhoto{
+      width:92px;height:92px;border-radius:16px;
+      background:#edf2fb;
+      border:1px solid var(--line);
+      overflow:hidden;
+      flex:0 0 auto;
+      display:grid;place-items:center;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      position:relative;
+    }
+    .carPhoto img{width:100%;height:100%;object-fit:cover;display:block}
+    .carMain{min-width:0;flex:1}
+    .carTitle{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+    }
+    .carTitle h3{
+      margin:0;
+      font-size:16px;
+      line-height:1.15;
+      letter-spacing:-.02em;
+      word-break:break-word;
+    }
+    .tagRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:6px 9px;
+      border-radius:999px;
+      background:#f4f7fc;
+      border:1px solid var(--line);
+      font-size:11px;
+      font-weight:700;
+      color:var(--muted);
+    }
+    .tag.blue{background:var(--blueSoft);color:var(--blue2);border-color:#d7e4ff}
+    .tag.good{background:#eaf8ef;color:var(--green);border-color:#d6eedc}
+    .tag.warn{background:#fff8e6;color:#916000;border-color:#f1e0b0}
+    .carMeta{margin-top:9px;display:grid;gap:6px}
+    .metaLine{
+      display:flex;justify-content:space-between;gap:10px;
+      font-size:12px;color:var(--muted);
+    }
+    .metaLine strong{color:var(--text)}
+    .carBody{padding:0 12px 12px}
+    .smallText{font-size:12px;color:var(--muted);line-height:1.45}
+    .sectionBox{
+      margin-top:10px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:#fbfdff;
+      overflow:hidden;
+    }
+    .sectionBoxHead{
       width:100%;
       border:none;
       background:transparent;
-      margin:0;
-      padding:16px 16px 14px;
+      padding:12px 12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      cursor:pointer;
+      gap:10px;
       text-align:left;
       color:var(--text);
-      font:inherit;
-      appearance:none;
+      font-weight:800;
     }
-    .taskGroupHead h3{margin:0;font-size:14px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
-    .taskGroupHead .sub{display:block;font-size:12px;color:var(--muted2);margin-top:4px}
-    .taskGroupBody{display:none;padding:0 16px 16px}
-    .taskGroupBody.open{display:block}
-    .chev{
-      width:32px;height:32px;border-radius:12px;display:grid;place-items:center;
-      background:rgba(127,146,180,.12);border:1px solid var(--line);color:var(--muted);flex:0 0 auto;
-      font-size:18px
+    .sectionBoxHead span{font-size:12px;color:var(--muted);font-weight:600;display:block;margin-top:3px}
+    .sectionBoxBody{
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height .26s ease, opacity .2s ease;
+      border-top:1px solid transparent;
     }
-    .historyToggle{
+    .sectionBox.open .sectionBoxBody{
+      max-height:1200px;
+      opacity:1;
+      border-top-color:var(--line);
+    }
+    .sectionBoxBodyInner{padding:12px}
+    .taskList{display:grid;gap:8px;margin-top:8px}
+    .taskItem{
+      display:flex;align-items:flex-start;gap:10px;
+      padding:11px 12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:#fff;
+    }
+    .taskItem.done{background:#f6fff9;border-color:#d9efdf}
+    .taskCheck{
+      width:20px;height:20px;flex:0 0 auto;
+      border-radius:7px;
+      border:1.5px solid #cdd8e7;
+      display:grid;place-items:center;
+      color:transparent;
+      margin-top:1px;
+      background:#fff;
+    }
+    .taskItem.done .taskCheck{
+      background:#eaf8ef;
+      color:var(--green);
+      border-color:#bfe0c8;
+    }
+    .taskMain{flex:1;min-width:0}
+    .taskMain strong{display:block;font-size:13px;line-height:1.2}
+    .taskMain .sub{display:block;margin-top:4px;font-size:11px;color:var(--muted);line-height:1.35}
+    .taskCost{font-weight:900;font-size:12px;color:#8a5a00;white-space:nowrap}
+    .miniActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .miniActions .btn{flex:1;min-width:130px}
+    .profitBox{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#f9fbff;
+      font-size:12px;
+      line-height:1.45;
+      color:var(--muted);
+    }
+    .profitBox strong{color:var(--text)}
+    .carFoot{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:0 12px 12px;
+    }
+    .carFoot .miniStats{
+      display:flex;gap:8px;flex-wrap:wrap
+    }
+    .chipStat{
+      font-size:11px;
+      padding:6px 8px;
+      border-radius:999px;
+      background:#f4f7fc;
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-weight:700;
+    }
+    .badgeRing{
+      display:inline-flex;align-items:center;gap:6px;
+      font-size:11px;font-weight:800;
+      padding:6px 9px;border-radius:999px;
+      background:#f3f7ff;border:1px solid #dce7ff;color:var(--blue2);
+    }
+    .badgeRing.good{background:#eaf8ef;border-color:#d7eddc;color:var(--green)}
+    .badgeRing.warn{background:#fff8e6;border-color:#f2e1b4;color:#9a6200}
+    .leadCard{padding:12px}
+    .leadHead{display:flex;gap:10px;justify-content:space-between;align-items:flex-start}
+    .leadTitle h3{margin:0;font-size:15px;letter-spacing:-.02em}
+    .leadTitle .sub{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.35}
+    .leadInfo{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+    .leadMetric{
+      padding:10px 11px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#fbfdff;
+      font-size:12px;
+    }
+    .leadMetric .label{color:var(--muted);font-size:11px;margin-bottom:5px}
+    .leadMetric strong{font-size:13px}
+    .leadActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .leadActions .btn{flex:1;min-width:130px}
+    .select.status{
+      width:auto;
+      padding:9px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      font-weight:700;
+    }
+    .chartWrap{
+      display:grid;
+      gap:10px;
+    }
+    .chartCard{
+      padding:12px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
+    }
+    .chartBars{
+      display:flex;
+      gap:10px;
+      align-items:flex-end;
+      min-height:160px;
+      padding-top:10px;
+    }
+    .barCol{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:7px;
+    }
+    .barOuter{
       width:100%;
+      min-height:120px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+    }
+    .barInner{
+      width:100%;
+      max-width:30px;
+      height:0;
+      border-radius:10px 10px 4px 4px;
+      background:var(--blue);
+      transition:height .3s ease;
+    }
+    .barInner.good{background:var(--green)}
+    .barInner.warn{background:var(--yellow)}
+    .barLabel{font-size:11px;color:var(--muted);text-align:center}
+    .barValue{font-size:11px;font-weight:800}
+    .menuGrid{display:grid;gap:10px}
+    .menuCard{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
+    }
+    .menuCard h3{margin:0;font-size:15px}
+    .menuCard p{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
+    .actionList{display:grid;gap:8px;margin-top:10px}
+    .actionItem{
+      display:flex;justify-content:space-between;gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      background:#fbfdff;
+      border:1px solid var(--line);
+      font-size:12px;
+      align-items:flex-start;
+    }
+    .actionItem strong{display:block;font-size:12px;line-height:1.25}
+    .actionItem span{display:block;color:var(--muted);font-size:11px;margin-top:3px;line-height:1.35}
+    .navWrap{
+      position:fixed;
+      left:0;right:0;bottom:0;
+      z-index:40;
+      padding:10px 12px calc(12px + env(safe-area-inset-bottom));
+      background:linear-gradient(180deg, rgba(247,249,252,0), rgba(247,249,252,.92) 16%, rgba(247,249,252,.98));
+      pointer-events:none;
+    }
+    .nav{
+      width:min(100%,430px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:6px;
+      padding:8px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:var(--nav);
+      backdrop-filter:blur(10px);
+      box-shadow:var(--shadow);
+      pointer-events:auto;
+    }
+    .navBtn{
       border:none;
       background:transparent;
-      text-align:left;
-      color:var(--text);
-      cursor:pointer;
-      padding:0;
-      font:inherit;
-      appearance:none;
+      color:var(--muted);
+      padding:10px 6px;
+      border-radius:18px;
+      font-size:10px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:4px;
+      min-width:0;
     }
-    .historyBody{display:none;padding-top:12px}
-    .historyBody.open{display:block}
-    .historyHeadLine{
+    .navBtn .ico{font-size:18px;line-height:1}
+    .navBtn.active{
+      color:var(--blue2);
+      background:#edf3ff;
+    }
+    .toastWrap{
+      position:fixed;
+      left:50%;
+      bottom:122px;
+      transform:translateX(-50%);
+      width:min(92vw,420px);
+      z-index:60;
+      display:grid;
+      gap:8px;
+      pointer-events:none;
+    }
+    .toast{
+      padding:12px 14px;
+      border-radius:16px;
+      background:#132238;
+      color:#fff;
+      box-shadow:var(--shadow);
+      display:flex;justify-content:space-between;gap:10px;align-items:center;
+      font-size:13px;
+      animation:toastIn .2s ease;
+    }
+    @keyframes toastIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+    .modalBackdrop{
+      position:fixed;inset:0;
+      background:var(--overlay);
+      z-index:70;
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+    }
+    .modalBackdrop.show{display:flex}
+    .sheet{
+      width:min(100%,430px);
+      max-height:92vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:28px 28px 0 0;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:14px;
+      animation:sheetIn .22s ease;
+    }
+    @keyframes sheetIn{from{transform:translateY(10px);opacity:.8}to{transform:none;opacity:1}}
+    .sheetHead{
       display:flex;justify-content:space-between;align-items:center;gap:10px;
-      padding:14px 16px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow-soft)
+      margin-bottom:12px;
     }
-    .historyHeadLine strong{font-size:15px}
-    .historyHeadLine span{font-size:12px;color:var(--muted)}
-
-
-    /* Garažas: paprastesnis, šviesus, be gradientų */
-    body{background:#f6f8fc !important}
-    .app{max-width:430px}
-    #view-garage .sectionHead{margin-top:4px}
-    #view-garage .panel,
-    #view-garage .carCard,
-    #view-garage .rewardCard,
-    #view-garage .smallStatBox,
-    #view-garage .taskCard,
-    #view-garage .achievement,
-    #view-garage .historyItem,
-    #view-garage .switch,
-    #view-garage .menuLink,
-    #view-garage .zoneCard{
-      background:#ffffff !important;
-      background-image:none !important;
-      box-shadow:0 10px 24px rgba(16,32,59,.06) !important;
+    .sheetHead h3{margin:0;font-size:18px;letter-spacing:-.02em}
+    .closeBtn{
+      width:40px;height:40px;border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      font-size:18px;
+      box-shadow:var(--shadow2);
     }
-    #view-garage .panel,
-    #view-garage .carCard,
-    #view-garage .smallStatBox,
-    #view-garage .taskCard{
-      border-color:rgba(16,32,59,.08) !important;
+    .split{display:grid;gap:10px}
+    .calc{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fbfdff;
+      font-size:12px;
+      line-height:1.45;
+      color:var(--muted);
     }
-    #view-garage .btn{background:#1f6fff !important;box-shadow:none !important}
-    #view-garage .btn.secondary{background:#f3f6fb !important;color:#10203b !important}
-    #view-garage .btn.ghost{background:transparent !important;box-shadow:none !important}
-    #view-garage .garageSummaryGrid{
-      display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px
+    .divider{
+      height:1px;
+      background:var(--line);
+      margin:12px 0;
     }
-    #view-garage .garageStat{
-      padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(16,32,59,.08);
-      box-shadow:0 10px 24px rgba(16,32,59,.06)
+    .footerSpace{height:10px}
+    .emptyState{
+      padding:16px;
+      border-radius:18px;
+      background:#fff;
+      border:1px dashed var(--line2);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+      box-shadow:var(--shadow2);
     }
-    #view-garage .garageStat .label{font-size:12px;color:var(--muted);margin-bottom:8px}
-    #view-garage .garageStat .value{font-size:20px;font-weight:900;line-height:1.05}
-    #view-garage .garageStat .hint{font-size:12px;color:var(--muted2);margin-top:5px;line-height:1.35}
-    #view-garage .garageAccordion{margin-top:10px;overflow:hidden}
-    #view-garage .garageAccordionHead{
-      width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;
-      padding:16px;border:1px solid rgba(16,32,59,.08);border-radius:18px;background:#fff;
-      box-shadow:0 10px 24px rgba(16,32,59,.05);color:var(--text);font:inherit;text-align:left
+    .kpiRow{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .focusLine{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
     }
-    #view-garage .garageAccordionHead strong{display:block;font-size:15px}
-    #view-garage .garageAccordionHead span{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.35}
-    #view-garage .garageAccordionHead .plus{
-      width:32px;height:32px;border-radius:12px;display:grid;place-items:center;
-      background:#f3f6fb;border:1px solid rgba(16,32,59,.08);font-weight:900;font-size:18px;color:#1f6fff;flex:0 0 auto
+    .focusLine h3{margin:0 0 6px;font-size:16px}
+    .focusLine p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}
+    .checkRow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+    .switch{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:var(--shadow2);
+      margin-bottom:10px;
     }
-    #view-garage .garageAccordionBody{display:none;margin-top:10px}
-    #view-garage .garageAccordionBody.open{display:block}
-    #view-garage .garageFold{
-      padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(16,32,59,.08);
-      box-shadow:0 10px 24px rgba(16,32,59,.06)
+    .switch strong{display:block;font-size:14px}
+    .switch .sub{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+    .toggle{
+      width:54px;height:32px;border-radius:999px;
+      position:relative;
+      background:#d9e2f0;
+      border:1px solid var(--line);
+      flex:0 0 auto;
+      transition:background .15s ease;
     }
-    #view-garage .garageTaskTop{
-      display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:14px 2px 8px
+    .toggle::after{
+      content:"";
+      position:absolute;
+      top:3px;left:3px;
+      width:24px;height:24px;border-radius:50%;
+      background:#fff;
+      box-shadow:0 5px 10px rgba(19,34,56,.15);
+      transition:transform .15s ease;
     }
-    #view-garage .garageTaskTop h3{margin:0;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-    #view-garage .garageTaskTop span{font-size:12px;color:var(--muted2)}
-    #view-garage .garageTaskList{display:grid;gap:10px}
-    #view-garage .garageTaskCard{
-      display:flex;align-items:center;gap:12px;padding:14px;border-radius:18px;background:#fff;
-      border:1px solid rgba(16,32,59,.08);box-shadow:0 10px 24px rgba(16,32,59,.06)
+    .toggle.on{background:var(--blue)}
+    .toggle.on::after{transform:translateX(22px)}
+    .score{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid #dce5f4;
+      background:#f8fbff;
+      font-size:11px;
+      font-weight:800;
+      color:#49607f;
     }
-    #view-garage .garageTaskCard.done{background:#f6fbf7}
-    #view-garage .garageTaskCard .meta{font-size:11px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-    #view-garage .garageTaskCard .actions{margin-left:auto;display:flex;gap:8px;flex:0 0 auto}
-    #view-garage .garageTaskCard .check{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;border:1px solid rgba(16,32,59,.12);font-weight:900}
-    #view-garage .garageTaskCard.done .check{background:#e8f7ee;color:#16914e;border-color:#c9eed6}
-    #view-garage .garageTaskCard strong{font-size:14px}
-    #view-garage .garageTaskCard .reward{font-size:12px;font-weight:800;color:#1f6fff;white-space:nowrap}
-    #view-garage .garageNotice{
-      margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(16,32,59,.08);
-      box-shadow:0 10px 24px rgba(16,32,59,.06);color:var(--muted);font-size:13px;line-height:1.5
-    }
-
-    @media (max-width: 430px){
-      .hero{grid-template-columns:1fr}
-      .grid2,.achGrid,.shopGrid,.mapGrid{grid-template-columns:1fr 1fr}
-      .topStats{grid-template-columns:1fr 1fr}
-    }
-    @media (min-width: 900px){
-      .app{max-width:520px}
+    .score.good{background:#eaf8ef;border-color:#d6eddc;color:var(--green)}
+    .score.warn{background:#fff8e6;border-color:#f2e1b4;color:#9a6200}
+    .score.bad{background:#fff0f0;border-color:#f0d1d1;color:var(--red)}
+    .historyOpen .actionList{max-height:none}
+    @media (max-width:390px){
+      .grid2,.grid3,.summaryStrip,.leadInfo,.kpiRow{grid-template-columns:1fr 1fr}
+      .carTop{flex-direction:column}
+      .carPhoto{width:100%;height:160px}
+      .leadActions .btn,.miniActions .btn{min-width:100%}
     }
   </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
-    <h1 style="margin:0;font-size:22px;letter-spacing:.18em;text-transform:uppercase;text-align:center;width:100%">MOTYVACIJA</h1>
+    <div class="brand">
+      <h1>AutoFlip Pro</h1>
+      <p>Vienoje vietoje: garažas, skambučiai, pelnas, užduotys ir motyvacija.</p>
+    </div>
+    <div class="miniPills">
+      <div class="pill blue" id="pillLevel">Lygis 1</div>
+      <div class="pill good" id="pillXp">0 XP</div>
+    </div>
   </div>
 
+  <!-- HOME -->
   <div class="view active" id="view-home">
-    <div class="hero">
-      <div class="panel heroCard">
+    <div class="section">
+      <div class="card pad">
+        <div class="sectionHead" style="margin:0 0 12px">
+          <h2>Greita suvestinė</h2>
+          <span id="todayLabel">Šiandien</span>
+        </div>
+        <div class="summaryStrip">
+          <div class="summaryCard">
+            <div class="label">Aktyvūs auto</div>
+            <div class="value" id="sumActiveCars">0</div>
+            <div class="hint">Kuriuos dar ruoši pardavimui</div>
+          </div>
+          <div class="summaryCard">
+            <div class="label">Bendra investicija</div>
+            <div class="value" id="sumInvested">0 €</div>
+            <div class="hint">Savikaina + darbai</div>
+          </div>
+          <div class="summaryCard">
+            <div class="label">Potencialus pelnas</div>
+            <div class="value" id="sumPotential">0 €</div>
+            <div class="hint">Tik jei parduosi dabar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="focusLine">
+        <h3 id="dailyFocusTitle">Šiandienos fokusas</h3>
+        <p id="dailyFocusText">Atlik 1 pardavimą arba susisiek su 5 pardavėjais.</p>
+        <div class="checkRow">
+          <span class="score" id="focusScore">+0 XP už veiksmus</span>
+          <button class="btn small" id="goGarageBtn">Atidaryti garažą</button>
+          <button class="btn small secondary" id="goLeadsBtn">Atidaryti pirkimus</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="grid2">
+        <div class="metric">
+          <div class="label">Šiandien skambinta</div>
+          <div class="value" id="todayCalls">0</div>
+          <div class="hint">Svarbiausias darbas pirkimuose</div>
+        </div>
+        <div class="metric">
+          <div class="label">Šiandien sandorių</div>
+          <div class="value" id="todayDeals">0</div>
+          <div class="hint">Nupirkti arba parduoti auto</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card pad">
+        <div class="sectionHead" style="margin:0 0 10px">
+          <h2>Greiti veiksmai</h2>
+          <span>1 paspaudimas</span>
+        </div>
+        <div class="grid2">
+          <button class="btn" id="quickAddCarBtn">+ Greitai pridėti auto</button>
+          <button class="btn secondary" id="quickAddLeadBtn">+ Greitai pridėti pasiūlymą</button>
+        </div>
+        <div class="divider"></div>
+        <div class="notice">
+          Viskas veikia lokaliai telefone. Galėsi pridėti foto, užduotis, skambučių istoriją, pardavimus, veiksmų logą ir matyti pelną realiu laiku.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GARAGE -->
+  <div class="view" id="view-garage">
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Garažas</h2>
+        <span>Auto, darbai, pelnas</span>
+      </div>
+      <div class="card pad">
+        <div class="summaryStrip">
+          <div class="summaryCard">
+            <div class="label">Aktyvūs auto</div>
+            <div class="value" id="garageActiveCount">0</div>
+            <div class="hint">Ruošiami pardavimui</div>
+          </div>
+          <div class="summaryCard">
+            <div class="label">Investuota</div>
+            <div class="value" id="garageInvested">0 €</div>
+            <div class="hint">Pirkimas + darbai</div>
+          </div>
+          <div class="summaryCard">
+            <div class="label">Potencialus pelnas</div>
+            <div class="value" id="garagePotential">0 €</div>
+            <div class="hint">Jei parduotum dabar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section accordion" id="addCarAccordion">
+      <button class="accordionToggle" type="button" data-toggle="addCarAccordion">
         <div>
-          <div class="subtle">XP / lygio progresas</div>
-          <div class="xpWrap">
-            <div class="bar"><div class="fill" id="xpFill"></div></div>
-            <div class="xpLine">
-              <div>
-                <span>Lygis</span>
-                <strong id="levelValue">1</strong>
+          + Pridėti automobilį
+          <span class="sub">Spausk ir išsiskleis automobilio pridėjimas</span>
+        </div>
+        <div class="chev">⌄</div>
+      </button>
+      <div class="accordionBody">
+        <div class="accordionBodyInner">
+          <div class="card pad">
+            <div class="split">
+              <div class="field">
+                <label>Pavadinimas</label>
+                <input class="input" id="carName" placeholder="Nissan X-Trail" />
               </div>
-              <div style="text-align:right">
-                <span>Kitas lygis</span>
-                <strong id="xpToNext">0 XP</strong>
+              <div class="fieldRow">
+                <div class="field">
+                  <label>Kategorija</label>
+                  <select class="select" id="carCategory">
+                    <option>SUV</option>
+                    <option>Sedan</option>
+                    <option>Hatchback</option>
+                    <option>Universalas</option>
+                    <option>Van</option>
+                    <option>Coupe</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Pirkimo kaina (€)</label>
+                  <input class="input" id="carBuyPrice" type="number" min="0" step="1" placeholder="2000" />
+                </div>
               </div>
+              <div class="fieldRow">
+                <div class="field">
+                  <label>Data</label>
+                  <input class="input" id="carDate" type="date" />
+                </div>
+                <div class="field">
+                  <label>Foto</label>
+                  <input class="input" id="carPhotoInput" type="file" accept="image/*" />
+                </div>
+              </div>
+              <div class="field">
+                <label>Pastabos</label>
+                <textarea class="textarea" id="carNotes" placeholder="Trumpa informacija apie būklę, ridos, defektai, idėjos..."></textarea>
+              </div>
+              <button class="btn" id="saveCarBtn">Išsaugoti automobilį</button>
             </div>
           </div>
         </div>
-        <div class="topStats">
-          <div class="miniStat">
-            <div class="label">🔥 Serija</div>
-            <div class="value" id="streakValue">0</div>
-            <div class="hint" id="streakHint">Judėk į priekį</div>
-          </div>
-          <div class="miniStat">
-            <div class="label">🪙 Monetos</div>
-            <div class="value" id="coinsValue">0</div>
-            <div class="hint">Atlygiams</div>
-          </div>
-        </div>
       </div>
     </div>
 
     <div class="section">
-      <div class="panel dailyCard">
-        <div class="tag epic" id="dailyRarity">EPINĖ MISIJA</div>
-        <h3 id="dailyTitle">Atlik 60 min mokymosi</h3>
-        <p id="dailyDesc">Šiandienos misija duoda papildomą XP ir monetų bonusą.</p>
-        <div class="btnRow">
-          <button class="btn" id="claimDailyBtn">Įvykdyti dienos užduotį</button>
-          <button class="btn secondary" id="rerollDailyBtn">Perridenti</button>
-        </div>
-        <div class="badge info" id="dailyState" style="margin-top:12px">Dienos misija paruošta</div>
+      <div class="sectionHead">
+        <h2>Aktyvūs automobiliai</h2>
+        <span id="activeCarsLabel">0 auto</span>
       </div>
+      <div class="carGrid" id="activeCarsRoot"></div>
     </div>
 
-    <div class="section">
-      <div class="sectionHead"><h2>Šiandienos užduotys</h2><span id="taskProgressLabel">0/0 atlikta</span></div>
-      <div id="tasksRoot"></div>
-    </div>
-
-    <div class="section">
-      <button class="historyToggle" id="historyToggleBtn" type="button">
-        <div class="historyHeadLine">
-          <div>
-            <strong>Paskutiniai veiksmai</strong>
-            <span id="historyHint">Paspausk, kad pamatytum istoriją</span>
-          </div>
-          <div class="chev" id="historyChev">▸</div>
+    <div class="section accordion" id="soldCarsAccordion">
+      <button class="accordionToggle" type="button" data-toggle="soldCarsAccordion">
+        <div>
+          Parduoti automobiliai
+          <span class="sub">Spausk ir pamatysi visus pardavimus</span>
         </div>
+        <div class="chev">⌄</div>
       </button>
-      <div class="historyBody" id="historyBody">
-        <div class="historyList" id="historyRoot"></div>
+      <div class="accordionBody">
+        <div class="accordionBodyInner">
+          <div class="soldGrid" id="soldCarsRoot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="notice">
+        <strong>Viskas vienoje vietoje:</strong> auto, vertė, užduotys, darbų kaina, pardavimai ir pelnas. Čia pagrindinis tavo darbo centras.
       </div>
     </div>
   </div>
 
-
-
-  <div class="view" id="view-garage">
-    <div class="sectionHead"><h2>Garažas</h2><span>Auto, vertė, užduotys ir pelnas</span></div>
-
-    <div class="panel pad">
-      <div class="subtle">Garažo suvestinė</div>
-      <div class="garageSummaryGrid">
-        <div class="garageStat">
-          <div class="label">Turimi automobiliai</div>
-          <div class="value" id="garageActiveSummary">0</div>
-          <div class="hint" id="garageActiveSummaryHint">Aktyvūs automobiliai ir jų vertė</div>
-        </div>
-        <div class="garageStat">
-          <div class="label">Parduoti automobiliai</div>
-          <div class="value" id="garageSoldSummary">0</div>
-          <div class="hint" id="garageSoldSummaryHint">Parduoti ir uždirbtas pelnas</div>
-        </div>
-        <div class="garageStat">
-          <div class="label">Bendra turimų auto vertė</div>
-          <div class="value" id="garageValueSummary">0 €</div>
-          <div class="hint">Pirkimas + atliktos išlaidos</div>
-        </div>
-        <div class="garageStat">
-          <div class="label">Mėnesio grynasis pelnas</div>
-          <div class="value" id="garageProfitSummary">0 €</div>
-          <div class="hint">Skaičiuojamas automatiškai</div>
-        </div>
+  <!-- LEADS -->
+  <div class="view" id="view-leads">
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Galimi pirkimai</h2>
+        <span>Lead management</span>
       </div>
-    </div>
-
-    <div class="garageAccordion">
-      <button class="garageAccordionHead" id="garageAddTaskToggle" type="button" data-garage-toggle="addTask">
-        <div>
-          <strong>+ Pridėti užduotį</strong>
-          <span>Suskleidžiama forma naujai garažo užduočiai</span>
-        </div>
-        <div class="plus">+</div>
-      </button>
-      <div class="garageAccordionBody" id="garageAddTaskBody">
-        <div class="garageFold">
-          <div class="field"><label>Užduoties pavadinimas</label><input class="input" id="garageTaskTitle" placeholder="Nuplauti auto" /></div>
-          <div class="grid2">
-            <div class="field"><label>XP</label><input class="input" id="garageTaskXp" type="number" min="0" step="1" value="20" /></div>
-            <div class="field"><label>Monetos</label><input class="input" id="garageTaskCoins" type="number" min="0" step="1" value="10" /></div>
+      <div class="card pad">
+        <div class="summaryStrip">
+          <div class="summaryCard">
+            <div class="label">Laukiantys pasiūlymai</div>
+            <div class="value" id="leadCount">0</div>
+            <div class="hint">Dar nepirkti automobiliai</div>
           </div>
-          <button class="btn" id="addGarageTaskBtn" style="width:100%">Pridėti užduotį</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="garageTaskTop">
-      <div>
-        <h3>Reikiamos užduotys</h3>
-        <span id="garageTaskCount">0 aktyvių</span>
-      </div>
-      <span>Atlikai → varnelė, po 00:00 dingsta iš sąrašo</span>
-    </div>
-    <div class="garageTaskList" id="garageTaskRoot"></div>
-
-    <div class="garageAccordion">
-      <button class="garageAccordionHead" id="garageAddCarToggle" type="button" data-garage-toggle="addCar">
-        <div>
-          <strong>+ Pridėti automobilį</strong>
-          <span>Naujo automobilio pridėjimo forma</span>
-        </div>
-        <div class="plus">+</div>
-      </button>
-      <div class="garageAccordionBody" id="garageAddCarBody">
-        <div class="garageFold">
-          <div class="subtle" style="margin-bottom:8px">Pridėti automobilį</div>
-          <div class="field"><label>Pavadinimas</label><input class="input" id="carName" placeholder="Nissan X-Trail" /></div>
-          <div class="grid2">
-            <div class="field"><label>Pirkimo kaina</label><input class="input" id="carBuyPrice" type="number" min="0" step="1" placeholder="4500" /></div>
-            <div class="field"><label>Nuotrauka</label><input class="input" id="carPhoto" type="file" accept="image/*" /></div>
+          <div class="summaryCard">
+            <div class="label">Primintina šiandien</div>
+            <div class="value" id="leadDueCount">0</div>
+            <div class="hint">Laikas skambinti iš naujo</div>
           </div>
-          <button class="btn" id="addCarBtn" style="width:100%">Pridėti automobilį</button>
+          <div class="summaryCard">
+            <div class="label">Skambučiai</div>
+            <div class="value" id="leadCallCount">0</div>
+            <div class="hint">Viską matai istorijoje</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section accordion" id="addLeadAccordion">
+      <button class="accordionToggle" type="button" data-toggle="addLeadAccordion">
+        <div>
+          + Pridėti pasiūlymą
+          <span class="sub">Pridėk naują auto pasiūlymą į stebėjimą</span>
+        </div>
+        <div class="chev">⌄</div>
+      </button>
+      <div class="accordionBody">
+        <div class="accordionBodyInner">
+          <div class="card pad">
+            <div class="split">
+              <div class="field">
+                <label>Auto pavadinimas</label>
+                <input class="input" id="leadName" placeholder="Nissan X-Trail" />
+              </div>
+              <div class="fieldRow">
+                <div class="field">
+                  <label>Siūloma kaina (€)</label>
+                  <input class="input" id="leadOffer" type="number" min="0" step="1" placeholder="2000" />
+                </div>
+                <div class="field">
+                  <label>Norima kaina (€)</label>
+                  <input class="input" id="leadTarget" type="number" min="0" step="1" placeholder="1500" />
+                </div>
+              </div>
+              <div class="fieldRow">
+                <div class="field">
+                  <label>Data</label>
+                  <input class="input" id="leadDate" type="date" />
+                </div>
+                <div class="field">
+                  <label>Statusas</label>
+                  <select class="select" id="leadStatus">
+                    <option>Laukiu</option>
+                    <option>Deruosi</option>
+                    <option>Atsisakyta</option>
+                    <option>Nupirkta</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label>Pastabos</label>
+                <textarea class="textarea" id="leadNotes" placeholder="Kur stovi, kas skambino, kokia būklė, kada vėl skambinti..."></textarea>
+              </div>
+              <button class="btn" id="saveLeadBtn">Išsaugoti pasiūlymą</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="section">
-      <div class="panel pad">
-        <div class="subtle">Mėnesio grynasis pelnas</div>
-        <div class="xpLine" style="margin-top:0">
-          <div>
-            <span>Dabartinis rezultatas</span>
-            <strong id="monthlyProfitValue">0 €</strong>
-          </div>
-          <div style="text-align:right">
-            <span>Tikslas</span>
-            <strong>10 000 €</strong>
-          </div>
-        </div>
-        <div class="bar"><div class="fill" id="monthlyProfitFill"></div></div>
-        <div class="subtle" style="margin-top:8px">Kaupiamas per mėnesį grynasis pelnas. Pasiekus 10 000 € atsidaro pasiekimas.</div>
+      <div class="sectionHead">
+        <h2>Stebimi pasiūlymai</h2>
+        <span id="leadListLabel">0 vnt.</span>
       </div>
+      <div class="leadGrid" id="leadsRoot"></div>
     </div>
-
-    <div class="garageAccordion">
-      <button class="garageAccordionHead" id="garageActiveToggle" type="button" data-garage-toggle="activeCars">
-        <div>
-          <strong>Aktyvūs automobiliai</strong>
-          <span id="activeCarCount">0 auto</span>
-        </div>
-        <div class="plus">+</div>
-      </button>
-      <div class="garageAccordionBody" id="garageActiveBody">
-        <div class="carGrid" id="activeCarGrid"></div>
-      </div>
-    </div>
-
-    <div class="garageAccordion">
-      <button class="garageAccordionHead" id="garageSoldToggle" type="button" data-garage-toggle="soldCars">
-        <div>
-          <strong>Parduoti automobiliai</strong>
-          <span id="soldCarCount">0 auto</span>
-        </div>
-        <div class="plus">+</div>
-      </button>
-      <div class="garageAccordionBody" id="garageSoldBody">
-        <div class="carGrid" id="soldCarGrid"></div>
-      </div>
-    </div>
-
-    <div class="garageNotice">Viskas, ko reikia vienoje vietoje: auto, vertė, užduotys ir pelnas.</div>
   </div>
 
+  <!-- STATS -->
+  <div class="view" id="view-stats">
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Statistika</h2>
+        <span>Veiksmai ir pelnas</span>
+      </div>
+      <div class="chartWrap">
+        <div class="card pad">
+          <div class="grid2">
+            <div class="metric">
+              <div class="label">Nupirkta</div>
+              <div class="value" id="statsBought">0</div>
+              <div class="hint">Visi aktyvūs ir parduoti auto</div>
+            </div>
+            <div class="metric">
+              <div class="label">Parduota</div>
+              <div class="value" id="statsSold">0</div>
+              <div class="hint">Kiek sandorių užbaigta</div>
+            </div>
+            <div class="metric">
+              <div class="label">Bendras pelnas</div>
+              <div class="value" id="statsProfit">0 €</div>
+              <div class="hint">Iš visų parduotų auto</div>
+            </div>
+            <div class="metric">
+              <div class="label">Vidutinis pelnas</div>
+              <div class="value" id="statsAvgProfit">0 €</div>
+              <div class="hint">Vienam parduotam auto</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="sectionHead" style="margin:0 0 10px">
+            <h2>ROI ir veiksmai</h2>
+            <span id="roiLabel">0%</span>
+          </div>
+          <div class="statBar" style="margin-bottom:8px"><div id="roiFill"></div></div>
+          <div class="grid2">
+            <div class="metric">
+              <div class="label">Šiandien veiksmų</div>
+              <div class="value" id="statsTodayActions">0</div>
+              <div class="hint">Skambučiai + sandoriai + užduotys</div>
+            </div>
+            <div class="metric">
+              <div class="label">Veiksmų logas</div>
+              <div class="value" id="statsLogCount">0</div>
+              <div class="hint">Kiek įrašų išsaugota</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="sectionHead" style="margin:0 0 10px">
+            <h2>Pelnas per mėnesį</h2>
+            <span>Pagal pardavimo datas</span>
+          </div>
+          <div class="chartBars" id="profitChart"></div>
+        </div>
+
+        <div class="card pad">
+          <div class="sectionHead" style="margin:0 0 10px">
+            <h2>Auto pardavimai per mėnesį</h2>
+            <span>Skaičiuoja užbaigtus sandorius</span>
+          </div>
+          <div class="chartBars" id="salesChart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU -->
   <div class="view" id="view-menu">
-    <div class="sectionHead"><h2>Meniu</h2><span>Pagrindinės sistemos</span></div>
-
-    <div class="panel pad menuIntro">
-      <div class="subtle">Greitas naršymas</div>
-      <h3 style="margin:8px 0 6px;font-size:20px">Pasirink, ką nori daryti toliau</h3>
-      <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.5">Čia sudėta atlygių parduotuvė, statistika, įgūdžiai ir svarbios užduotys — kad viskas būtų vienoje premium vietoje.</p>
-      <div class="menuLinks">
-        <button class="menuLink" data-jump="menu-shop"><div class="ico">🛍️</div><strong>Atlygių parduotuvė</strong><span>Išleisk monetas atlygams ir mažoms pergalėms</span></button>
-        <button class="menuLink" data-jump="menu-stats"><div class="ico">📊</div><strong>Statistika</strong><span>Kaupiami tavo realūs rezultatai</span></button>
-        <button class="menuLink" data-jump="menu-skills"><div class="ico">🧠</div><strong>Įgūdžiai</strong><span>Jėga, susikaupimas, verslas ir disciplina</span></button>
-        <button class="menuLink" data-jump="menu-important"><div class="ico">⭐</div><strong>Svarbios užduotys</strong><span>Pridėk asmeninius darbus ir gauk atlygį</span></button>
+    <div class="section">
+      <div class="sectionHead">
+        <h2>Meniu</h2>
+        <span>Motyvacija + įrankiai</span>
       </div>
-    </div>
-
-    <div class="section" id="menu-shop">
-      <div class="sectionHead"><h2>Atlygių parduotuvė</h2><span>Monetų atlygiams</span></div>
-      <div class="shopGrid" id="shopGrid"></div>
-    </div>
-
-    <div class="section" id="menu-stats">
-      <div class="sectionHead"><h2>Statistika</h2><span>Kaupiama ir auga</span></div>
-      <div class="grid2" id="statsGrid"></div>
-    </div>
-
-    <div class="section" id="menu-skills">
-      <div class="sectionHead"><h2>Įgūdžiai</h2><span>Įgūdžių stiprinimai</span></div>
-      <div class="skillGrid" id="skillsRoot"></div>
-    </div>
-
-    <div class="section" id="menu-important">
-      <div class="sectionHead"><h2>Svarbios užduotys</h2><span>Sumokėti mokesčius, pas gydytoją ir kt.</span></div>
-      <div class="panel pad">
-        <div class="field"><label>Užduoties pavadinimas</label><input class="input" id="importantTitle" placeholder="Sumokėti mokesčius" /></div>
-        <div class="grid2">
-          <div class="field"><label>XP</label><input class="input" id="importantXp" type="number" min="0" step="1" value="20" /></div>
-          <div class="field"><label>Monetos</label><input class="input" id="importantCoins" type="number" min="0" step="1" value="10" /></div>
+      <div class="menuGrid">
+        <div class="menuCard">
+          <h3>Šiandienos fokusas</h3>
+          <p id="menuFocusText">Atlik 1 pardavimą arba susisiek su 5 pardavėjais.</p>
+          <div class="checkRow">
+            <span class="score" id="menuFocusBadge">+0 XP</span>
+            <button class="btn small" id="markActionBtn">Pažymėti veiksmą</button>
+          </div>
         </div>
-        <button class="btn" id="addImportantBtn" style="width:100%">Pridėti svarbią užduotį</button>
-      </div>
-      <div class="section">
-        <div class="taskList" id="importantTasksRoot"></div>
+
+        <div class="menuCard">
+          <h3>Statistiniai tikslai</h3>
+          <p>Matyk pažangą iki 10k pelno per mėnesį ir 5 auto per savaitę.</p>
+          <div class="actionList">
+            <div class="actionItem">
+              <div>
+                <strong>Mėnesio pelnas</strong>
+                <span id="goalProfitText">0 / 10 000 €</span>
+              </div>
+              <span class="badgeRing" id="goalProfitBadge">0%</span>
+            </div>
+            <div class="actionItem">
+              <div>
+                <strong>5 auto per savaitę</strong>
+                <span id="goalDealsText">0 / 5</span>
+              </div>
+              <span class="badgeRing" id="goalDealsBadge">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menuCard">
+          <h3>Veiksmų logas</h3>
+          <p>Pridėti auto, pridėti užduotis, skambučiai, pardavimai ir kiti veiksmai.</p>
+          <div class="actionList" id="actionLogRoot"></div>
+        </div>
+
+        <div class="menuCard">
+          <h3>Nustatymai</h3>
+          <div class="switch">
+            <div>
+              <strong>Garsai</strong>
+              <span class="sub">Trumpi garsiniai signalai</span>
+            </div>
+            <div class="toggle on" id="soundToggle"></div>
+          </div>
+          <div class="switch">
+            <div>
+              <strong>Vibracija</strong>
+              <span class="sub">Haptinis grįžtamasis ryšys</span>
+            </div>
+            <div class="toggle on" id="vibrateToggle"></div>
+          </div>
+          <div class="switch" style="margin-bottom:0">
+            <div>
+              <strong>Visiškas reset</strong>
+              <span class="sub">Ištrina visą lokalią informaciją</span>
+            </div>
+            <button class="btn ghost small" id="resetBtn">Reset</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="view" id="view-achievements">
-
-    <div class="sectionHead"><h2>Pasiekimai</h2><span>Atrakinti / ženklelis / atlygis</span></div>
-    <div class="achGrid" id="achievementsRoot"></div>
-  </div>
-
-
-  <div class="view" id="view-settings">
-    <div class="sectionHead"><h2>Nustatymai</h2><span>Premium valdymas</span></div>
-    <div class="panel pad">
-      <div class="switch">
-        <div><strong>Šviesus / tamsus režimas</strong><div class="sub">Paliekame šviesų kaip pagrindą</div></div>
-        <div class="toggle on" id="themeToggle"></div>
-      </div>
-      <div class="switch">
-        <div><strong>Garsas</strong><div class="sub">Užduotims, lygiui ir atrakinimams</div></div>
-        <div class="toggle on" id="soundToggle"></div>
-      </div>
-      <div class="switch">
-        <div><strong>Vibracija</strong><div class="sub">Haptinis grįžtamasis ryšys</div></div>
-        <div class="toggle on" id="vibrateToggle"></div>
-      </div>
-      <div class="switch">
-        <div><strong>Visiškai nuresetinti žaidimą</strong><div class="sub">Ištrina visą lokalų progresą ir pradeda iš naujo</div></div>
-        <button class="btn ghost" id="resetBtn">Pilnas reset</button>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footerSpace">
-</div>
+  <div class="footerSpace"></div>
 </div>
 
 <div class="toastWrap" id="toastWrap"></div>
 
-<div class="modalBackdrop" id="modalBackdrop">
+<div class="modalBackdrop" id="modalBackdrop" aria-hidden="true">
   <div class="sheet" id="sheet"></div>
 </div>
 
@@ -926,173 +1145,70 @@
   <div class="nav">
     <button class="navBtn active" data-view="home"><div class="ico">🏠</div><div>Pagrindinis</div></button>
     <button class="navBtn" data-view="garage"><div class="ico">🚗</div><div>Garažas</div></button>
-    <button class="navBtn" data-view="menu"><div class="ico">☰</div><div>Meniu</div></button>
-    <button class="navBtn" data-view="achievements"><div class="ico">🏆</div><div>Pasiekimai</div></button>
-    <button class="navBtn" data-view="settings"><div class="ico">⚙️</div><div>Nustatymai</div></button>
+    <button class="navBtn" data-view="leads"><div class="ico">💰</div><div>Pirkimai</div></button>
+    <button class="navBtn" data-view="stats"><div class="ico">📊</div><div>Statistika</div></button>
+    <button class="navBtn" data-view="menu"><div class="ico">⚙️</div><div>Meniu</div></button>
   </div>
 </div>
 
 <script>
 (() => {
-  const STORAGE_KEY = 'zaisk_gyvenimas_premium_lt_v2';
+  const STORAGE_KEY = 'autoflip_pro_mobile_v1';
+  const money = n => `${new Intl.NumberFormat('lt-LT').format(Math.round(Number(n) || 0))} €`;
   const todayISO = () => new Date().toISOString().slice(0,10);
-  const currentMonthKey = () => new Date().toISOString().slice(0,7);
-  const nowLabel = () => new Date().toLocaleString('lt-LT', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
-  const escapeHTML = (str='') => String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[s]));
-  const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
-  const clamp = (n,min,max) => Math.max(min, Math.min(max, n));
-  const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'id_' + Date.now() + '_' + Math.random().toString(16).slice(2));
-  const moneyFmt = (n) => `${new Intl.NumberFormat('lt-LT').format(Math.round(Number(n) || 0))} €`;
-
-
-  const taskTemplates = [
-    {id:'water', cat:'Sveikata', icon:'💧', title:'2L vandens', xp:18, coins:8, difficulty:'Vidutinė', statKey:'waterLiters', statValue:2, skill:'Discipline'},
-    {id:'social', cat:'Sveikata', icon:'📵', title:'60 min be socialinių tinklų', xp:16, coins:7, difficulty:'Vidutinė', statKey:'socialMinutes', statValue:60, skill:'Discipline'},
-    {id:'walk', cat:'Sveikata', icon:'🚶', title:'30 min pasivaikščiojimas', xp:15, coins:6, difficulty:'Lengva', statKey:'walkMinutes', statValue:30, skill:'Strength'},
-    {id:'push', cat:'Sveikata', icon:'💪', title:'50 atsispaudimų', xp:24, coins:10, difficulty:'Sunkesnė', statKey:'pushups', statValue:50, skill:'Strength'},
-    {id:'pull', cat:'Sveikata', icon:'🏋️', title:'20 prisitraukimų', xp:30, coins:14, difficulty:'Sunkesnė', statKey:'pullups', statValue:20, skill:'Strength'},
-    {id:'meal', cat:'Sveikata', icon:'🍽️', title:'3 kartai valgymo', xp:12, coins:5, difficulty:'Lengva', statKey:'meals', statValue:3, skill:'Discipline'},
-    {id:'addiction', cat:'Sveikata', icon:'🛡️', title:'24h be priklausomybių', xp:35, coins:18, difficulty:'Epik', statKey:'cleanDays', statValue:1, skill:'Discipline'},
-
-    {id:'mom', cat:'Produktyvumas', icon:'👪', title:'30 min pas mamą', xp:10, coins:5, difficulty:'Lengva', statKey:'momVisits', statValue:30, skill:'Discipline'},
-    {id:'clean', cat:'Produktyvumas', icon:'🧹', title:'Sutvarkyti namus', xp:22, coins:9, difficulty:'Vidutinė', statKey:'homeCleanings', statValue:1, skill:'Discipline'},
-    {id:'sales5', cat:'Produktyvumas', icon:'📄', title:'5 pardavimo sutartys', xp:35, coins:18, difficulty:'Epik', statKey:'salesContracts', statValue:5, skill:'Business'},
-    {id:'garage2h', cat:'Produktyvumas', icon:'🔧', title:'2h darbas garaže', xp:26, coins:12, difficulty:'Sunkesnė', statKey:'garageHours', statValue:2, skill:'Business'},
-    {id:'carAds', cat:'Produktyvumas', icon:'📸', title:'1 auto į skelbimus', xp:24, coins:11, difficulty:'Sunkesnė', statKey:'carsListed', statValue:1, skill:'Business'},
-    {id:'buyCar', cat:'Produktyvumas', icon:'🚘', title:'1 nupirktas auto', xp:30, coins:16, difficulty:'Sunkesnė', statKey:'carsBought', statValue:1, skill:'Business'},
-    {id:'sellCar', cat:'Produktyvumas', icon:'💸', title:'1 parduotas auto', xp:35, coins:22, difficulty:'Epik', statKey:'carsSold', statValue:1, skill:'Business'},
-    {id:'procrast', cat:'Produktyvumas', icon:'⏳', title:'Atidėliotas dalykas (1/2)', xp:20, coins:8, difficulty:'Vidutinė', statKey:'procrastTasks', statValue:1, skill:'Focus'},
-
-    {id:'study', cat:'Tobulėjimas', icon:'📚', title:'60 min mokymasis', xp:20, coins:8, difficulty:'Vidutinė', statKey:'studyMinutes', statValue:60, skill:'Focus'},
-    {id:'read', cat:'Tobulėjimas', icon:'📖', title:'20 puslapių skaitymas', xp:14, coins:6, difficulty:'Lengva', statKey:'readPages', statValue:20, skill:'Focus'},
-    {id:'ce', cat:'Tobulėjimas', icon:'🪪', title:'60 min CE teorija', xp:18, coins:7, difficulty:'Vidutinė', statKey:'ceMinutes', statValue:60, skill:'Focus'},
-    {id:'teeth', cat:'Tobulėjimas', icon:'🦷', title:'Dantys ryte/vakare', xp:10, coins:4, difficulty:'Lengva', statKey:'teethSessions', statValue:1, skill:'Discipline'},
-    {id:'shower', cat:'Tobulėjimas', icon:'🚿', title:'Prausimasis', xp:10, coins:4, difficulty:'Lengva', statKey:'showers', statValue:1, skill:'Discipline'},
-    {id:'tv', cat:'Tobulėjimas', icon:'📺', title:'Diena be TV', xp:16, coins:6, difficulty:'Vidutinė', statKey:'tvFreeDays', statValue:1, skill:'Focus'}
+  const monthKey = (d = new Date()) => d.toISOString().slice(0,7);
+  const uid = () => (crypto?.randomUUID ? crypto.randomUUID() : 'id_' + Date.now() + '_' + Math.random().toString(16).slice(2));
+  const escapeHTML = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const daysBetween = (a, b = todayISO()) => {
+    if(!a) return 0;
+    const da = new Date(a + 'T00:00:00');
+    const db = new Date(b + 'T00:00:00');
+    return Math.max(0, Math.floor((db - da) / 86400000));
+  };
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const fmtDate = d => {
+    if(!d) return '—';
+    const x = new Date(d);
+    if(isNaN(x)) return d;
+    return x.toLocaleDateString('lt-LT', {year:'numeric', month:'2-digit', day:'2-digit'});
+  };
+  const nowLabel = () => new Date().toLocaleString('lt-LT', {dateStyle:'short', timeStyle:'short'});
+  const weekday = new Date().getDay();
+  const dailyFocusList = [
+    'Šiandien padaryk 1 pardavimą.',
+    'Susisiek su 5 pardavėjais ir atnaujink statusus.',
+    'Peržiūrėk 3 aktyvius auto ir paskaičiuok galimą pelną.',
+    'Pažymėk visas atliktas užduotis ir sutvarkyk logą.',
+    'Surask 1 naują gerą pasiūlymą į galimų pirkimų sąrašą.',
+    'Peržvelk seniausiai stovintį auto ir nuspręsk žingsnį.',
+    'Paskambink visiems pasiūlymams, kuriems jau 3+ dienos.'
   ];
-
-
-  const dailyQuestPool = taskTemplates.filter(t => [
-    'social','walk','push','pull','mom','clean','sales5','procrast','study','read','ce'
-  ].includes(t.id));
-
-  const worldDefs = [
-    {name:'Pradžios zona', emoji:'🌱', req:1, desc:'Pirmas žingsnis', atlygis:{xp:25, coins:20}},
-    {name:'Disciplinos miestas', emoji:'🛡️', req:4, desc:'Įpročiai ir ritmas', atlygis:{xp:40, coins:35}},
-    {name:'Pinigų rajonas', emoji:'💼', req:8, desc:'Pinigų judėjimas', atlygis:{xp:60, coins:50}},
-    {name:'Elito zona', emoji:'👑', req:15, desc:'Aukštas lygis', atlygis:{xp:90, coins:80}},
-    {name:'Laisvės pasaulis', emoji:'🕊️', req:25, desc:'Laisvė ir kontrolė', atlygis:{xp:140, coins:120}}
-  ];
-
-
-  const rewardsShop = [
-    {id:'pizza', name:'Picos vakaras', icon:'🍕', cost:70, desc:'Smagus vakaro atlygis po geros dienos.'},
-    {id:'random15', name:'15€ atsitiktinis pirkinys', icon:'🎁', cost:110, desc:'Mažas atpildas už stiprų progresą.'},
-    {id:'cinema', name:'Kinas', icon:'🎬', cost:150, desc:'Atsipalaidavimas su premium jausmu.'},
-    {id:'massage', name:'Masažas', icon:'💆', cost:200, desc:'Atsistatymas kūnui ir protui.'},
-    {id:'shopping80', name:'80€ pirkinys', icon:'🛍️', cost:260, desc:'Didelis atlygis už didelį progresą.'},
-    {id:'trip3', name:'3 dienų kelionė', icon:'✈️', cost:420, desc:'Didžiausias savaitgalio prizas.'}
-  ];
-
-
-  const achievementDefs = [
-    {id:'daily10', icon:'🥇', title:'10 užduočių per dieną', desc:'Per vieną dieną atlik 10 užduočių', need:s => stateDailyTaskCount(s) >= 10, atlygis:{xp:60, coins:40}},
-    {id:'weekly100', icon:'📅', title:'100 užduočių per savaitę', desc:'Per 7 dienas atlik 100 užduočių', need:s => stateWeeklyTaskCount(s) >= 100, atlygis:{xp:120, coins:80}},
-    {id:'streak3', icon:'🔥', title:'3 dienų serija', desc:'Išlaikyk 3 dienas iš eilės', need:s => s.streak >= 3, atlygis:{xp:40, coins:30}},
-    {id:'streak7', icon:'🔥', title:'7 dienų serija', desc:'Išlaikyk 7 dienas iš eilės', need:s => s.streak >= 7, atlygis:{xp:70, coins:50}},
-    {id:'streak15', icon:'🔥', title:'15 dienų serija', desc:'Išlaikyk 15 dienų iš eilės', need:s => s.streak >= 15, atlygis:{xp:120, coins:90}},
-    {id:'push100', icon:'💪', title:'100 atsispaudimų', desc:'Surink 100 atsispaudimų', need:s => s.stats.pushups >= 100, atlygis:{xp:60, coins:35}},
-    {id:'push300', icon:'💪', title:'300 atsispaudimų', desc:'Surink 300 atsispaudimų', need:s => s.stats.pushups >= 300, atlygis:{xp:120, coins:70}},
-    {id:'push500', icon:'💪', title:'500 atsispaudimų', desc:'Surink 500 atsispaudimų', need:s => s.stats.pushups >= 500, atlygis:{xp:180, coins:110}},
-    {id:'pull50', icon:'🏋️', title:'50 prisitraukimų', desc:'Surink 50 prisitraukimų', need:s => s.stats.pullups >= 50, atlygis:{xp:60, coins:35}},
-    {id:'pull100', icon:'🏋️', title:'100 prisitraukimų', desc:'Surink 100 prisitraukimų', need:s => s.stats.pullups >= 100, atlygis:{xp:120, coins:70}},
-    {id:'pull200', icon:'🏋️', title:'200 prisitraukimų', desc:'Surink 200 prisitraukimų', need:s => s.stats.pullups >= 200, atlygis:{xp:180, coins:110}},
-    {id:'profit5k', icon:'💎', title:'5 000 € grynojo pelno per mėnesį', desc:'Per mėnesį pasiek 5 000 € grynojo pelno', need:s => (s.finances?.monthlyNetProfit || 0) >= 5000, atlygis:{xp:140, coins:120}},
-    {id:'profit10k', icon:'💎', title:'10 000 € grynojo pelno per mėnesį', desc:'Per mėnesį pasiek 10 000 € grynojo pelno', need:s => (s.finances?.monthlyNetProfit || 0) >= 10000, atlygis:{xp:180, coins:150}}
-  ];
-
-  const defaultSkills = [
-    {key:'Strength', icon:'💪', desc:'Sportas, kūnas ir energija', xp:0, level:1, boost:1.12},
-    {key:'Focus', icon:'🧠', desc:'Mokymasis, koncentracija ir gylis', xp:0, level:1, boost:1.10},
-    {key:'Business', icon:'💰', desc:'Automobilių pardavimai ir pinigų judėjimas', xp:0, level:1, boost:1.10},
-    {key:'Discipline', icon:'🧘', desc:'Įpročiai, ritmas ir stabilumas', xp:0, level:1, boost:1.14}
-  ];
-
-
-  const defaultStats = () => ({
-    tasksCompleted:0,
-    lifetimeXp:0,
-    waterLiters:0,
-    socialMinutes:0,
-    walkMinutes:0,
-    pushups:0,
-    pullups:0,
-    meals:0,
-    cleanDays:0,
-    momVisits:0,
-    homeCleanings:0,
-    salesContracts:0,
-    garageHours:0,
-    carsListed:0,
-    carsBought:0,
-    carsSold:0,
-    procrastTasks:0,
-    studyMinutes:0,
-    readPages:0,
-    ceMinutes:0,
-    teethSessions:0,
-    showers:0,
-    tvFreeDays:0,
-    shopSpends:0,
-    shopPurchases:0,
-    badgesEarned:0,
-    worldUnlocks:0
-  });
-
+  const focus = dailyFocusList[weekday % dailyFocusList.length];
 
   const defaultState = () => ({
-    theme:'light',
-    sound:true,
-    vibrate:true,
-    selectedView:'home',
-    level:1,
-    xp:0,
-    coins:0,
-    streak:0,
-    maxStreak:0,
-    lastActiveDate:todayISO(),
-    streakCountedFor:'',
-    completedToday:{},
-    dailyQuest:null,
-    dailyQuestDate:'',
-    dailyQuestClaimed:false,
-    importantTasks:[],
-    completionLog:[],
-    finances:{
-      monthKey: currentMonthKey(),
-      monthlyNetProfit:0,
-      monthlyRevenue:0,
-      monthlyExpenses:0,
-      lifetimeNetProfit:0
+    level: 1,
+    xp: 0,
+    sound: true,
+    vibrate: true,
+    activeView: 'home',
+    ui: {
+      addCarOpen: true,
+      soldOpen: false,
+      addLeadOpen: true,
+      carForms: {},
+      carSellForms: {},
+      carTaskForms: {},
+      leadForms: {}
     },
-    stats: defaultStats(),
-    skills: JSON.parse(JSON.stringify(defaultSkills)),
-    unlockedAchievements:{},
-    worldsUnlocked:[],
-    shopPurchases:[],
-    cars:[],
-    history:[],
-    garageTasks:[],
-    garageTasksDate:'',
-    ui:{
-      taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false},
-      historyOpen:false,
-      garageSections:{addTask:false, addCar:false, activeCars:false, soldCars:false}
-    }
+    cars: [],
+    leads: [],
+    actions: [],
+    weeklyGoal: { deals: 0, target: 5 },
+    monthlyGoal: { profit: 0, target: 10000 },
+    today: { calls: 0, deals: 0, tasks: 0, date: todayISO() }
   });
 
   let state = loadState();
-
 
   function loadState(){
     try{
@@ -1103,142 +1219,38 @@
       return {
         ...base,
         ...parsed,
-        finances: {...base.finances, ...(parsed.finances||{})},
-        stats: {...base.stats, ...(parsed.stats||{})},
-        skills: Array.isArray(parsed.skills) && parsed.skills.length ? parsed.skills : JSON.parse(JSON.stringify(defaultSkills)),
-        unlockedAchievements: {...(parsed.unlockedAchievements||{})},
-        worldsUnlocked: Array.isArray(parsed.worldsUnlocked) ? parsed.worldsUnlocked : [],
-        shopPurchases: Array.isArray(parsed.shopPurchases) ? parsed.shopPurchases : [],
-        cars: Array.isArray(parsed.cars) ? parsed.cars : [],
-        history: Array.isArray(parsed.history) ? parsed.history : [],
-        completedToday: parsed.completedToday || {},
-        importantTasks: Array.isArray(parsed.importantTasks) ? parsed.importantTasks : [],
-        completionLog: Array.isArray(parsed.completionLog) ? parsed.completionLog : [],
-        garageTasks: Array.isArray(parsed.garageTasks) ? parsed.garageTasks : [],
-        garageTasksDate: parsed.garageTasksDate || '',
         ui: {
-          taskGroups: {Sveikata:false, Produktyvumas:false, Tobulėjimas:false, ...(parsed.ui?.taskGroups||{})},
-          historyOpen: !!parsed.ui?.historyOpen,
-          garageSections: {addTask:false, addCar:false, activeCars:false, soldCars:false, ...(parsed.ui?.garageSections||{})}
-        }
+          ...base.ui,
+          ...(parsed.ui || {}),
+          carForms: {...base.ui.carForms, ...(parsed.ui?.carForms || {})},
+          carSellForms: {...base.ui.carSellForms, ...(parsed.ui?.carSellForms || {})},
+          carTaskForms: {...base.ui.carTaskForms, ...(parsed.ui?.carTaskForms || {})},
+          leadForms: {...base.ui.leadForms, ...(parsed.ui?.leadForms || {})}
+        },
+        today: (parsed.today && parsed.today.date === todayISO()) ? parsed.today : {...base.today, date: todayISO()}
       };
     }catch(e){
-      console.warn('State load failed', e);
+      console.warn('Load failed', e);
       return defaultState();
     }
   }
 
   function saveState(){
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
-  function addHistory(title, desc, icon='⚡'){
-    state.history.unshift({title, desc, icon, time: nowLabel()});
-    state.history = state.history.slice(0, 12);
-  }
-
-  function logTaskCompletion(label='užduotis'){
-    state.completionLog.unshift({kind:'task', label, date: todayISO(), time: nowLabel()});
-    state.completionLog = state.completionLog.slice(0, 500);
-  }
-
-  function stateDailyTaskCount(s = state){
-    const today = todayISO();
-    return (s.completionLog || []).filter(e => e.kind === 'task' && e.date === today).length;
-  }
-
-  function stateWeeklyTaskCount(s = state){
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - 6);
-    const cutoffISO = cutoff.toISOString().slice(0,10);
-    return (s.completionLog || []).filter(e => e.kind === 'task' && e.date >= cutoffISO).length;
-  }
-
-  function ensureMonthlyCycle(){
-    const mk = currentMonthKey();
-    if(!state.finances) state.finances = defaultState().finances;
-    if(state.finances.monthKey !== mk){
-      state.finances.monthKey = mk;
-      state.finances.monthlyNetProfit = 0;
-      state.finances.monthlyRevenue = 0;
-      state.finances.monthlyExpenses = 0;
-    }
-  }
-
-  function carChecklistExpenses(car){
-    return (car?.checklist || []).reduce((sum, item) => sum + (Number(item.expense) || 0), 0);
-  }
-
-  function carTotalCost(car){
-    return Number(car?.buyPrice || 0) + carChecklistExpenses(car);
-  }
-
-  function carNetProfit(car){
-    if(!car || car.status !== 'parduotas') return 0;
-    return Number(car.soldPrice || 0) - carTotalCost(car);
-  }
-
-  function carDoneCount(car){
-    return (car?.checklist || []).filter(i => i.done).length;
-  }
-
-  function carProgress(car){
-    const total = (car?.checklist || []).length || 1;
-    return Math.round((carDoneCount(car) / total) * 100);
-  }
-
-  function skillLabel(key){
-    return ({
-      Strength:'Jėga',
-      Focus:'Susikaupimas',
-      Business:'Verslas',
-      Discipline:'Disciplina'
-    }[key] || key);
-  }
-
-  function toast(msg, icon='•'){
+  function toast(text, icon='•'){
     const wrap = document.getElementById('toastWrap');
     const el = document.createElement('div');
     el.className = 'toast';
-    el.innerHTML = `<span>${escapeHTML(msg)}</span><strong>${escapeHTML(icon)}</strong>`;
+    el.innerHTML = `<span>${escapeHTML(text)}</span><strong>${escapeHTML(icon)}</strong>`;
     wrap.appendChild(el);
-    setTimeout(() => { el.style.opacity='0'; el.style.transform='translateY(10px) scale(.98)'; }, 1600);
-    setTimeout(() => el.remove(), 2000);
+    setTimeout(() => { el.style.opacity='0'; el.style.transform='translateY(8px) scale(.98)'; }, 1500);
+    setTimeout(() => el.remove(), 1900);
   }
 
-  function pulse(sel){
-    const el = typeof sel === 'string' ? document.querySelector(sel) : sel;
-    if(!el) return;
-    el.classList.remove('pulse');
-    void el.offsetWidth;
-    el.classList.add('pulse');
-    setTimeout(() => el.classList.remove('pulse'), 560);
-  }
-
-  function spark(emoji='✨'){
-    const count = 8;
-    const startX = window.innerWidth / 2;
-    const startY = window.innerHeight * 0.52;
-    for(let i=0;i<count;i++){
-      const s = document.createElement('div');
-      s.className = 'spark';
-      s.textContent = emoji;
-      s.style.left = (startX + (Math.random()*240 - 120)) + 'px';
-      s.style.top = (startY + (Math.random()*100 - 50)) + 'px';
-      s.style.animationDelay = (Math.random()*0.12)+'s';
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 900);
-    }
-  }
-
-  function vibrate(pattern){
-    if(!state.vibrate || !navigator.vibrate) return;
-    navigator.vibrate(pattern);
-  }
-
-  let audioCtx;
-  function playTone(freq=440, dur=0.09){
+  let audioCtx = null;
+  function beep(freq=440, duration=0.08){
     if(!state.sound) return;
     try{
       audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -1246,1071 +1258,973 @@
       const gain = audioCtx.createGain();
       osc.type = 'sine';
       osc.frequency.value = freq;
-      gain.gain.value = 0.04;
+      gain.gain.value = 0.03;
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start();
-      osc.stop(audioCtx.currentTime + dur);
+      osc.stop(audioCtx.currentTime + duration);
     }catch(e){}
   }
-
-  function skillLevelFromXp(xp){
-    return 1 + Math.floor(xp / 100);
+  function vibrate(pattern){
+    if(state.vibrate && navigator.vibrate) navigator.vibrate(pattern);
   }
 
-  function skillMultiplier(){
-    const discipline = state.skills.find(s => s.key === 'Discipline')?.level || 1;
-    return 1 + (state.level - 1) * 0.03 + (discipline - 1) * 0.01;
+  function addAction(type, title, detail='', xp=0){
+    state.actions.unshift({id:uid(), type, title, detail, xp, at:nowLabel(), date:todayISO()});
+    state.actions = state.actions.slice(0, 60);
+    if(xp) gainXp(xp, false);
+    saveState();
+    render();
   }
 
-  function checkDateReset(){
-    const today = todayISO();
-    if(state.dailyQuestDate !== today){
-      state.dailyQuestDate = today;
-      state.dailyQuestClaimed = false;
-      state.dailyQuest = rand(dailyQuestPool);
-      state.completedToday = {};
-      const y = yesterdayISO();
-      if(state.lastActiveDate !== y && state.lastActiveDate !== today){
-        state.streak = 0;
-        state.streakCountedFor = '';
-      }
-    }
-    const garageDay = state.garageTasksDate || '';
-    if(garageDay !== today){
-      state.garageTasksDate = today;
-      state.garageTasks = (state.garageTasks || []).filter(task => !task.done);
-    }
-  }
-
-  function yesterdayISO(){
-    const d = new Date();
-    d.setDate(d.getDate() - 1);
-    return d.toISOString().slice(0,10);
-  }
-
-  function markStreakOnFirstCompletion(){
-    const today = todayISO();
-    if(state.streakCountedFor === today) return;
-    const y = yesterdayISO();
-    if(state.lastActiveDate === y){
-      state.streak += 1;
-    }else if(state.lastActiveDate !== today){
-      state.streak = 1;
-    }
-    state.maxStreak = Math.max(state.maxStreak, state.streak);
-    state.streakCountedFor = today;
-    state.lastActiveDate = today;
-  }
-
-  function levelUpCheck(){
+  function gainXp(amount, emit=true){
+    state.xp += Math.max(0, Math.round(amount || 0));
     let leveled = false;
     while(state.xp >= state.level * 100){
       state.xp -= state.level * 100;
       state.level += 1;
-      const bonus = 20 + state.level * 6;
-      state.coins += bonus;
-      addHistory('Lygio pakėlimas', `Pasiekei ${state.level} lygį ir gavai +${bonus} 🪙`, '⭐');
-      toast(`Lygis pakeltas! +${bonus} 🪙`, '⭐');
-      spark('✨');
-      pulse('#levelValue');
-      playTone(660, 0.11);
-      vibrate([20,30,20]);
       leveled = true;
-    }
-    return leveled;
-  }
-
-  function updateSkills(key, gainedXp){
-    const skill = state.skills.find(s => s.key === key);
-    if(!skill) return;
-    skill.xp += gainedXp;
-    skill.level = skillLevelFromXp(skill.xp);
-    skill.boost = key === 'Strength' ? 1.12 + (skill.level-1) * 0.01 :
-                  key === 'Focus' ? 1.10 + (skill.level-1) * 0.01 :
-                  key === 'Business' ? 1.10 + (skill.level-1) * 0.01 :
-                  1.14 + (skill.level-1) * 0.01;
-  }
-
-  function addXpAndCoins(baseXp, coins, source, skillKey=null, icon='✅'){
-    const gainedXp = Math.round(baseXp);
-    state.xp += gainedXp;
-    state.stats.lifetimeXp += gainedXp;
-    state.coins += coins;
-    if(skillKey) updateSkills(skillKey, gainedXp);
-    addHistory(source, `+${gainedXp} XP ir +${coins} 🪙`, icon);
-    toast(`+${gainedXp} XP • +${coins} 🪙`, icon);
-    spark(icon === '✨' ? '✨' : '🪙');
-    pulse('#coinsValue');
-    if(state.sound) playTone(icon === '✨' ? 520 : 420, 0.08);
-    if(state.vibrate) vibrate(18);
-    levelUpCheck();
-    checkWorldUnlocks();
-    checkAchievements();
-    saveState();
-    render();
-  }
-
-  function completeTask(id){
-    checkDateReset();
-    if(state.completedToday[id]) return;
-    const t = taskTemplates.find(x => x.id === id);
-    if(!t) return;
-    state.completedToday[id] = true;
-    state.stats.tasksCompleted += 1;
-    state.stats[t.statKey] += t.statValue;
-    markStreakOnFirstCompletion();
-    logTaskCompletion(t.title);
-    addXpAndCoins(t.xp, t.coins, 'Užduotis atlikta', t.skill, '✅');
-    if(id === 'push') addHistory('Sportas', '+50 atsispaudimų pridėti prie statistikos', '💪');
-    if(id === 'sellCar') state.stats.carsSold += 1;
-    if(id === 'carAds') state.stats.carsListed += 1;
-    if(id === 'buyCar') state.stats.carsBought += 1;
-  }
-
-  function generateQuestReward(q){
-    const bonus = q.xp >= 30 ? {xp:24, coins:18} : q.xp >= 20 ? {xp:18, coins:14} : {xp:12, coins:8};
-    return {xp: q.xp + bonus.xp, coins: q.coins + bonus.coins};
-  }
-
-  function claimDailyQuest(){
-    checkDateReset();
-    if(state.dailyQuestClaimed || !state.dailyQuest) return;
-    state.dailyQuestClaimed = true;
-    state.stats.tasksCompleted += 1;
-    markStreakOnFirstCompletion();
-    const q = state.dailyQuest;
-    const atlygis = generateQuestReward(q);
-    logTaskCompletion(q.title);
-    state.stats[q.statKey] += q.statValue;
-    addXpAndCoins(atlygis.xp, atlygis.coins, 'Dienos questas', q.skill, '✨');
-    addHistory('Dienos questas', `Įvykdyta: ${q.title}`, '🏅');
-    if(state.streak >= 7){
-      state.coins += 20;
-      addHistory('Streak bonus', '+20 🪙 už 7+ dienų seriją', '🔥');
-      toast('Streak bonus +20 🪙', '🔥');
-    }
-    saveState();
-    render();
-  }
-
-  function rerollDailyQuest(){
-    const pool = dailyQuestPool;
-    let next = rand(pool);
-    if(state.dailyQuest && pool.length > 1){
-      let tries = 0;
-      while(next.id === state.dailyQuest.id && tries < 10){
-        next = rand(pool);
-        tries++;
+      if(emit){
+        toast(`Pakeltas lygis! Dabar ${state.level} lygis`, '⭐');
+        beep(660, 0.1);
+        vibrate([20,20,20]);
       }
     }
-    state.dailyQuest = next;
-    state.dailyQuestDate = todayISO();
-    state.dailyQuestClaimed = false;
-    addHistory('Misijos perridenimas', 'Sugeneruota nauja dienos užduotis', '🎲');
+    if(emit && !leveled){
+      beep(520, 0.06);
+    }
     saveState();
-    render();
-    toast('Naujas dienos questas', '🎲');
   }
 
-  function checkWorldUnlocks(){
-    const newlyUnlocked = [];
-    worldDefs.forEach(w => {
-      if(w.name === 'Pradžios zona'){
-        if(!state.worldsUnlocked.includes(w.name)) state.worldsUnlocked.push(w.name);
-        return;
-      }
-      if(state.level >= w.req && !state.worldsUnlocked.includes(w.name)){
-        state.worldsUnlocked.push(w.name);
-        newlyUnlocked.push(w);
-        state.stats.worldUnlocks += 1;
-        state.coins += w.atlygis.coins;
-        state.xp += w.atlygis.xp;
-        addHistory('Pasaulis atrakintas', `${w.name} atrakintas: +${w.atlygis.xp} XP +${w.atlygis.coins} 🪙`, w.emoji);
-        toast(`${w.name} atrakintas! +${w.atlygis.xp} XP +${w.atlygis.coins} 🪙`, w.emoji);
-        spark(w.emoji);
-        playTone(880, 0.1);
-        vibrate([20,30,20]);
+  function carCost(car){
+    const tasks = Array.isArray(car.tasks) ? car.tasks : [];
+    const taskCost = tasks.reduce((s,t) => s + Number(t.cost || 0), 0);
+    return Number(car.buyPrice || 0) + taskCost;
+  }
+  function carDoneTasks(car){
+    return (car.tasks || []).filter(t => t.done).length;
+  }
+  function carProgress(car){
+    const total = (car.tasks || []).length;
+    if(!total) return 0;
+    return Math.round((carDoneTasks(car)/total)*100);
+  }
+  function carProfit(car){
+    if(!car.sold) return 0;
+    return Number(car.sellPrice || 0) - carCost(car);
+  }
+  function carROI(car){
+    const c = carCost(car);
+    if(!c) return 0;
+    return Math.round((carProfit(car)/c)*100);
+  }
+  function soldDate(car){
+    return car.soldAt || car.date || todayISO();
+  }
+  function carAge(car){
+    return daysBetween(car.date || car.createdAt || todayISO());
+  }
+  function healthScore(car){
+    if(car.sold) return 100;
+    const age = carAge(car);
+    const invest = carCost(car);
+    const taskRatio = (car.tasks?.length ? carDoneTasks(car) / car.tasks.length : 0);
+    const callPenalty = 0;
+    let score = 100;
+    score -= age * 2.5;
+    score -= Math.min(18, invest / 500);
+    score += taskRatio * 12;
+    score += callPenalty;
+    return clamp(Math.round(score), 0, 100);
+  }
+  function scoreClass(score){
+    if(score >= 70) return 'good';
+    if(score >= 40) return 'warn';
+    return 'bad';
+  }
+
+  function monthlyStats(){
+    const months = [];
+    const now = new Date();
+    for(let i=5;i>=0;i--){
+      const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+      const key = d.toISOString().slice(0,7);
+      months.push({key, label: d.toLocaleDateString('lt-LT', {month:'short'}), profit:0, sales:0});
+    }
+    state.cars.filter(c=>c.sold).forEach(c=>{
+      const key = (c.soldAt || todayISO()).slice(0,7);
+      const m = months.find(x => x.key === key);
+      if(m){
+        m.profit += carProfit(c);
+        m.sales += 1;
       }
     });
-    if(newlyUnlocked.length){
-      levelUpCheck();
-    }
+    return months;
   }
 
-  function checkAchievements(){
-    achievementDefs.forEach(a => {
-      if(!state.unlockedAchievements[a.id] && a.need(state)){
-        state.unlockedAchievements[a.id] = true;
-        state.stats.badgesEarned += 1;
-        state.xp += a.atlygis.xp;
-        state.stats.lifetimeXp += a.atlygis.xp;
-        state.coins += a.atlygis.coins;
-        addHistory('Pasiekimas atrakintas', `${a.title} +${a.atlygis.xp} XP +${a.atlygis.coins} 🪙`, a.icon);
-        toast(`Pasiekimas: ${a.title}`, a.icon);
-        spark(a.icon);
-        playTone(760, 0.12);
-        vibrate([20,25,20]);
-      }
-    });
-    levelUpCheck();
+  function currentMonthRealizedProfit(){
+    const key = monthKey();
+    return state.cars.filter(c => c.sold && (c.soldAt || '').slice(0,7) === key).reduce((s,c)=>s+carProfit(c),0);
   }
 
-  function buyReward(id){
-    const item = rewardsShop.find(x => x.id === id);
-    if(!item) return;
-    if(state.coins < item.cost){
-      toast('Nepakanka monetų', '🪙');
-      return;
-    }
-    state.coins -= item.cost;
-    state.stats.shopSpends += item.cost;
-    state.stats.shopPurchases += 1;
-    state.shopPurchases.unshift({name:item.name, cost:item.cost, time: nowLabel()});
-    state.shopPurchases = state.shopPurchases.slice(0, 10);
-    addHistory('Pirkimas parduotuvėje', `${item.name} nupirkta už ${item.cost} 🪙`, item.icon);
-    toast(`Nupirkta: ${item.name}`, item.icon);
-    spark(item.icon);
-    playTone(600, 0.08);
+  function totalStats(){
+    const active = state.cars.filter(c=>!c.sold);
+    const sold = state.cars.filter(c=>c.sold);
+    const invested = active.reduce((s,c)=>s+carCost(c),0);
+    const potential = active.reduce((s,c)=>s+Math.max(0, Number(c.sellPrice || c.expectedPrice || 0) - carCost(c)),0);
+    const realized = sold.reduce((s,c)=>s+carProfit(c),0);
+    const avg = sold.length ? Math.round(realized / sold.length) : 0;
+    const roiBase = sold.reduce((s,c)=>s+carCost(c),0);
+    const roi = roiBase ? Math.round((realized / roiBase) * 100) : 0;
+    const calls = state.leads.reduce((s,l)=>s+Number(l.callCount || 0),0);
+    const due = state.leads.filter(l => remindDue(l)).length;
+    return {active, sold, invested, potential, realized, avg, roi, calls, due};
+  }
+
+  function remindDue(lead){
+    const d = daysBetween(lead.lastCallAt || lead.date || todayISO());
+    return d >= 3;
+  }
+  function reminderText(lead){
+    const d = daysBetween(lead.lastCallAt || lead.date || todayISO());
+    if(!lead.lastCallAt) return 'Dar neskambinta';
+    if(d < 3) return `Praėjo ${d} d.`;
+    if(d <= 5) return `🔔 Laikas vėl siūlyti kainą (${d} d.)`;
+    return `Skambinti jau reikėjo prieš ${d} d.`;
+  }
+
+  function setView(view){
+    state.activeView = view;
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === `view-${view}`));
+    document.querySelectorAll('.navBtn').forEach(btn => btn.classList.toggle('active', btn.dataset.view === view));
     saveState();
     render();
+    window.scrollTo({top:0, behavior:'smooth'});
   }
 
-
-  function garageTaskCount(){
-    return (state.garageTasks || []).filter(task => !task.done).length;
-  }
-
-  function addGarageTask(title, xp, coins){
-    const task = {
-      id: uid(),
-      title: title.trim(),
-      xp: Math.max(0, Number(xp) || 0),
-      coins: Math.max(0, Number(coins) || 0),
-      done: false,
-      createdAt: nowLabel(),
-      completedAt: null,
-      doneDate: ''
-    };
-    state.garageTasks.unshift(task);
-    addHistory('Garažo užduotis', `Pridėta: ${task.title}`, '🧰');
-    toast('Užduotis pridėta', '🧰');
-    saveState();
-    render();
-  }
-
-  function completeGarageTask(taskId){
-    const task = state.garageTasks.find(t => t.id === taskId);
-    if(!task || task.done) return;
-    task.done = true;
-    task.completedAt = nowLabel();
-    task.doneDate = todayISO();
-    state.stats.tasksCompleted += 1;
-    logTaskCompletion(task.title);
-    markStreakOnFirstCompletion();
-    addXpAndCoins(task.xp, task.coins, 'Garažo užduotis atlikta', 'Business', '✅');
-  }
-
-  function deleteGarageTask(taskId){
-    const task = state.garageTasks.find(t => t.id === taskId);
-    if(!task) return;
-    const ok = window.confirm(`Ištrinti garažo užduotį „${task.title}“?`);
-    if(!ok) return;
-    state.garageTasks = state.garageTasks.filter(t => t.id !== taskId);
-    addHistory('Garažo užduotis', `Ištrinta: ${task.title}`, '🗑️');
-    toast('Užduotis ištrinta', '🗑️');
-    saveState();
-    render();
-  }
-
-  function addImportantTask(title, xp, coins){
-    const task = {
-      id: uid(),
-      title: title.trim(),
-      xp: Math.max(0, Number(xp) || 0),
-      coins: Math.max(0, Number(coins) || 0),
-      done: false,
-      createdAt: nowLabel(),
-      completedAt: null
-    };
-    state.importantTasks.unshift(task);
-    addHistory('Svarbi užduotis', `Pridėta: ${task.title}`, '⭐');
-    saveState();
-    render();
-  }
-
-  function completeImportantTask(taskId){
-    const task = state.importantTasks.find(t => t.id === taskId);
-    if(!task || task.done) return;
-    task.done = true;
-    task.completedAt = nowLabel();
-    state.stats.tasksCompleted += 1;
-    logTaskCompletion(task.title);
-    markStreakOnFirstCompletion();
-    addXpAndCoins(task.xp, task.coins, 'Svarbi užduotis atlikta', 'Discipline', '⭐');
-  }
-
-  function deleteImportantTask(taskId){
-    const task = state.importantTasks.find(t => t.id === taskId);
-    if(!task) return;
-    const ok = window.confirm(`Ištrinti svarbią užduotį „${task.title}“?`);
-    if(!ok) return;
-    state.importantTasks = state.importantTasks.filter(t => t.id !== taskId);
-    addHistory('Svarbi užduotis', `Ištrinta: ${task.title}`, '🗑️');
-    toast('Užduotis ištrinta', '🗑️');
-    saveState();
-    render();
-  }
-
-  function deleteCar(carId){
-    const car = state.cars.find(c => c.id === carId);
-    if(!car) return;
-    const ok = window.confirm(`Ištrinti automobilį „${car.name}“ visam laikui?`);
-    if(!ok) return;
-    if(car.status === 'parduotas'){
-      const carCost = carTotalCost(car);
-      const net = carNetProfit(car);
-      state.finances.monthlyRevenue = Math.max(0, state.finances.monthlyRevenue - Number(car.soldPrice || 0));
-      state.finances.monthlyExpenses = Math.max(0, state.finances.monthlyExpenses - carCost);
-      state.finances.monthlyNetProfit -= net;
-      state.finances.lifetimeNetProfit -= net;
-      state.stats.carsSold = Math.max(0, state.stats.carsSold - 1);
-    }
-    state.cars = state.cars.filter(c => c.id !== carId);
-    addHistory('Garažas', `Ištrintas automobilis: ${car.name}`, '🗑️');
-    toast('Automobilis ištrintas', '🗑️');
-    saveState();
-    render();
-  }
-
-  function deleteChecklistItem(carId, itemId){
-    const car = state.cars.find(c => c.id === carId);
-    if(!car) return;
-    const item = car.checklist.find(i => i.id === itemId);
-    if(!item) return;
-    const ok = window.confirm(`Ištrinti užduotį „${item.name}“?`);
-    if(!ok) return;
-    car.checklist = car.checklist.filter(i => i.id !== itemId);
-    addHistory('Garažo užduotis', `Ištrinta: ${item.name}`, '🗑️');
-    saveState();
-    render();
-    openCar(carId);
-  }
-
-  function addCar(name, imageSrc, buyPrice){
-    const car = {
-      id: uid(),
-      name,
-      imageSrc,
-      buyPrice: Number(buyPrice) || 0,
-      soldPrice: null,
-      netProfit: 0,
-      soldAt: null,
-      status:'aktyvus',
-      checklist:[
-        {id:'wash', name:'Nuplauti', xp:10, coins:4, done:false, expense:0},
-        {id:'photo', name:'Nufotografuoti', xp:12, coins:5, done:false, expense:0},
-        {id:'ads', name:'Įdėti į skelbimus', xp:16, coins:8, done:false, expense:0},
-        {id:'fix', name:'Sutvarkyti defektus', xp:20, coins:10, done:false, expense:0}
-      ]
-    };
-    state.cars.unshift(car);
-    addHistory('Garažas', `${name} pridėtas į garažą`, '🚗');
-    toast('Automobilis pridėtas', '🚗');
-    saveState();
-    render();
-  }
-
-  function openCar(carId){
-
-    const car = state.cars.find(c => c.id === carId);
-    if(!car) return;
-    renderCarSheet(car);
-    document.getElementById('modalBackdrop').classList.add('show');
+  function openSheet(title, contentHtml){
     const backdrop = document.getElementById('modalBackdrop');
-    backdrop.onclick = (e) => { if(e.target === backdrop) closeSheet(); };
-  }
-
-
-  function renderCarSheet(car){
-    const doneCount = carDoneCount(car);
-    const pct = carProgress(car);
-    const currentCost = carTotalCost(car);
-    const isSold = car.status === 'parduotas';
-    const soldPrice = Number(car.soldPrice || 0);
-    const netProfit = isSold ? carNetProfit(car) : 0;
-    const html = `
+    const sheet = document.getElementById('sheet');
+    sheet.innerHTML = `
       <div class="sheetHead">
-        <h3>${escapeHTML(car.name)}</h3>
-        <button class="closeBtn" id="closeSheet">✕</button>
+        <h3>${escapeHTML(title)}</h3>
+        <button class="closeBtn" type="button" id="sheetCloseBtn">✕</button>
       </div>
-      <div class="carCard">
-        <div class="carHero" style="background-image:url('${car.imageSrc || ''}')">
-          <div class="pill">${isSold ? 'Parduotas' : pct === 100 ? 'Paruoštas pardavimui' : pct >= 50 ? 'Beveik paruoštas' : 'Ruošiamas'}</div>
-          <div class="pill">${pct}%</div>
-        </div>
-        <div class="carBody">
-          <div class="grid2" style="margin-bottom:10px">
-            <div class="smallStatBox">
-              <div class="label">Pirkimo kaina</div>
-              <div class="value">${moneyFmt(car.buyPrice)}</div>
-              <div class="hint">Pradinė investicija</div>
-            </div>
-            <div class="smallStatBox">
-              <div class="label">Šiuo metu stovi</div>
-              <div class="value">${moneyFmt(currentCost)}</div>
-              <div class="hint">Pirkimas + išlaidos</div>
-            </div>
-          </div>
-          <div class="carLine"><span>Progresas</span><span>${doneCount}/${car.checklist.length} punktų</span></div>
-          <div class="miniBar"><div class="fill" style="width:${pct}%"></div></div>
-          <div class="sectionHead" style="margin:14px 0 8px"><h2>Užduočių sąrašas</h2><span>XP + monetos + išlaidos</span></div>
-          <div class="list" id="carChecklist"></div>
-          <div class="grid2" style="margin-top:12px">
-            <div class="smallStatBox">
-              <div class="label">Grynas pelnas</div>
-              <div class="value">${isSold ? (netProfit >= 0 ? '+' : '') + moneyFmt(netProfit) : moneyFmt(0)}</div>
-              <div class="hint">${isSold ? 'Galutinis rezultatas' : 'Atsiras pardavus'}</div>
-            </div>
-            <div class="smallStatBox">
-              <div class="label">Pardavimo kaina</div>
-              <div class="value">${isSold ? moneyFmt(soldPrice) : '—'}</div>
-              <div class="hint">${isSold ? 'Jau parduota' : 'Įrašyk prieš parduodant'}</div>
-            </div>
-          </div>
-          ${isSold ? `
-            <div class="cardNotice" style="margin-top:12px">
-              Automobilis parduotas ${escapeHTML(car.soldAt || '')}. Grynasis pelnas: <strong>${(netProfit >= 0 ? '+' : '') + moneyFmt(netProfit)}</strong>.
-            </div>
-            <div class="btnRow">
-              <button class="btn danger" id="deleteCarBtn">Ištrinti automobilį</button>
-            </div>
-          ` : `
-            <div class="field" style="margin-top:12px">
-              <label>Pardavimo kaina</label>
-              <input class="input" id="sellPriceInput" type="number" min="0" step="1" placeholder="Įrašyk pardavimo kainą" value="${car.soldPrice || ''}" />
-            </div>
-            <div class="btnRow">
-              <button class="btn secondary" id="addChecklistBtn">+ Pridėti punktą</button>
-              <button class="btn" id="sellCarBtn" ${pct===100 ? '' : 'disabled'} style="opacity:${pct===100 ? 1 : .45};cursor:${pct===100 ? 'pointer' : 'not-allowed'}">Parduoti automobilį</button>
-              <button class="btn danger" id="deleteCarBtn">Ištrinti automobilį</button>
-            </div>
-            <div class="cardNotice" style="margin-top:12px">
-              Kai visi punktai atlikti ir įrašysi pardavimo kainą, sistema automatiškai paskaičiuos grynąjį pelną.
-            </div>
-          `}
-        </div>
-      </div>
+      ${contentHtml}
     `;
-    openSheet(html);
-    renderCarChecklist(car.id);
-    const close = document.getElementById('closeSheet');
-    if(close) close.onclick = closeSheet;
-    const sellBtn = document.getElementById('sellCarBtn');
-    if(sellBtn) sellBtn.onclick = () => sellCar(car.id);
-    const addBtn = document.getElementById('addChecklistBtn');
-    if(addBtn) addBtn.onclick = () => openAddChecklistForm(car.id);
-    const deleteCarBtn = document.getElementById('deleteCarBtn');
-    if(deleteCarBtn) deleteCarBtn.onclick = () => deleteCar(car.id);
-  }
-
-  function openAddChecklistForm(carId){
-
-    const car = state.cars.find(c => c.id === carId);
-    if(!car) return;
-    const current = document.getElementById('sheet').innerHTML;
-    document.getElementById('sheet').innerHTML = `
-      <div class="sheetHead">
-        <h3>Pridėti checklist punktą</h3>
-        <button class="closeBtn" id="closeAdd">✕</button>
-      </div>
-      <div class="field"><label>Punktas</label><input class="input" id="newCheckName" placeholder="Pvz. Sutvarkyti saloną" /></div>
-      <div class="grid2">
-        <div class="field"><label>XP</label><input class="input" id="newCheckXp" type="number" value="12" /></div>
-        <div class="field"><label>Monetos</label><input class="input" id="newCheckCoins" type="number" value="5" /></div>
-      </div>
-      <div class="btnRow">
-        <button class="btn" id="saveNewCheck">Pridėti</button>
-        <button class="btn secondary" id="backToCar">Atgal</button>
-      </div>
-    `;
-    document.getElementById('closeAdd').onclick = closeSheet;
-    document.getElementById('backToCar').onclick = () => renderCarSheet(car);
-    document.getElementById('saveNewCheck').onclick = () => {
-      const name = document.getElementById('newCheckName').value.trim();
-      const xp = Number(document.getElementById('newCheckXp').value || 12);
-      const coins = Number(document.getElementById('newCheckCoins').value || 5);
-      if(!name){
-        toast('Įrašyk punktą', '✍️');
-        return;
-      }
-      car.checklist.push({id:'custom_' + Date.now(), name, xp, coins, done:false});
-      addHistory('Garažo punktas', `Pridėtas: ${name}`, '➕');
-      saveState();
-      renderCarSheet(car);
-      toast('Punktas pridėtas', '➕');
-    };
-  }
-
-
-  function renderCarChecklist(carId){
-    const car = state.cars.find(c => c.id === carId);
-    const root = document.getElementById('carChecklist');
-    if(!root || !car) return;
-    const editable = car.status !== 'parduotas';
-    root.innerHTML = car.checklist.map(item => `
-      <div class="listItem">
-        <label>
-          <input type="checkbox" ${item.done ? 'checked' : ''} ${editable ? '' : 'disabled'} data-car="${car.id}" data-item="${item.id}" />
-          <div>
-            <strong>${escapeHTML(item.name)}</strong>
-            <div class="small">+${item.xp} XP • +${item.coins} 🪙</div>
-          </div>
-        </label>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-          <input class="input" style="width:110px;padding:9px 10px;border-radius:12px;font-size:12px" type="number" min="0" step="1" ${item.done || !editable ? 'disabled' : ''} value="${Number(item.expense || 0) || ''}" data-expense-for="${item.id}" placeholder="Išlaidos €" />
-          <div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">
-            <span class="badge ${item.done ? 'good' : 'info'}">${item.done ? 'Atlikta' : 'Laukiama'}</span>
-            <button class="smallBtn danger" type="button" data-delete-item="${item.id}" ${editable ? '' : 'disabled'}>✕</button>
-          </div>
-        </div>
-      </div>
-    `).join('');
-    root.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.onchange = () => {
-        const car = state.cars.find(c => c.id === cb.dataset.car);
-        const item = car?.checklist.find(i => i.id === cb.dataset.item);
-        if(!car || !item || item.done) return;
-        const expenseInput = root.querySelector(`[data-expense-for="${item.id}"]`);
-        const expense = Number(expenseInput?.value || 0);
-        item.done = true;
-        item.expense = expense;
-        logTaskCompletion(item.name);
-        addXpAndCoins(item.xp, item.coins, 'Garažo užduotis', 'Business', '🚗');
-        if(car.checklist.every(i => i.done)){
-          car.status = 'paruoštas';
-          toast('Auto paruoštas pardavimui!', '🏁');
-        }else if(car.checklist.filter(i => i.done).length >= Math.ceil(car.checklist.length / 2)){
-          car.status = 'beveik paruoštas';
-        }
-        saveState();
-        render();
-        openCar(car.id);
-      };
-    });
-    root.querySelectorAll('[data-delete-item]').forEach(btn => {
-      btn.onclick = () => deleteChecklistItem(car.id, btn.dataset.deleteItem);
-    });
-  }
-
-
-  function sellCar(carId){
-    const car = state.cars.find(c => c.id === carId);
-    if(!car) return;
-    if(!car.checklist.every(i => i.done)){
-      toast('Visos užduotys turi būti atliktos', '⚠️');
-      return;
-    }
-    const sellPriceInput = document.getElementById('sellPriceInput');
-    const sellPrice = Number(sellPriceInput?.value || car.soldPrice || 0);
-    if(!sellPrice || sellPrice <= 0){
-      toast('Įrašyk pardavimo kainą', '💰');
-      return;
-    }
-    car.soldPrice = sellPrice;
-    car.soldAt = nowLabel();
-    car.status = 'parduotas';
-    car.netProfit = sellPrice - carTotalCost(car);
-    state.stats.carsSold += 1;
-    state.stats.tasksCompleted += 1;
-    state.coins += 90;
-    state.xp += 120;
-    state.stats.lifetimeXp += 120;
-    updateSkills('Business', 120);
-    state.finances.monthlyRevenue += sellPrice;
-    state.finances.monthlyExpenses += carTotalCost(car);
-    state.finances.monthlyNetProfit += car.netProfit;
-    state.finances.lifetimeNetProfit += car.netProfit;
-    addHistory('Automobilis parduotas', `${car.name} parduotas už ${moneyFmt(sellPrice)}. Grynasis pelnas: ${(car.netProfit >= 0 ? '+' : '') + moneyFmt(car.netProfit)}`, '💸');
-    toast(`Parduota! +${moneyFmt(car.netProfit)}`, '💸');
-    spark('🏁');
-    playTone(920, 0.12);
-    vibrate([25,35,25]);
-    levelUpCheck();
-    checkWorldUnlocks();
-    checkAchievements();
-    saveState();
-    render();
-    closeSheet();
-  }
-
-  function openSheet(html){
-
-    document.getElementById('sheet').innerHTML = html;
-    document.getElementById('modalBackdrop').classList.add('show');
+    backdrop.classList.add('show');
+    backdrop.setAttribute('aria-hidden','false');
+    document.getElementById('sheetCloseBtn').onclick = closeSheet;
+    backdrop.onclick = e => { if(e.target === backdrop) closeSheet(); };
   }
   function closeSheet(){
-    document.getElementById('modalBackdrop').classList.remove('show');
-    document.getElementById('sheet').innerHTML = '';
+    const backdrop = document.getElementById('modalBackdrop');
+    backdrop.classList.remove('show');
+    backdrop.setAttribute('aria-hidden','true');
+    backdrop.onclick = null;
   }
 
-  function worldProgressPercent(){
-    const maxReq = worldDefs[worldDefs.length - 1].req;
-    return clamp(Math.round((state.level / maxReq) * 100), 0, 100);
+  function openTaskForm(carId, open=true){
+    state.ui.carTaskForms[carId] = open;
+    saveState();
+    render();
+  }
+  function openSellForm(carId, open=true){
+    state.ui.carSellForms[carId] = open;
+    saveState();
+    render();
+  }
+  function openLeadForm(leadId, open=true){
+    state.ui.leadForms[leadId] = open;
+    saveState();
+    render();
   }
 
-  function zoneForLevel(level){
-    if(level < 4) return {name:'Pradžios zona', idx:0, hint:'Pirmas startas'};
-    if(level < 8) return {name:'Disciplinos miestas', idx:1, hint:'Įpročių miestas'};
-    if(level < 15) return {name:'Pinigų rajonas', idx:2, hint:'Pinigų rajonas'};
-    if(level < 25) return {name:'Elito zona', idx:3, hint:'Aukštas brandos lygis'};
-    return {name:'Laisvės pasaulis', idx:4, hint:'Laisvės pasaulis'};
+  function toggleAccordion(id){
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+    if(id === 'addCarAccordion') state.ui.addCarOpen = el.classList.contains('open');
+    if(id === 'soldCarsAccordion') state.ui.soldOpen = el.classList.contains('open');
+    if(id === 'addLeadAccordion') state.ui.addLeadOpen = el.classList.contains('open');
+    saveState();
+  }
+
+  function generateLeadFromQuick(){
+    state.activeView = 'leads';
+    state.ui.addLeadOpen = true;
+    saveState();
+    render();
+    setView('leads');
+    document.getElementById('leadName').focus();
+  }
+  function quickCarFocus(){
+    state.activeView = 'garage';
+    state.ui.addCarOpen = true;
+    saveState();
+    render();
+    setView('garage');
+    document.getElementById('carName').focus();
+  }
+
+  function addCar(data){
+    const car = {
+      id: uid(),
+      name: data.name.trim(),
+      category: data.category,
+      buyPrice: Number(data.buyPrice || 0),
+      image: data.image || '',
+      date: data.date || todayISO(),
+      notes: data.notes || '',
+      expectedPrice: Number(data.expectedPrice || 0),
+      tasks: [],
+      sold: false,
+      sellPrice: 0,
+      soldAt: '',
+      createdAt: todayISO()
+    };
+    state.cars.unshift(car);
+    addAction('car-add', `Pridėtas auto: ${car.name}`, `${car.category}, ${money(car.buyPrice)}`, 10);
+    gainXp(10, false);
+    toast(`Pridėtas auto: ${car.name}`, '🚗');
+    beep(520, 0.08);
+    vibrate(14);
+    saveState();
+    render();
+  }
+
+  function addTask(carId, data){
+    const car = state.cars.find(c => c.id === carId);
+    if(!car) return;
+    car.tasks = car.tasks || [];
+    car.tasks.unshift({
+      id: uid(),
+      title: data.title.trim(),
+      cost: Number(data.cost || 0),
+      note: data.note || '',
+      done: false,
+      doneAt: ''
+    });
+    addAction('task-add', `Pridėta užduotis auto: ${car.name}`, `${data.title} • ${money(data.cost)}`, 5);
+    gainXp(5, false);
+    toast('Užduotis pridėta', '📋');
+    saveState();
+    render();
+  }
+
+  function toggleTaskDone(carId, taskId){
+    const car = state.cars.find(c => c.id === carId);
+    if(!car) return;
+    const t = car.tasks.find(x => x.id === taskId);
+    if(!t) return;
+    t.done = !t.done;
+    t.doneAt = t.done ? todayISO() : '';
+    if(t.done){
+      state.today.tasks += 1;
+      addAction('task-done', `Atlikta: ${t.title}`, `Auto: ${car.name}`, 8);
+      gainXp(8, false);
+      toast('Užduotis pažymėta kaip atlikta', '✅');
+      beep(660, 0.06);
+      vibrate([18,20,18]);
+    }else{
+      addAction('task-undone', `Atžymėta: ${t.title}`, `Auto: ${car.name}`, 0);
+    }
+    saveState();
+    render();
+  }
+
+  function sellCar(carId, sellPrice){
+    const car = state.cars.find(c => c.id === carId);
+    if(!car) return;
+    car.sold = true;
+    car.sellPrice = Number(sellPrice || 0);
+    car.soldAt = todayISO();
+    state.today.deals += 1;
+    state.weeklyGoal.deals += 1;
+    const profit = carProfit(car);
+    const roi = carROI(car);
+    addAction('car-sold', `Parduotas auto: ${car.name}`, `${money(car.sellPrice)} | pelnas ${money(profit)} | ROI ${roi}%`, 25);
+    gainXp(25 + Math.max(0, Math.min(30, Math.round(profit/50))), false);
+    toast(`Parduota: ${car.name} • ${money(profit)}`, '💸');
+    beep(740, 0.08);
+    vibrate([25,20,25]);
+    saveState();
+    render();
+  }
+
+  function addLead(data){
+    const lead = {
+      id: uid(),
+      name: data.name.trim(),
+      offerPrice: Number(data.offerPrice || 0),
+      targetPrice: Number(data.targetPrice || 0),
+      date: data.date || todayISO(),
+      status: data.status || 'Laukiu',
+      notes: data.notes || '',
+      lastCallAt: '',
+      callCount: 0,
+      createdAt: todayISO(),
+      history: []
+    };
+    state.leads.unshift(lead);
+    addAction('lead-add', `Pridėtas pasiūlymas: ${lead.name}`, `${money(lead.offerPrice)} → ${money(lead.targetPrice)}`, 8);
+    gainXp(8, false);
+    toast(`Pridėtas pasiūlymas: ${lead.name}`, '💰');
+    beep(520, 0.08);
+    saveState();
+    render();
+  }
+
+  function leadCallNow(leadId){
+    const lead = state.leads.find(l => l.id === leadId);
+    if(!lead) return;
+    lead.lastCallAt = todayISO();
+    lead.callCount = Number(lead.callCount || 0) + 1;
+    lead.history = lead.history || [];
+    lead.history.unshift({at: nowLabel(), text:'Skambinta šiandien'});
+    state.today.calls += 1;
+    state.weeklyGoal.deals += 0;
+    addAction('lead-call', `Skambinau: ${lead.name}`, `Paskutinis skambutis atnaujintas`, 4);
+    gainXp(4, false);
+    toast('Skambutis pažymėtas', '📞');
+    beep(610, 0.05);
+    vibrate(12);
+    saveState();
+    render();
+  }
+
+  function updateLeadStatus(leadId, status){
+    const lead = state.leads.find(l => l.id === leadId);
+    if(!lead) return;
+    lead.status = status;
+    addAction('lead-status', `Statusas: ${lead.name}`, status, 0);
+    saveState();
+    render();
+  }
+
+  function markActionDaily(){
+    state.today.deals += 1;
+    addAction('daily', 'Pažymėtas dienos veiksmas', focus, 5);
+    gainXp(5, false);
+    toast('Veiksmas pažymėtas', '🧩');
+    saveState();
+    render();
+  }
+
+  function renderSummary(){
+    const t = totalStats();
+    const allCars = state.cars.length;
+    const soldCars = t.sold.length;
+    const activeCars = t.active.length;
+    const realized = t.realized;
+    const invested = t.invested;
+    const potential = t.potential;
+    const avg = soldCars ? Math.round(realized / soldCars) : 0;
+    const roiBase = state.cars.filter(c=>c.sold).reduce((s,c)=>s+carCost(c),0);
+    const roi = roiBase ? Math.round((realized/roiBase)*100) : 0;
+    const monthProfit = currentMonthRealizedProfit();
+    document.getElementById('pillLevel').textContent = `Lygis ${state.level}`;
+    document.getElementById('pillXp').textContent = `${state.xp} XP`;
+    document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('lt-LT', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('sumActiveCars').textContent = activeCars;
+    document.getElementById('sumInvested').textContent = money(invested);
+    document.getElementById('sumPotential').textContent = money(potential);
+    document.getElementById('garageActiveCount').textContent = activeCars;
+    document.getElementById('garageInvested').textContent = money(invested);
+    document.getElementById('garagePotential').textContent = money(potential);
+    document.getElementById('activeCarsLabel').textContent = `${activeCars} auto`;
+    document.getElementById('leadCount').textContent = state.leads.filter(l => l.status !== 'Nupirkta' && l.status !== 'Atsisakyta').length;
+    document.getElementById('leadDueCount').textContent = state.leads.filter(remindDue).length;
+    document.getElementById('leadCallCount').textContent = state.leads.reduce((s,l)=>s+Number(l.callCount||0),0);
+    document.getElementById('leadListLabel').textContent = `${state.leads.length} vnt.`;
+    document.getElementById('statsBought').textContent = allCars;
+    document.getElementById('statsSold').textContent = soldCars;
+    document.getElementById('statsProfit').textContent = money(realized);
+    document.getElementById('statsAvgProfit').textContent = money(avg);
+    document.getElementById('statsTodayActions').textContent = state.today.calls + state.today.deals + state.today.tasks;
+    document.getElementById('statsLogCount').textContent = state.actions.length;
+    document.getElementById('todayCalls').textContent = state.today.calls;
+    document.getElementById('todayDeals').textContent = state.today.deals;
+    document.getElementById('menuFocusText').textContent = focus;
+    document.getElementById('menuFocusBadge').textContent = `+${Math.max(4, (state.today.calls + state.today.deals + state.today.tasks) * 3)} XP`;
+    document.getElementById('focusScore').textContent = `+${Math.max(4, (state.today.calls + state.today.deals + state.today.tasks) * 3)} XP už veiksmus`;
+    document.getElementById('goalProfitText').textContent = `${money(monthProfit)} / 10 000 €`;
+    document.getElementById('goalDealsText').textContent = `${state.weeklyGoal.deals} / 5`;
+    const profitPct = clamp((monthProfit / 10000) * 100, 0, 100);
+    document.getElementById('goalProfitBadge').textContent = `${Math.round(profitPct)}%`;
+    document.getElementById('goalDealsBadge').textContent = `${clamp(Math.round((state.weeklyGoal.deals/5)*100),0,100)}%`;
+    document.getElementById('roiLabel').textContent = `${roi}% ROI`;
+    document.getElementById('roiFill').style.width = `${clamp(roi,0,100)}%`;
+    document.getElementById('roiFill').parentElement.classList.toggle('good', roi >= 30);
+    document.getElementById('roiFill').parentElement.classList.toggle('warn', roi >= 10 && roi < 30);
+    document.getElementById('roiFill').parentElement.classList.toggle('red', roi < 10);
+    document.getElementById('monthlyLabel');
+    document.getElementById('goGarageBtn').onclick = () => setView('garage');
+    document.getElementById('goLeadsBtn').onclick = () => setView('leads');
+    document.getElementById('quickAddCarBtn').onclick = quickCarFocus;
+    document.getElementById('quickAddLeadBtn').onclick = generateLeadFromQuick;
+    document.getElementById('markActionBtn').onclick = markActionDaily;
+  }
+
+  function renderCharts(){
+    const months = monthlyStats();
+    const maxProfit = Math.max(1, ...months.map(m=>Math.max(0,m.profit)));
+    const maxSales = Math.max(1, ...months.map(m=>m.sales));
+
+    const profitChart = months.map(m => {
+      const h = Math.round((Math.max(0, m.profit)/maxProfit) * 120);
+      const cls = m.profit >= 0 ? 'good' : 'warn';
+      return `
+        <div class="barCol">
+          <div class="barOuter"><div class="barInner ${cls}" style="height:${h}px"></div></div>
+          <div class="barValue">${money(m.profit)}</div>
+          <div class="barLabel">${m.label}</div>
+        </div>
+      `;
+    }).join('');
+
+    const salesChart = months.map(m => {
+      const h = Math.round((m.sales/maxSales) * 120);
+      return `
+        <div class="barCol">
+          <div class="barOuter"><div class="barInner" style="height:${h}px"></div></div>
+          <div class="barValue">${m.sales}</div>
+          <div class="barLabel">${m.label}</div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('profitChart').innerHTML = profitChart;
+    document.getElementById('salesChart').innerHTML = salesChart;
+  }
+
+  function renderLog(){
+    const root = document.getElementById('actionLogRoot');
+    if(!state.actions.length){
+      root.innerHTML = `<div class="emptyState">Dar nėra veiksmų. Kai pridėsi auto, užduotis ar skambutį, viskas atsiras čia.</div>`;
+      return;
+    }
+    root.innerHTML = state.actions.slice(0,12).map(item => `
+      <div class="actionItem">
+        <div>
+          <strong>${escapeHTML(item.title)}</strong>
+          <span>${escapeHTML(item.detail || '')}${item.xp ? ` • +${item.xp} XP` : ''}</span>
+        </div>
+        <span>${escapeHTML(item.at)}</span>
+      </div>
+    `).join('');
+  }
+
+  function renderCars(){
+    const activeRoot = document.getElementById('activeCarsRoot');
+    const soldRoot = document.getElementById('soldCarsRoot');
+    const activeCars = state.cars.filter(c => !c.sold);
+    const soldCars = state.cars.filter(c => c.sold);
+
+    if(!activeCars.length){
+      activeRoot.innerHTML = `<div class="emptyState">Nėra aktyvių automobilių. Paspausk + Pridėti automobilį ir pradėk pildyti garažą.</div>`;
+    }else{
+      activeRoot.innerHTML = activeCars.map(renderCarCard).join('');
+    }
+
+    if(!soldCars.length){
+      soldRoot.innerHTML = `<div class="emptyState">Parduotų automobilių dar nėra. Kai parduosi, jie bus čia saugiai archyvuoti.</div>`;
+    }else{
+      soldRoot.innerHTML = soldCars.map(renderSoldCard).join('');
+    }
+
+    // Rebind file inputs and values after render
+    document.querySelectorAll('[data-action="car-photo"]').forEach(inp => {
+      inp.onchange = e => handleCarPhoto(e, inp.dataset.carId);
+    });
+    document.querySelectorAll('[data-action="lead-status"]').forEach(sel => {
+      sel.onchange = () => updateLeadStatus(sel.dataset.leadId, sel.value);
+    });
+    document.querySelectorAll('[data-action="task-done"]').forEach(inp => {
+      inp.onchange = () => toggleTaskDone(inp.dataset.carId, inp.dataset.taskId);
+    });
+    document.querySelectorAll('[data-action="task-cost-preview"]').forEach(inp => {
+      inp.oninput = () => updateTaskCostPreview(inp.dataset.carId);
+    });
+    document.querySelectorAll('[data-action="sell-price"]').forEach(inp => {
+      inp.oninput = () => updateSellPreview(inp.dataset.carId);
+    });
+  }
+
+  function renderLeads(){
+    const root = document.getElementById('leadsRoot');
+    if(!state.leads.length){
+      root.innerHTML = `<div class="emptyState">Kol kas nėra pasiūlymų. Įkelk pirmą lead'ą ir sek skambučius, kainas bei priminimus.</div>`;
+      return;
+    }
+    root.innerHTML = state.leads.map(renderLeadCard).join('');
+  }
+
+  function renderGarageFormsState(){
+    const add = document.getElementById('addCarAccordion');
+    const leadAdd = document.getElementById('addLeadAccordion');
+    const sold = document.getElementById('soldCarsAccordion');
+    add.classList.toggle('open', !!state.ui.addCarOpen);
+    leadAdd.classList.toggle('open', !!state.ui.addLeadOpen);
+    sold.classList.toggle('open', !!state.ui.soldOpen);
   }
 
   function render(){
-    checkDateReset();
-    ensureMonthlyCycle();
-    if(!state.dailyQuest) state.dailyQuest = rand(dailyQuestPool);
-    if(!state.history.length) addHistory('Sveiki atvykę', 'Žaidimas paruoštas startui', '🎮');
-
-    const xpNeeded = state.level * 100;
-    const xpPct = clamp(Math.round((state.xp / xpNeeded) * 100), 0, 100);
-    const completedCount = Object.keys(state.completedToday).length;
-    const allCount = taskTemplates.length;
-    const stats = state.stats;
-
-    document.documentElement.setAttribute('data-theme', state.theme);
-    document.getElementById('themeToggle').classList.toggle('on', state.theme === 'light');
-    document.getElementById('soundToggle').classList.toggle('on', state.sound);
-    document.getElementById('vibrateToggle').classList.toggle('on', state.vibrate);
-
-
-    document.getElementById('xpFill').style.width = xpPct + '%';
-    document.getElementById('levelValue').textContent = state.level;
-    document.getElementById('xpToNext').textContent = `${Math.max(0, xpNeeded - state.xp)} XP iki lygio`;
-    document.getElementById('streakValue').textContent = state.streak;
-    document.getElementById('coinsValue').textContent = state.coins;
-    document.getElementById('streakHint').textContent = state.streak >= 7 ? 'Karšta serija' : state.streak >= 3 ? 'Puikus ritmas' : 'Judėk toliau';
-
-
-
-    document.getElementById('dailyState').className = `badge ${state.dailyQuestClaimed ? 'good' : 'info'}`;
-    document.getElementById('dailyState').textContent = state.dailyQuestClaimed ? 'Dienos misija įvykdyta' : 'Dienos misija paruošta';
-
-    document.getElementById('taskProgressLabel').textContent = `${completedCount}/${allCount} atlikta`;
-
-    // daily quest
-    const q = state.dailyQuest;
-    document.getElementById('dailyRarity').textContent = `${(q.rarity || (q.xp >= 30 ? 'legendinė' : q.xp >= 20 ? 'epinė' : 'reta')).toUpperCase()} MISIJA`;
-    document.getElementById('dailyRarity').className = `tag ${(q.xp >= 30 ? 'legendary' : q.xp >= 20 ? 'epic' : 'rare')}`;
-    document.getElementById('dailyTitle').textContent = q.title;
-    document.getElementById('dailyDesc').textContent = `Ši misija iš ${q.cat} kategorijos. Duoda bonus XP ir monetų.`;
-    document.getElementById('claimDailyBtn').textContent = state.dailyQuestClaimed ? 'Jau įvykdyta' : 'Įvykdyti dienos užduotį';
-    document.getElementById('claimDailyBtn').disabled = state.dailyQuestClaimed;
-    document.getElementById('claimDailyBtn').style.opacity = state.dailyQuestClaimed ? .55 : 1;
-
-    // tasks
-    const categories = ['Sveikata','Produktyvumas','Tobulėjimas'];
-    const tasksHtml = categories.map(cat => {
-      const tasks = taskTemplates.filter(t => t.cat === cat);
-      const open = !!(state.ui?.taskGroups?.[cat]);
-      return `
-        <div class="panel taskGroup">
-          <button class="taskGroupHead" type="button" data-toggle-cat="${cat}">
-            <div>
-              <h3>${cat}</h3>
-              <span class="sub">${tasks.length} užduočių • ${open ? 'Paliesk, kad suskleistum' : 'Paliesk, kad išskleistum'}</span>
-            </div>
-            <div class="chev">${open ? '▾' : '▸'}</div>
-          </button>
-          <div class="taskGroupBody ${open ? 'open' : ''}">
-            <div class="taskList">
-              ${tasks.map(t => {
-                const done = !!state.completedToday[t.id];
-                return `
-                  <div class="taskCard ${done ? 'done' : ''}" data-task="${t.id}">
-                    <div class="check">${done ? '✓' : ''}</div>
-                    <div class="taskMain">
-                      <strong>${t.icon} ${escapeHTML(t.title)}</strong>
-                      <div class="taskMeta">
-                        <span>${t.difficulty}</span>
-                        <span>${done ? 'Atlikta šiandien' : 'Paspausk ir gauk atlygį'}</span>
-                      </div>
-                    </div>
-                    <div class="rewardPills">
-                      <div class="xp">+${t.xp} XP</div>
-                      <div class="coins">+${t.coins} 🪙</div>
-                    </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-    document.getElementById('tasksRoot').innerHTML = tasksHtml;
-    document.querySelectorAll('[data-task]').forEach(el => el.addEventListener('click', () => completeTask(el.dataset.task)));
-    document.querySelectorAll('[data-toggle-cat]').forEach(btn => btn.addEventListener('click', () => {
-      const cat = btn.dataset.toggleCat;
-      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false};
-      state.ui.taskGroups = state.ui.taskGroups || {Sveikata:false, Produktyvumas:false, Tobulėjimas:false};
-      state.ui.taskGroups[cat] = !state.ui.taskGroups[cat];
-      saveState();
-      render();
-    }));
-
-    // stats grid
-    const statCards = [
-      {label:'Vanduo', value:`${stats.waterLiters} L`, hint:'Kaupiama kasdien', icon:'💧'},
-      {label:'Pasivaikščiojimas', value:`${stats.walkMinutes} min`, hint:'Kaupiama statistika', icon:'🚶'},
-      {label:'Atsispaudimai', value:stats.pushups, hint:'Strength augimas', icon:'💪'},
-      {label:'Prisitraukimai', value:stats.pullups, hint:'Kaupiama statistika', icon:'🏋️'},
-      {label:'Skaitymas', value:`${stats.readPages} psl`, hint:'Tavo augimas', icon:'📖'},
-      {label:'Mokymasis', value:`${stats.studyMinutes} min`, hint:'Focus progresas', icon:'🧠'},
-      {label:'CE teorija', value:`${stats.ceMinutes} min`, hint:'Kaupiasi', icon:'🪪'},
-      {label:'Auto pardavimai', value:stats.carsSold, hint:'Business progresas', icon:'🚗'}
-    ];
-    document.getElementById('statsGrid').innerHTML = statCards.map(s => `
-      <div class="smallStatBox">
-        <div class="label">${s.icon} ${s.label}</div>
-        <div class="value">${escapeHTML(String(s.value))}</div>
-        <div class="hint">${s.hint}</div>
-      </div>
-    `).join('');
-
-
-    // shop
-    document.getElementById('shopGrid').innerHTML = rewardsShop.map(item => `
-      <div class="rewardCard">
-        <div class="top">
-          <div>
-            <div class="ico">${item.icon}</div>
-            <strong>${escapeHTML(item.name)}</strong>
-          </div>
-          <div class="cost">🪙 ${item.cost}</div>
-        </div>
-        <p>${escapeHTML(item.desc)}</p>
-        <button class="btn secondary buyBtn" data-buy="${item.id}">Pirkti</button>
-      </div>
-    `).join('');
-    document.querySelectorAll('[data-buy]').forEach(btn => btn.onclick = () => buyReward(btn.dataset.buy));
-
-    // history
-    const historyOpen = !!(state.ui?.historyOpen);
-    const historyRoot = document.getElementById('historyRoot');
-    document.getElementById('historyBody').classList.toggle('open', historyOpen);
-    document.getElementById('historyChev').textContent = historyOpen ? '▾' : '▸';
-    document.getElementById('historyHint').textContent = historyOpen ? 'Paspausk, kad paslėptum istoriją' : 'Paspausk, kad pamatytum istoriją';
-    historyRoot.innerHTML = historyOpen ? (state.history.length ? state.history : [{title:'Pradėk žaidimą', desc:'Atlik pirmą užduotį', icon:'🎮', time:nowLabel()}]).map(item => `
-      <div class="historyItem">
-        <div class="histIcon">${item.icon}</div>
-        <div>
-          <strong>${escapeHTML(item.title)}</strong>
-          <span>${escapeHTML(item.desc)}</span>
-          <span style="font-size:11px;opacity:.78">${escapeHTML(item.time)}</span>
-        </div>
-      </div>
-    `).join('') : '';
-
-
-    // garažas
-    ensureMonthlyCycle();
-    const activeCars = state.cars.filter(car => car.status !== 'parduotas');
-    const soldCars = state.cars.filter(car => car.status === 'parduotas');
-    const garageTasks = (state.garageTasks || []);
-    const garageValue = activeCars.reduce((sum, car) => sum + carTotalCost(car), 0);
-    const garageNetProfit = soldCars.reduce((sum, car) => sum + carNetProfit(car), 0);
-    const garageOpen = {addTask:false, addCar:false, activeCars:false, soldCars:false, ...(state.ui?.garageSections||{})};
-
-    document.getElementById('garageActiveSummary').textContent = activeCars.length;
-    document.getElementById('garageSoldSummary').textContent = soldCars.length;
-    document.getElementById('garageValueSummary').textContent = moneyFmt(garageValue);
-    document.getElementById('garageProfitSummary').textContent = moneyFmt(state.finances.monthlyNetProfit);
-    document.getElementById('garageActiveSummaryHint').textContent = activeCars.length ? `${moneyFmt(garageValue)} vertė` : 'Kol kas nėra aktyvių auto';
-    document.getElementById('garageSoldSummaryHint').textContent = soldCars.length ? `${moneyFmt(garageNetProfit)} bendras pelnas` : 'Parduoti automobiliai atsiras čia';
-    document.getElementById('carCount').textContent = `${activeCars.length} aktyvūs / ${soldCars.length} parduoti`;
-    document.getElementById('activeCarCount').textContent = `${activeCars.length} auto`;
-    document.getElementById('soldCarCount').textContent = `${soldCars.length} auto`;
-    document.getElementById('garageTaskCount').textContent = `${garageTaskCount()} aktyvių`;
-    document.getElementById('monthlyProfitValue').textContent = moneyFmt(state.finances.monthlyNetProfit);
-    document.getElementById('monthlyProfitFill').style.width = `${clamp((state.finances.monthlyNetProfit / 10000) * 100, 0, 100)}%`;
-
-    document.getElementById('garageAddTaskBody').classList.toggle('open', !!garageOpen.addTask);
-    document.getElementById('garageAddCarBody').classList.toggle('open', !!garageOpen.addCar);
-    document.getElementById('garageActiveBody').classList.toggle('open', !!garageOpen.activeCars);
-    document.getElementById('garageSoldBody').classList.toggle('open', !!garageOpen.soldCars);
-
-    document.getElementById('garageAddTaskToggle').querySelector('.plus').textContent = garageOpen.addTask ? '−' : '+';
-    document.getElementById('garageAddCarToggle').querySelector('.plus').textContent = garageOpen.addCar ? '−' : '+';
-    document.getElementById('garageActiveToggle').querySelector('.plus').textContent = garageOpen.activeCars ? '−' : '+';
-    document.getElementById('garageSoldToggle').querySelector('.plus').textContent = garageOpen.soldCars ? '−' : '+';
-
-    document.getElementById('garageTaskRoot').innerHTML = garageTasks.length ? garageTasks.map(task => `
-      <div class="garageTaskCard ${task.done ? 'done' : ''}">
-        <div class="check">${task.done ? '✓' : ''}</div>
-        <div class="taskMain">
-          <strong>${escapeHTML(task.title)}</strong>
-          <div class="meta">
-            <span>${task.done ? 'Atlikta' : 'Laukia atlikimo'}</span>
-            <span>${task.done ? `Baigta: ${escapeHTML(task.completedAt || '')}` : 'Varnele užsidės atlikus'}</span>
-          </div>
-        </div>
-        <div class="reward">+${task.xp} XP • +${task.coins} 🪙</div>
-        <div class="actions">
-          <button class="smallBtn" data-garage-complete="${task.id}" ${task.done ? 'disabled' : ''}>✓</button>
-          <button class="smallBtn danger" data-garage-delete="${task.id}">✕</button>
-        </div>
-      </div>
-    `).join('') : `<div class="emptyState">Kol kas nėra garažo užduočių. Paspausk <b>+ Pridėti užduotį</b> ir susikurk dienos darbus.</div>`;
-    document.querySelectorAll('[data-garage-complete]').forEach(btn => btn.onclick = () => completeGarageTask(btn.dataset.garageComplete));
-    document.querySelectorAll('[data-garage-delete]').forEach(btn => btn.onclick = () => deleteGarageTask(btn.dataset.garageDelete));
-
-    document.getElementById('activeCarGrid').innerHTML = activeCars.length ? activeCars.map(car => {
-      const done = carDoneCount(car);
-      const pct = carProgress(car);
-      const totalCost = carTotalCost(car);
-      return `
-        <div class="carCard" data-open-car="${car.id}">
-          <div class="carHero" style="background-image:url('${car.imageSrc || ''}')">
-            <div class="pill">Aktyvus</div>
-            <div class="pill">${pct}%</div>
-          </div>
-          <div class="carBody">
-            <h4>${escapeHTML(car.name)}</h4>
-            <div class="carLine"><span>${done}/${car.checklist.length} punktų</span><span>Stovi: ${moneyFmt(totalCost)}</span></div>
-            <div class="miniBar"><div class="fill" style="width:${pct}%"></div></div>
-            <div class="carLine"><span>Pirkta už ${moneyFmt(car.buyPrice)}</span><span>Išlaidos: ${moneyFmt(carChecklistExpenses(car))}</span></div>
-          </div>
-        </div>
-      `;
-    }).join('') : `<div class="emptyState">Kol kas nėra aktyvių automobilių. Pridėk pirmą auto ir pradėk Garažo misiją.</div>`;
-    document.getElementById('soldCarGrid').innerHTML = soldCars.length ? soldCars.map(car => {
-      const pct = carProgress(car);
-      return `
-        <div class="carCard" data-open-car="${car.id}">
-          <div class="carHero" style="background-image:url('${car.imageSrc || ''}')">
-            <div class="pill">Parduotas</div>
-            <div class="pill">${pct}%</div>
-          </div>
-          <div class="carBody">
-            <h4>${escapeHTML(car.name)}</h4>
-            <div class="carLine"><span>Pardavimo kaina: ${moneyFmt(car.soldPrice)}</span><span>Grynasis pelnas: ${(car.netProfit >= 0 ? '+' : '') + moneyFmt(car.netProfit)}</span></div>
-            <div class="miniBar"><div class="fill" style="width:100%"></div></div>
-            <div class="carLine"><span>Stovėjo: ${moneyFmt(carTotalCost(car))}</span><span>${escapeHTML(car.soldAt || '')}</span></div>
-          </div>
-        </div>
-      `;
-    }).join('') : `<div class="emptyState">Dar nėra parduotų automobilių. Kai parduosi pirmą, jis čia atsiras atskirai.</div>`;
-    document.getElementById('activeCarGrid').querySelectorAll('[data-open-car]').forEach(el => el.onclick = () => openCar(el.dataset.openCar));
-    document.getElementById('soldCarGrid').querySelectorAll('[data-open-car]').forEach(el => el.onclick = () => openCar(el.dataset.openCar));
-
-    // įgūdžiai
-
-    document.getElementById('skillsRoot').innerHTML = state.skills.map(s => `
-      <div class="skillCard">
-        <div class="skillTop">
-          <div>
-            <strong>${s.icon} ${escapeHTML(skillLabel(s.key))}</strong>
-            <span>Lygis ${s.level}</span>
-          </div>
-          <span class="badge info">Stiprinimas x${s.boost.toFixed(2)}</span>
-        </div>
-        <div class="miniBar"><div class="fill" style="width:${s.xp % 100}%"></div></div>
-        <div class="skillDesc">${escapeHTML(s.desc)}</div>
-      </div>
-    `).join('');
-
-
-    // svarbios užduotys
-    const importantRoot = document.getElementById('importantTasksRoot');
-    if(importantRoot){
-      importantRoot.innerHTML = state.importantTasks.length ? state.importantTasks.map(task => `
-        <div class="taskCard ${task.done ? 'done' : ''}">
-          <div class="check">${task.done ? '✓' : ''}</div>
-          <div class="taskMain">
-            <strong>⭐ ${escapeHTML(task.title)}</strong>
-            <div class="taskMeta">
-              <span>${task.done ? 'Atlikta' : 'Svarbi užduotis'}</span>
-              <span>${task.completedAt ? `Baigta: ${escapeHTML(task.completedAt)}` : 'Pridėta ranka'}</span>
-            </div>
-          </div>
-          <div class="rewardPills">
-            <div class="xp">+${task.xp} XP</div>
-            <div class="coins">+${task.coins} 🪙</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-left:10px">
-            <button class="smallBtn" data-important-complete="${task.id}" ${task.done ? 'disabled' : ''}>✓</button>
-            <button class="smallBtn danger" data-important-delete="${task.id}">✕</button>
-          </div>
-        </div>
-      `).join('') : `<div class="emptyState">Kol kas nėra svarbių užduočių. Pridėk pirmą darbą, pvz. mokesčiai ar vizitas pas gydytoją.</div>`;
-      importantRoot.querySelectorAll('[data-important-complete]').forEach(btn => {
-        btn.onclick = () => completeImportantTask(btn.dataset.importantComplete);
-      });
-      importantRoot.querySelectorAll('[data-important-delete]').forEach(btn => {
-        btn.onclick = () => deleteImportantTask(btn.dataset.importantDelete);
-      });
-    }
-
-    // achievements
-    document.getElementById('achievementsRoot').innerHTML = achievementDefs.map(a => {
-      const ok = !!state.unlockedAchievements[a.id];
-      return `
-        <div class="achievement ${ok ? '' : 'locked'}">
-          <div class="ico">${a.icon}</div>
-          <strong>${escapeHTML(a.title)}</strong>
-          <span>${escapeHTML(a.desc)}</span>
-          <div style="margin-top:12px"><span class="badge ${ok ? 'good' : 'warn'}">${ok ? `+${a.atlygis.coins} 🪙` : 'Užrakinta'}</span></div>
-        </div>
-      `;
-    }).join('');
-
-    const allowedViews = new Set(['home','garage','menu','achievements','settings']);
-    if(!allowedViews.has(state.selectedView)) state.selectedView = 'home';
-    document.querySelectorAll('.navBtn').forEach(btn => btn.classList.toggle('active', btn.dataset.view === state.selectedView));
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    const activeView = document.getElementById(`view-${state.selectedView}`) || document.getElementById('view-home');
-    activeView.classList.add('active');
-
+    document.body.classList.toggle('historyOpen', false);
+    document.querySelectorAll('.navBtn').forEach(btn => btn.classList.toggle('active', btn.dataset.view === state.activeView));
+    renderGarageFormsState();
+    renderSummary();
+    renderCars();
+    renderLeads();
+    renderCharts();
+    renderLog();
+    updateInputsDefaults();
     saveState();
   }
 
-  // events
-  document.querySelectorAll('.navBtn').forEach(btn => btn.addEventListener('click', () => {
-    state.selectedView = btn.dataset.view;
-    saveState();
-    render();
-  }));
+  function updateInputsDefaults(){
+    const carDate = document.getElementById('carDate');
+    if(carDate && !carDate.value) carDate.value = todayISO();
+    const leadDate = document.getElementById('leadDate');
+    if(leadDate && !leadDate.value) leadDate.value = todayISO();
+  }
 
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-jump]');
-    if(!btn) return;
-    const target = document.getElementById(btn.dataset.jump);
-    if(target){
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-      toast('Atidaryta iš meniu', '↘️');
-    }
-  });
+  function renderCarCard(car){
+    const cost = carCost(car);
+    const profitPreview = car.sold ? carProfit(car) : Math.max(0, Number(car.expectedPrice || 0) - cost);
+    const score = healthScore(car);
+    const scoreCls = scoreClass(score);
+    const progress = carProgress(car);
+    const taskCount = (car.tasks || []).length;
+    const completed = carDoneTasks(car);
+    const imageHtml = car.image ? `<img src="${escapeHTML(car.image)}" alt="">` : `<div>Foto<br>neįkelta</div>`;
+    const taskFormOpen = !!state.ui.carTaskForms[car.id];
+    const sellFormOpen = !!state.ui.carSellForms[car.id];
+    const taskSectionOpen = taskFormOpen || taskCount > 0;
+    const sellSectionOpen = sellFormOpen;
+    const workTip = car.sold ? 'Parduotas' : carAge(car) >= 10 ? 'Stovi ilgiau — peržiūrėk kainą' : 'Judėjimas normalus';
+    const expectedText = car.sold ? `Parduota už ${money(car.sellPrice)}` : (car.expectedPrice ? `Prognozė: ${money(car.expectedPrice)}` : 'Pridėk pardavimo prognozę');
+    const roi = car.sold ? `${carROI(car)}% ROI` : 'Dar neparduotas';
+    return `
+      <div class="carCard" data-car-id="${car.id}">
+        <div class="carTop">
+          <div class="carPhoto">${imageHtml}</div>
+          <div class="carMain">
+            <div class="carTitle">
+              <div>
+                <h3>${escapeHTML(car.name)}</h3>
+                <div class="tagRow">
+                  <span class="tag blue">${escapeHTML(car.category || 'Other')}</span>
+                  <span class="tag">${fmtDate(car.date || car.createdAt)}</span>
+                  <span class="tag">${taskCount} užd.</span>
+                </div>
+              </div>
+              <span class="score ${scoreCls}">${score}/100</span>
+            </div>
 
-  document.getElementById('claimDailyBtn').onclick = claimDailyQuest;
-  document.getElementById('rerollDailyBtn').onclick = rerollDailyQuest;
-  document.getElementById('historyToggleBtn').onclick = () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageSections:{addTask:false, addCar:false, activeCars:false, soldCars:false}};
-    state.ui.historyOpen = !state.ui.historyOpen;
-    saveState();
-    render();
-  };
+            <div class="carMeta">
+              <div class="metaLine"><span>Savikaina</span><strong>${money(car.buyPrice)}</strong></div>
+              <div class="metaLine"><span>Investuota su darbais</span><strong>${money(cost)}</strong></div>
+              <div class="metaLine"><span>Pelnas</span><strong>${car.sold ? money(carProfit(car)) : '—'}</strong></div>
+              <div class="metaLine"><span>ROI</span><strong>${roi}</strong></div>
+            </div>
 
-  document.querySelectorAll('[data-garage-toggle]').forEach(btn => btn.addEventListener('click', () => {
-    const key = btn.dataset.garageToggle;
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageSections:{addTask:false, addCar:false, activeCars:false, soldCars:false}};
-    state.ui.garageSections = {addTask:false, addCar:false, activeCars:false, soldCars:false, ...(state.ui.garageSections||{})};
-    state.ui.garageSections[key] = !state.ui.garageSections[key];
-    saveState();
-    render();
-  }));
+            <div class="statBar" style="margin-top:9px"><div style="width:${progress}%"></div></div>
+            <div class="smallText" style="margin-top:8px">${completed}/${taskCount || 0} atlikta • ${workTip}</div>
+          </div>
+        </div>
 
-  document.getElementById('addGarageTaskBtn').onclick = () => {
-    const title = document.getElementById('garageTaskTitle').value.trim();
-    const xp = Number(document.getElementById('garageTaskXp').value || 0);
-    const coins = Number(document.getElementById('garageTaskCoins').value || 0);
-    if(!title){
-      toast('Įrašyk užduoties pavadinimą', '✍️');
-      return;
-    }
-    addGarageTask(title, xp, coins);
-    document.getElementById('garageTaskTitle').value = '';
-    document.getElementById('garageTaskXp').value = '20';
-    document.getElementById('garageTaskCoins').value = '10';
-  };
+        <div class="carBody">
+          ${car.notes ? `<div class="notice" style="margin-bottom:10px">${escapeHTML(car.notes)}</div>` : ''}
+          <div class="tagRow">
+            <span class="badgeRing ${scoreCls}">Auto Health Score: ${score}</span>
+            <span class="badgeRing ${car.sold ? 'good' : (carAge(car) >= 12 ? 'warn' : '')}">${car.sold ? 'Parduotas' : `${carAge(car)} d. garaže`}</span>
+            <span class="badgeRing">${expectedText}</span>
+          </div>
 
-  document.getElementById('addCarBtn').onclick = async () => {
-    const name = document.getElementById('carName').value.trim();
-    const buyPrice = Number(document.getElementById('carBuyPrice').value || 0);
-    const file = document.getElementById('carPhoto').files[0];
-    if(!name){
-      toast('Įvesk automobilio pavadinimą', '✍️');
-      return;
-    }
-    if(!buyPrice || buyPrice <= 0){
-      toast('Įvesk pirkimo kainą', '💰');
-      return;
-    }
-    if(!file){
-      toast('Įkelk automobilio nuotrauką', '🖼️');
-      return;
-    }
+          <div class="profitBox">
+            <strong>Profit Preview:</strong> ${car.sold ? `Pardavimas įvykdytas — faktinis pelnas ${money(carProfit(car))}.` : `Jei parduosi už ${money(Number(car.expectedPrice || cost + 0))}, pelnas būtų ${money(Math.max(0, Number(car.expectedPrice || 0) - cost))}.`}
+          </div>
+
+          <div class="miniActions">
+            <button class="btn small secondary" type="button" onclick="window.__app.toggleTaskForm('${car.id}')">+ Pridėti užduotį</button>
+            <button class="btn small secondary" type="button" onclick="window.__app.toggleSellForm('${car.id}')">💸 Parduoti</button>
+          </div>
+
+          <div class="sectionBox ${taskSectionOpen ? 'open' : ''}" id="tasksBox-${car.id}">
+            <button class="sectionBoxHead" type="button" onclick="window.__app.toggleTaskForm('${car.id}', true)">
+              <div>
+                + Pridėti užduotį
+                <span>Darbas, kaina, pastaba ir varnelė</span>
+              </div>
+              <div class="chev">⌄</div>
+            </button>
+            <div class="sectionBoxBody">
+              <div class="sectionBoxBodyInner">
+                <div class="split">
+                  <div class="field">
+                    <label>Užduoties pavadinimas</label>
+                    <input class="input" id="taskTitle-${car.id}" placeholder="Keisti tepalus" />
+                  </div>
+                  <div class="fieldRow">
+                    <div class="field">
+                      <label>Kaina (€)</label>
+                      <input class="input" id="taskCost-${car.id}" type="number" min="0" step="1" placeholder="80" data-action="task-cost-preview" data-car-id="${car.id}" />
+                    </div>
+                    <div class="field">
+                      <label>Pastaba</label>
+                      <input class="input" id="taskNote-${car.id}" placeholder="Kas buvo daroma?" />
+                    </div>
+                  </div>
+                  <button class="btn small" type="button" onclick="window.__app.saveTaskFromCard('${car.id}')">Išsaugoti užduotį</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="taskList" style="margin-top:10px">
+            ${car.tasks && car.tasks.length ? car.tasks.map(t => `
+              <label class="taskItem ${t.done ? 'done' : ''}">
+                <input class="taskCheck" type="checkbox" ${t.done ? 'checked' : ''} data-action="task-done" data-car-id="${car.id}" data-task-id="${t.id}" />
+                <div class="taskMain">
+                  <strong>${escapeHTML(t.title)}</strong>
+                  <span class="sub">${escapeHTML(t.note || 'Be pastabos')}</span>
+                </div>
+                <div class="taskCost">${money(t.cost)}</div>
+              </label>
+            `).join('') : `<div class="emptyState" style="padding:12px">Dar nėra užduočių šiam auto. Pridėk pirmą darbą.</div>`}
+          </div>
+
+          <div class="sectionBox ${sellSectionOpen ? 'open' : ''}" id="sellBox-${car.id}" style="margin-top:10px">
+            <button class="sectionBoxHead" type="button" onclick="window.__app.toggleSellForm('${car.id}', true)">
+              <div>
+                💸 Parduoti automobilį
+                <span>Įvesk pardavimo kainą ir matysi pelno preview</span>
+              </div>
+              <div class="chev">⌄</div>
+            </button>
+            <div class="sectionBoxBody">
+              <div class="sectionBoxBodyInner">
+                <div class="split">
+                  <div class="fieldRow">
+                    <div class="field">
+                      <label>Pardavimo kaina (€)</label>
+                      <input class="input" id="sellPrice-${car.id}" type="number" min="0" step="1" placeholder="2500" data-action="sell-price" data-car-id="${car.id}" value="${car.sold ? car.sellPrice : (car.expectedPrice || '')}" />
+                    </div>
+                    <div class="field">
+                      <label>Pastaba</label>
+                      <input class="input" id="sellNote-${car.id}" placeholder="Kam parduota / koks sandoris?" />
+                    </div>
+                  </div>
+                  <div class="calc" id="sellPreview-${car.id}">
+                    Įvesk pardavimo kainą ir matysi tikslų pelną bei ROI.
+                  </div>
+                  <button class="btn small" type="button" onclick="window.__app.confirmSell('${car.id}')">Patvirtinti pardavimą</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carFoot">
+          <div class="miniStats">
+            <span class="chipStat">${completed} atlikta</span>
+            <span class="chipStat">${carAge(car)} d. garaže</span>
+            ${car.sold ? `<span class="chipStat">${fmtDate(car.soldAt)}</span>` : `<span class="chipStat">Laukia pardavimo</span>`}
+          </div>
+          <button class="miniBtn" type="button" onclick="window.__app.focusCar('${car.id}')">↗</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderSoldCard(car){
+    const profit = carProfit(car);
+    const roi = carROI(car);
+    const imageHtml = car.image ? `<img src="${escapeHTML(car.image)}" alt="">` : `<div>Foto<br>neįkelta</div>`;
+    return `
+      <div class="carCard">
+        <div class="carTop">
+          <div class="carPhoto">${imageHtml}</div>
+          <div class="carMain">
+            <div class="carTitle">
+              <div>
+                <h3>${escapeHTML(car.name)}</h3>
+                <div class="tagRow">
+                  <span class="tag blue">${escapeHTML(car.category || 'Other')}</span>
+                  <span class="tag good">Parduotas</span>
+                  <span class="tag">${fmtDate(car.soldAt)}</span>
+                </div>
+              </div>
+              <span class="score good">+${money(profit)}</span>
+            </div>
+            <div class="carMeta">
+              <div class="metaLine"><span>Pirkimo kaina</span><strong>${money(car.buyPrice)}</strong></div>
+              <div class="metaLine"><span>Pardavimo kaina</span><strong>${money(car.sellPrice)}</strong></div>
+              <div class="metaLine"><span>Pelnas</span><strong>${money(profit)}</strong></div>
+              <div class="metaLine"><span>ROI</span><strong>${roi}%</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="carBody">
+          <div class="notice">${car.notes ? escapeHTML(car.notes) : 'Parduotas auto saugomas archyve su visais skaičiais ir datomis.'}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderLeadCard(lead){
+    const due = daysBetween(lead.lastCallAt || lead.date || todayISO());
+    const remind = reminderText(lead);
+    const badgeCls = due >= 5 ? 'warn' : (due >= 3 ? 'warn' : 'good');
+    return `
+      <div class="leadCard">
+        <div class="leadHead">
+          <div class="leadTitle">
+            <h3>${escapeHTML(lead.name)}</h3>
+            <div class="sub">${remind}</div>
+          </div>
+          <select class="select status" data-action="lead-status" data-lead-id="${lead.id}">
+            ${['Laukiu','Deruosi','Atsisakyta','Nupirkta'].map(s => `<option ${lead.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="leadInfo">
+          <div class="leadMetric"><div class="label">Siūloma kaina</div><strong>${money(lead.offerPrice)}</strong></div>
+          <div class="leadMetric"><div class="label">Norima kaina</div><strong>${money(lead.targetPrice)}</strong></div>
+          <div class="leadMetric"><div class="label">Data</div><strong>${fmtDate(lead.date)}</strong></div>
+          <div class="leadMetric"><div class="label">Paskutinis skambutis</div><strong>${lead.lastCallAt ? fmtDate(lead.lastCallAt) : 'Neskambinta'}</strong></div>
+        </div>
+        <div class="tagRow" style="margin-top:10px">
+          <span class="badgeRing ${badgeCls}">${remind}</span>
+          <span class="badgeRing">Skambinta: ${lead.callCount || 0}</span>
+          <span class="badgeRing">${lead.status}</span>
+        </div>
+        ${lead.notes ? `<div class="notice" style="margin-top:10px">${escapeHTML(lead.notes)}</div>` : ''}
+        <div class="leadActions">
+          <button class="btn small" type="button" onclick="window.__app.callLead('${lead.id}')">Skambinau šiandien</button>
+          <button class="btn small secondary" type="button" onclick="window.__app.quickLeadAction('${lead.id}')">Atnaujinti pasiūlymą</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function updateTaskCostPreview(carId){
+    const input = document.getElementById(`taskCost-${carId}`);
+    const box = document.getElementById(`sellPreview-${carId}`);
+    if(!input || !box) return;
+    const car = state.cars.find(c => c.id === carId);
+    if(!car) return;
+    const cost = carCost(car) + Number(input.value || 0);
+    box.innerHTML = `Jei ši užduotis kainuos <strong>${money(input.value || 0)}</strong>, auto investicija po pridėjimo būtų <strong>${money(Number(car.buyPrice || 0) + (car.tasks||[]).reduce((s,t)=>s+Number(t.cost||0),0) + Number(input.value || 0))}</strong>.`;
+  }
+
+  function updateSellPreview(carId){
+    const input = document.getElementById(`sellPrice-${carId}`);
+    const box = document.getElementById(`sellPreview-${carId}`);
+    const car = state.cars.find(c => c.id === carId);
+    if(!car || !input || !box) return;
+    const sell = Number(input.value || 0);
+    const profit = sell - carCost(car);
+    const roi = carCost(car) ? Math.round((profit / carCost(car))*100) : 0;
+    box.innerHTML = `Pardavus už <strong>${money(sell)}</strong>, pelnas būtų <strong>${money(profit)}</strong> ir ROI <strong>${roi}%</strong>.`;
+  }
+
+  function handleCarPhoto(e, carId){
+    const file = e.target.files && e.target.files[0];
+    if(!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      addCar(name, reader.result, buyPrice);
-      document.getElementById('carName').value = '';
-      document.getElementById('carBuyPrice').value = '';
-      document.getElementById('carPhoto').value = '';
+      const car = state.cars.find(c => c.id === carId);
+      if(!car) return;
+      car.image = reader.result;
+      addAction('photo', `Įkelta foto: ${car.name}`, file.name, 0);
+      saveState();
+      render();
     };
     reader.readAsDataURL(file);
-  };
+  }
 
-  document.getElementById('addImportantBtn').onclick = () => {
-    const title = document.getElementById('importantTitle').value.trim();
-    const xp = Number(document.getElementById('importantXp').value || 0);
-    const coins = Number(document.getElementById('importantCoins').value || 0);
-    if(!title){
-      toast('Įrašyk svarbios užduoties pavadinimą', '✍️');
-      return;
-    }
-    addImportantTask(title, xp, coins);
-    document.getElementById('importantTitle').value = '';
-    document.getElementById('importantXp').value = '20';
-    document.getElementById('importantCoins').value = '10';
-  };
-
-  document.getElementById('themeToggle').onclick = () => {
-    state.theme = state.theme === 'light' ? 'dark' : 'light';
-    toast(state.theme === 'light' ? 'Šviesus režimas' : 'Tamsus režimas', '🎨');
-    saveState(); render();
-  };
-  document.getElementById('soundToggle').onclick = () => {
-    state.sound = !state.sound;
-    toast(`Garsas ${state.sound ? 'įjungtas' : 'išjungtas'}`, '🔊');
-    saveState(); render();
-  };
-  document.getElementById('vibrateToggle').onclick = () => {
-    state.vibrate = !state.vibrate;
-    toast(`Vibracija ${state.vibrate ? 'įjungta' : 'išjungta'}`, '📳');
-    saveState(); render();
-  };
-  document.getElementById('resetBtn').onclick = () => {
-    const ok = window.confirm('Ar tikrai visiškai ištrinti žaidimą ir pradėti iš naujo?');
-    if(!ok) return;
-    localStorage.removeItem(STORAGE_KEY);
-    state = defaultState();
-    state.dailyQuest = rand(dailyQuestPool);
-    state.dailyQuestDate = todayISO();
-    state.worldsUnlocked = [];
-    state.history = [{title:'Sveiki atvykę', desc:'Žaidimas paruoštas startui', icon:'🎮', time: nowLabel()}];
+  function saveTaskFromCard(carId){
+    const title = document.getElementById(`taskTitle-${carId}`)?.value || '';
+    const cost = document.getElementById(`taskCost-${carId}`)?.value || '0';
+    const note = document.getElementById(`taskNote-${carId}`)?.value || '';
+    if(!title.trim()){ toast('Įrašyk užduoties pavadinimą', '⚠️'); return; }
+    addTask(carId, {title, cost, note});
+    document.getElementById(`taskTitle-${carId}`).value = '';
+    document.getElementById(`taskCost-${carId}`).value = '';
+    document.getElementById(`taskNote-${carId}`).value = '';
+    state.ui.carTaskForms[carId] = true;
     saveState();
     render();
-    toast('Žaidimas visiškai nuresetintas', '🧹');
+  }
+
+  function confirmSell(carId){
+    const price = document.getElementById(`sellPrice-${carId}`)?.value || '';
+    if(!String(price).trim()){ toast('Įvesk pardavimo kainą', '⚠️'); return; }
+    sellCar(carId, price);
+  }
+
+  function callLead(leadId){
+    leadCallNow(leadId);
+  }
+
+  function quickLeadAction(leadId){
+    const lead = state.leads.find(l => l.id === leadId);
+    if(!lead) return;
+    openSheet('Greitas veiksmas', `
+      <div class="split">
+        <div class="notice">
+          <strong>${escapeHTML(lead.name)}</strong><br>
+          Pasirink veiksmą: atnaujinti kainą, pažymėti skambutį ar pakeisti statusą.
+        </div>
+        <div class="grid2">
+          <button class="btn" type="button" onclick="window.__app.callLead('${lead.id}');window.__app.closeModal()">Skambinau šiandien</button>
+          <button class="btn secondary" type="button" onclick="window.__app.quickStatus('${lead.id}','Deruosi');window.__app.closeModal()">Deruosi</button>
+          <button class="btn secondary" type="button" onclick="window.__app.quickStatus('${lead.id}','Atsisakyta');window.__app.closeModal()">Atsisakyta</button>
+          <button class="btn secondary" type="button" onclick="window.__app.quickStatus('${lead.id}','Nupirkta');window.__app.closeModal()">Nupirkta</button>
+        </div>
+      </div>
+    `);
+  }
+
+  function quickStatus(leadId, status){
+    updateLeadStatus(leadId, status);
+    toast(`Statusas: ${status}`, '🔁');
+  }
+
+  function focusCar(carId){
+    setView('garage');
+    setTimeout(() => {
+      const el = document.querySelector(`[data-car-id="${carId}"]`);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  }
+
+  function saveCarFromForm(){
+    const name = document.getElementById('carName').value.trim();
+    const category = document.getElementById('carCategory').value;
+    const buyPrice = document.getElementById('carBuyPrice').value;
+    const date = document.getElementById('carDate').value;
+    const notes = document.getElementById('carNotes').value.trim();
+    const expectedPrice = 0;
+    const input = document.getElementById('carPhotoInput');
+    if(!name){ toast('Įrašyk automobilio pavadinimą', '⚠️'); return; }
+    const finish = (image='') => {
+      addCar({name, category, buyPrice, date, notes, expectedPrice, image});
+      document.getElementById('carName').value = '';
+      document.getElementById('carBuyPrice').value = '';
+      document.getElementById('carNotes').value = '';
+      if(input) input.value = '';
+      toast('Automobilis išsaugotas', '🚗');
+    };
+    const file = input && input.files && input.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = () => finish(reader.result);
+      reader.readAsDataURL(file);
+    }else{
+      finish('');
+    }
+  }
+
+  function saveLeadFromForm(){
+    const name = document.getElementById('leadName').value.trim();
+    const offerPrice = document.getElementById('leadOffer').value;
+    const targetPrice = document.getElementById('leadTarget').value;
+    const date = document.getElementById('leadDate').value;
+    const status = document.getElementById('leadStatus').value;
+    const notes = document.getElementById('leadNotes').value.trim();
+    if(!name){ toast('Įrašyk auto pavadinimą', '⚠️'); return; }
+    addLead({name, offerPrice, targetPrice, date, status, notes});
+    document.getElementById('leadName').value = '';
+    document.getElementById('leadOffer').value = '';
+    document.getElementById('leadTarget').value = '';
+    document.getElementById('leadNotes').value = '';
+    toast('Pasiūlymas išsaugotas', '💰');
+  }
+
+  function updateToggles(){
+    document.getElementById('soundToggle').classList.toggle('on', !!state.sound);
+    document.getElementById('vibrateToggle').classList.toggle('on', !!state.vibrate);
+    document.getElementById('addCarAccordion').classList.toggle('open', !!state.ui.addCarOpen);
+    document.getElementById('addLeadAccordion').classList.toggle('open', !!state.ui.addLeadOpen);
+    document.getElementById('soldCarsAccordion').classList.toggle('open', !!state.ui.soldOpen);
+  }
+
+  function resetAll(){
+    if(!confirm('Tikrai ištrinti visą lokalų progresą?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    state = defaultState();
+    state.activeView = 'home';
+    saveState();
+    render();
+    toast('Sistema atnaujinta', '🧹');
+  }
+
+  window.__app = {
+    toggleTaskForm: (carId, open=true) => {
+      state.ui.carTaskForms[carId] = open;
+      saveState();
+      render();
+      if(open) setTimeout(() => {
+        const el = document.getElementById(`tasksBox-${carId}`);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 80);
+    },
+    toggleSellForm: (carId, open=true) => {
+      state.ui.carSellForms[carId] = open;
+      saveState();
+      render();
+      if(open) setTimeout(() => {
+        const el = document.getElementById(`sellBox-${carId}`);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 80);
+    },
+    saveTaskFromCard,
+    confirmSell,
+    callLead,
+    quickLeadAction,
+    quickStatus,
+    focusCar,
+    closeModal: closeSheet
   };
 
-  document.getElementById('modalBackdrop').addEventListener('click', (e) => {
-    if(e.target.id === 'modalBackdrop') closeSheet();
+  // Event wiring
+  document.querySelectorAll('.navBtn').forEach(btn => {
+    btn.addEventListener('click', () => setView(btn.dataset.view));
   });
-  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeSheet(); });
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => toggleAccordion(btn.dataset.toggle));
+  });
+  document.getElementById('saveCarBtn').addEventListener('click', saveCarFromForm);
+  document.getElementById('saveLeadBtn').addEventListener('click', saveLeadFromForm);
+  document.getElementById('goGarageBtn').addEventListener('click', () => setView('garage'));
+  document.getElementById('goLeadsBtn').addEventListener('click', () => setView('leads'));
+  document.getElementById('quickAddCarBtn').addEventListener('click', quickCarFocus);
+  document.getElementById('quickAddLeadBtn').addEventListener('click', generateLeadFromQuick);
+  document.getElementById('markActionBtn').addEventListener('click', markActionDaily);
+  document.getElementById('soundToggle').addEventListener('click', () => { state.sound = !state.sound; saveState(); render(); toast(state.sound ? 'Garsai įjungti' : 'Garsai išjungti', '🔊'); });
+  document.getElementById('vibrateToggle').addEventListener('click', () => { state.vibrate = !state.vibrate; saveState(); render(); toast(state.vibrate ? 'Vibracija įjungta' : 'Vibracija išjungta', '📳'); });
+  document.getElementById('resetBtn').addEventListener('click', resetAll);
+  document.getElementById('modalBackdrop').addEventListener('click', e => { if(e.target.id === 'modalBackdrop') closeSheet(); });
+  document.getElementById('sheet').addEventListener('click', e => e.stopPropagation());
 
-  // init
-  if(!state.dailyQuest) state.dailyQuest = rand(dailyQuestPool);
-  if(!state.dailyQuestDate) state.dailyQuestDate = todayISO();
-  state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageSections:{addTask:false, addCar:false, activeCars:false, soldCars:false}};
-  state.ui.garageSections = {addTask:false, addCar:false, activeCars:false, soldCars:false, ...(state.ui.garageSections||{})};
-  if(state.selectedView === 'skills') state.selectedView = 'menu';
-  if(!state.history.length) state.history.push({title:'Sveiki atvykę', desc:'Žaidimas paruoštas startui', icon:'🎮', time: nowLabel()});
-  checkDateReset();
-  ensureMonthlyCycle();
-  checkWorldUnlocks();
-  checkAchievements();
-  saveState();
+  // default dates
+  document.getElementById('carDate').value = todayISO();
+  document.getElementById('leadDate').value = todayISO();
+
+  // daily reset of today counters
+  if(state.today.date !== todayISO()){
+    state.today = { calls:0, deals:0, tasks:0, date: todayISO() };
+    saveState();
+  }
+
+  // Keep the default add sections open for quick use
+  state.ui.addCarOpen = state.ui.addCarOpen ?? true;
+  state.ui.addLeadOpen = state.ui.addLeadOpen ?? true;
+
+  // Auto-save on page hide
+  window.addEventListener('beforeunload', saveState);
+
   render();
 })();
 </script>
