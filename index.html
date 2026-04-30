@@ -1560,6 +1560,20 @@
       <div id="tasksRoot"></div>
     </div>
 
+    <div class="section">
+      <button class="historyToggle" id="historyToggleBtn" type="button">
+        <div class="historyHeadLine">
+          <div>
+            <strong>Paskutiniai veiksmai</strong>
+            <span id="historyHint">Paspausk, kad pamatytum istoriją</span>
+          </div>
+          <div class="chev" id="historyChev">▸</div>
+        </div>
+      </button>
+      <div class="historyBody" id="historyBody">
+        <div class="historyList" id="historyRoot"></div>
+      </div>
+    </div>
   </div>
 
 
@@ -1848,7 +1862,7 @@
 
   <div class="view" id="view-achievements">
 
-    <div class="sectionHead"><h2>Žaidimas</h2></div>
+    <div class="sectionHead"><h2>Žaidimas</h2><span>profilis / miestai / veiksmai</span></div>
     <div id="achievementsRoot"></div>
   </div>
 
@@ -2464,9 +2478,7 @@ function defaultGameState(){
   return {
     name:'Žaidėjas',
     avatar:'🧑‍💼',
-    menu:'actions',
-    profileOpen:false,
-    menuOpen:false,
+    menu:'profile',
     city:'utena',
     level:1,
     xp:0,
@@ -2477,9 +2489,6 @@ function defaultGameState(){
     reputation:0,
     cityRep: Object.fromEntries(GAME_CITIES.map(c => [c.id, 0])),
     projects: [],
-    investments: [],
-    investmentProfit:0,
-    investmentLastTick:todayISO(),
     lastIncomeClaimDate:'',
     casinoBet:25,
     history: [],
@@ -2493,13 +2502,8 @@ function normalizeGame(game){
   const g = {...base, ...(game||{})};
   g.cityRep = {...base.cityRep, ...(game?.cityRep || {})};
   g.projects = Array.isArray(game?.projects) ? game.projects.slice() : [];
-  g.investments = Array.isArray(game?.investments) ? game.investments.slice() : [];
-  g.investmentProfit = Number(game?.investmentProfit || 0);
-  g.investmentLastTick = game?.investmentLastTick || todayISO();
-  g.history = [];
-  g.menu = ['actions','cities','build','casino','bank','invest'].includes(g.menu) ? g.menu : 'actions';
-  g.profileOpen = !!game?.profileOpen;
-  g.menuOpen = game?.menuOpen == null ? false : !!game?.menuOpen;
+  g.history = Array.isArray(game?.history) ? game.history.slice(0, 16) : [];
+  g.menu = ['profile','cities','actions','build','casino','bank'].includes(g.menu) ? g.menu : 'profile';
   if(!GAME_CITIES.some(c => c.id === g.city)) g.city = 'utena';
   g.level = Math.max(1, Number(g.level) || 1);
   g.xp = Math.max(0, Number(g.xp) || 0);
@@ -2519,12 +2523,14 @@ function ensureGameState(){
     state.game.dayKey = todayISO();
     state.game.energy = 100;
     state.game.lastIncomeClaimDate = '';
+    state.game.history.unshift({title:'Nauja diena', desc:'Energija atstatyta', icon:'☀️', time: nowLabel()});
+    state.game.history = state.game.history.slice(0,16);
   }
-  gameAdvanceInvestments();
 }
 
 function gameLog(title, desc, icon='🎮'){
-  state.game.lastAction = `${title} · ${desc}`;
+  state.game.history.unshift({title, desc, icon, time: nowLabel()});
+  state.game.history = state.game.history.slice(0, 12);
 }
 
 function gameXpNeed(){
@@ -2807,296 +2813,14 @@ function gamePruneHistory(){
   state.game.history = state.game.history.slice(0, 12);
 }
 
-
-const GAME_INVESTMENTS = [
-  {id:'index', name:'Baltas indeksas', icon:'📈', req:1, min:50, range:[-0.8, 1.8], risk:'žema'},
-  {id:'bond', name:'Obligacijos', icon:'🏛️', req:2, min:50, range:[0.1, 0.8], risk:'labai žema'},
-  {id:'gold', name:'Auksas', icon:'🥇', req:3, min:60, range:[-0.9, 2.1], risk:'žema'},
-  {id:'realty', name:'NT fondas', icon:'🏢', req:3, min:100, range:[-0.2, 1.2], risk:'žema'},
-  {id:'startup', name:'Startuolis', icon:'🚀', req:4, min:80, range:[-3.5, 6.5], risk:'vidutinė'},
-  {id:'crypto', name:'Kriptas', icon:'🪙', req:2, min:40, range:[-6, 9], risk:'aukšta'}
-];
-
-function gameAdvanceInvestments(){
-  const today = todayISO();
-  const last = state.game.investmentLastTick || today;
-  const days = Math.max(0, daysBetweenISO(last, today));
-  if(days <= 0) return;
-
-  state.game.investments = (state.game.investments || []).map(inv => {
-    const def = GAME_INVESTMENTS.find(d => d.id === inv.kind) || GAME_INVESTMENTS[0];
-    let value = Number(inv.value || inv.amount || 0);
-    const history = Array.isArray(inv.history) ? inv.history.slice() : [];
-    for(let i=0; i<days; i++){
-      const levelBoost = Math.min(1.0, (state.game.level - 1) * 0.02);
-      const repBoost = Math.max(-0.6, Math.min(0.6, state.game.reputation / 100));
-      const pct = (Math.random() * (def.range[1] - def.range[0]) + def.range[0]) + levelBoost + repBoost * 0.2;
-      value = Math.max(0, Math.round(value * (1 + pct / 100)));
-      history.unshift({date:addDaysISO(last, i + 1), pct:Math.round(pct * 100) / 100, value});
-    }
-    return {...inv, value, daysHeld:(inv.daysHeld || 0) + days, history:history.slice(0, 8)};
-  });
-
-  state.game.investmentLastTick = today;
-}
-
-function gameInvestmentStats(){
-  const active = state.game.investments || [];
-  const invested = active.reduce((sum, inv) => sum + Number(inv.amount || 0), 0);
-  const current = active.reduce((sum, inv) => sum + Number(inv.value || inv.amount || 0), 0);
-  const unrealized = current - invested;
-  const realized = Number(state.game.investmentProfit || 0);
-  return {
-    count: active.length,
-    invested,
-    current,
-    unrealized,
-    realized,
-    total: realized + unrealized
-  };
-}
-
-function gameToggleProfile(){
-  state.game.profileOpen = !state.game.profileOpen;
-  saveState();
-  render();
-}
-
-function gameToggleMenu(){
-  state.game.menuOpen = !state.game.menuOpen;
-  saveState();
-  render();
-}
-
-function gameSelectTab(tab){
-  state.game.menu = ['cities','actions','build','casino','bank','invest'].includes(tab) ? tab : 'actions';
-  state.game.menuOpen = true;
-  saveState();
-  render();
-}
-
-function gameSelectCity(cityId){
-  const city = gameCity(cityId);
-  if(state.game.level < city.unlock){
-    toast('Miestas užrakintas', `Reikia ${city.unlock} lvl`);
-    return;
-  }
-  state.game.city = cityId;
-  state.game.menu = 'actions';
-  state.game.menuOpen = true;
-  saveState();
-  render();
-}
-
-function gameBuyProject(projectId){
-  const project = gameProjectById(projectId);
-  if(!project) return;
-  if(state.game.projects.includes(projectId)){ toast('Jau pastatyta', '🏗️'); return; }
-  if(state.game.level < project.req){ toast(`Reikia ${project.req} lvl`, '🔒'); return; }
-  if(state.game.coins < project.cost){ toast('Per mažai monetų', '🪙'); return; }
-  state.game.coins -= project.cost;
-  state.game.projects.push(projectId);
-  state.game.reputation = clamp(state.game.reputation + 2, -100, 100);
-  gameAddXp(project.req * 12);
-  toast(`${project.name} pastatytas`, `-${moneyFmt(project.cost)}`);
-  playChime(860);
-  spark();
-  saveState();
-  render();
-}
-
-function gameClaimIncome(){
-  ensureGameState();
-  const today = todayISO();
-  if(state.game.lastIncomeClaimDate === today){
-    toast('Pelnas jau surinktas', '🪙');
-    return;
-  }
-  const income = gameProjectIncome();
-  if(income <= 0){ toast('Nėra ką surinkti', '🏗️'); return; }
-  state.game.coins += income;
-  state.game.lastIncomeClaimDate = today;
-  gameAddXp(Math.max(4, Math.floor(income / 2)));
-  toast('Surinktas dienos pelnas', `+${moneyFmt(income)}`);
-  playChime(980);
-  spark();
-  saveState();
-  render();
-}
-
-function gameBank(kind){
-  const amount = Math.max(0, Number(document.getElementById('gameBankAmount')?.value || 0));
-  if(kind === 'deposit'){
-    if(!amount || state.game.coins < amount){ toast('Nėra ką padėti', '🏦'); return; }
-    state.game.coins -= amount;
-    state.game.bank += amount;
-    gameAddXp(6);
-    toast('Pinigai padėti į banką', `-${moneyFmt(amount)}`);
-    playChime(740);
-  }else if(kind === 'withdraw'){
-    if(!amount || state.game.bank < amount){ toast('Banke nėra tiek', '🏦'); return; }
-    state.game.bank -= amount;
-    state.game.coins += amount;
-    gameAddXp(4);
-    toast('Pinigai išimti', `+${moneyFmt(amount)}`);
-    playChime(760);
-  }else if(kind === 'loan'){
-    const loan = amount || 100;
-    state.game.loan += loan;
-    state.game.coins += loan;
-    gameAddXp(8);
-    toast('Paskola gauta', `+${moneyFmt(loan)}`);
-    playChime(820);
-  }else if(kind === 'repay'){
-    if(!amount || state.game.coins < amount || state.game.loan <= 0){ toast('Negali grąžinti', '📄'); return; }
-    const pay = Math.min(amount, state.game.loan);
-    state.game.coins -= pay;
-    state.game.loan -= pay;
-    gameAddXp(5);
-    toast('Paskola grąžinta', `-${moneyFmt(pay)}`);
-    playChime(700);
-  }
-  state.game.lastAction = `Bankas · ${kind}`;
-  saveState();
-  render();
-}
-
-function gameCasino(kind){
-  const bet = Math.max(1, Number(document.getElementById('gameCasinoBet')?.value || state.game.casinoBet || 25));
-  state.game.casinoBet = bet;
-  if(state.game.coins < bet){ toast('Per mažai monetų', '🎲'); return; }
-
-  state.game.coins -= bet;
-  let win = 0;
-  let label = '';
-
-  if(kind === 'roulette'){
-    const roll = Math.random();
-    if(roll < 0.48){ win = bet * 2; label = 'Ruletė laimėta'; }
-    else { label = 'Ruletė pralaimėta'; }
-  }else if(kind === 'slots'){
-    const roll = Math.random();
-    if(roll < 0.18){ win = bet * 5; label = 'Didelis slotų laimėjimas'; }
-    else if(roll < 0.45){ win = Math.floor(bet * 1.5); label = 'Mažas slotų laimikis'; }
-    else { label = 'Slotai tušti'; }
-  }else if(kind === 'allin'){
-    const roll = Math.random();
-    if(roll < 0.5){ win = bet * 2; label = 'All-in pavyko'; }
-    else { label = 'All-in sudegė'; }
-  }
-
-  state.game.coins += win;
-  gameAddXp(win > bet ? 14 : win > 0 ? 8 : 4);
-  state.game.reputation = clamp(state.game.reputation + (win > 0 ? -1 : -2), -100, 100);
-  toast(label, win ? `+${moneyFmt(win - bet)}` : `-${moneyFmt(bet)}`);
-  playChime(win ? 980 : 480);
-  spark();
-  state.game.lastAction = `Kazino · ${kind}`;
-  saveState();
-  render();
-}
-
-function gameBuyInvestment(kind){
-  const def = GAME_INVESTMENTS.find(x => x.id === kind);
-  if(!def) return;
-  if(state.game.level < def.req){ toast(`Reikia ${def.req} lvl`, '🔒'); return; }
-  const amountInput = document.querySelector(`[data-invest-amount="${kind}"]`);
-  const amount = Math.max(def.min, Number(amountInput?.value || def.min));
-  if(state.game.coins < amount){ toast('Per mažai monetų', '🪙'); return; }
-
-  state.game.coins -= amount;
-  state.game.investments.unshift({
-    id: uid(),
-    kind,
-    amount,
-    value: amount,
-    boughtAt: todayISO(),
-    daysHeld: 0,
-    history: []
-  });
-  state.game.lastAction = `Investicija · ${def.name}`;
-  toast(`Pirktas ${def.name}`, `-${moneyFmt(amount)}`);
-  playChime(920);
-  spark();
-  saveState();
-  render();
-}
-
-function gameSellInvestment(id){
-  const idx = (state.game.investments || []).findIndex(x => x.id === id);
-  if(idx < 0) return;
-  const inv = state.game.investments[idx];
-  const def = GAME_INVESTMENTS.find(x => x.id === inv.kind) || GAME_INVESTMENTS[0];
-  const sellValue = Math.max(0, Math.round(Number(inv.value || inv.amount || 0)));
-  const profit = sellValue - Number(inv.amount || 0);
-  state.game.coins += sellValue;
-  state.game.investmentProfit = Number(state.game.investmentProfit || 0) + profit;
-  state.game.investments.splice(idx, 1);
-  state.game.lastAction = `Investicija · ${def.name} parduota`;
-  gameAddXp(Math.max(4, Math.floor(Math.abs(profit) / 10) + 4));
-  toast(`${def.name} parduota`, `${profit >= 0 ? '+' : ''}${moneyFmt(profit)}`);
-  playChime(profit >= 0 ? 980 : 380);
-  spark(profit >= 0 ? '✨' : '💥');
-  saveState();
-  render();
-}
-
-function gameRenderProfile(){
-  return `
-    <div class="gamePanel gameFade">
-      <div class="gameRow2">
-        <div class="gameStat">
-          <div class="label">👤 Vardas</div>
-          <div class="value">${escapeHTML(state.game.name)}</div>
-        </div>
-        <div class="gameStat">
-          <div class="label">🚀 Avataras</div>
-          <div class="value">${escapeHTML(state.game.avatar)}</div>
-        </div>
-      </div>
-      <div style="height:12px"></div>
-      <div class="field">
-        <label>Vardas</label>
-        <input class="input" id="gameNameInput" value="${escapeHTML(state.game.name)}" placeholder="Įrašyk vardą" />
-      </div>
-      <div class="field">
-        <label>Avatarai</label>
-        <div class="gameAvatarGrid">
-          ${GAME_AVATARS.map(a => `<button class="gameAvatarBtn ${state.game.avatar===a ? 'active' : ''}" data-game-avatar="${a}" type="button">${a}</button>`).join('')}
-        </div>
-      </div>
-      <button class="btn" data-game-save-profile type="button" style="width:100%">Išsaugoti</button>
-    </div>
-  `;
-}
-
-function gameRenderMenu(){
-  const tabs = [
-    ['cities','Miestai','🏙️'],
-    ['actions','Veiksmai','⚡'],
-    ['build','Statyba','🏗️'],
-    ['casino','Kazino','🎰'],
-    ['bank','Bankas','🏦'],
-    ['invest','Investicijos','📈']
-  ];
-  return `
-    <div class="gameMenuGrid">
-      ${tabs.map(([id,title,icon]) => `
-        <button class="gameMenuBtn ${state.game.menu===id ? 'active' : ''}" type="button" data-game-tab="${id}">
-          <div class="icon">${icon}</div>
-          <div>
-            <strong>${title}</strong>
-          </div>
-        </button>
-      `).join('')}
-    </div>
-  `;
-}
-
 function gameRenderCities(){
   const city = gameCity(state.game.city);
   return `
     <div class="gamePanel gameFade">
+      <div class="gameHintBox">
+        Pasirink miestą, atrakink naujus lygius ir pereik į kitus pastatus. Kiekvienas miestas turi savo bonusą.
+      </div>
+      <div style="height:10px"></div>
       <div class="gameCityGrid">
         ${GAME_CITIES.map(c => {
           const locked = state.game.level < c.unlock;
@@ -3107,18 +2831,21 @@ function gameRenderCities(){
               <div class="top">
                 <div>
                   <strong>${escapeHTML(c.name)}</strong>
+                  <div class="meta">${escapeHTML(c.bonus)}</div>
                 </div>
                 <div class="emoji">${c.emoji}</div>
               </div>
-              <div class="meta">${escapeHTML(c.bonus)}</div>
+              <div class="meta">${escapeHTML(locked ? 'Užrakinta' : c.desc)}</div>
             </button>
           `;
         }).join('')}
       </div>
       <div style="height:12px"></div>
-      <div class="gameRow2">
-        <div class="gameStat"><div class="label">📍 Miestas</div><div class="value">${escapeHTML(city.name)}</div></div>
-        <div class="gameStat"><div class="label">✨ Rep</div><div class="value">${state.game.cityRep[city.id] || 0}</div></div>
+      <div class="gamePanel">
+        <div class="gameRow2">
+          <div class="gameStat"><div class="label">📍 Dabar</div><div class="value">${escapeHTML(city.name)}</div><div class="hint">${escapeHTML(city.desc)}</div></div>
+          <div class="gameStat"><div class="label">✨ Miesto rep</div><div class="value">${state.game.cityRep[city.id] || 0}</div><div class="hint">${escapeHTML(city.bonus)}</div></div>
+        </div>
       </div>
     </div>
   `;
@@ -3128,9 +2855,13 @@ function gameRenderActions(){
   const city = gameCity(state.game.city);
   return `
     <div class="gamePanel gameFade">
+      <div class="gameHintBox">
+        Čia yra tavo miesto pastatai. Kiekviename pastate – trys veiksmai. Aukštesnis lygis atrakina geresnius veiksmus.
+      </div>
+      <div style="height:10px"></div>
       <div class="gameBuildingGrid">
         ${city.buildings.map(([type, title, icon]) => {
-          const actions = (GAME_ACTION_LIBRARY[type] || []);
+          const actions = GAME_ACTION_LIBRARY[type] || [];
           return `
             <div class="gameBuildingCard">
               <div class="gameBuildingTop">
@@ -3138,9 +2869,10 @@ function gameRenderActions(){
                   <div class="gameBuildingIcon">${icon}</div>
                   <div>
                     <strong>${escapeHTML(title)}</strong>
+                    <div>${escapeHTML(GAME_BUILDING_LABEL(type))}</div>
                   </div>
                 </div>
-                <span class="gamePill">${GAME_BUILDING_LABEL(type)}</span>
+                <span class="gamePill">${type}</span>
               </div>
               <div class="gameActionRow">
                 ${actions.map(a => {
@@ -3148,7 +2880,7 @@ function gameRenderActions(){
                   return `
                     <button class="btn ${locked ? 'secondary' : ''} gameActionBtn" data-game-action="${a.id}" data-game-city="${city.id}" data-game-building="${type}" ${locked ? 'disabled' : ''} type="button">
                       ${escapeHTML(a.label)}
-                      <small>${a.restore ? `+${a.restore}` : `${a.chance}%`}</small>
+                      <small>${a.restore ? `+${a.restore} energ.` : `${a.chance}%`}</small>
                     </button>
                   `;
                 }).join('')}
@@ -3161,22 +2893,58 @@ function gameRenderActions(){
   `;
 }
 
+function gameRenderProfile(){
+  return `
+    <div class="gamePanel gameFade">
+      <div class="gameRow2">
+        <div class="gameStat">
+          <div class="label">👤 Vardas</div>
+          <div class="value">${escapeHTML(state.game.name)}</div>
+          <div class="hint">Prisitaikyk žmogeliuką.</div>
+        </div>
+        <div class="gameStat">
+          <div class="label">🚀 Stilius</div>
+          <div class="value">${escapeHTML(state.game.avatar)}</div>
+          <div class="hint">Pasirink avatarą.</div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="field">
+        <label>Vardas</label>
+        <input class="input" id="gameNameInput" value="${escapeHTML(state.game.name)}" placeholder="Įrašyk vardą" />
+      </div>
+      <button class="btn" data-game-save-profile type="button" style="width:100%">Išsaugoti profilį</button>
+      <div style="height:12px"></div>
+      <div class="field">
+        <label>Avatarai</label>
+        <div class="gameAvatarGrid">
+          ${GAME_AVATARS.map(a => `<button class="gameAvatarBtn ${state.game.avatar===a ? 'active' : ''}" data-game-avatar="${a}" type="button">${a}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function gameRenderBuild(){
   const owned = gameOwnedProjects();
   return `
     <div class="gamePanel gameFade">
+      <div class="gameHintBox">
+        Pasistatai projektą, gauni dienos pelną ir keli savo imperiją. Kuo daugiau pastatytų vietų – tuo stipresnis srautas.
+      </div>
+      <div style="height:12px"></div>
       <div class="gameRow2">
-        <div class="gameStat"><div class="label">🏗️ Pastatyta</div><div class="value">${owned.length}</div></div>
-        <div class="gameStat"><div class="label">💸 Pelnas/d.</div><div class="value">${moneyFmt(gameProjectIncome())}</div></div>
+        <div class="gameStat"><div class="label">🏗️ Pastatyta</div><div class="value">${owned.length}</div><div class="hint">projektai</div></div>
+        <div class="gameStat"><div class="label">💸 Pelnas/diena</div><div class="value">${moneyFmt(gameProjectIncome())}</div><div class="hint">surinkimas 1 kartą per dieną</div></div>
       </div>
       <div class="btnRow">
-        <button class="btn secondary" type="button" data-game-collect-income>Surinkti</button>
-        <button class="btn secondary" type="button" data-game-reset-income>Atnaujinti</button>
+        <button class="btn secondary" type="button" data-game-collect-income>Surinkti dienos pelną</button>
+        <button class="btn secondary" type="button" data-game-reset-income>Atnaujinti pelną</button>
       </div>
       <div style="height:12px"></div>
       <div class="gameProjectGrid">
         ${GAME_PROJECTS.map(p => {
-          const isOwned = state.game.projects.includes(p.id);
+          const owned = state.game.projects.includes(p.id);
           return `
             <div class="gameProjectCard">
               <div class="gameProjectTop">
@@ -3184,6 +2952,7 @@ function gameRenderBuild(){
                   <div class="gameProjectIcon">${p.icon}</div>
                   <div>
                     <strong>${escapeHTML(p.name)}</strong>
+                    <div class="desc">${escapeHTML(p.desc)}</div>
                   </div>
                 </div>
                 <span class="gamePill">${moneyFmt(p.cost)}</span>
@@ -3191,10 +2960,10 @@ function gameRenderBuild(){
               <div class="gameProjectMeta">
                 <span class="gamePill">+${moneyFmt(p.income)}/d.</span>
                 <span class="gamePill">lvl ${p.req}</span>
-                <span class="gamePill ${isOwned ? 'good' : ''}">${isOwned ? 'Pastatyta' : 'Laisva'}</span>
+                <span class="gamePill ${owned ? 'good' : ''}">${owned ? 'Pastatyta' : 'Laisva'}</span>
               </div>
               <div class="btnRow" style="margin-top:10px">
-                <button class="btn ${isOwned ? 'secondary' : ''}" type="button" data-game-project="${p.id}" ${isOwned ? 'disabled' : ''}>${isOwned ? 'Jau pastatyta' : 'Pirkti / statyti'}</button>
+                <button class="btn ${owned ? 'secondary' : ''}" type="button" data-game-project="${p.id}" ${owned ? 'disabled' : ''}>${owned ? 'Jau pastatyta' : 'Pirkti / statyti'}</button>
               </div>
             </div>
           `;
@@ -3208,8 +2977,8 @@ function gameRenderCasino(){
   return `
     <div class="gamePanel gameFade">
       <div class="gameRow2">
-        <div class="gameStat"><div class="label">🎲 Betas</div><div class="value">${moneyFmt(state.game.casinoBet)}</div></div>
-        <div class="gameStat"><div class="label">🏦 Bankas</div><div class="value">${moneyFmt(state.game.bank)}</div></div>
+        <div class="gameStat"><div class="label">🎲 Betas</div><div class="value">${moneyFmt(state.game.casinoBet)}</div><div class="hint">keisk apačioje</div></div>
+        <div class="gameStat"><div class="label">🏦 Bankas</div><div class="value">${moneyFmt(state.game.bank)}</div><div class="hint">jei pralaimi, bent taupai</div></div>
       </div>
       <div style="height:12px"></div>
       <div class="field">
@@ -3220,6 +2989,9 @@ function gameRenderCasino(){
         <button class="btn" type="button" data-game-casino="roulette">Ruletė</button>
         <button class="btn secondary" type="button" data-game-casino="slots">Slotas</button>
         <button class="btn danger" type="button" data-game-casino="allin">All-in</button>
+        <div class="gameCasinoCard" style="grid-column:1/-1">
+          <div class="gameHintBox">Ruletė dažniau meta vidutinį rezultatą, slotas – vieną didesnį laimėjimą, all-in – tik kai nori viską arba nieko.</div>
+        </div>
       </div>
     </div>
   `;
@@ -3244,76 +3016,50 @@ function gameRenderBank(){
         <button class="btn" type="button" data-game-bank="loan">Paskola</button>
         <button class="btn danger" type="button" data-game-bank="repay">Grąžinti</button>
       </div>
+      <div style="height:12px"></div>
+      <div class="gameHintBox">Palūkanos gali būti surenkamos dienos pradžioje. Paskola duoda greitą kapitalą, bet augina skolą.</div>
     </div>
   `;
 }
 
-function gameRenderInvest(){
-  const stats = gameInvestmentStats();
+function gameRenderMenu(){
+  const tabs = [
+    ['profile','Profilis','👤','Vardas ir avataras'],
+    ['cities','Miestai','🏙️','10 miestų žemėlapis'],
+    ['actions','Veiksmai','⚡','Pastatai ir misijos'],
+    ['build','Statyba','🏗️','Projektai ir pelnas'],
+    ['casino','Kazino','🎰','Rizika ir laimėjimai'],
+    ['bank','Bankas','🏦','Taupyk ir skolinkis']
+  ];
+  return `
+    <div class="gameMenuGrid">
+      ${tabs.map(([id,title,icon,desc]) => `
+        <button class="gameMenuBtn ${state.game.menu===id ? 'active' : ''}" type="button" data-game-tab="${id}">
+          <div class="icon">${icon}</div>
+          <div>
+            <strong>${title}</strong>
+            <div>${desc}</div>
+          </div>
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function gameRenderLog(){
   return `
     <div class="gamePanel gameFade">
-      <div class="gameRow2">
-        <div class="gameStat"><div class="label">Įdėta</div><div class="value">${moneyFmt(stats.invested)}</div></div>
-        <div class="gameStat"><div class="label">Dabar</div><div class="value">${moneyFmt(stats.current)}</div></div>
+      <div class="sectionHead" style="margin:0 0 10px">
+        <h2 style="margin:0;font-size:16px;font-weight:900;letter-spacing:-.02em">Istorija</h2>
+        <span>paskutiniai ėjimai</span>
       </div>
-      <div style="height:10px"></div>
-      <div class="gameRow2">
-        <div class="gameStat"><div class="label">Nerealizuota</div><div class="value">${(stats.unrealized >= 0 ? '+' : '') + moneyFmt(stats.unrealized)}</div></div>
-        <div class="gameStat"><div class="label">Realizuota</div><div class="value">${(stats.realized >= 0 ? '+' : '') + moneyFmt(stats.realized)}</div></div>
-      </div>
-      <div style="height:12px"></div>
-      <div class="gameProjectGrid">
-        ${GAME_INVESTMENTS.map(def => `
-          <div class="gameProjectCard">
-            <div class="gameProjectTop">
-              <div style="display:flex;gap:10px;min-width:0">
-                <div class="gameProjectIcon">${def.icon}</div>
-                <div>
-                  <strong>${escapeHTML(def.name)}</strong>
-                </div>
-              </div>
-              <span class="gamePill">lvl ${def.req}</span>
-            </div>
-            <div class="gameProjectMeta">
-              <span class="gamePill">${moneyFmt(def.min)}</span>
-              <span class="gamePill">${escapeHTML(def.risk)}</span>
-            </div>
-            <div class="field" style="margin-top:10px">
-              <label>Suma</label>
-              <input class="input" type="number" min="${def.min}" step="1" value="${def.min}" data-invest-amount="${def.id}" />
-            </div>
-            <button class="btn" type="button" data-invest-buy="${def.id}">Pirkti</button>
+      <div class="gameLogList">
+        ${(state.game.history.length ? state.game.history : [{title:'Pradėk žaidimą', desc:'Atlik pirmą veiksmą', icon:'🎮', time: nowLabel()}]).map(item => `
+          <div class="gameLogItem">
+            <div class="gameLogIcon">${item.icon}</div>
+            <div><strong>${escapeHTML(item.title)}</strong><div>${escapeHTML(item.desc)}</div></div>
           </div>
         `).join('')}
-      </div>
-      <div style="height:12px"></div>
-      <div class="sectionHead"><h2>Portfelis</h2><span>${stats.count} pozicijos</span></div>
-      <div class="gameProjectGrid">
-        ${(state.game.investments || []).length ? state.game.investments.map(inv => {
-          const def = GAME_INVESTMENTS.find(x => x.id === inv.kind) || GAME_INVESTMENTS[0];
-          const profit = Number(inv.value || 0) - Number(inv.amount || 0);
-          return `
-            <div class="gameProjectCard">
-              <div class="gameProjectTop">
-                <div style="display:flex;gap:10px;min-width:0">
-                  <div class="gameProjectIcon">${def.icon}</div>
-                  <div>
-                    <strong>${escapeHTML(def.name)}</strong>
-                  </div>
-                </div>
-                <span class="gamePill">${inv.daysHeld || 0} d.</span>
-              </div>
-              <div class="gameProjectMeta">
-                <span class="gamePill">Įdėta ${moneyFmt(inv.amount)}</span>
-                <span class="gamePill">Dabar ${moneyFmt(inv.value || inv.amount)}</span>
-                <span class="gamePill ${profit >= 0 ? 'good' : 'warn'}">${profit >= 0 ? '+' : ''}${moneyFmt(profit)}</span>
-              </div>
-              <div class="btnRow" style="margin-top:10px">
-                <button class="btn secondary" type="button" data-invest-sell="${inv.id}">Parduoti</button>
-              </div>
-            </div>
-          `;
-        }).join('') : `<div class="emptyState">Portfelis tuščias.</div>`}
       </div>
     </div>
   `;
@@ -3321,18 +3067,20 @@ function gameRenderInvest(){
 
 function renderGamePage(){
   ensureGameState();
+  gamePruneHistory();
   const city = gameCity(state.game.city);
   const xpNeed = gameXpNeed();
   const xpPct = clamp(Math.round((state.game.xp / xpNeed) * 100), 0, 100);
   const income = gameProjectIncome();
+
   const activeTab = state.game.menu;
-  const activeBody = activeTab === 'cities' ? gameRenderCities()
+  const activeBody = activeTab === 'profile' ? gameRenderProfile()
+    : activeTab === 'cities' ? gameRenderCities()
     : activeTab === 'actions' ? gameRenderActions()
     : activeTab === 'build' ? gameRenderBuild()
     : activeTab === 'casino' ? gameRenderCasino()
     : activeTab === 'bank' ? gameRenderBank()
-    : activeTab === 'invest' ? gameRenderInvest()
-    : gameRenderActions();
+    : gameRenderProfile();
 
   document.getElementById('achievementsRoot').innerHTML = `
     <div class="gameShell">
@@ -3340,11 +3088,12 @@ function renderGamePage(){
         <div class="gameHeroTop">
           <div>
             <div class="badge good">🎮 Žaidimas</div>
-            <h3>${escapeHTML(state.game.name)}</h3>
+            <h3>${escapeHTML(state.game.name)} · ${escapeHTML(city.name)}</h3>
+            <p>Susikurk žmogeliuką, kelk žaidimo lygį, statyk projektus, keliauk per miestus ir rink dienos pelną.</p>
           </div>
           <div style="text-align:right">
-            <div class="badge info">${escapeHTML(city.name)}</div>
-            <div style="margin-top:8px" class="badge">${moneyFmt(state.game.coins)}</div>
+            <div class="badge info">📍 ${escapeHTML(city.name)}</div>
+            <div style="margin-top:8px" class="badge">${escapeHTML(city.bonus)}</div>
           </div>
         </div>
 
@@ -3355,44 +3104,167 @@ function renderGamePage(){
         </div>
 
         <div class="gameStatGrid">
-          <div class="gameStat"><div class="label">🪙 Monetos</div><div class="value">${moneyFmt(state.game.coins)}</div></div>
-          <div class="gameStat"><div class="label">🏦 Bankas</div><div class="value">${moneyFmt(state.game.bank)}</div></div>
-          <div class="gameStat"><div class="label">⚡ Energija</div><div class="value">${state.game.energy}</div></div>
+          <div class="gameStat"><div class="label">🪙 Monetos</div><div class="value">${moneyFmt(state.game.coins)}</div><div class="hint">Žaidimo valiuta</div></div>
+          <div class="gameStat"><div class="label">🏦 Bankas</div><div class="value">${moneyFmt(state.game.bank)}</div><div class="hint">Taupymas</div></div>
+          <div class="gameStat"><div class="label">⚡ Energija</div><div class="value">${state.game.energy}</div><div class="hint">Veiksmams</div></div>
         </div>
 
         <div class="gameRow2">
-          <div class="gameStat"><div class="label">⭐ Reputacija</div><div class="value">${state.game.reputation}</div></div>
-          <div class="gameStat"><div class="label">🏗️ Pelnas/d.</div><div class="value">${moneyFmt(income)}</div></div>
-        </div>
-
-        <div class="gameRow2" style="margin-top:2px">
-          <button class="btn secondary" type="button" data-game-toggle-profile>Žaidėjas</button>
-          <button class="btn secondary" type="button" data-game-toggle-menu>Meniu</button>
+          <div class="gameStat"><div class="label">⭐ Reputacija</div><div class="value">${state.game.reputation}</div><div class="hint">Įtaka ir pasitikėjimas</div></div>
+          <div class="gameStat"><div class="label">🏗️ Pelnas/diena</div><div class="value">${moneyFmt(income)}</div><div class="hint">Iš pastatytų projektų</div></div>
         </div>
       </div>
 
-      ${state.game.profileOpen ? `
-      <div class="panel">
-        <div class="sectionHead"><h2>Žaidėjas</h2></div>
-        ${gameRenderProfile()}
-      </div>` : ''}
-
-      ${state.game.menuOpen ? `
-      <div class="panel pad">
-        <div class="sectionHead" style="margin:0 0 10px">
-          <h2>Meniu</h2>
-          <span>${state.game.menu === 'actions' ? 'Veiksmai' : state.game.menu === 'cities' ? 'Miestai' : state.game.menu === 'build' ? 'Statyba' : state.game.menu === 'casino' ? 'Kazino' : state.game.menu === 'bank' ? 'Bankas' : 'Investicijos'}</span>
-        </div>
+      <div class="gamePanel">
+        <div class="sectionHead" style="margin:0 0 10px"><h2 style="margin:0;font-size:16px;font-weight:900">Main menu</h2><span>Pasirink kryptį</span></div>
         ${gameRenderMenu()}
       </div>
+
       <div class="section">
+        <div class="sectionHead"><h2>${activeTab === 'profile' ? 'Profilis' : activeTab === 'cities' ? 'Miestai' : activeTab === 'actions' ? 'Veiksmai' : activeTab === 'build' ? 'Statyba' : activeTab === 'casino' ? 'Kazino' : 'Bankas'}</h2><span>${escapeHTML(city.name)}</span></div>
         ${activeBody}
-      </div>` : ''}
+      </div>
+
+      <div class="section">
+        ${gameRenderLog()}
+      </div>
     </div>
   `;
 }
 
-function carChecklistExpenses(car){
+  const defaultState = () => ({
+    theme:'light',
+    sound:true,
+    vibrate:true,
+    selectedView:'home',
+    level:1,
+    xp:0,
+    coins:0,
+    streak:0,
+    maxStreak:0,
+    lastActiveDate:todayISO(),
+    streakCountedFor:'',
+    completedToday:{},
+    dailyQuest:null,
+    dailyQuestDate:'',
+    dailyQuestClaimed:false,
+    importantTasks:[],
+    completionLog:[],
+    finances:{
+      monthKey: currentMonthKey(),
+      monthlyNetProfit:0,
+      monthlyRevenue:0,
+      monthlyExpenses:0,
+      lifetimeNetProfit:0,
+      budgetBalance:0,
+      transactions:[],
+      debts:[],
+      debtLedger:[]
+    },
+    stats: defaultStats(),
+    skills: JSON.parse(JSON.stringify(defaultSkills)),
+    unlockedAchievements:{},
+    worldsUnlocked:[],
+    shopPurchases:[],
+    cars:[],
+    history:[],
+    garageTasks:[],
+    garageTaskLastReset:todayISO(),
+    leadVariants:[],
+    game: defaultGameState(),
+    ui:{
+      taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false},
+      historyOpen:false,
+      garageTaskGroups:{autos:false, custom:false},
+      leadFilters:{query:'', due:'all', sort:'due'}
+    }
+  });
+
+  let state = loadState();
+
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return defaultState();
+      const parsed = JSON.parse(raw);
+      const base = defaultState();
+      return {
+        ...base,
+        ...parsed,
+        finances: {
+          ...base.finances,
+          ...(parsed.finances||{}),
+          transactions: Array.isArray(parsed.finances?.transactions) ? parsed.finances.transactions : [],
+          debts: Array.isArray(parsed.finances?.debts) ? parsed.finances.debts : [],
+          debtLedger: Array.isArray(parsed.finances?.debtLedger) ? parsed.finances.debtLedger : []
+        },
+        stats: {...base.stats, ...(parsed.stats||{})},
+        skills: Array.isArray(parsed.skills) && parsed.skills.length ? parsed.skills : JSON.parse(JSON.stringify(defaultSkills)),
+        unlockedAchievements: {...(parsed.unlockedAchievements||{})},
+        worldsUnlocked: Array.isArray(parsed.worldsUnlocked) ? parsed.worldsUnlocked : [],
+        shopPurchases: Array.isArray(parsed.shopPurchases) ? parsed.shopPurchases : [],
+        cars: Array.isArray(parsed.cars) ? parsed.cars : [],
+        history: Array.isArray(parsed.history) ? parsed.history : [],
+        completedToday: parsed.completedToday || {},
+        importantTasks: Array.isArray(parsed.importantTasks) ? parsed.importantTasks : [],
+        completionLog: Array.isArray(parsed.completionLog) ? parsed.completionLog : [],
+        garageTasks: Array.isArray(parsed.garageTasks) ? parsed.garageTasks : [],
+        garageTaskLastReset: parsed.garageTaskLastReset || todayISO(),
+        leadVariants: Array.isArray(parsed.leadVariants) ? parsed.leadVariants : [],
+        game: normalizeGame(parsed.game),
+        ui: {
+          taskGroups: {Sveikata:false, Produktyvumas:false, Tobulėjimas:false, ...(parsed.ui?.taskGroups||{})},
+          historyOpen: !!parsed.ui?.historyOpen,
+          garageTaskGroups: {autos:false, custom:false, ...(parsed.ui?.garageTaskGroups||{})},
+          leadFilters: {query:'', due:'all', sort:'due', ...(parsed.ui?.leadFilters||{})}
+        }
+      };
+    }catch(e){
+      console.warn('State load failed', e);
+      return defaultState();
+    }
+  }
+
+  function saveState(){
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function addHistory(title, desc, icon='⚡'){
+    state.history.unshift({title, desc, icon, time: nowLabel()});
+    state.history = state.history.slice(0, 12);
+  }
+
+  function logTaskCompletion(label='užduotis', kind='task'){
+    state.completionLog.unshift({kind, label, date: todayISO(), time: nowLabel()});
+    state.completionLog = state.completionLog.slice(0, 500);
+  }
+
+  function stateDailyTaskCount(s = state){
+    const today = todayISO();
+    return (s.completionLog || []).filter(e => e.kind === 'task' && e.date === today).length;
+  }
+
+  function stateWeeklyTaskCount(s = state){
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 6);
+    const cutoffISO = cutoff.toISOString().slice(0,10);
+    return (s.completionLog || []).filter(e => e.kind === 'task' && e.date >= cutoffISO).length;
+  }
+
+  function ensureMonthlyCycle(){
+    const mk = currentMonthKey();
+    if(!state.finances) state.finances = defaultState().finances;
+    if(state.finances.monthKey !== mk){
+      state.finances.monthKey = mk;
+      state.finances.monthlyNetProfit = 0;
+      state.finances.monthlyRevenue = 0;
+      state.finances.monthlyExpenses = 0;
+    }
+  }
+
+  function carChecklistExpenses(car){
     return (car?.checklist || []).reduce((sum, item) => sum + (Number(item.expense) || 0), 0);
   }
 
@@ -4660,16 +4532,6 @@ function carChecklistExpenses(car){
 
 document.addEventListener('click', (e) => {
   if(state.selectedView !== 'achievements') return;
-  const toggleProfileBtn = e.target.closest('[data-game-toggle-profile]');
-  if(toggleProfileBtn){
-    gameToggleProfile();
-    return;
-  }
-  const toggleMenuBtn = e.target.closest('[data-game-toggle-menu]');
-  if(toggleMenuBtn){
-    gameToggleMenu();
-    return;
-  }
   const tabBtn = e.target.closest('[data-game-tab]');
   if(tabBtn){
     gameSelectTab(tabBtn.dataset.gameTab);
@@ -4701,16 +4563,6 @@ document.addEventListener('click', (e) => {
     gameBuyProject(projectBtn.dataset.gameProject);
     return;
   }
-  const investBuyBtn = e.target.closest('[data-invest-buy]');
-  if(investBuyBtn){
-    gameBuyInvestment(investBuyBtn.dataset.investBuy);
-    return;
-  }
-  const investSellBtn = e.target.closest('[data-invest-sell]');
-  if(investSellBtn){
-    gameSellInvestment(investSellBtn.dataset.investSell);
-    return;
-  }
   const collectBtn = e.target.closest('[data-game-collect-income]');
   if(collectBtn){
     gameCollectDailyCash();
@@ -4740,6 +4592,12 @@ document.addEventListener('click', (e) => {
   const rerollDailyBtnEl2 = document.getElementById('rerollDailyBtn');
   if(claimDailyBtnEl2) claimDailyBtnEl2.onclick = claimDailyQuest;
   if(rerollDailyBtnEl2) rerollDailyBtnEl2.onclick = rerollDailyQuest;
+  document.getElementById('historyToggleBtn').onclick = () => {
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+    state.ui.historyOpen = !state.ui.historyOpen;
+    saveState();
+    render();
+  };
   const backToGarageStatsBtn = document.getElementById('backToGarageStatsBtn');
   if(backToGarageStatsBtn) backToGarageStatsBtn.onclick = () => { state.selectedView = 'garage'; saveState(); render(); };
   const backToMenuBtn = document.getElementById('backToMenuBtn');
