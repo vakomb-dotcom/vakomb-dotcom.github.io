@@ -1061,9 +1061,9 @@
       min-width:0;
       min-height:108px;
       padding:16px;
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
+      display:flex;
       align-items:center;
+      justify-content:flex-start;
       gap:12px;
       text-align:left;
       background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
@@ -1462,18 +1462,6 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="panel dailyCard">
-        <div class="tag epic" id="dailyRarity">EPINĖ MISIJA</div>
-        <h3 id="dailyTitle">Atlik 60 min mokymosi</h3>
-        <p id="dailyDesc">Šiandienos misija duoda papildomą XP ir monetų bonusą.</p>
-        <div class="btnRow">
-          <button class="btn" id="claimDailyBtn">Įvykdyti dienos užduotį</button>
-          <button class="btn secondary" id="rerollDailyBtn">Perridenti</button>
-        </div>
-        <div class="badge info" id="dailyState" style="margin-top:12px">Dienos misija paruošta</div>
-      </div>
-    </div>
 
     <div class="section">
       <div class="sectionHead"><h2>Šiandienos užduotys</h2><span id="taskProgressLabel">0/0 atlikta</span></div>
@@ -1517,30 +1505,26 @@
         <button class="garageAction" type="button" data-garage-action="tasks">
           <div class="left">
             <div class="ico">✅</div>
-            <div><strong>Užduotys</strong></div>
+            <div><strong>Užduotys ›</strong></div>
           </div>
-          <div class="chev">▸</div>
         </button>
         <button class="garageAction" type="button" data-garage-action="leads">
           <div class="left">
             <div class="ico">📋</div>
-            <div><strong>Dominantys variantai</strong></div>
+            <div><strong>Dominantys variantai ›</strong></div>
           </div>
-          <div class="chev">▸</div>
         </button>
         <button class="garageAction" type="button" data-garage-action="addcar">
           <div class="left">
             <div class="ico">➕</div>
-            <div><strong>Pridėti automobilį</strong></div>
+            <div><strong>Pridėti automobilį ›</strong></div>
           </div>
-          <div class="chev">↘</div>
         </button>
         <button class="garageAction" type="button" data-garage-action="stats">
           <div class="left">
             <div class="ico">📊</div>
-            <div><strong>Statistika</strong></div>
+            <div><strong>Statistika ›</strong></div>
           </div>
-          <div class="chev">↘</div>
         </button>
       </div>
     </div>
@@ -1582,13 +1566,23 @@
     </div>
 
     <div class="section">
-      <div class="panel pad">
-        <div class="field"><label>Pavadinimas</label><input class="input" id="carName" placeholder="Nissan X-Trail" /></div>
-        <div class="grid2">
-          <div class="field"><label>Pirkimo kaina</label><input class="input" id="carBuyPrice" type="number" min="0" step="1" placeholder="4500" /></div>
-          <div class="field"><label>Nuotrauka</label><input class="input" id="carPhoto" type="file" accept="image/*" /></div>
+      <div class="panel taskGroup">
+        <button class="taskGroupHead" type="button" data-garage-toggle="cars">
+          <div>
+            <h3>Pridėti automobilį</h3>
+          </div>
+          <div class="chev" id="garageCarsChev">▸</div>
+        </button>
+        <div class="taskGroupBody" id="garageCarsBody">
+          <div class="panel pad" style="margin:0 16px 16px">
+            <div class="field"><label>Pavadinimas</label><input class="input" id="carName" placeholder="Nissan X-Trail" /></div>
+            <div class="grid2">
+              <div class="field"><label>Pirkimo kaina</label><input class="input" id="carBuyPrice" type="number" min="0" step="1" placeholder="4500" /></div>
+              <div class="field"><label>Nuotrauka</label><input class="input" id="carPhoto" type="file" accept="image/*" /></div>
+            </div>
+            <button class="btn" id="addCarBtn" style="width:100%">Pridėti automobilį</button>
+          </div>
         </div>
-        <button class="btn" id="addCarBtn" style="width:100%">Pridėti automobilį</button>
       </div>
     </div>
 
@@ -1603,44 +1597,16 @@
     </div>
   </div>
 
+  
   <div class="view" id="view-garage-leads">
-    <div class="sectionHead"><h2>Dominantys variantai</h2><span>Klientų pasiūlymai ir skambučiai</span></div>
+    <div class="sectionHead"><h2>Dominantys variantai</h2><span id="garageLeadCount">0 variantų</span></div>
 
-    <div class="panel pad">
-      <div class="garageMenuTitle">
-        <div>
-          <strong>Klientų variantų sąrašas</strong>
-          <span>Čia gali įkelti pasiūlytą automobilį, nuotraukas, derybų kainą ir nurodyti kada paskambinti dar kartą.</span>
-        </div>
-        <button class="btn secondary" type="button" id="backToGarageBtn">← Į garažą</button>
-      </div>
-      <div class="garageMenuGrid" style="margin-top:12px">
-        <div class="smallStatBox">
-          <div class="label">Viso variantų</div>
-          <div class="value" id="garageLeadTotal">0</div>
-          <div class="hint">Visi įkelti klientų pasiūlymai</div>
-        </div>
-        <div class="smallStatBox">
-          <div class="label">Skambinti šiandien</div>
-          <div class="value" id="garageLeadToday">0</div>
-          <div class="hint">Variantai su 0 dienų likučiu</div>
-        </div>
-        <div class="smallStatBox">
-          <div class="label">Vėluoja skambutis</div>
-          <div class="value" id="garageLeadOverdue">0</div>
-          <div class="hint">Reikia skambinti jau dabar</div>
-        </div>
-        <div class="smallStatBox">
-          <div class="label">Vidutiniškai liko</div>
-          <div class="value" id="garageLeadAvg">0 d.</div>
-          <div class="hint">Bendrai tarp aktyvių variantų</div>
-        </div>
-      </div>
+    <div class="section">
+      <div class="garageLeadGrid" id="garageLeadRoot"></div>
     </div>
 
     <div class="section">
       <div class="panel pad">
-        <div class="subtle">Naujas dominantis variantas</div>
         <div class="field"><label>Markė</label><input class="input" id="leadMake" placeholder="Nissan" /></div>
         <div class="grid2">
           <div class="field"><label>Modelis</label><input class="input" id="leadModel" placeholder="X-Trail" /></div>
@@ -1665,43 +1631,7 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="sectionHead"><h2>Filtravimas</h2><span>Pagal likusias dienas ir tekstą</span></div>
-      <div class="panel pad">
-        <div class="field"><label>Paieška</label><input class="input" id="leadSearch" placeholder="Ieškoti pagal markę, modelį, miestą..." /></div>
-        <div class="leadFilterBar">
-          <div class="field" style="margin:0"><label>Liko iki skambučio</label>
-            <select class="input" id="leadDueFilter">
-              <option value="all">Visi</option>
-              <option value="overdue">Vėluoja</option>
-              <option value="0">Šiandien</option>
-              <option value="1">1 diena</option>
-              <option value="2">2 dienos</option>
-              <option value="3">3 dienos</option>
-              <option value="7">7 dienos</option>
-            </select>
-          </div>
-          <div class="field" style="margin:0"><label>Rikiavimas</label>
-            <select class="input" id="leadSort">
-              <option value="due">Artimiausias skambutis</option>
-              <option value="newest">Naujausi</option>
-              <option value="price">Didžiausia pradinė kaina</option>
-              <option value="city">Miestas</option>
-            </select>
-          </div>
-          <div class="field" style="margin:0"><label>Greitas filtras</label>
-            <button class="btn secondary" id="leadOnlyDueBtn" style="width:100%">Tik artimiausi</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="sectionHead"><h2>Sąrašas</h2><span id="garageLeadCount">0 variantų</span></div>
-      <div class="garageLeadGrid" id="garageLeadRoot"></div>
-    </div>
   </div>
-
 
   <div class="view" id="view-garage-stats">
     <div class="sectionHead">
@@ -2256,8 +2186,8 @@
   }
 
   function openGarageTasks(){
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-    state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false};
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false, cars:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+    state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false, cars:false};
     state.ui.garageTaskGroups.autos = true;
     state.ui.garageTaskGroups.custom = true;
     saveState();
@@ -2267,9 +2197,14 @@
   }
 
   function openGarageAddCar(){
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false, cars:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+    state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false, cars:false};
+    state.ui.garageTaskGroups.cars = true;
+    saveState();
+    render();
     const el = document.getElementById('carName');
     if(el) el.focus({preventScroll:false});
-    const sec = document.querySelector('#view-garage .panel.pad');
+    const sec = document.getElementById('garageCarsBody');
     if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
@@ -2407,7 +2342,7 @@
     ui:{
       taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false},
       historyOpen:false,
-      garageTaskGroups:{autos:false, custom:false},
+      garageTaskGroups:{autos:false, custom:false, cars:false},
       leadFilters:{query:'', due:'all', sort:'due'}
     }
   });
@@ -3373,20 +3308,31 @@
 
 
 
-    document.getElementById('dailyState').className = `badge ${state.dailyQuestClaimed ? 'good' : 'info'}`;
-    document.getElementById('dailyState').textContent = state.dailyQuestClaimed ? 'Dienos misija įvykdyta' : 'Dienos misija paruošta';
+    const dailyStateEl = document.getElementById('dailyState');
+    if(dailyStateEl){
+      dailyStateEl.className = `badge ${state.dailyQuestClaimed ? 'good' : 'info'}`;
+      dailyStateEl.textContent = state.dailyQuestClaimed ? 'Dienos misija įvykdyta' : 'Dienos misija paruošta';
+    }
 
     document.getElementById('taskProgressLabel').textContent = `${completedCount}/${allCount} atlikta`;
 
     // daily quest
     const q = state.dailyQuest;
-    document.getElementById('dailyRarity').textContent = `${(q.rarity || (q.xp >= 30 ? 'legendinė' : q.xp >= 20 ? 'epinė' : 'reta')).toUpperCase()} MISIJA`;
-    document.getElementById('dailyRarity').className = `tag ${(q.xp >= 30 ? 'legendary' : q.xp >= 20 ? 'epic' : 'rare')}`;
-    document.getElementById('dailyTitle').textContent = q.title;
-    document.getElementById('dailyDesc').textContent = `Ši misija iš ${q.cat} kategorijos. Duoda bonus XP ir monetų.`;
-    document.getElementById('claimDailyBtn').textContent = state.dailyQuestClaimed ? 'Jau įvykdyta' : 'Įvykdyti dienos užduotį';
-    document.getElementById('claimDailyBtn').disabled = state.dailyQuestClaimed;
-    document.getElementById('claimDailyBtn').style.opacity = state.dailyQuestClaimed ? .55 : 1;
+    const dailyRarityEl = document.getElementById('dailyRarity');
+    const dailyTitleEl = document.getElementById('dailyTitle');
+    const dailyDescEl = document.getElementById('dailyDesc');
+    const claimDailyBtn = document.getElementById('claimDailyBtn');
+    if(dailyRarityEl && q){
+      dailyRarityEl.textContent = `${(q.rarity || (q.xp >= 30 ? 'legendinė' : q.xp >= 20 ? 'epinė' : 'reta')).toUpperCase()} MISIJA`;
+      dailyRarityEl.className = `tag ${(q.xp >= 30 ? 'legendary' : q.xp >= 20 ? 'epic' : 'rare')}`;
+    }
+    if(dailyTitleEl && q) dailyTitleEl.textContent = q.title;
+    if(dailyDescEl && q) dailyDescEl.textContent = `Ši misija iš ${q.cat} kategorijos. Duoda bonus XP ir monetų.`;
+    if(claimDailyBtn){
+      claimDailyBtn.textContent = state.dailyQuestClaimed ? 'Jau įvykdyta' : 'Įvykdyti dienos užduotį';
+      claimDailyBtn.disabled = state.dailyQuestClaimed;
+      claimDailyBtn.style.opacity = state.dailyQuestClaimed ? .55 : 1;
+    }
 
     // tasks
     const categories = ['Sveikata','Produktyvumas','Tobulėjimas'];
@@ -3432,7 +3378,7 @@
     document.querySelectorAll('[data-task]').forEach(el => el.addEventListener('click', () => completeTask(el.dataset.task)));
     document.querySelectorAll('[data-toggle-cat]').forEach(btn => btn.addEventListener('click', () => {
       const cat = btn.dataset.toggleCat;
-      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false, cars:false}, leadFilters:{query:'', due:'all', sort:'due'}};
       state.ui.taskGroups = state.ui.taskGroups || {Sveikata:false, Produktyvumas:false, Tobulėjimas:false};
       state.ui.taskGroups[cat] = !state.ui.taskGroups[cat];
       saveState();
@@ -3634,37 +3580,10 @@
 
     const leadRoot = document.getElementById('garageLeadRoot');
     if(leadRoot){
-      const q = (state.ui?.leadFilters?.query || '').toLowerCase().trim();
-      const due = state.ui?.leadFilters?.due || 'all';
-      const sort = state.ui?.leadFilters?.sort || 'due';
-      const searchInput = document.getElementById('leadSearch');
-      const dueInput = document.getElementById('leadDueFilter');
-      const sortInput = document.getElementById('leadSort');
-      if(searchInput && searchInput.value !== (state.ui?.leadFilters?.query || '')) searchInput.value = state.ui?.leadFilters?.query || '';
-      if(dueInput && dueInput.value !== due) dueInput.value = due;
-      if(sortInput && sortInput.value !== sort) sortInput.value = sort;
-      let leads = (state.leadVariants || []).filter(lead => {
-        const hay = [lead.make, lead.model, lead.year, lead.fuel, lead.phone, lead.city, lead.defects, lead.notes].join(' ').toLowerCase();
-        const matchesText = !q || hay.includes(q);
-        const matchesDue = garageLeadDueFilterMatch(lead, due);
-        return matchesText && matchesDue;
-      });
-      leads.sort((a,b) => {
-        if(sort === 'newest') return (b.createdDateISO || '').localeCompare(a.createdDateISO || '');
-        if(sort === 'price') return Number(b.initialPrice || 0) - Number(a.initialPrice || 0);
-        if(sort === 'city') return String(a.city || '').localeCompare(String(b.city || ''), 'lt');
-        return garageLeadDaysLeft(a) - garageLeadDaysLeft(b);
-      });
-
-      const total = (state.leadVariants || []).length;
-      const todayCnt = (state.leadVariants || []).filter(l => garageLeadDaysLeft(l) === 0).length;
-      const overdueCnt = (state.leadVariants || []).filter(l => garageLeadDaysLeft(l) < 0).length;
-      const avg = total ? Math.round((state.leadVariants || []).reduce((sum, l) => sum + Math.max(0, garageLeadDaysLeft(l)), 0) / total) : 0;
-      document.getElementById('garageLeadTotal').textContent = total;
-      document.getElementById('garageLeadToday').textContent = todayCnt;
-      document.getElementById('garageLeadOverdue').textContent = overdueCnt;
-      document.getElementById('garageLeadAvg').textContent = `${avg} d.`;
-      document.getElementById('garageLeadCount').textContent = `${leads.length} variantų`;
+      const leads = (state.leadVariants || []);
+      const total = leads.length;
+      const countEl = document.getElementById('garageLeadCount');
+      if(countEl) countEl.textContent = `${total} variantų`;
       leadRoot.innerHTML = leads.length ? leads.map(lead => {
         const days = garageLeadDaysLeft(lead);
         const daysClass = days < 0 ? 'danger' : days === 0 ? 'warn' : 'good';
@@ -3793,10 +3712,12 @@
     }
   });
 
-  document.getElementById('claimDailyBtn').onclick = claimDailyQuest;
-  document.getElementById('rerollDailyBtn').onclick = rerollDailyQuest;
+  const claimDailyBtn = document.getElementById('claimDailyBtn');
+  if(claimDailyBtn) claimDailyBtn.onclick = claimDailyQuest;
+  const rerollDailyBtn = document.getElementById('rerollDailyBtn');
+  if(rerollDailyBtn) rerollDailyBtn.onclick = rerollDailyQuest;
   document.getElementById('historyToggleBtn').onclick = () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false, cars:false}, leadFilters:{query:'', due:'all', sort:'due'}};
     state.ui.historyOpen = !state.ui.historyOpen;
     saveState();
     render();
@@ -3824,8 +3745,8 @@
     }
     const toggleBtn = e.target.closest('[data-garage-toggle]');
     if(toggleBtn){
-      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-      state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false};
+      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false, cars:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+      state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false, cars:false};
       const key = toggleBtn.dataset.garageToggle;
       state.ui.garageTaskGroups[key] = !state.ui.garageTaskGroups[key];
       saveState();
@@ -3906,35 +3827,6 @@
     saveState();
     render();
   };
-  document.getElementById('leadSearch').oninput = (e) => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-    state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
-    state.ui.leadFilters.query = e.target.value;
-    saveState();
-    render();
-  };
-  document.getElementById('leadDueFilter').onchange = (e) => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-    state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
-    state.ui.leadFilters.due = e.target.value;
-    saveState();
-    render();
-  };
-  document.getElementById('leadSort').onchange = (e) => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-    state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
-    state.ui.leadFilters.sort = e.target.value;
-    saveState();
-    render();
-  };
-  document.getElementById('leadOnlyDueBtn').onclick = () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-    state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
-    state.ui.leadFilters.due = '0';
-    saveState();
-    render();
-  };
-
   document.getElementById('addImportantBtn').onclick = () => {
     const title = document.getElementById('importantTitle').value.trim();
     const xp = Number(document.getElementById('importantXp').value || 0);
@@ -3988,8 +3880,8 @@
   if(!state.dailyQuestDate) state.dailyQuestDate = todayISO();
   if(state.selectedView === 'skills') state.selectedView = 'menu';
   if(!state.history.length) state.history.push({title:'Sveiki atvykę', desc:'Žaidimas paruoštas startui', icon:'🎮', time: nowLabel()});
-  state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
-  state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false};
+  state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false, cars:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+  state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false, cars:false};
   state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
   checkDateReset();
   ensureMonthlyCycle();
