@@ -2288,7 +2288,7 @@
   function openGarageLeadSheet(leadId){
     const lead = state.leadVariants.find(v => v.id === leadId);
     if(!lead) return;
-    const photos = (lead.photos || []).slice(0,6);
+    const photos = (lead.photos || []).slice(0,20);
     const html = `
       <div class="sheetHead">
         <h3>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h3>
@@ -3304,7 +3304,7 @@
 
     document.getElementById('garageStatsMeta').textContent = `${monthlyProfit >= 0 ? '+' : ''}${moneyFmt(monthlyProfit)} šį mėnesį`;
     document.getElementById('garageSalesCount').textContent = `${monthlySold.length} auto`;
-    salesRoot.innerHTML = soldCars.slice(0,6).map(car => {
+    salesRoot.innerHTML = soldCars.slice(0,10).map(car => {
       const profit = carNetProfit(car);
       return `<div class="carCard"><button class="heroImageBtn" type="button" data-open-car="${car.id}"><div class="carHero" style="background-image:url('${car.imageSrc || ''}')"><div class="pill">${profit >= 0 ? '+' : ''}${moneyFmt(profit)}</div><div class="pill">${escapeHTML(car.soldDateISO || '')}</div></div></button><div class="carBody"><h4>${escapeHTML(car.name)}</h4><div class="carLine"><span>Pirkta ${moneyFmt(car.buyPrice)}</span><span>Parduota ${moneyFmt(car.soldPrice)}</span></div></div></div>`;
     }).join('') || '<div class="emptyState">Parduotų automobilių dar nėra.</div>';
@@ -3573,7 +3573,7 @@
             </div>
           </div>
           <div class="rewardPills">
-            <div class="xp">ID ${escapeHTML(task.id.slice(-4))}</div>
+            <div class="xp">ID ${escapeHTML(task.id.slice(-10))}</div>
             <div class="coins">${task.done ? 'Šiandien' : 'Rytoj grįš'}</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-left:10px">
