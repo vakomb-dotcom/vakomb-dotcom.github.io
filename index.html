@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-  <title>Žaisk Gyvenimą — paprasta versija</title>
+  <title>Verslininkėlis — tavo progresas</title>
   <style>
     :root{
       --bg:#f6f7fb;
@@ -1609,19 +1609,780 @@
     .leadEditFull{grid-column:1/-1}
     .sheetActions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
 
+  
+    /* Verslininkėlis premium refresh */
+    html{
+      scroll-behavior:smooth;
+    }
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.11), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(16,185,129,.08), transparent 22%),
+        linear-gradient(180deg, #fcfdff 0%, #f4f7fc 42%, #eef3f8 100%);
+      background-attachment: fixed;
+      font-size:16px;
+    }
+    html[data-theme="dark"] body{
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.16), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(16,185,129,.10), transparent 22%),
+        linear-gradient(180deg, #0b1220 0%, #0f172a 48%, #111827 100%);
+    }
+    .app{
+      max-width: 540px;
+      padding: 14px 14px 146px;
+      isolation: isolate;
+    }
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:35;
+      margin:0 -14px 14px;
+      padding: calc(env(safe-area-inset-top) + 12px) 14px 12px;
+      backdrop-filter: blur(18px) saturate(155%);
+      background: linear-gradient(180deg, rgba(252,253,255,.96) 0%, rgba(252,253,255,.70) 100%);
+      border-bottom: 1px solid rgba(148,163,184,.18);
+    }
+    html[data-theme="dark"] .topbar{
+      background: linear-gradient(180deg, rgba(15,23,42,.92) 0%, rgba(15,23,42,.68) 100%);
+      border-bottom-color: rgba(148,163,184,.10);
+    }
+    .topbar h1{
+      font-size:22px !important;
+      letter-spacing:.24em;
+      text-shadow:0 1px 0 rgba(255,255,255,.18);
+    }
+    .section{
+      margin-top:14px;
+      scroll-margin-top:108px;
+    }
+    .sectionHead{
+      margin:0 4px 10px;
+      align-items:center;
+    }
+    .sectionHead h2{
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+    .sectionHead span{
+      font-size:11px;
+      line-height:1.2;
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(148,163,184,.10);
+      color: var(--muted);
+      border: 1px solid rgba(148,163,184,.16);
+    }
+    .panel,
+    .taskCard,
+    .carCard,
+    .rewardCard,
+    .smallStatBox,
+    .zoneCard,
+    .achievement,
+    .switch,
+    .listItem,
+    .financeRow,
+    .historyItem,
+    .garageAction,
+    .menuLink,
+    .garageCarTaskCard,
+    .garageLeadCard,
+    .metricStat,
+    .dailyQuestCard,
+    .questCard{
+      border-radius:28px;
+      box-shadow:0 18px 42px rgba(15,23,42,.08);
+      border-color:rgba(148,163,184,.18);
+    }
+    html[data-theme="dark"] .panel,
+    html[data-theme="dark"] .taskCard,
+    html[data-theme="dark"] .carCard,
+    html[data-theme="dark"] .rewardCard,
+    html[data-theme="dark"] .smallStatBox,
+    html[data-theme="dark"] .zoneCard,
+    html[data-theme="dark"] .achievement,
+    html[data-theme="dark"] .switch,
+    html[data-theme="dark"] .listItem,
+    html[data-theme="dark"] .financeRow,
+    html[data-theme="dark"] .historyItem,
+    html[data-theme="dark"] .garageAction,
+    html[data-theme="dark"] .menuLink,
+    html[data-theme="dark"] .garageCarTaskCard,
+    html[data-theme="dark"] .garageLeadCard,
+    html[data-theme="dark"] .metricStat,
+    html[data-theme="dark"] .dailyQuestCard,
+    html[data-theme="dark"] .questCard{
+      border-color:rgba(148,163,184,.12);
+      box-shadow:0 18px 42px rgba(0,0,0,.22);
+    }
+    .panel{
+      background: linear-gradient(180deg, var(--surface) 0%, rgba(255,255,255,.98) 100%);
+    }
+    html[data-theme="dark"] .panel{
+      background: linear-gradient(180deg, rgba(17,24,39,.98) 0%, rgba(17,24,39,.92) 100%);
+    }
+    .panel.pad{padding:16px}
+    .heroCard,
+    .dailyCard,
+    .menuIntro,
+    .sheet,
+    .nav,
+    .garageAction,
+    .menuLink,
+    .rewardCard,
+    .taskCard,
+    .carCard,
+    .financeRow,
+    .historyItem,
+    .metricStat,
+    .dailyQuestCard,
+    .questCard{
+      backdrop-filter: blur(12px);
+    }
+    .topStats{
+      gap:12px;
+    }
+    .miniStat{
+      border-radius:22px;
+      padding:14px;
+      background: linear-gradient(180deg, rgba(241,245,249,.92) 0%, rgba(248,250,252,.98) 100%);
+      border: 1px solid rgba(148,163,184,.18);
+      box-shadow:0 10px 24px rgba(15,23,42,.05);
+    }
+    html[data-theme="dark"] .miniStat{
+      background: linear-gradient(180deg, rgba(30,41,59,.95) 0%, rgba(15,23,42,.92) 100%);
+      border-color: rgba(148,163,184,.14);
+    }
+    .miniStat .label,
+    .metricStat .label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+    .miniStat .value,
+    .metricStat .value{
+      font-size:24px;
+      letter-spacing:-.03em;
+      font-weight:900;
+      line-height:1;
+    }
+    .miniStat .hint,
+    .metricStat .hint{
+      font-size:11px;
+      line-height:1.45;
+      color:var(--muted);
+      margin-top:6px;
+    }
+    .metricsRow{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+    .metricStat{
+      padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+      border:1px solid rgba(148,163,184,.18);
+      min-height:94px;
+    }
+    html[data-theme="dark"] .metricStat{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .dailyQuestCard{
+      padding:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .dailyQuestCard{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .dailyQuestTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .questMiniStat{
+      text-align:right;
+    }
+    .questMiniStat strong{
+      display:block;
+      font-size:18px;
+      letter-spacing:-.02em;
+    }
+    .questMiniStat span{
+      font-size:11px;
+      color:var(--muted);
+    }
+    .dailyQuestCard h3{
+      margin:10px 0 6px;
+      font-size:20px;
+      letter-spacing:-.02em;
+    }
+    .dailyQuestCard p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .questGrid{
+      display:grid;
+      gap:12px;
+    }
+    .questCard{
+      padding:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+      border:1px solid rgba(148,163,184,.18);
+    }
+    html[data-theme="dark"] .questCard{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .questCard.claimed{
+      opacity:.78;
+    }
+    .questTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+    }
+    .questLeft{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      min-width:0;
+      flex:1;
+    }
+    .questIcon{
+      width:44px;
+      height:44px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:rgba(37,99,235,.08);
+      font-size:20px;
+      flex:0 0 auto;
+    }
+    .questLeft strong{
+      display:block;
+      font-size:15px;
+      letter-spacing:-.01em;
+    }
+    .questLeft span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:4px;
+      line-height:1.4;
+    }
+    .questPill{
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(37,99,235,.08);
+      border:1px solid rgba(37,99,235,.12);
+      font-size:11px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .questSubtasks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+    .questChip{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      border:1px solid var(--line);
+      background:var(--surface-2);
+    }
+    .questChip.done{
+      background:#dcfce7;
+      border-color:#bbf7d0;
+    }
+    .questActions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+    .questActions .btn{
+      flex:1;
+      min-height:44px;
+    }
+    .questActions .btn.secondary{
+      background:linear-gradient(180deg, rgba(241,245,249,.98) 0%, rgba(226,232,240,.96) 100%);
+    }
+    .questActions .btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+    .taskGroup{
+      border-radius:28px;
+    }
+    .taskGroupHead{
+      padding:18px 18px 16px;
+    }
+    .taskGroupHead h3{
+      font-size:13px;
+      letter-spacing:.12em;
+    }
+    .taskCard,
+    .carCard,
+    .rewardCard,
+    .achievement,
+    .historyItem,
+    .financeRow,
+    .listItem,
+    .switch,
+    .smallStatBox,
+    .garageCarTaskCard,
+    .garageLeadCard{
+      overflow:hidden;
+    }
+    .taskCard{
+      padding:15px 16px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .taskCard{
+      background:linear-gradient(180deg, rgba(30,41,59,.98) 0%, rgba(15,23,42,.96) 100%);
+    }
+    .taskMain strong{
+      font-size:15px;
+      letter-spacing:-.01em;
+    }
+    .taskMeta{
+      margin-top:2px;
+      font-size:10px;
+    }
+    .check{
+      width:28px;height:28px;border-radius:10px;
+    }
+    .rewardPills .xp,
+    .rewardPills .coins{
+      font-size:11px;
+    }
+    .carGrid{
+      gap:14px;
+    }
+    .carCard{
+      border-radius:28px;
+    }
+    .carHero{
+      min-height:168px;
+      padding:16px;
+    }
+    .carBody{
+      padding:16px;
+    }
+    .carBody h4{
+      font-size:18px;
+      letter-spacing:-.02em;
+    }
+    .miniBar{
+      height:12px;
+      margin:12px 0;
+    }
+    .rewardCard{
+      min-height:154px;
+      padding:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .rewardCard{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .rewardCard .ico,
+    .achievement .ico,
+    .histIcon{
+      background:rgba(37,99,235,.08);
+    }
+    .rewardCard strong,
+    .achievement strong{
+      font-size:15px;
+      letter-spacing:-.01em;
+    }
+    .rewardCard p,
+    .achievement span,
+    .historyItem span,
+    .garageLeadLine,
+    .leadDetailBox,
+    .financeRow span{
+      line-height:1.5;
+    }
+    .achievement{
+      min-height:132px;
+      padding:16px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .achievement{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .switch{
+      padding:15px 16px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .switch{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .input{
+      min-height:48px;
+      padding:14px 15px;
+      border-radius:16px;
+      border-color:rgba(148,163,184,.22);
+      background:rgba(255,255,255,.92);
+    }
+    html[data-theme="dark"] .input{
+      background:rgba(15,23,42,.65);
+      border-color:rgba(148,163,184,.16);
+    }
+    select.input{
+      appearance:none;
+      background-image:linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+      background-position:calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px);
+      background-size:5px 5px, 5px 5px;
+      background-repeat:no-repeat;
+      padding-right:36px;
+    }
+    .navWrap{
+      padding:10px 12px calc(14px + env(safe-area-inset-bottom));
+      background:linear-gradient(180deg, rgba(248,251,255,.18) 0%, rgba(248,251,255,.82) 100%);
+      border-top:none;
+    }
+    html[data-theme="dark"] .navWrap{
+      background:linear-gradient(180deg, rgba(15,23,42,.18) 0%, rgba(15,23,42,.88) 100%);
+    }
+    .nav{
+      max-width:540px;
+      padding:10px;
+      border-radius:26px;
+      background:rgba(255,255,255,.76);
+      border:1px solid rgba(148,163,184,.18);
+      box-shadow:0 18px 40px rgba(15,23,42,.12);
+    }
+    html[data-theme="dark"] .nav{
+      background:rgba(15,23,42,.78);
+      border-color:rgba(148,163,184,.14);
+    }
+    .navBtn{
+      border-radius:18px;
+      padding:10px 6px;
+      min-height:66px;
+      transition:transform .16s ease, background .16s ease, border-color .16s ease, color .16s ease;
+    }
+    .navBtn.active{
+      background:linear-gradient(180deg, rgba(37,99,235,.10) 0%, rgba(37,99,235,.16) 100%);
+      border-color:rgba(37,99,235,.14);
+      transform:translateY(-1px);
+      box-shadow:inset 0 0 0 1px rgba(37,99,235,.10);
+    }
+    .navBtn .ico{font-size:19px}
+    .toast{
+      border-radius:18px;
+      box-shadow:0 20px 46px rgba(15,23,42,.18);
+    }
+    .modalBackdrop{
+      background:rgba(15,23,42,.56);
+      backdrop-filter:blur(6px);
+    }
+    .sheet{
+      width:min(100%,540px);
+      padding:18px;
+      border-radius:28px 28px 0 0;
+      background:linear-gradient(180deg, var(--surface) 0%, rgba(255,255,255,.98) 100%);
+    }
+    html[data-theme="dark"] .sheet{
+      background:linear-gradient(180deg, rgba(17,24,39,.99) 0%, rgba(17,24,39,.95) 100%);
+    }
+    .sheetHead h3{
+      font-size:20px;
+      letter-spacing:-.02em;
+    }
+    .closeBtn{
+      width:44px;
+      height:44px;
+      border-radius:16px;
+      background:rgba(148,163,184,.10);
+    }
+    .garageLeadCard{
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .garageLeadCard{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .garageLeadHero{
+      min-height:182px;
+      padding:16px;
+    }
+    .garageLeadBody{
+      padding:16px;
+    }
+    .garageLeadBody h4{
+      font-size:18px;
+      letter-spacing:-.02em;
+    }
+    .garageLeadTags{
+      gap:10px;
+    }
+    .garageLeadTag{
+      border-radius:999px;
+    }
+    .garageLeadActions{
+      gap:10px;
+    }
+    .garageLeadActions .btn,
+    .garageLeadActions .btn.secondary,
+    .garageLeadActions .btn.danger{
+      min-height:44px;
+      font-size:12px;
+    }
+    .garageCarTaskCard{
+      padding:16px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .garageCarTaskCard{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .garageCarTaskHead strong,
+    .financeRow strong{
+      font-size:15px;
+      letter-spacing:-.01em;
+    }
+    .financeRow{
+      padding:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .financeRow{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .financeActions{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .leadFilterBar{
+      grid-template-columns:minmax(0,1.4fr) minmax(0,.9fr) minmax(0,.9fr);
+    }
+    .heroImageBtn .carHero{
+      min-height:176px;
+    }
+    .galleryThumbs{
+      gap:10px;
+    }
+    .galleryThumbs .img{
+      border-radius:16px;
+    }
+    .statChip{
+      border-radius:999px;
+      background:rgba(37,99,235,.08);
+      border-color:rgba(37,99,235,.14);
+    }
+    .historyHeadLine{
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(248,250,252,.98) 100%);
+    }
+    html[data-theme="dark"] .historyHeadLine{
+      background:linear-gradient(180deg, rgba(30,41,59,.97) 0%, rgba(15,23,42,.95) 100%);
+    }
+    .historyHeadLine strong{
+      font-size:16px;
+    }
+    .garageMenuTitle span,
+    .sectionHead span{
+      color:var(--muted);
+    }
+
+    .garageAction{
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+    .garageAction .left{
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    .taskGroupHead{
+      justify-content:center;
+      text-align:center;
+    }
+    .taskGroupHead > div:first-child{
+      flex:1;
+      text-align:center;
+    }
+    .taskGroupHead .chev,
+    .garageAction .chev{
+      display:none !important;
+    }
+    @media (max-width: 430px){
+      .app{padding-left:12px;padding-right:12px}
+      .topbar{
+        margin-left:-12px;
+        margin-right:-12px;
+      }
+      .garageStatsGrid,
+      .financeGrid,
+      .metricsGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .garageMenuGrid,
+      .menuLinks{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .garageAction{
+        min-height:106px;
+      }
+      .menuLink{
+        min-height:116px;
+      }
+    }
+    @media (min-width: 700px){
+      .app{max-width:560px}
+      .sheet{width:min(100%,560px)}
+      .nav{max-width:560px}
+    }
+
+    .leadCompactForm{display:grid;gap:10px;margin-top:4px}
+    .leadCompactGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .leadFull{grid-column:1/-1}
+    .garageLeadGrid{gap:10px}
+    .garageLeadCard{
+      border-radius:24px;
+      overflow:hidden;
+    }
+    .garageLeadCard:focus-visible{
+      outline:3px solid rgba(37,99,235,.26);
+      outline-offset:3px;
+    }
+    .garageLeadTop{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .garageLeadTitle{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+    }
+    .garageLeadTitle strong{
+      font-size:16px;
+      letter-spacing:-.02em;
+      line-height:1.2;
+      display:block;
+    }
+    .garageLeadYear{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .garageLeadMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .garageLeadMeta .garageLeadTag{
+      padding:6px 9px;
+      font-size:11px;
+    }
+    .garageLeadPriceBlock{
+      display:flex;
+      align-items:flex-end;
+      flex-direction:column;
+      gap:4px;
+      flex:0 0 auto;
+    }
+    .garageLeadPrice{
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+    .garageLeadStatus{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      border:1px solid var(--line);
+      background:var(--surface-2);
+    }
+    .garageLeadStatus.good{background:#dcfce7;border-color:#bbf7d0}
+    .garageLeadStatus.warn{background:#fef3c7;border-color:#fde68a}
+    .garageLeadStatus.danger{background:#fee2e2;border-color:#fecaca}
+    .garageLeadNote{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .garageLeadSheetHero{
+      display:grid;
+      gap:12px;
+      margin-top:2px;
+    }
+    .garageLeadSheetMain{
+      aspect-ratio:4/3;
+      border-radius:22px;
+      background:var(--surface-2);
+      background-size:cover;
+      background-position:center;
+      border:1px solid var(--line);
+    }
+    .garageLeadSheetMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .garageLeadSheetText{
+      padding:12px 14px;
+      border-radius:16px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .garageLeadSheetThumbs{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+    .garageLeadSheetThumbs button{
+      border:none;
+      background:transparent;
+      padding:0;
+      appearance:none;
+    }
+    .garageLeadSheetThumbs .img{
+      aspect-ratio:1/1;
+      border-radius:14px;
+      background-size:cover;
+      background-position:center;
+      border:1px solid var(--line);
+    }
+    .questSectionSpacer{height:2px}
+
   </style>
 </head>
 <body>
 <div class="app">
   <div class="topbar">
-    <h1 style="margin:0;font-size:22px;letter-spacing:.18em;text-transform:uppercase;text-align:center;width:100%">MOTYVACIJA</h1>
+    <h1 style="margin:0;font-size:22px;letter-spacing:.18em;text-transform:uppercase;text-align:center;width:100%">VERSLININKĖLIS</h1>
   </div>
 
   <div class="view active" id="view-home">
     <div class="hero">
       <div class="panel heroCard">
         <div>
-          <div class="subtle">XP / lygio progresas</div>
+          <div class="subtle">Verslininkėlio progresas</div>
           <div class="xpWrap">
             <div class="bar"><div class="fill" id="xpFill"></div></div>
             <div class="xpLine">
@@ -1640,19 +2401,70 @@
           <div class="miniStat">
             <div class="label">🔥 Serija</div>
             <div class="value" id="streakValue">0</div>
-            <div class="hint" id="streakHint">Judėk į priekį</div>
+            <div class="hint" id="streakHint">Stabiliai augu</div>
           </div>
           <div class="miniStat">
             <div class="label">🪙 Monetos</div>
             <div class="value" id="coinsValue">0</div>
-            <div class="hint">Atlygiams</div>
+            <div class="hint">Monetoms</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="section">
-      <div class="sectionHead"><h2>Šiandienos užduotys</h2><span id="taskProgressLabel">0/0 atlikta</span></div>
+      <div class="sectionHead"><h2>Personažo būsena</h2><span>Šiandienos ritmas</span></div>
+      <div class="metricsRow">
+        <div class="metricStat">
+          <div class="label">❤️ Sveikata</div>
+          <div class="value" id="healthValue">0%</div>
+          <div class="hint" id="healthHint">Stabiliai</div>
+        </div>
+        <div class="metricStat">
+          <div class="label">⚡ Produktyvumas</div>
+          <div class="value" id="productivityValue">0%</div>
+          <div class="hint" id="productivityHint">Susikaupimas</div>
+        </div>
+        <div class="metricStat">
+          <div class="label">📈 Augimas</div>
+          <div class="value" id="growthValue">0%</div>
+          <div class="hint" id="growthHint">Mokymasis</div>
+        </div>
+        <div class="metricStat">
+          <div class="label">💼 Verslas</div>
+          <div class="value" id="businessValue">0%</div>
+          <div class="hint" id="businessHint">Garažas ir sandoriai</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="panel dailyQuestCard">
+        <div class="dailyQuestTop">
+          <div>
+            <div class="badge info" id="dailyState">Dienos misija</div>
+            <div class="tag" id="dailyRarity">MISIJA</div>
+          </div>
+          <div class="questMiniStat">
+            <strong id="dailyMiniProgress">0/0</strong>
+            <span>Progresas</span>
+          </div>
+        </div>
+        <h3 id="dailyTitle">—</h3>
+        <p id="dailyDesc">—</p>
+        <div class="btnRow" style="margin-top:12px">
+          <button class="btn" id="claimDailyBtn">Įvykdyti</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sectionHead"><h2>Didieji questai</h2><span id="questProgressLabel">0/0 įvykdyta</span></div>
+      <div class="questGrid" id="questRoot"></div>
+    </div>
+
+    <div class="section">
+      <div class="sectionHead"><h2>Šiandienos misijos</h2><span id="taskProgressLabel">0/0 atlikta</span></div>
       <div id="tasksRoot"></div>
     </div>
 
@@ -1660,8 +2472,8 @@
       <button class="historyToggle" id="historyToggleBtn" type="button">
         <div class="historyHeadLine">
           <div>
-            <strong>Paskutiniai veiksmai</strong>
-            <span id="historyHint">Paspausk, kad pamatytum istoriją</span>
+            <strong>Tavo progresas</strong>
+            <span id="historyHint">Atidaryk progresą</span>
           </div>
           <div class="chev" id="historyChev">▸</div>
         </div>
@@ -1693,7 +2505,7 @@
         <button class="garageAction" type="button" data-garage-action="tasks">
           <div class="left">
             <div class="ico">✅</div>
-            <div><strong>Užduotys</strong></div>
+            <div><strong>Misijos</strong></div>
           </div>
         </button>
         <button class="garageAction" type="button" data-garage-action="leads">
@@ -1933,14 +2745,14 @@
   </div>
 
   <div class="view" id="view-achievements">
-    <div class="sectionHead"><h2>Užduotys</h2><span>Asmeniniai darbai</span></div>
+    <div class="sectionHead"><h2>Questai</h2><span>Didieji tikslai</span></div>
     <div class="panel pad">
-      <div class="field"><label>Užduoties pavadinimas</label><input class="input" id="importantTitle" placeholder="Sumokėti mokesčius" /></div>
+      <div class="field"><label>Užduoties pavadinimas</label><input class="input" id="importantTitle" placeholder="Pavyzdžiui: užbaigti sandorį" /></div>
       <div class="grid2">
         <div class="field"><label>XP</label><input class="input" id="importantXp" type="number" min="0" step="1" value="20" /></div>
         <div class="field"><label>Monetos</label><input class="input" id="importantCoins" type="number" min="0" step="1" value="10" /></div>
       </div>
-      <button class="btn" id="addImportantBtn" style="width:100%">Pridėti užduotį</button>
+      <button class="btn" id="addImportantBtn" style="width:100%">Pridėti questą</button>
     </div>
     <div class="section">
       <div class="taskList" id="importantTasksRoot"></div>
@@ -1988,7 +2800,7 @@
     <button class="navBtn active" data-view="home"><div class="ico">🏠</div><div>Pagrindinis</div></button>
     <button class="navBtn" data-view="garage"><div class="ico">🚗</div><div>Garažas</div></button>
     <button class="navBtn" data-view="menu"><div class="ico">☰</div><div>Meniu</div></button>
-    <button class="navBtn" data-view="achievements"><div class="ico">🏆</div><div>Užduotys</div></button>
+    <button class="navBtn" data-view="achievements"><div class="ico">🏆</div><div>Questai</div></button>
     <button class="navBtn" data-view="settings"><div class="ico">⚙️</div><div>Nustatymai</div></button>
   </div>
 </div>
@@ -2047,13 +2859,41 @@
 
 
   const rewardsShop = [
-    {id:'pizza', name:'Picos vakaras', icon:'🍕', cost:70, desc:'Smagus vakaro atlygis po geros dienos.'},
-    {id:'random15', name:'15€ atsitiktinis pirkinys', icon:'🎁', cost:110, desc:'Mažas atpildas už stiprų progresą.'},
-    {id:'cinema', name:'Kinas', icon:'🎬', cost:150, desc:'Atsipalaidavimas su premium jausmu.'},
-    {id:'massage', name:'Masažas', icon:'💆', cost:200, desc:'Atsistatymas kūnui ir protui.'},
-    {id:'shopping80', name:'80€ pirkinys', icon:'🛍️', cost:260, desc:'Didelis atlygis už didelį progresą.'},
-    {id:'trip3', name:'3 dienų kelionė', icon:'✈️', cost:420, desc:'Didžiausias savaitgalio prizas.'}
+    {id:'pizza', name:'Poilsio vakaras', icon:'🍕', cost:70, desc:'Ramiai atsijungi po gero ritmo.'},
+    {id:'random15', name:'Mini atlygis', icon:'🎁', cost:110, desc:'Greitas mažas džiaugsmas.'},
+    {id:'cinema', name:'Kino vakaras', icon:'🎬', cost:150, desc:'Trumpas poilsis su stiliumi.'},
+    {id:'massage', name:'Atsistatymas', icon:'💆', cost:200, desc:'Kūnui ir galvai.'},
+    {id:'shopping80', name:'Naujas aksesuaras', icon:'🛍️', cost:260, desc:'Kai nori kažko rimtesnio.'},
+    {id:'trip3', name:'Didelis pabėgimas', icon:'✈️', cost:420, desc:'Didžiausias bonusas.'}
   ];
+
+  const questDefs = [
+    {
+      id:'morning',
+      title:'Ryto ritmas',
+      icon:'🌅',
+      desc:'Vanduo, judesys, švara.',
+      subtasks:['water','walk','teeth','shower'],
+      reward:{xp:70, coins:35}
+    },
+    {
+      id:'focus',
+      title:'Fokusas',
+      icon:'🧠',
+      desc:'Mokymasis, skaitymas ir ramybė.',
+      subtasks:['study','read','ce','social'],
+      reward:{xp:85, coins:40}
+    },
+    {
+      id:'business',
+      title:'Verslo sprintas',
+      icon:'💼',
+      desc:'Garažas ir sandoriai.',
+      subtasks:['garage2h','carAds','buyCar','sellCar'],
+      reward:{xp:120, coins:70}
+    }
+  ];
+
 
 
   const achievementDefs = [
@@ -2601,6 +3441,7 @@
     garageTasks:[],
     garageTaskLastReset:todayISO(),
     leadVariants:[],
+    questClaims:{},
     ui:{
       taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false},
       historyOpen:false,
@@ -2642,6 +3483,7 @@
         garageTasks: Array.isArray(parsed.garageTasks) ? parsed.garageTasks : [],
         garageTaskLastReset: parsed.garageTaskLastReset || todayISO(),
         leadVariants: Array.isArray(parsed.leadVariants) ? parsed.leadVariants : [],
+        questClaims: parsed.questClaims && typeof parsed.questClaims === 'object' ? parsed.questClaims : {},
         ui: {
           taskGroups: {Sveikata:false, Produktyvumas:false, Tobulėjimas:false, ...(parsed.ui?.taskGroups||{})},
           historyOpen: !!parsed.ui?.historyOpen,
@@ -2685,6 +3527,69 @@
     const cutoffISO = cutoff.toISOString().slice(0,10);
     return (s.completionLog || []).filter(e => e.kind === 'task' && e.date >= cutoffISO).length;
   }
+
+  const HEALTH_TASK_IDS = ['water','social','walk','push','pull','meal','addiction'];
+  const PRODUCTIVITY_TASK_IDS = ['clean','procrast','mom','garage2h'];
+  const GROWTH_TASK_IDS = ['study','read','ce','tv'];
+  const BUSINESS_TASK_IDS = ['sales5','carAds','buyCar','sellCar'];
+
+  function taskDoneToday(id){
+    return !!state.completedToday?.[id];
+  }
+
+  function scoreFromIds(ids){
+    if(!ids.length) return 0;
+    const done = ids.filter(taskDoneToday).length;
+    return clamp(Math.round((done / Math.min(ids.length, 4)) * 100), 0, 100);
+  }
+
+  function questProgress(quest){
+    const subtasks = Array.isArray(quest?.subtasks) ? quest.subtasks : [];
+    const done = subtasks.filter(taskDoneToday).length;
+    const total = subtasks.length || 1;
+    return {
+      done,
+      total,
+      pct: clamp(Math.round((done / total) * 100), 0, 100),
+      claimed: !!(state.questClaims && state.questClaims[quest.id] === todayISO())
+    };
+  }
+
+  function claimQuest(questId){
+    const quest = questDefs.find(q => q.id === questId);
+    if(!quest) return;
+    state.questClaims = state.questClaims || {};
+    const progress = questProgress(quest);
+    if(progress.claimed){
+      toast('Šis questas jau paimtas šiandien', '🏁');
+      return;
+    }
+    if(progress.pct < 100){
+      toast('Questas dar nebaigtas', '⌛');
+      return;
+    }
+    state.questClaims[questId] = todayISO();
+    addXpAndCoins(quest.reward.xp, quest.reward.coins, `Questas: ${quest.title}`, 'Focus', quest.icon);
+  }
+
+  function questSubtaskLabel(id){
+    const labels = {
+      water:'Vanduo',
+      walk:'Judėjimas',
+      teeth:'Dantys',
+      shower:'Prausimasis',
+      study:'Mokymasis',
+      read:'Skaitymas',
+      ce:'CE teorija',
+      social:'Be soc. tinklų',
+      garage2h:'Garažas',
+      carAds:'Skelbimai',
+      buyCar:'Pirkimas',
+      sellCar:'Pardavimas'
+    };
+    return labels[id] || id;
+  }
+
 
   function ensureMonthlyCycle(){
     const mk = currentMonthKey();
@@ -2892,6 +3797,12 @@
     return 1 + (state.level - 1) * 0.03 + (discipline - 1) * 0.01;
   }
 
+  function xpNeedForLevel(level){
+    const lvl = Math.max(1, Number(level) || 1);
+    return Math.round(90 + Math.pow(lvl, 1.18) * 55);
+  }
+
+
   function checkDateReset(){
     const today = todayISO();
     if(state.dailyQuestDate !== today){
@@ -2930,7 +3841,7 @@
 
   function levelUpCheck(){
     let leveled = false;
-    while(state.xp >= state.level * 100){
+    while(state.xp >= xpNeedForLevel(state.level)){
       state.xp -= state.level * 100;
       state.level += 1;
       const bonus = 20 + state.level * 6;
@@ -3552,9 +4463,10 @@
     checkDateReset();
     ensureMonthlyCycle();
     if(!state.dailyQuest) state.dailyQuest = rand(dailyQuestPool);
+  state.questClaims = state.questClaims || {};
     if(!state.history.length) addHistory('Sveiki atvykę', 'Žaidimas paruoštas startui', '🎮');
 
-    const xpNeeded = state.level * 100;
+    const xpNeeded = xpNeedForLevel(state.level);
     const xpPct = clamp(Math.round((state.xp / xpNeeded) * 100), 0, 100);
     const completedCount = Object.keys(state.completedToday).length;
     const allCount = taskTemplates.length;
@@ -3580,6 +4492,64 @@
 
     document.getElementById('taskProgressLabel').textContent = `${completedCount}/${allCount} atlikta`;
 
+    const healthScore = scoreFromIds(HEALTH_TASK_IDS);
+    const productivityScore = scoreFromIds(PRODUCTIVITY_TASK_IDS);
+    const growthScore = scoreFromIds(GROWTH_TASK_IDS);
+    const businessScore = scoreFromIds(BUSINESS_TASK_IDS);
+    const setMetric = (id, value, hint) => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.textContent = `${value}%`;
+      const hintEl = document.getElementById(id.replace('Value','Hint'));
+      if(hintEl) hintEl.textContent = hint;
+    };
+    setMetric('healthValue', healthScore, healthScore >= 80 ? 'Stipru' : healthScore >= 40 ? 'Kylam' : 'Reikia impulso');
+    setMetric('productivityValue', productivityScore, productivityScore >= 80 ? 'Deep work' : productivityScore >= 40 ? 'Judėjimas' : 'Startuok');
+    setMetric('growthValue', growthScore, growthScore >= 80 ? 'Augimas' : growthScore >= 40 ? 'Dirbi' : 'Mokykis');
+    setMetric('businessValue', businessScore, businessScore >= 80 ? 'Pulsuoja' : businessScore >= 40 ? 'Veikia' : 'Aktyvuok');
+
+    const questRoot = document.getElementById('questRoot');
+    if(questRoot){
+      const claimedToday = state.questClaims || {};
+      const questDone = questDefs.filter(q => questProgress(q).pct === 100 && claimedToday[q.id] === todayISO()).length;
+      const questTotal = questDefs.length;
+      const questLabel = document.getElementById('questProgressLabel');
+      if(questLabel) questLabel.textContent = `${questDone}/${questTotal} įvykdyta`;
+      questRoot.innerHTML = questDefs.map(q => {
+        const progress = questProgress(q);
+        const claimed = progress.claimed;
+        const canClaim = progress.pct === 100 && !claimed;
+        return `
+          <div class="questCard ${claimed ? 'claimed' : ''}">
+            <div class="questTop">
+              <div class="questLeft">
+                <div class="questIcon">${q.icon}</div>
+                <div>
+                  <strong>${escapeHTML(q.title)}</strong>
+                  <span>${escapeHTML(q.desc)}</span>
+                </div>
+              </div>
+              <div class="questPill">+${q.reward.xp} XP</div>
+            </div>
+            <div class="miniBar" style="margin-top:12px"><div class="fill" style="width:${progress.pct}%"></div></div>
+            <div class="taskMeta">
+              <span>${progress.done}/${progress.total} žingsnių</span>
+              <span>${claimed ? 'Paimtas šiandien' : canClaim ? 'Paruoštas' : 'Dar nebaigtas'}</span>
+            </div>
+            <div class="questSubtasks">
+              ${q.subtasks.map(id => `<span class="questChip ${taskDoneToday(id) ? 'done' : ''}">${escapeHTML(questSubtaskLabel(id))}</span>`).join('')}
+            </div>
+            <div class="questActions">
+              <button class="btn ${canClaim ? '' : 'secondary'}" data-claim-quest="${q.id}" ${canClaim ? '' : 'disabled'}>${claimed ? 'Paimta' : canClaim ? 'Pasiimti questą' : 'Vykdyti'}</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      questRoot.querySelectorAll('[data-claim-quest]').forEach(btn => {
+        btn.onclick = () => claimQuest(btn.dataset.claimQuest);
+      });
+    }
+
     const dailyStateEl = document.getElementById('dailyState');
     const dailyRarityEl = document.getElementById('dailyRarity');
     const dailyTitleEl = document.getElementById('dailyTitle');
@@ -3594,6 +4564,8 @@
       dailyRarityEl.className = `tag ${(q.xp >= 30 ? 'legendary' : q.xp >= 20 ? 'epic' : 'rare')}`;
       dailyTitleEl.textContent = q.title;
       dailyDescEl.textContent = `Ši misija iš ${q.cat} kategorijos. Duoda bonus XP ir monetų.`;
+      const miniProgressEl = document.getElementById('dailyMiniProgress');
+      if(miniProgressEl) miniProgressEl.textContent = state.dailyQuestClaimed ? '1/1' : '0/1';
       claimDailyBtnEl.textContent = state.dailyQuestClaimed ? 'Jau įvykdyta' : 'Įvykdyti dienos užduotį';
       claimDailyBtnEl.disabled = state.dailyQuestClaimed;
       claimDailyBtnEl.style.opacity = state.dailyQuestClaimed ? .55 : 1;
@@ -3688,7 +4660,7 @@
     const historyRoot = document.getElementById('historyRoot');
     document.getElementById('historyBody').classList.toggle('open', historyOpen);
     document.getElementById('historyChev').textContent = historyOpen ? '▾' : '▸';
-    document.getElementById('historyHint').textContent = historyOpen ? 'Paspausk, kad paslėptum istoriją' : 'Paspausk, kad pamatytum istoriją';
+    document.getElementById('historyHint').textContent = historyOpen ? 'Uždaryk progresą' : 'Atidaryk progresą';
     historyRoot.innerHTML = historyOpen ? (state.history.length ? state.history : [{title:'Pradėk žaidimą', desc:'Atlik pirmą užduotį', icon:'🎮', time:nowLabel()}]).map(item => `
       <div class="historyItem">
         <div class="histIcon">${item.icon}</div>
@@ -3919,7 +4891,7 @@
             <button class="smallBtn danger" data-important-delete="${task.id}">✕</button>
           </div>
         </div>
-      `).join('') : `<div class="emptyState">Kol kas nėra užduočių. Pridėk pirmą darbą, ir jis atsiras kaip aiškus sąrašas.</div>`;
+      `).join('') : `<div class="emptyState">Kol kas nėra questų. Pridėk pirmą ir jis atsiras kaip aiškus sąrašas.</div>`;
       importantRoot.querySelectorAll('[data-important-complete]').forEach(btn => {
         btn.onclick = () => completeImportantTask(btn.dataset.importantComplete);
       });
@@ -4169,6 +5141,7 @@
 
   // init
   if(!state.dailyQuest) state.dailyQuest = rand(dailyQuestPool);
+  state.questClaims = state.questClaims || {};
   if(!state.dailyQuestDate) state.dailyQuestDate = todayISO();
   if(state.selectedView === 'skills') state.selectedView = 'menu';
   if(!state.history.length) state.history.push({title:'Sveiki atvykę', desc:'Žaidimas paruoštas startui', icon:'🎮', time: nowLabel()});
