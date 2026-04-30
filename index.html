@@ -619,148 +619,6 @@
       color:var(--muted);
     }
 
-    .leadThumb{
-      border:none;
-      padding:0;
-      border-radius:14px;
-      background:var(--surface-2);
-      background-size:cover;
-      background-position:center;
-      aspect-ratio:1/1;
-      border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-      cursor:pointer;
-      overflow:hidden;
-    }
-    .leadThumb:active{transform:scale(.985)}
-    .photoViewer{
-      display:grid;
-      gap:12px;
-    }
-    .photoViewerMain{
-      position:relative;
-      border-radius:22px;
-      overflow:hidden;
-      background:var(--surface-2);
-      border:1px solid var(--line);
-      min-height:260px;
-      display:grid;
-      place-items:center;
-    }
-    .photoViewerMain img{
-      width:100%;
-      height:min(62vh,540px);
-      object-fit:cover;
-      display:block;
-    }
-    .photoNav{
-      display:flex;
-      gap:10px;
-      justify-content:space-between;
-    }
-    .photoCounter{
-      font-size:12px;
-      color:var(--muted);
-      text-align:center;
-    }
-    .financeGrid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-    .financeHeroGrid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    .financeList{
-      display:grid;
-      gap:10px;
-    }
-    .financeItem{
-      padding:14px;
-      border-radius:18px;
-      background:var(--surface);
-      border:1px solid var(--line);
-      box-shadow:var(--shadow-soft);
-    }
-    .financeItem .top{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-    }
-    .financeItem strong{display:block;font-size:14px}
-    .financeItem .meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.35}
-    .financeItem .amount{font-size:14px;font-weight:900}
-    .chipRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:800;
-      border:1px solid var(--line);
-      background:var(--surface-2);
-    }
-    .chip.good{background:#dcfce7;border-color:#bbf7d0}
-    .chip.warn{background:#fef3c7;border-color:#fde68a}
-    .chip.danger{background:#fee2e2;border-color:#fecaca}
-    .segmentBar{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:8px;
-      margin-top:10px;
-    }
-    .segmentBtn{
-      border:1px solid var(--line);
-      background:var(--surface);
-      border-radius:14px;
-      padding:10px 8px;
-      font:inherit;
-      color:var(--text);
-      cursor:pointer;
-      font-size:12px;
-      font-weight:800;
-    }
-    .segmentBtn.active{
-      background:#eff6ff;
-      border-color:#bfdbfe;
-    }
-    .tableList{
-      display:grid;
-      gap:8px;
-    }
-    .tableRow{
-      display:grid;
-      grid-template-columns:1.2fr .75fr .75fr .7fr;
-      gap:8px;
-      align-items:center;
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:var(--surface);
-      box-shadow:var(--shadow-soft);
-      font-size:12px;
-    }
-    .tableRow.head{
-      background:var(--surface-2);
-      box-shadow:none;
-      font-weight:800;
-      color:var(--muted);
-    }
-    .tableRow .muted{color:var(--muted)}
-    .financeTotals{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-    .financeTotals .smallStatBox .value{font-size:18px}
-    .financeTotals .smallStatBox .hint{line-height:1.35}
-
     .menuIntro{
       padding:16px;border-radius:24px;
       background:var(--surface);
@@ -911,14 +769,14 @@
 
 
 
-  
   <div class="view" id="view-garage">
-    <div class="sectionHead"><h2>Garažas</h2><span id="garageMenuBadgeTop">0 auto</span></div>
+    <div class="sectionHead"><h2>Garažas</h2><span>Automobiliai, užduotys ir variantai</span></div>
 
     <div class="panel pad garageMenuPanel">
       <div class="garageMenuTitle">
         <div>
           <strong>Garažo meniu</strong>
+          <span>Greiti veiksmai, kad viskas būtų po ranka ir nereikėtų klaidžioti per visą sistemą.</span>
         </div>
         <div class="badge info" id="garageMenuBadge">0 aktyvių / 0 parduotų</div>
       </div>
@@ -926,41 +784,42 @@
         <button class="garageAction" type="button" data-garage-action="tasks">
           <div class="left">
             <div class="ico">✅</div>
-            <div><strong>Užduotys</strong></div>
+            <div><strong>Užduotys</strong><span>Automobilių užduotys ir kitos užduotys vienoje vietoje</span></div>
           </div>
           <div class="chev">▸</div>
         </button>
         <button class="garageAction" type="button" data-garage-action="leads">
           <div class="left">
             <div class="ico">📋</div>
-            <div><strong>Dominantys variantai</strong></div>
+            <div><strong>Dominantys variantai</strong><span>Klientų pasiūlymai, skambučiai ir filtrai</span></div>
           </div>
           <div class="chev">▸</div>
         </button>
         <button class="garageAction" type="button" data-garage-action="addcar">
           <div class="left">
             <div class="ico">➕</div>
-            <div><strong>Pridėti automobilį</strong></div>
+            <div><strong>Pridėti automobilį</strong><span>Greitas naujo automobilio įkėlimas į garažą</span></div>
           </div>
-          <div class="chev">▸</div>
+          <div class="chev">↘</div>
         </button>
         <button class="garageAction" type="button" data-garage-action="stats">
           <div class="left">
             <div class="ico">📊</div>
-            <div><strong>Statistika</strong></div>
+            <div><strong>Smulki statistika</strong><span>Diena, savaitė, mėnuo ir garažo rezultatai</span></div>
           </div>
-          <div class="chev">▸</div>
+          <div class="chev">↘</div>
         </button>
       </div>
     </div>
 
     <div class="section" id="garageTasksSection">
-      <div class="sectionHead"><h2>Užduotys</h2><span id="garageTaskSummary">0/0</span></div>
+      <div class="sectionHead"><h2>Užduotys</h2><span id="garageTaskSummary">0 automobilių užduočių / 0 kitų užduočių</span></div>
 
       <div class="panel taskGroup">
         <button class="taskGroupHead" type="button" data-garage-toggle="autos">
           <div>
             <h3>Automobilių užduotys</h3>
+            <span class="sub">Kiekvieno aktyvaus automobilio darbai, kuriuos gali pažymėti čia pat.</span>
           </div>
           <div class="chev" id="garageAutosChev">▸</div>
         </button>
@@ -973,6 +832,7 @@
         <button class="taskGroupHead" type="button" data-garage-toggle="custom">
           <div>
             <h3>Kitos užduotys</h3>
+            <span class="sub">Pridėk savo darbus, pažymėk varnele ir rytoj jie vėl grįš nepažymėti.</span>
           </div>
           <div class="chev" id="garageCustomChev">▸</div>
         </button>
@@ -1003,6 +863,29 @@
     </div>
 
     <div class="section">
+      <div class="sectionHead"><h2>Smulki statistika</h2><span>Garažo diena / savaitė / mėnuo</span></div>
+      <div class="garageStatsGrid" id="garageStatsGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="panel pad">
+        <div class="subtle">Mėnesio grynasis pelnas</div>
+        <div class="xpLine" style="margin-top:0">
+          <div>
+            <span>Dabartinis rezultatas</span>
+            <strong id="monthlyProfitValue">0 €</strong>
+          </div>
+          <div style="text-align:right">
+            <span>Tikslas</span>
+            <strong>10 000 €</strong>
+          </div>
+        </div>
+        <div class="bar"><div class="fill" id="monthlyProfitFill"></div></div>
+        <div class="subtle" style="margin-top:8px">Kaupiamas per mėnesį grynasis pelnas. Pasiekus 10 000 € atsidaro pasiekimas.</div>
+      </div>
+    </div>
+
+    <div class="section">
       <div class="sectionHead"><h2>Aktyvūs automobiliai</h2><span id="activeCarCount">0 auto</span><span id="carCount" style="display:none"></span></div>
       <div class="carGrid" id="activeCarGrid"></div>
     </div>
@@ -1014,41 +897,43 @@
   </div>
 
   <div class="view" id="view-garage-leads">
-    <div class="sectionHead"><h2>Dominantys variantai</h2><span id="garageLeadCount">0</span></div>
+    <div class="sectionHead"><h2>Dominantys variantai</h2><span>Klientų pasiūlymai ir skambučiai</span></div>
 
     <div class="panel pad">
       <div class="garageMenuTitle">
         <div>
-          <strong>Variantų sąrašas</strong>
+          <strong>Klientų variantų sąrašas</strong>
+          <span>Čia gali įkelti pasiūlytą automobilį, nuotraukas, derybų kainą ir nurodyti kada paskambinti dar kartą.</span>
         </div>
-        <button class="btn secondary" type="button" id="backToGarageBtn">← Garažas</button>
+        <button class="btn secondary" type="button" id="backToGarageBtn">← Į garažą</button>
       </div>
-      <div class="financeHeroGrid">
+      <div class="garageMenuGrid" style="margin-top:12px">
         <div class="smallStatBox">
-          <div class="label">Viso</div>
+          <div class="label">Viso variantų</div>
           <div class="value" id="garageLeadTotal">0</div>
-          <div class="hint">Įkelti variantai</div>
+          <div class="hint">Visi įkelti klientų pasiūlymai</div>
         </div>
         <div class="smallStatBox">
           <div class="label">Skambinti šiandien</div>
           <div class="value" id="garageLeadToday">0</div>
-          <div class="hint">Liko 0 dienų</div>
+          <div class="hint">Variantai su 0 dienų likučiu</div>
         </div>
         <div class="smallStatBox">
-          <div class="label">Vėluoja</div>
+          <div class="label">Vėluoja skambutis</div>
           <div class="value" id="garageLeadOverdue">0</div>
-          <div class="hint">Skambutis vėluoja</div>
+          <div class="hint">Reikia skambinti jau dabar</div>
         </div>
         <div class="smallStatBox">
-          <div class="label">Vid. likutis</div>
+          <div class="label">Vidutiniškai liko</div>
           <div class="value" id="garageLeadAvg">0 d.</div>
-          <div class="hint">Tarp aktyvių variantų</div>
+          <div class="hint">Bendrai tarp aktyvių variantų</div>
         </div>
       </div>
     </div>
 
     <div class="section">
       <div class="panel pad">
+        <div class="subtle">Naujas dominantis variantas</div>
         <div class="field"><label>Markė</label><input class="input" id="leadMake" placeholder="Nissan" /></div>
         <div class="grid2">
           <div class="field"><label>Modelis</label><input class="input" id="leadModel" placeholder="X-Trail" /></div>
@@ -1063,40 +948,41 @@
           <div class="field"><label>Pradinė kaina</label><input class="input" id="leadInitialPrice" type="number" min="0" step="1" placeholder="2000" /></div>
         </div>
         <div class="grid2">
-          <div class="field"><label>Mūsų kaina</label><input class="input" id="leadTargetPrice" type="number" min="0" step="1" placeholder="1500" /></div>
+          <div class="field"><label>Mūsų siūlyta kaina</label><input class="input" id="leadTargetPrice" type="number" min="0" step="1" placeholder="1500" /></div>
           <div class="field"><label>Po kiek dienų skambinti</label><input class="input" id="leadFollowDays" type="number" min="0" step="1" value="2" /></div>
         </div>
         <div class="field"><label>Defektai</label><input class="input" id="leadDefects" placeholder="Variklis, kėbulas, pakaba..." /></div>
         <div class="field"><label>Nuotraukos</label><input class="input" id="leadPhotos" type="file" accept="image/*" multiple /></div>
-        <div class="field"><label>Pastabos</label><input class="input" id="leadNotes" placeholder="Derybos, skambinimo planas..." /></div>
+        <div class="field"><label>Pastabos</label><input class="input" id="leadNotes" placeholder="Kurioj stadijoj derybos, kam skambinti, ką pasakė..." /></div>
         <button class="btn" id="addGarageLeadBtn" style="width:100%">Įkelti variantą</button>
       </div>
     </div>
 
     <div class="section">
+      <div class="sectionHead"><h2>Filtravimas</h2><span>Pagal likusias dienas ir tekstą</span></div>
       <div class="panel pad">
-        <div class="field"><label>Paieška</label><input class="input" id="leadSearch" placeholder="Markė, modelis, miestas..." /></div>
+        <div class="field"><label>Paieška</label><input class="input" id="leadSearch" placeholder="Ieškoti pagal markę, modelį, miestą..." /></div>
         <div class="leadFilterBar">
-          <div class="field" style="margin:0"><label>Liko</label>
+          <div class="field" style="margin:0"><label>Liko iki skambučio</label>
             <select class="input" id="leadDueFilter">
               <option value="all">Visi</option>
               <option value="overdue">Vėluoja</option>
               <option value="0">Šiandien</option>
-              <option value="1">1 d.</option>
-              <option value="2">2 d.</option>
-              <option value="3">3 d.</option>
-              <option value="7">7 d.</option>
+              <option value="1">1 diena</option>
+              <option value="2">2 dienos</option>
+              <option value="3">3 dienos</option>
+              <option value="7">7 dienos</option>
             </select>
           </div>
           <div class="field" style="margin:0"><label>Rikiavimas</label>
             <select class="input" id="leadSort">
-              <option value="due">Artimiausias</option>
+              <option value="due">Artimiausias skambutis</option>
               <option value="newest">Naujausi</option>
-              <option value="price">Didžiausia kaina</option>
+              <option value="price">Didžiausia pradinė kaina</option>
               <option value="city">Miestas</option>
             </select>
           </div>
-          <div class="field" style="margin:0"><label>Greitai</label>
+          <div class="field" style="margin:0"><label>Greitas filtras</label>
             <button class="btn secondary" id="leadOnlyDueBtn" style="width:100%">Tik artimiausi</button>
           </div>
         </div>
@@ -1104,46 +990,51 @@
     </div>
 
     <div class="section">
-      <div class="sectionHead"><h2>Sąrašas</h2><span id="garageLeadCount2">0</span></div>
+      <div class="sectionHead"><h2>Sąrašas</h2><span id="garageLeadCount">0 variantų</span></div>
       <div class="garageLeadGrid" id="garageLeadRoot"></div>
     </div>
   </div>
 
   <div class="view" id="view-menu">
-    <div class="sectionHead"><h2>Meniu</h2><span id="menuCount">5 skiltys</span></div>
+
+    <div class="sectionHead"><h2>Meniu</h2><span>Pagrindinės sistemos</span></div>
 
     <div class="panel pad menuIntro">
-      <div class="garageMenuTitle">
-        <div><strong>Greitas naršymas</strong></div>
-      </div>
+      <div class="subtle">Greitas naršymas</div>
+      <h3 style="margin:8px 0 6px;font-size:20px">Pasirink, ką nori daryti toliau</h3>
+      <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.5">Čia sudėta atlygių parduotuvė, statistika, įgūdžiai ir svarbios užduotys — kad viskas būtų vienoje premium vietoje.</p>
       <div class="menuLinks">
-        <button class="menuLink" data-go-view="garage-stats"><div class="ico">📊</div><strong>Statistika</strong></button>
-        <button class="menuLink" data-go-view="finance"><div class="ico">💼</div><strong>Finansai</strong></button>
-        <button class="menuLink" data-jump="menu-shop"><div class="ico">🛍️</div><strong>Parduotuvė</strong></button>
-        <button class="menuLink" data-jump="menu-important"><div class="ico">⭐</div><strong>Užduotys</strong></button>
-        <button class="menuLink" data-jump="menu-skills"><div class="ico">🧠</div><strong>Įgūdžiai</strong></button>
+        <button class="menuLink" data-jump="menu-shop"><div class="ico">🛍️</div><strong>Atlygių parduotuvė</strong><span>Išleisk monetas atlygams ir mažoms pergalėms</span></button>
+        <button class="menuLink" data-jump="menu-stats"><div class="ico">📊</div><strong>Statistika</strong><span>Kaupiami tavo realūs rezultatai</span></button>
+        <button class="menuLink" data-jump="menu-skills"><div class="ico">🧠</div><strong>Įgūdžiai</strong><span>Jėga, susikaupimas, verslas ir disciplina</span></button>
+        <button class="menuLink" data-jump="menu-important"><div class="ico">⭐</div><strong>Svarbios užduotys</strong><span>Pridėk asmeninius darbus ir gauk atlygį</span></button>
       </div>
     </div>
 
     <div class="section" id="menu-shop">
-      <div class="sectionHead"><h2>Atlygių parduotuvė</h2><span id="shopCount">0</span></div>
+      <div class="sectionHead"><h2>Atlygių parduotuvė</h2><span>Monetų atlygiams</span></div>
       <div class="shopGrid" id="shopGrid"></div>
     </div>
 
+    <div class="section" id="menu-stats">
+      <div class="sectionHead"><h2>Statistika</h2><span>Kaupiama ir auga</span></div>
+      <div class="grid2" id="statsGrid"></div>
+    </div>
+
     <div class="section" id="menu-skills">
-      <div class="sectionHead"><h2>Įgūdžiai</h2><span id="skillsCount">0</span></div>
+      <div class="sectionHead"><h2>Įgūdžiai</h2><span>Įgūdžių stiprinimai</span></div>
       <div class="skillGrid" id="skillsRoot"></div>
     </div>
 
     <div class="section" id="menu-important">
-      <div class="sectionHead"><h2>Svarbios užduotys</h2><span id="importantCount">0</span></div>
+      <div class="sectionHead"><h2>Svarbios užduotys</h2><span>Sumokėti mokesčius, pas gydytoją ir kt.</span></div>
       <div class="panel pad">
         <div class="field"><label>Užduoties pavadinimas</label><input class="input" id="importantTitle" placeholder="Sumokėti mokesčius" /></div>
         <div class="grid2">
           <div class="field"><label>XP</label><input class="input" id="importantXp" type="number" min="0" step="1" value="20" /></div>
           <div class="field"><label>Monetos</label><input class="input" id="importantCoins" type="number" min="0" step="1" value="10" /></div>
         </div>
-        <button class="btn" id="addImportantBtn" style="width:100%">Pridėti</button>
+        <button class="btn" id="addImportantBtn" style="width:100%">Pridėti svarbią užduotį</button>
       </div>
       <div class="section">
         <div class="taskList" id="importantTasksRoot"></div>
@@ -1151,92 +1042,14 @@
     </div>
   </div>
 
-  <div class="view" id="view-garage-stats">
-    <div class="sectionHead"><h2>Statistika</h2><span id="garageStatsRangeLabel">Mėnuo</span></div>
+  <div class="view" id="view-achievements">
 
-    <div class="panel pad">
-      <div class="segmentBar">
-        <button class="segmentBtn active" data-garage-range="day">Diena</button>
-        <button class="segmentBtn" data-garage-range="week">Savaitė</button>
-        <button class="segmentBtn" data-garage-range="month">Mėnuo</button>
-        <button class="segmentBtn" data-garage-range="all">Visas</button>
-      </div>
-      <div class="financeTotals" style="margin-top:12px" id="garageStatsTopGrid"></div>
-    </div>
-
-    <div class="section">
-      <div class="sectionHead"><h2>Automobilių rezultatai</h2><span>Sparta, pelnas ir išlaidos</span></div>
-      <div class="tableList" id="garageStatsPeriodRoot"></div>
-    </div>
-
-    <div class="section">
-      <div class="sectionHead"><h2>Geriausi automobiliai</h2><span>Pelnas / brangiausi / aktyvūs</span></div>
-      <div class="tableList" id="garageStatsCarsRoot"></div>
-    </div>
+    <div class="sectionHead"><h2>Pasiekimai</h2><span>Atrakinti / ženklelis / atlygis</span></div>
+    <div class="achGrid" id="achievementsRoot"></div>
   </div>
 
-  <div class="view" id="view-finance">
-    <div class="sectionHead"><h2>Finansai</h2><span id="financeRangeLabel">Mėnuo</span></div>
 
-    <div class="panel pad">
-      <div class="segmentBar">
-        <button class="segmentBtn active" data-finance-range="day">Diena</button>
-        <button class="segmentBtn" data-finance-range="week">Savaitė</button>
-        <button class="segmentBtn" data-finance-range="month">Mėnuo</button>
-        <button class="segmentBtn" data-finance-range="all">Visas</button>
-      </div>
-      <div class="financeTotals" style="margin-top:12px" id="financeTopGrid"></div>
-    </div>
-
-    <div class="section">
-      <div class="panel pad">
-        <div class="field"><label>Biudžeto operacija</label><input class="input" id="budgetAmount" type="number" min="0" step="1" placeholder="100" /></div>
-        <div class="grid2">
-          <div class="field"><label>Tipas</label>
-            <select class="input" id="budgetSign">
-              <option value="in">Pridėti</option>
-              <option value="out">Išimti</option>
-            </select>
-          </div>
-          <div class="field"><label>Data</label><input class="input" id="budgetDate" type="date" /></div>
-        </div>
-        <div class="field"><label>Aprašymas</label><input class="input" id="budgetNote" placeholder="Rezervas, sąskaita, kuras..." /></div>
-        <button class="btn" id="addBudgetBtn" style="width:100%">Įrašyti į biudžetą</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="panel pad">
-        <div class="field"><label>Skola kam</label><input class="input" id="debtPerson" placeholder="Vardas arba įmonė" /></div>
-        <div class="grid2">
-          <div class="field"><label>Suma</label><input class="input" id="debtAmount" type="number" min="0" step="1" placeholder="150" /></div>
-          <div class="field"><label>Veiksmas</label>
-            <select class="input" id="debtSign">
-              <option value="add">Pridėti skolą</option>
-              <option value="pay">Apmokėti</option>
-            </select>
-          </div>
-        </div>
-        <div class="grid2">
-          <div class="field"><label>Data</label><input class="input" id="debtDate" type="date" /></div>
-          <div class="field"><label>Priminti iki</label><input class="input" id="debtDueDate" type="date" /></div>
-        </div>
-        <div class="field"><label>Aprašymas</label><input class="input" id="debtNote" placeholder="Kam, už ką, kas įvyko..." /></div>
-        <button class="btn" id="addDebtBtn" style="width:100%">Įrašyti skolą</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="sectionHead"><h2>Kiek kam skoloj</h2><span id="debtCount">0</span></div>
-      <div class="financeList" id="debtSummaryRoot"></div>
-    </div>
-
-    <div class="section">
-      <div class="sectionHead"><h2>Finansų įrašai</h2><span id="financeLogCount">0</span></div>
-      <div class="financeList" id="financeLedgerRoot"></div>
-    </div>
-  </div>
-<div class="view" id="view-settings">
+  <div class="view" id="view-settings">
     <div class="sectionHead"><h2>Nustatymai</h2><span>Premium valdymas</span></div>
     <div class="panel pad">
       <div class="switch">
@@ -1425,138 +1238,6 @@
     const to = parseISODateLocal(toISO);
     if(!from || !to) return 0;
     return Math.round((to - from) / 86400000);
-  }
-
-
-  function cleanText(value){
-    return String(value || '').trim();
-  }
-
-  function clampMoney(n){
-    return Math.round(Number(n) || 0);
-  }
-
-  function addSignedBudget(amount){
-    if(!state.finances) state.finances = defaultState().finances;
-    state.finances.budget = clampMoney((state.finances.budget || 0) + Number(amount || 0));
-  }
-
-  function addFinanceLedgerEntry(entry){
-    state.financeLedger = Array.isArray(state.financeLedger) ? state.financeLedger : [];
-    state.financeLedger.unshift({
-      id: uid(),
-      date: entry.date || todayISO(),
-      time: nowLabel(),
-      kind: entry.kind || 'manual',
-      title: cleanText(entry.title || 'Įrašas'),
-      amount: clampMoney(entry.amount || 0),
-      sign: entry.sign || 'in',
-      note: cleanText(entry.note || ''),
-      ref: entry.ref || ''
-    });
-    state.financeLedger = state.financeLedger.slice(0, 300);
-  }
-
-  function addDebtLedgerEntry(entry){
-    state.debtLedger = Array.isArray(state.debtLedger) ? state.debtLedger : [];
-    state.debtLedger.unshift({
-      id: uid(),
-      person: cleanText(entry.person || ''),
-      amount: clampMoney(entry.amount || 0),
-      sign: entry.sign || 'add',
-      date: entry.date || todayISO(),
-      note: cleanText(entry.note || ''),
-      dueDate: entry.dueDate || ''
-    });
-    state.debtLedger = state.debtLedger.slice(0, 300);
-  }
-
-  function financeDebtSummary(){
-    const map = new Map();
-    for(const item of (state.debtLedger || [])){
-      const key = item.person || 'Nežinomas';
-      const cur = map.get(key) || {person:key, balance:0, lastDate:'', lastNote:'', entries:0, dueDate:''};
-      const delta = item.sign === 'pay' ? -Math.abs(item.amount) : Math.abs(item.amount);
-      cur.balance += delta;
-      cur.entries += 1;
-      if(!cur.lastDate || (item.date || '') > cur.lastDate) cur.lastDate = item.date || '';
-      cur.lastNote = item.note || cur.lastNote;
-      if(item.dueDate && (!cur.dueDate || item.dueDate < cur.dueDate)) cur.dueDate = item.dueDate;
-      map.set(key, cur);
-    }
-    return Array.from(map.values()).sort((a,b) => Math.abs(b.balance) - Math.abs(a.balance));
-  }
-
-  function financeRangeStart(range){
-    const d = new Date();
-    if(range === '7d') d.setDate(d.getDate() - 6);
-    else if(range === '30d') d.setDate(d.getDate() - 29);
-    else if(range === '90d') d.setDate(d.getDate() - 89);
-    else if(range === 'all') return '0000-01-01';
-    else d.setMonth(d.getMonth() - 1), d.setDate(d.getDate() + 1);
-    return toISODateLocal(d);
-  }
-
-  function financeSoldCarsInRange(range){
-    const start = financeRangeStart(range);
-    return (state.cars || []).filter(c => c.status === 'parduotas' && (c.soldDateISO || '') >= start);
-  }
-
-  function financeLedgerInRange(range){
-    const start = financeRangeStart(range);
-    return (state.financeLedger || []).filter(item => (item.date || '') >= start);
-  }
-
-  function garageStatsSummary(range='month'){
-    const sold = (state.cars || []).filter(c => c.status === 'parduotas');
-    const active = (state.cars || []).filter(c => c.status !== 'parduotas');
-    const totalBuy = (state.cars || []).reduce((sum, c) => sum + Number(c.buyPrice || 0), 0);
-    const totalChecklist = (state.cars || []).reduce((sum, c) => sum + carChecklistExpenses(c), 0);
-    const totalSpent = totalBuy + totalChecklist;
-    const totalRevenue = sold.reduce((sum, c) => sum + Number(c.soldPrice || 0), 0);
-    const totalProfit = sold.reduce((sum, c) => sum + Number(c.netProfit || 0), 0);
-    const avgBuy = (state.cars || []).length ? totalBuy / (state.cars || []).length : 0;
-    const avgProfit = sold.length ? totalProfit / sold.length : 0;
-    const completedTasks = (state.completionLog || []).filter(e => e.kind === 'garageCarTask' || e.kind === 'garageCustomTask').length;
-    const carTaskDone = (state.completionLog || []).filter(e => e.kind === 'garageCarTask').length;
-    const customDone = (state.completionLog || []).filter(e => e.kind === 'garageCustomTask').length;
-    const topProfitCar = [...sold].sort((a,b) => Number(b.netProfit || 0) - Number(a.netProfit || 0))[0];
-    const topCostCar = [...(state.cars || [])].sort((a,b) => carTotalCost(b) - carTotalCost(a))[0];
-    return {sold, active, totalBuy, totalChecklist, totalSpent, totalRevenue, totalProfit, avgBuy, avgProfit, completedTasks, carTaskDone, customDone, topProfitCar, topCostCar};
-  }
-
-  function garagePeriodStats(period='day'){
-    const today = todayISO();
-    const weekCutoff = new Date();
-    weekCutoff.setDate(weekCutoff.getDate() - 6);
-    const monthCutoff = new Date();
-    monthCutoff.setDate(monthCutoff.getDate() - 29);
-    const start = period === 'day' ? today : period === 'week' ? toISODateLocal(weekCutoff) : period === 'month' ? toISODateLocal(monthCutoff) : '0000-01-01';
-    const sold = (state.cars || []).filter(c => c.status === 'parduotas' && (c.soldDateISO || '') >= start);
-    const bought = (state.cars || []).filter(c => (c.createdDateISO || '') >= start);
-    const checklistDone = (state.completionLog || []).filter(e => (e.kind === 'garageCarTask' || e.kind === 'garageCustomTask') && e.date >= start).length;
-    const revenue = sold.reduce((sum, c) => sum + Number(c.soldPrice || 0), 0);
-    const profit = sold.reduce((sum, c) => sum + Number(c.netProfit || 0), 0);
-    const spent = bought.reduce((sum, c) => sum + carTotalCost(c), 0);
-    return {start, sold, bought, checklistDone, revenue, profit, spent};
-  }
-
-  function financeSummary(range='month'){
-    const ledger = financeLedgerInRange(range);
-    const soldCars = financeSoldCarsInRange(range);
-    const carPurchases = (state.cars || []).reduce((sum, c) => sum + Number(c.buyPrice || 0), 0);
-    const checklistCost = (state.cars || []).reduce((sum, c) => sum + carChecklistExpenses(c), 0);
-    const debtTotal = financeDebtSummary().reduce((sum, d) => sum + Math.max(0, d.balance), 0);
-    const income = ledger.filter(e => e.sign === 'in').reduce((sum, e) => sum + Number(e.amount || 0), 0) + soldCars.reduce((sum, c) => sum + Number(c.soldPrice || 0), 0);
-    const expense = ledger.filter(e => e.sign === 'out').reduce((sum, e) => sum + Number(e.amount || 0), 0) + carPurchases + checklistCost;
-    const net = income - expense;
-    const budget = Number(state.finances?.budget || 0);
-    const cash = budget + state.finances.monthlyNetProfit - debtTotal;
-    return {ledger, soldCars, carPurchases, checklistCost, debtTotal, income, expense, net, budget, cash};
-  }
-
-  function formatTimeRangeLabel(range){
-    return ({day:'Diena', week:'Savaitė', month:'Mėnuo', all:'Visas laikotarpis'})[range] || 'Mėnuo';
   }
 
   function garageLeadDaysLeft(lead){
@@ -1792,19 +1473,14 @@
   }
 
   function openGarageStats(){
-    state.selectedView = 'garage-stats';
-    saveState();
-    render();
+    const sec = document.getElementById('garageStatsGrid');
+    if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
   }
-
 
   function openGarageLeadSheet(leadId){
     const lead = state.leadVariants.find(v => v.id === leadId);
     if(!lead) return;
     const photos = (lead.photos || []).slice(0,6);
-    const renderGallery = photos.length
-      ? photos.map((src, index) => `<button type="button" class="leadThumb" data-lead-photo="${lead.id}" data-lead-photo-index="${index}" style="background-image:url('${src}')"></button>`).join('')
-      : '<div class="leadDetailBox" style="grid-column:1/-1">Nuotraukų nėra.</div>';
     const html = `
       <div class="sheetHead">
         <h3>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h3>
@@ -1822,14 +1498,14 @@
             <span class="garageLeadTag">${escapeHTML(lead.fuel || 'Nenurodyta')}</span>
           </div>
           <div class="leadDetailBox" style="margin-top:12px">
-            <strong style="color:var(--text);display:block;margin-bottom:6px">Kontaktai</strong>
+            <strong style="color:var(--text);display:block;margin-bottom:6px">Kontaktai ir pastabos</strong>
             Tel. nr.: ${escapeHTML(lead.phone || '—')}<br>
             Defektai: ${escapeHTML(lead.defects || '—')}<br>
             Pastabos: ${escapeHTML(lead.notes || '—')}<br>
             Skambinta: ${escapeHTML(lead.lastCalledAt || 'dar ne')}<br>
             Po ${Number(lead.followUpDays || 0)} dienų.
           </div>
-          <div class="leadGallery">${renderGallery}</div>
+          <div class="leadGallery">${photos.map(src => `<div class="img" style="background-image:url('${src}')"></div>`).join('')}</div>
           <div class="btnRow" style="margin-top:12px">
             <button class="btn secondary" id="leadCallNowBtn">📞 Paskambinta</button>
             <button class="btn danger" id="leadDeleteBtn">Ištrinti variantą</button>
@@ -1847,42 +1523,7 @@
       deleteGarageLead(lead.id);
       closeSheet();
     };
-    document.querySelectorAll('[data-lead-photo]').forEach(btn => {
-      btn.onclick = () => openLeadPhotoViewer(lead.id, Number(btn.dataset.leadPhotoIndex || 0));
-    });
   }
-
-  function openLeadPhotoViewer(leadId, index=0){
-    const lead = state.leadVariants.find(v => v.id === leadId);
-    if(!lead || !Array.isArray(lead.photos) || !lead.photos.length) return;
-    const photos = lead.photos;
-    const normalizedIndex = ((index % photos.length) + photos.length) % photos.length;
-    const src = photos[normalizedIndex];
-    const html = `
-      <div class="sheetHead">
-        <h3>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}</h3>
-        <button class="closeBtn" id="closePhotoViewer">✕</button>
-      </div>
-      <div class="photoViewer">
-        <div class="photoViewerMain">
-          <img src="${src}" alt="${escapeHTML(lead.make)} ${escapeHTML(lead.model)}" />
-        </div>
-        <div class="photoCounter">${normalizedIndex + 1} / ${photos.length}</div>
-        <div class="photoNav">
-          <button class="btn secondary" id="prevLeadPhoto">← Ankstesnė</button>
-          <button class="btn secondary" id="nextLeadPhoto">Kita →</button>
-        </div>
-        <button class="btn danger" id="closeViewerBtn" style="width:100%">Uždaryti</button>
-      </div>
-    `;
-    openSheet(html);
-    const reopen = (delta) => openLeadPhotoViewer(lead.id, normalizedIndex + delta);
-    document.getElementById('closePhotoViewer').onclick = closeSheet;
-    document.getElementById('closeViewerBtn').onclick = closeSheet;
-    document.getElementById('prevLeadPhoto').onclick = () => reopen(-1);
-    document.getElementById('nextLeadPhoto').onclick = () => reopen(1);
-  }
-
 
   const defaultState = () => ({
     theme:'light',
@@ -1953,8 +1594,6 @@
         garageTasks: Array.isArray(parsed.garageTasks) ? parsed.garageTasks : [],
         garageTaskLastReset: parsed.garageTaskLastReset || todayISO(),
         leadVariants: Array.isArray(parsed.leadVariants) ? parsed.leadVariants : [],
-        financeLedger: Array.isArray(parsed.financeLedger) ? parsed.financeLedger : [],
-        debtLedger: Array.isArray(parsed.debtLedger) ? parsed.debtLedger : [],
         ui: {
           taskGroups: {Sveikata:false, Produktyvumas:false, Tobulėjimas:false, ...(parsed.ui?.taskGroups||{})},
           historyOpen: !!parsed.ui?.historyOpen,
@@ -2352,7 +1991,6 @@
     render();
   }
 
-
   function deleteCar(carId){
     const car = state.cars.find(c => c.id === carId);
     if(!car) return;
@@ -2366,10 +2004,6 @@
       state.finances.monthlyNetProfit -= net;
       state.finances.lifetimeNetProfit -= net;
       state.stats.carsSold = Math.max(0, state.stats.carsSold - 1);
-      addSignedBudget(-Number(car.soldPrice || 0) + carCost);
-    }else{
-      addSignedBudget(carTotalCost(car));
-      state.finances.monthlyExpenses = Math.max(0, state.finances.monthlyExpenses - carTotalCost(car));
     }
     state.cars = state.cars.filter(c => c.id !== carId);
     addHistory('Garažas', `Ištrintas automobilis: ${car.name}`, '🗑️');
@@ -2377,7 +2011,6 @@
     saveState();
     render();
   }
-
 
   function completeCarChecklistItem(carId, itemId, expenseValue=0){
     const car = state.cars.find(c => c.id === carId);
@@ -2387,18 +2020,6 @@
     item.done = true;
     item.expense = Math.max(0, Number(expenseValue) || 0);
     item.doneAt = nowLabel();
-    if(item.expense){
-      state.finances.monthlyExpenses += item.expense;
-      addSignedBudget(-item.expense);
-      addFinanceLedgerEntry({
-        kind:'car-expense',
-        title:`Išlaidos: ${car.name}`,
-        amount:item.expense,
-        sign:'out',
-        note:item.name,
-        ref:car.id
-      });
-    }
     if(car.checklist.every(i => i.done)){
       car.status = 'paruoštas';
       toast('Auto paruoštas pardavimui!', '🏁');
@@ -2425,7 +2046,6 @@
     openCar(carId);
   }
 
-
   function addCar(name, imageSrc, buyPrice){
     const car = {
       id: uid(),
@@ -2447,16 +2067,6 @@
       ]
     };
     state.cars.unshift(car);
-    state.finances.monthlyExpenses += car.buyPrice;
-    addSignedBudget(-car.buyPrice);
-    addFinanceLedgerEntry({
-      kind:'car-buy',
-      title:`Auto pirkimas: ${name}`,
-      amount:car.buyPrice,
-      sign:'out',
-      note:'Automobilis įrašytas į garažą',
-      ref:car.id
-    });
     addHistory('Garažas', `${name} pridėtas į garažą`, '🚗');
     toast('Automobilis pridėtas', '🚗');
     saveState();
@@ -2636,7 +2246,6 @@
   }
 
 
-
   function sellCar(carId){
     const car = state.cars.find(c => c.id === carId);
     if(!car) return;
@@ -2665,15 +2274,6 @@
     state.finances.monthlyExpenses += carTotalCost(car);
     state.finances.monthlyNetProfit += car.netProfit;
     state.finances.lifetimeNetProfit += car.netProfit;
-    addSignedBudget(sellPrice);
-    addFinanceLedgerEntry({
-      kind:'car-sell',
-      title:`Auto pardavimas: ${car.name}`,
-      amount:sellPrice,
-      sign:'in',
-      note:`Grynasis pelnas ${car.netProfit >= 0 ? '+' : ''}${moneyFmt(car.netProfit)}`,
-      ref:car.id
-    });
     addHistory('Automobilis parduotas', `${car.name} parduotas už ${moneyFmt(sellPrice)}. Grynasis pelnas: ${(car.netProfit >= 0 ? '+' : '') + moneyFmt(car.netProfit)}`, '💸');
     toast(`Parduota! +${moneyFmt(car.netProfit)}`, '💸');
     spark('🏁');
@@ -2710,7 +2310,6 @@
     return {name:'Laisvės pasaulis', idx:4, hint:'Laisvės pasaulis'};
   }
 
-
   function render(){
     checkDateReset();
     ensureMonthlyCycle();
@@ -2723,228 +2322,172 @@
     const allCount = taskTemplates.length;
     const stats = state.stats;
 
-    const isGarageView = state.selectedView === 'garage';
-    const isGarageLeadsView = state.selectedView === 'garage-leads';
-    const isGarageStatsView = state.selectedView === 'garage-stats';
-    const isFinanceView = state.selectedView === 'finance';
-    const isMenuView = state.selectedView === 'menu';
-
     document.documentElement.setAttribute('data-theme', state.theme);
-    const themeToggle = document.getElementById('themeToggle');
-    const soundToggle = document.getElementById('soundToggle');
-    const vibrateToggle = document.getElementById('vibrateToggle');
-    if(themeToggle) themeToggle.classList.toggle('on', state.theme === 'light');
-    if(soundToggle) soundToggle.classList.toggle('on', state.sound);
-    if(vibrateToggle) vibrateToggle.classList.toggle('on', state.vibrate);
+    document.getElementById('themeToggle').classList.toggle('on', state.theme === 'light');
+    document.getElementById('soundToggle').classList.toggle('on', state.sound);
+    document.getElementById('vibrateToggle').classList.toggle('on', state.vibrate);
 
-    const xpFill = document.getElementById('xpFill');
-    if(xpFill) xpFill.style.width = xpPct + '%';
-    const levelValue = document.getElementById('levelValue');
-    if(levelValue) levelValue.textContent = state.level;
-    const xpToNext = document.getElementById('xpToNext');
-    if(xpToNext) xpToNext.textContent = `${Math.max(0, xpNeeded - state.xp)} XP iki lygio`;
-    const streakValue = document.getElementById('streakValue');
-    if(streakValue) streakValue.textContent = state.streak;
-    const coinsValue = document.getElementById('coinsValue');
-    if(coinsValue) coinsValue.textContent = state.coins;
-    const streakHint = document.getElementById('streakHint');
-    if(streakHint) streakHint.textContent = state.streak >= 7 ? 'Karšta serija' : state.streak >= 3 ? 'Puikus ritmas' : 'Judėk toliau';
 
-    const dailyState = document.getElementById('dailyState');
-    if(dailyState){
-      dailyState.className = `badge ${state.dailyQuestClaimed ? 'good' : 'info'}`;
-      dailyState.textContent = state.dailyQuestClaimed ? 'Dienos misija įvykdyta' : 'Dienos misija paruošta';
-    }
-    const taskProgressLabel = document.getElementById('taskProgressLabel');
-    if(taskProgressLabel) taskProgressLabel.textContent = `${completedCount}/${allCount} atlikta`;
+    document.getElementById('xpFill').style.width = xpPct + '%';
+    document.getElementById('levelValue').textContent = state.level;
+    document.getElementById('xpToNext').textContent = `${Math.max(0, xpNeeded - state.xp)} XP iki lygio`;
+    document.getElementById('streakValue').textContent = state.streak;
+    document.getElementById('coinsValue').textContent = state.coins;
+    document.getElementById('streakHint').textContent = state.streak >= 7 ? 'Karšta serija' : state.streak >= 3 ? 'Puikus ritmas' : 'Judėk toliau';
 
+
+
+    document.getElementById('dailyState').className = `badge ${state.dailyQuestClaimed ? 'good' : 'info'}`;
+    document.getElementById('dailyState').textContent = state.dailyQuestClaimed ? 'Dienos misija įvykdyta' : 'Dienos misija paruošta';
+
+    document.getElementById('taskProgressLabel').textContent = `${completedCount}/${allCount} atlikta`;
+
+    // daily quest
     const q = state.dailyQuest;
-    const dailyRarity = document.getElementById('dailyRarity');
-    const dailyTitle = document.getElementById('dailyTitle');
-    const dailyDesc = document.getElementById('dailyDesc');
-    const claimDailyBtn = document.getElementById('claimDailyBtn');
-    if(dailyRarity && q){
-      dailyRarity.textContent = `${(q.rarity || (q.xp >= 30 ? 'legendinė' : q.xp >= 20 ? 'epinė' : 'reta')).toUpperCase()} MISIJA`;
-      dailyRarity.className = `tag ${(q.xp >= 30 ? 'legendary' : q.xp >= 20 ? 'epic' : 'rare')}`;
-    }
-    if(dailyTitle && q) dailyTitle.textContent = q.title;
-    if(dailyDesc && q) dailyDesc.textContent = q.cat;
-    if(claimDailyBtn){
-      claimDailyBtn.textContent = state.dailyQuestClaimed ? 'Jau įvykdyta' : 'Įvykdyti dienos užduotį';
-      claimDailyBtn.disabled = state.dailyQuestClaimed;
-      claimDailyBtn.style.opacity = state.dailyQuestClaimed ? .55 : 1;
-    }
+    document.getElementById('dailyRarity').textContent = `${(q.rarity || (q.xp >= 30 ? 'legendinė' : q.xp >= 20 ? 'epinė' : 'reta')).toUpperCase()} MISIJA`;
+    document.getElementById('dailyRarity').className = `tag ${(q.xp >= 30 ? 'legendary' : q.xp >= 20 ? 'epic' : 'rare')}`;
+    document.getElementById('dailyTitle').textContent = q.title;
+    document.getElementById('dailyDesc').textContent = `Ši misija iš ${q.cat} kategorijos. Duoda bonus XP ir monetų.`;
+    document.getElementById('claimDailyBtn').textContent = state.dailyQuestClaimed ? 'Jau įvykdyta' : 'Įvykdyti dienos užduotį';
+    document.getElementById('claimDailyBtn').disabled = state.dailyQuestClaimed;
+    document.getElementById('claimDailyBtn').style.opacity = state.dailyQuestClaimed ? .55 : 1;
 
+    // tasks
     const categories = ['Sveikata','Produktyvumas','Tobulėjimas'];
-    const tasksRoot = document.getElementById('tasksRoot');
-    if(tasksRoot){
-      const tasksHtml = categories.map(cat => {
-        const tasks = taskTemplates.filter(t => t.cat === cat);
-        const open = !!(state.ui?.taskGroups?.[cat]);
-        return `
-          <div class="panel taskGroup">
-            <button class="taskGroupHead" type="button" data-toggle-cat="${cat}">
-              <div>
-                <h3>${cat}</h3>
-                <span class="sub">${tasks.length} užduočių</span>
-              </div>
-              <div class="chev">${open ? '▾' : '▸'}</div>
-            </button>
-            <div class="taskGroupBody ${open ? 'open' : ''}">
-              <div class="taskList">
-                ${tasks.map(t => {
-                  const done = !!state.completedToday[t.id];
-                  return `
-                    <div class="taskCard ${done ? 'done' : ''}" data-task="${t.id}">
-                      <div class="check">${done ? '✓' : ''}</div>
-                      <div class="taskMain">
-                        <strong>${t.icon} ${escapeHTML(t.title)}</strong>
-                        <div class="taskMeta">
-                          <span>${t.difficulty}</span>
-                          <span>${done ? 'Atlikta šiandien' : 'Paspausk ir gauk atlygį'}</span>
-                        </div>
-                      </div>
-                      <div class="rewardPills">
-                        <div class="xp">+${t.xp} XP</div>
-                        <div class="coins">+${t.coins} 🪙</div>
+    const tasksHtml = categories.map(cat => {
+      const tasks = taskTemplates.filter(t => t.cat === cat);
+      const open = !!(state.ui?.taskGroups?.[cat]);
+      return `
+        <div class="panel taskGroup">
+          <button class="taskGroupHead" type="button" data-toggle-cat="${cat}">
+            <div>
+              <h3>${cat}</h3>
+              <span class="sub">${tasks.length} užduočių • ${open ? 'Paliesk, kad suskleistum' : 'Paliesk, kad išskleistum'}</span>
+            </div>
+            <div class="chev">${open ? '▾' : '▸'}</div>
+          </button>
+          <div class="taskGroupBody ${open ? 'open' : ''}">
+            <div class="taskList">
+              ${tasks.map(t => {
+                const done = !!state.completedToday[t.id];
+                return `
+                  <div class="taskCard ${done ? 'done' : ''}" data-task="${t.id}">
+                    <div class="check">${done ? '✓' : ''}</div>
+                    <div class="taskMain">
+                      <strong>${t.icon} ${escapeHTML(t.title)}</strong>
+                      <div class="taskMeta">
+                        <span>${t.difficulty}</span>
+                        <span>${done ? 'Atlikta šiandien' : 'Paspausk ir gauk atlygį'}</span>
                       </div>
                     </div>
-                  `;
-                }).join('')}
-              </div>
+                    <div class="rewardPills">
+                      <div class="xp">+${t.xp} XP</div>
+                      <div class="coins">+${t.coins} 🪙</div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
-        `;
-      }).join('');
-      tasksRoot.innerHTML = tasksHtml;
-      document.querySelectorAll('[data-task]').forEach(el => el.addEventListener('click', () => completeTask(el.dataset.task)));
-      document.querySelectorAll('[data-toggle-cat]').forEach(btn => btn.addEventListener('click', () => {
-        const cat = btn.dataset.toggleCat;
-        state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
-        state.ui.taskGroups = state.ui.taskGroups || {Sveikata:false, Produktyvumas:false, Tobulėjimas:false};
-        state.ui.taskGroups[cat] = !state.ui.taskGroups[cat];
-        saveState();
-        render();
-      }));
-    }
+        </div>
+      `;
+    }).join('');
+    document.getElementById('tasksRoot').innerHTML = tasksHtml;
+    document.querySelectorAll('[data-task]').forEach(el => el.addEventListener('click', () => completeTask(el.dataset.task)));
+    document.querySelectorAll('[data-toggle-cat]').forEach(btn => btn.addEventListener('click', () => {
+      const cat = btn.dataset.toggleCat;
+      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
+      state.ui.taskGroups = state.ui.taskGroups || {Sveikata:false, Produktyvumas:false, Tobulėjimas:false};
+      state.ui.taskGroups[cat] = !state.ui.taskGroups[cat];
+      saveState();
+      render();
+    }));
 
-    const historyOpen = !!(state.ui?.historyOpen);
-    const historyBody = document.getElementById('historyBody');
-    const historyChev = document.getElementById('historyChev');
-    const historyHint = document.getElementById('historyHint');
-    const historyRoot = document.getElementById('historyRoot');
-    if(historyBody) historyBody.classList.toggle('open', historyOpen);
-    if(historyChev) historyChev.textContent = historyOpen ? '▾' : '▸';
-    if(historyHint) historyHint.textContent = historyOpen ? 'Paspausk, kad paslėptum istoriją' : 'Paspausk, kad pamatytum istoriją';
-    if(historyRoot){
-      historyRoot.innerHTML = historyOpen ? (state.history.length ? state.history : [{title:'Pradėk žaidimą', desc:'Atlik pirmą užduotį', icon:'🎮', time:nowLabel()}]).map(item => `
-        <div class="historyItem">
-          <div class="histIcon">${item.icon}</div>
+    // stats grid
+    const statCards = [
+      {label:'Vanduo', value:`${stats.waterLiters} L`, hint:'Kaupiama kasdien', icon:'💧'},
+      {label:'Pasivaikščiojimas', value:`${stats.walkMinutes} min`, hint:'Kaupiama statistika', icon:'🚶'},
+      {label:'Atsispaudimai', value:stats.pushups, hint:'Strength augimas', icon:'💪'},
+      {label:'Prisitraukimai', value:stats.pullups, hint:'Kaupiama statistika', icon:'🏋️'},
+      {label:'Skaitymas', value:`${stats.readPages} psl`, hint:'Tavo augimas', icon:'📖'},
+      {label:'Mokymasis', value:`${stats.studyMinutes} min`, hint:'Focus progresas', icon:'🧠'},
+      {label:'CE teorija', value:`${stats.ceMinutes} min`, hint:'Kaupiasi', icon:'🪪'},
+      {label:'Auto pardavimai', value:stats.carsSold, hint:'Business progresas', icon:'🚗'}
+    ];
+    document.getElementById('statsGrid').innerHTML = statCards.map(s => `
+      <div class="smallStatBox">
+        <div class="label">${s.icon} ${s.label}</div>
+        <div class="value">${escapeHTML(String(s.value))}</div>
+        <div class="hint">${s.hint}</div>
+      </div>
+    `).join('');
+
+
+    // shop
+    document.getElementById('shopGrid').innerHTML = rewardsShop.map(item => `
+      <div class="rewardCard">
+        <div class="top">
           <div>
-            <strong>${escapeHTML(item.title)}</strong>
-            <span>${escapeHTML(item.desc)}</span>
-            <span style="font-size:11px;opacity:.78">${escapeHTML(item.time)}</span>
+            <div class="ico">${item.icon}</div>
+            <strong>${escapeHTML(item.name)}</strong>
           </div>
+          <div class="cost">🪙 ${item.cost}</div>
         </div>
-      `).join('') : '';
-    }
+        <p>${escapeHTML(item.desc)}</p>
+        <button class="btn secondary buyBtn" data-buy="${item.id}">Pirkti</button>
+      </div>
+    `).join('');
+    document.querySelectorAll('[data-buy]').forEach(btn => btn.onclick = () => buyReward(btn.dataset.buy));
 
-    // Menu
-    const shopGrid = document.getElementById('shopGrid');
-    if(shopGrid){
-      shopGrid.innerHTML = rewardsShop.map(item => `
-        <div class="rewardCard">
-          <div class="top">
-            <div>
-              <div class="ico">${item.icon}</div>
-              <strong>${escapeHTML(item.name)}</strong>
-            </div>
-            <div class="cost">🪙 ${item.cost}</div>
-          </div>
-          <button class="btn secondary buyBtn" data-buy="${item.id}">Pirkti</button>
+    // history
+    const historyOpen = !!(state.ui?.historyOpen);
+    const historyRoot = document.getElementById('historyRoot');
+    document.getElementById('historyBody').classList.toggle('open', historyOpen);
+    document.getElementById('historyChev').textContent = historyOpen ? '▾' : '▸';
+    document.getElementById('historyHint').textContent = historyOpen ? 'Paspausk, kad paslėptum istoriją' : 'Paspausk, kad pamatytum istoriją';
+    historyRoot.innerHTML = historyOpen ? (state.history.length ? state.history : [{title:'Pradėk žaidimą', desc:'Atlik pirmą užduotį', icon:'🎮', time:nowLabel()}]).map(item => `
+      <div class="historyItem">
+        <div class="histIcon">${item.icon}</div>
+        <div>
+          <strong>${escapeHTML(item.title)}</strong>
+          <span>${escapeHTML(item.desc)}</span>
+          <span style="font-size:11px;opacity:.78">${escapeHTML(item.time)}</span>
         </div>
-      `).join('');
-      document.querySelectorAll('[data-buy]').forEach(btn => btn.onclick = () => buyReward(btn.dataset.buy));
-    }
-    const skillsRoot = document.getElementById('skillsRoot');
-    if(skillsRoot){
-      skillsRoot.innerHTML = state.skills.map(s => `
-        <div class="skillCard">
-          <div class="skillTop">
-            <div>
-              <strong>${s.icon} ${escapeHTML(skillLabel(s.key))}</strong>
-              <span>Lygis ${s.level}</span>
-            </div>
-            <span class="badge info">x${s.boost.toFixed(2)}</span>
-          </div>
-          <div class="miniBar"><div class="fill" style="width:${s.xp % 100}%"></div></div>
-          <div class="skillDesc">${escapeHTML(s.desc)}</div>
-        </div>
-      `).join('');
-    }
-    const importantRoot = document.getElementById('importantTasksRoot');
-    if(importantRoot){
-      importantRoot.innerHTML = state.importantTasks.length ? state.importantTasks.map(task => `
-        <div class="taskCard ${task.done ? 'done' : ''}">
-          <div class="check">${task.done ? '✓' : ''}</div>
-          <div class="taskMain">
-            <strong>⭐ ${escapeHTML(task.title)}</strong>
-            <div class="taskMeta">
-              <span>${task.done ? 'Atlikta' : 'Svarbi užduotis'}</span>
-              <span>${task.completedAt ? `Baigta: ${escapeHTML(task.completedAt)}` : 'Pridėta ranka'}</span>
-            </div>
-          </div>
-          <div class="rewardPills">
-            <div class="xp">+${task.xp} XP</div>
-            <div class="coins">+${task.coins} 🪙</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-left:10px">
-            <button class="smallBtn" data-important-complete="${task.id}" ${task.done ? 'disabled' : ''}>✓</button>
-            <button class="smallBtn danger" data-important-delete="${task.id}">✕</button>
-          </div>
-        </div>
-      `).join('') : `<div class="emptyState">Kol kas nėra svarbių užduočių.</div>`;
-      document.querySelectorAll('[data-important-complete]').forEach(btn => btn.onclick = () => completeImportantTask(btn.dataset.importantComplete));
-      document.querySelectorAll('[data-important-delete]').forEach(btn => btn.onclick = () => deleteImportantTask(btn.dataset.importantDelete));
-    }
-    const importantCount = document.getElementById('importantCount');
-    if(importantCount) importantCount.textContent = `${state.importantTasks.length}`;
-    const shopCount = document.getElementById('shopCount');
-    if(shopCount) shopCount.textContent = `${rewardsShop.length}`;
-    const skillsCount = document.getElementById('skillsCount');
-    if(skillsCount) skillsCount.textContent = `${state.skills.length}`;
-    const menuCount = document.getElementById('menuCount');
-    if(menuCount) menuCount.textContent = '5 skiltys';
+      </div>
+    `).join('') : '';
 
-    // Garage main
+
+
+    // garažas
     ensureGarageDailyTasks();
+    ensureMonthlyCycle();
     const activeCars = state.cars.filter(car => car.status !== 'parduotas');
     const soldCars = state.cars.filter(car => car.status === 'parduotas');
-    const garageMenuBadge = document.getElementById('garageMenuBadge');
-    const garageMenuBadgeTop = document.getElementById('garageMenuBadgeTop');
-    if(garageMenuBadge) garageMenuBadge.textContent = `${activeCars.length} aktyvių / ${soldCars.length} parduotų`;
-    if(garageMenuBadgeTop) garageMenuBadgeTop.textContent = `${activeCars.length + soldCars.length} auto`;
-    const activeCarCount = document.getElementById('activeCarCount');
-    const soldCarCount = document.getElementById('soldCarCount');
-    const carCount = document.getElementById('carCount');
-    if(activeCarCount) activeCarCount.textContent = `${activeCars.length} auto`;
-    if(soldCarCount) soldCarCount.textContent = `${soldCars.length} auto`;
-    if(carCount) carCount.textContent = `${activeCars.length} aktyvūs / ${soldCars.length} parduoti`;
+    document.getElementById('carCount').textContent = `${activeCars.length} aktyvūs / ${soldCars.length} parduoti`;
+    document.getElementById('activeCarCount').textContent = `${activeCars.length} auto`;
+    document.getElementById('soldCarCount').textContent = `${soldCars.length} auto`;
+    document.getElementById('garageMenuBadge').textContent = `${activeCars.length} aktyvių / ${soldCars.length} parduotų`;
+
+    const garageStats = garageTaskStatsList();
+    const garageStatsRoot = document.getElementById('garageStatsGrid');
+    if(garageStatsRoot){
+      garageStatsRoot.innerHTML = garageStats.map(s => `
+        <div class="smallStatBox">
+          <div class="label">${s.label}</div>
+          <div class="value">${escapeHTML(s.value)}</div>
+          <div class="hint">${escapeHTML(s.hint)}</div>
+        </div>
+      `).join('');
+    }
 
     const garageTaskGroups = state.ui?.garageTaskGroups || {autos:false, custom:false};
-    const garageAutosBody = document.getElementById('garageAutosBody');
-    const garageCustomBody = document.getElementById('garageCustomBody');
-    const garageAutosChev = document.getElementById('garageAutosChev');
-    const garageCustomChev = document.getElementById('garageCustomChev');
-    if(garageAutosBody) garageAutosBody.classList.toggle('open', !!garageTaskGroups.autos);
-    if(garageCustomBody) garageCustomBody.classList.toggle('open', !!garageTaskGroups.custom);
-    if(garageAutosChev) garageAutosChev.textContent = garageTaskGroups.autos ? '▾' : '▸';
-    if(garageCustomChev) garageCustomChev.textContent = garageTaskGroups.custom ? '▾' : '▸';
+    document.getElementById('garageAutosBody')?.classList.toggle('open', !!garageTaskGroups.autos);
+    document.getElementById('garageCustomBody')?.classList.toggle('open', !!garageTaskGroups.custom);
+    document.getElementById('garageAutosChev') && (document.getElementById('garageAutosChev').textContent = garageTaskGroups.autos ? '▾' : '▸');
+    document.getElementById('garageCustomChev') && (document.getElementById('garageCustomChev').textContent = garageTaskGroups.custom ? '▾' : '▸');
 
-    const garageTaskSummary = document.getElementById('garageTaskSummary');
     const garageCustomActive = state.garageTasks || [];
-    if(garageTaskSummary) garageTaskSummary.textContent = `${activeCars.reduce((sum, car) => sum + car.checklist.length, 0)} / ${garageCustomActive.length}`;
-
+    document.getElementById('garageTaskSummary').textContent = `${activeCars.reduce((sum, car) => sum + car.checklist.length, 0)} automobilių užduočių / ${garageCustomActive.length} kitų užduočių`;
     const autoTasksRoot = document.getElementById('garageAutoTasksRoot');
     if(autoTasksRoot){
       autoTasksRoot.innerHTML = activeCars.length ? activeCars.map(car => `
@@ -2952,7 +2495,7 @@
           <div class="garageCarTaskHead">
             <div>
               <strong>${escapeHTML(car.name)}</strong>
-              <span>${carDoneCount(car)}/${car.checklist.length} atlikta</span>
+              <span>${carDoneCount(car)}/${car.checklist.length} atlikta • ${car.status === 'paruoštas' ? 'paruoštas pardavimui' : car.status === 'beveik paruoštas' ? 'beveik paruoštas' : 'rengiamas'}</span>
             </div>
             <button class="btn secondary" type="button" data-open-car="${car.id}" style="padding:10px 12px;border-radius:14px;font-size:12px">Atidaryti</button>
           </div>
@@ -2965,7 +2508,7 @@
                     <input type="checkbox" ${checked ? 'checked' : ''} ${checked ? 'disabled' : ''} data-garage-car="${car.id}" data-garage-item="${item.id}" />
                     <div>
                       <strong>${escapeHTML(item.name)}</strong>
-                      <div class="small">+${item.xp} XP • +${item.coins} 🪙 • ${moneyFmt(item.expense || 0)}</div>
+                      <div class="small">+${item.xp} XP • +${item.coins} 🪙 • išlaidos ${moneyFmt(item.expense || 0)}</div>
                     </div>
                   </label>
                   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
@@ -2977,7 +2520,7 @@
             }).join('')}
           </div>
         </div>
-      `).join('') : `<div class="emptyState">Kol kas nėra aktyvių automobilių.</div>`;
+      `).join('') : `<div class="emptyState">Kol kas nėra aktyvių automobilių. Pridėk pirmą auto ir čia iškart matysi jo darbus.</div>`;
       autoTasksRoot.querySelectorAll('input[type="checkbox"]').forEach(cb => {
         cb.onchange = () => {
           const carId = cb.dataset.garageCar;
@@ -3001,25 +2544,71 @@
           <div class="taskMain">
             <strong>🧩 ${escapeHTML(task.title)}</strong>
             <div class="taskMeta">
-              <span>${task.done ? 'Atlikta' : 'Kita užduotis'}</span>
-              <span>${task.completedAt ? `Baigta: ${escapeHTML(task.completedAt)}` : 'Laukia'}</span>
+              <span>${task.done ? `Atlikta ${escapeHTML(task.completedAt || '')}` : 'Laukiama'}</span>
+              <span>+${task.xp} XP</span>
+              <span>+${task.coins} 🪙</span>
             </div>
           </div>
           <div class="rewardPills">
-            <div class="xp">+${task.xp} XP</div>
-            <div class="coins">+${task.coins} 🪙</div>
+            <div class="xp">ID ${escapeHTML(task.id.slice(-4))}</div>
+            <div class="coins">${task.done ? 'Šiandien' : 'Rytoj grįš'}</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-left:10px">
-            <button class="smallBtn" data-garage-custom-complete="${task.id}" ${task.done ? 'disabled' : ''}>✓</button>
-            <button class="smallBtn danger" data-garage-custom-delete="${task.id}">✕</button>
+            <button class="smallBtn" data-garage-task-complete="${task.id}" ${task.done ? 'disabled' : ''}>✓</button>
+            <button class="smallBtn danger" data-garage-task-delete="${task.id}">✕</button>
           </div>
         </div>
-      `).join('') : `<div class="emptyState">Kitos užduotys dar tuščios.</div>`;
-      garageCustomRoot.querySelectorAll('[data-garage-custom-complete]').forEach(btn => btn.onclick = () => completeGarageTask(btn.dataset.garageCustomComplete));
-      garageCustomRoot.querySelectorAll('[data-garage-custom-delete]').forEach(btn => btn.onclick = () => deleteGarageTask(btn.dataset.garageCustomDelete));
+      `).join('') : `<div class="emptyState" style="margin:0 16px 16px">Kol kas nėra kitų užduočių. Pridėk pirmą darbą ir pažymėk jį kai padarysi.</div>`;
+      garageCustomRoot.querySelectorAll('[data-garage-task-complete]').forEach(btn => {
+        btn.onclick = () => completeGarageTask(btn.dataset.garageTaskComplete);
+      });
+      garageCustomRoot.querySelectorAll('[data-garage-task-delete]').forEach(btn => {
+        btn.onclick = () => deleteGarageTask(btn.dataset.garageTaskDelete);
+      });
     }
 
-    // Garage leads
+    document.getElementById('monthlyProfitValue').textContent = moneyFmt(state.finances.monthlyNetProfit);
+    document.getElementById('monthlyProfitFill').style.width = `${clamp((state.finances.monthlyNetProfit / 10000) * 100, 0, 100)}%`;
+
+    document.getElementById('activeCarGrid').innerHTML = activeCars.length ? activeCars.map(car => {
+      const done = carDoneCount(car);
+      const pct = carProgress(car);
+      const totalCost = carTotalCost(car);
+      return `
+        <div class="carCard" data-open-car="${car.id}">
+          <div class="carHero" style="background-color:var(--surface-2);background-image:url('${car.imageSrc || ''}')">
+            <div class="pill">Aktyvus</div>
+            <div class="pill">${pct}%</div>
+          </div>
+          <div class="carBody">
+            <h4>${escapeHTML(car.name)}</h4>
+            <div class="carLine"><span>${done}/${car.checklist.length} punktų</span><span>Stovi: ${moneyFmt(totalCost)}</span></div>
+            <div class="miniBar"><div class="fill" style="width:${pct}%"></div></div>
+            <div class="carLine"><span>Pirkta už ${moneyFmt(car.buyPrice)}</span><span>Išlaidos: ${moneyFmt(carChecklistExpenses(car))}</span></div>
+          </div>
+        </div>
+      `;
+    }).join('') : `<div class="emptyState">Kol kas nėra aktyvių automobilių. Pridėk pirmą auto ir pradėk Garažo misiją.</div>`;
+    document.getElementById('soldCarGrid').innerHTML = soldCars.length ? soldCars.map(car => {
+      const pct = carProgress(car);
+      return `
+        <div class="carCard" data-open-car="${car.id}">
+          <div class="carHero" style="background-color:var(--surface-2);background-image:url('${car.imageSrc || ''}')">
+            <div class="pill">Parduotas</div>
+            <div class="pill">${pct}%</div>
+          </div>
+          <div class="carBody">
+            <h4>${escapeHTML(car.name)}</h4>
+            <div class="carLine"><span>Pardavimo kaina: ${moneyFmt(car.soldPrice)}</span><span>Grynasis pelnas: ${(car.netProfit >= 0 ? '+' : '') + moneyFmt(car.netProfit)}</span></div>
+            <div class="miniBar"><div class="fill" style="width:100%"></div></div>
+            <div class="carLine"><span>Stovėjo: ${moneyFmt(carTotalCost(car))}</span><span>${escapeHTML(car.soldAt || '')}</span></div>
+          </div>
+        </div>
+      `;
+    }).join('') : `<div class="emptyState">Dar nėra parduotų automobilių. Kai parduosi pirmą, jis čia atsiras atskirai.</div>`;
+    document.getElementById('activeCarGrid').querySelectorAll('[data-open-car]').forEach(el => el.onclick = () => openCar(el.dataset.openCar));
+    document.getElementById('soldCarGrid').querySelectorAll('[data-open-car]').forEach(el => el.onclick = () => openCar(el.dataset.openCar));
+
     const leadRoot = document.getElementById('garageLeadRoot');
     if(leadRoot){
       const q = (state.ui?.leadFilters?.query || '').toLowerCase().trim();
@@ -3033,7 +2622,9 @@
       if(sortInput && sortInput.value !== sort) sortInput.value = sort;
       let leads = (state.leadVariants || []).filter(lead => {
         const hay = [lead.make, lead.model, lead.year, lead.fuel, lead.phone, lead.city, lead.defects, lead.notes].join(' ').toLowerCase();
-        return (!q || hay.includes(q)) && garageLeadDueFilterMatch(lead, due);
+        const matchesText = !q || hay.includes(q);
+        const matchesDue = garageLeadDueFilterMatch(lead, due);
+        return matchesText && matchesDue;
       });
       leads.sort((a,b) => {
         if(sort === 'newest') return (b.createdDateISO || '').localeCompare(a.createdDateISO || '');
@@ -3041,27 +2632,20 @@
         if(sort === 'city') return String(a.city || '').localeCompare(String(b.city || ''), 'lt');
         return garageLeadDaysLeft(a) - garageLeadDaysLeft(b);
       });
+
       const total = (state.leadVariants || []).length;
       const todayCnt = (state.leadVariants || []).filter(l => garageLeadDaysLeft(l) === 0).length;
       const overdueCnt = (state.leadVariants || []).filter(l => garageLeadDaysLeft(l) < 0).length;
       const avg = total ? Math.round((state.leadVariants || []).reduce((sum, l) => sum + Math.max(0, garageLeadDaysLeft(l)), 0) / total) : 0;
-      const garageLeadTotal = document.getElementById('garageLeadTotal');
-      const garageLeadToday = document.getElementById('garageLeadToday');
-      const garageLeadOverdue = document.getElementById('garageLeadOverdue');
-      const garageLeadAvg = document.getElementById('garageLeadAvg');
-      const garageLeadCount = document.getElementById('garageLeadCount');
-      const garageLeadCount2 = document.getElementById('garageLeadCount2');
-      if(garageLeadTotal) garageLeadTotal.textContent = total;
-      if(garageLeadToday) garageLeadToday.textContent = todayCnt;
-      if(garageLeadOverdue) garageLeadOverdue.textContent = overdueCnt;
-      if(garageLeadAvg) garageLeadAvg.textContent = `${avg} d.`;
-      if(garageLeadCount) garageLeadCount.textContent = `${leads.length}`;
-      if(garageLeadCount2) garageLeadCount2.textContent = `${leads.length}`;
+      document.getElementById('garageLeadTotal').textContent = total;
+      document.getElementById('garageLeadToday').textContent = todayCnt;
+      document.getElementById('garageLeadOverdue').textContent = overdueCnt;
+      document.getElementById('garageLeadAvg').textContent = `${avg} d.`;
+      document.getElementById('garageLeadCount').textContent = `${leads.length} variantų`;
       leadRoot.innerHTML = leads.length ? leads.map(lead => {
         const days = garageLeadDaysLeft(lead);
         const daysClass = days < 0 ? 'danger' : days === 0 ? 'warn' : 'good';
         const heroStyle = lead.photos?.[0] ? `background-image:url('${lead.photos[0]}')` : '';
-        const thumbs = (lead.photos || []).slice(0,3).map((src, idx) => `<button type="button" class="leadThumb" data-lead-photo="${lead.id}" data-lead-photo-index="${idx}" style="background-image:url('${src}')"></button>`).join('');
         return `
           <div class="garageLeadCard" data-lead-id="${lead.id}">
             <div class="garageLeadHero" style="${heroStyle}">
@@ -3070,180 +2654,94 @@
             </div>
             <div class="garageLeadBody">
               <h4>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h4>
-              <div class="garageLeadLine"><span>${escapeHTML(lead.city || 'Be miesto')}</span><span>${escapeHTML(lead.phone || '—')}</span></div>
+              <div class="garageLeadLine"><span>${escapeHTML(lead.city || 'Be miesto')} • ${escapeHTML(lead.fuel || '—')}</span><span>${escapeHTML(lead.phone || '—')}</span></div>
               <div class="garageLeadTags">
-                <span class="garageLeadTag good">${moneyFmt(lead.initialPrice)}</span>
-                <span class="garageLeadTag">${moneyFmt(lead.targetPrice)}</span>
+                <span class="garageLeadTag good">Pradinė ${moneyFmt(lead.initialPrice)}</span>
+                <span class="garageLeadTag">Mūsų kaina ${moneyFmt(lead.targetPrice)}</span>
                 <span class="garageLeadTag ${daysClass}">${garageLeadDaysText(lead)}</span>
               </div>
-              <div class="garageLeadLine"><span>${escapeHTML(lead.defects || '—')}</span><span>${escapeHTML(lead.lastCalledAt || 'dar ne')}</span></div>
-              <div class="garageLeadLine"><span>${Number(lead.followUpDays || 0)} d.</span><span>${escapeHTML(lead.notes || '')}</span></div>
-              <div class="leadGallery">${thumbs || '<div class="leadDetailBox" style="grid-column:1/-1">Nuotraukų nėra.</div>'}</div>
+              <div class="garageLeadLine"><span>Defektai: ${escapeHTML(lead.defects || 'Nenurodyta')}</span><span>Skambinta: ${escapeHTML(lead.lastCalledAt || 'dar ne')}</span></div>
+              <div class="garageLeadLine"><span>Po ${Number(lead.followUpDays || 0)} d.</span><span>${escapeHTML(lead.notes || '')}</span></div>
+              <div class="leadGallery">${(lead.photos || []).slice(0,3).map(src => `<div class="img" style="background-image:url('${src}')"></div>`).join('') || '<div class="leadDetailBox" style="grid-column:1/-1">Nuotraukų dar nėra.</div>'}</div>
               <div class="garageLeadActions">
-                <button class="btn secondary" type="button" data-call-lead="${lead.id}">Paskambinta</button>
-                <button class="btn secondary" type="button" data-edit-lead="${lead.id}">Atidaryti</button>
+                <button class="btn secondary" type="button" data-call-lead="${lead.id}">📞 Paskambinta</button>
+                <button class="btn secondary" type="button" data-edit-lead="${lead.id}">Detalės</button>
                 <button class="btn danger" type="button" data-delete-lead="${lead.id}">Ištrinti</button>
               </div>
             </div>
           </div>
         `;
-      }).join('') : `<div class="emptyState">Variantų dar nėra.</div>`;
+      }).join('') : `<div class="emptyState">Dar nėra įkeltų klientų variantų. Įkelk pirmą pasiūlymą aukščiau ir jis atsiras šiame sąraše.</div>`;
       leadRoot.querySelectorAll('[data-call-lead]').forEach(btn => btn.onclick = () => callGarageLead(btn.dataset.callLead));
       leadRoot.querySelectorAll('[data-delete-lead]').forEach(btn => btn.onclick = () => deleteGarageLead(btn.dataset.deleteLead));
       leadRoot.querySelectorAll('[data-edit-lead]').forEach(btn => btn.onclick = () => openGarageLeadSheet(btn.dataset.editLead));
-      leadRoot.querySelectorAll('[data-lead-photo]').forEach(btn => btn.onclick = () => openLeadPhotoViewer(btn.dataset.leadPhoto, Number(btn.dataset.leadPhotoIndex || 0)));
     }
 
-    // Garage stats page
-    const garageStatsViewRoot = document.getElementById('garageStatsTopGrid');
-    if(garageStatsViewRoot){
-      const range = state.ui?.garageStatsRange || 'month';
-      const period = garagePeriodStats(range);
-      const summary = garageStatsSummary(range);
-      const periodLabel = document.getElementById('garageStatsRangeLabel');
-      if(periodLabel) periodLabel.textContent = formatTimeRangeLabel(range);
-      garageStatsViewRoot.innerHTML = [
-        {label:'Aktyvūs', value: summary.active.length, hint:'Automobiliai garaže'},
-        {label:'Parduoti', value: summary.sold.length, hint:'Sėkmingi pardavimai'},
-        {label:'Išleista', value: moneyFmt(summary.totalSpent), hint:'Pirkimai + darbai'},
-        {label:'Pelnas', value: (summary.totalProfit >= 0 ? '+' : '') + moneyFmt(summary.totalProfit), hint:'Visų pardavimų rezultatas'},
-        {label:'Vid. pirkimas', value: moneyFmt(summary.avgBuy), hint:'Vidutinė auto kaina'},
-        {label:'Punktai', value: summary.completedTasks, hint:'Atlikti garažo darbai'}
-      ].map(s => `
-        <div class="smallStatBox">
-          <div class="label">${s.label}</div>
-          <div class="value">${escapeHTML(String(s.value))}</div>
-          <div class="hint">${escapeHTML(s.hint)}</div>
+    // įgūdžiai
+
+
+    document.getElementById('skillsRoot').innerHTML = state.skills.map(s => `
+      <div class="skillCard">
+        <div class="skillTop">
+          <div>
+            <strong>${s.icon} ${escapeHTML(skillLabel(s.key))}</strong>
+            <span>Lygis ${s.level}</span>
+          </div>
+          <span class="badge info">Stiprinimas x${s.boost.toFixed(2)}</span>
         </div>
-      `).join('');
-      const periodRoot = document.getElementById('garageStatsPeriodRoot');
-      if(periodRoot){
-        periodRoot.innerHTML = [
-          {name:'Pardavimo pajamos', value: moneyFmt(period.revenue), note:'pardavimai'},
-          {name:'Grynasis pelnas', value: (period.profit >= 0 ? '+' : '') + moneyFmt(period.profit), note:'rezultatas'},
-          {name:'Išlaidos', value: moneyFmt(period.spent), note:'įsigijimai'},
-          {name:'Nupirkta auto', value: period.bought.length, note:'pridėti į garažą'},
-          {name:'Parduota auto', value: period.sold.length, note:'užbaigti sandoriai'},
-          {name:'Atlikta darbų', value: period.checklistDone, note:'užduotys'}
-        ].map(row => `
-          <div class="tableRow">
-            <div><strong>${escapeHTML(row.name)}</strong></div>
-            <div>${escapeHTML(String(row.value))}</div>
-            <div class="muted">${escapeHTML(row.note)}</div>
-            <div class="muted">${formatTimeRangeLabel(range)}</div>
-          </div>
-        `).join('');
-      }
-      const carsRoot = document.getElementById('garageStatsCarsRoot');
-      if(carsRoot){
-        const topProfit = [...summary.sold].sort((a,b) => Number(b.netProfit || 0) - Number(a.netProfit || 0)).slice(0,4);
-        const topCost = [...state.cars].sort((a,b) => carTotalCost(b) - carTotalCost(a)).slice(0,4);
-        carsRoot.innerHTML = `
-          <div class="tableRow head"><div>Automobilis</div><div>Kaina</div><div>Pelnas</div><div>Statusas</div></div>
-          ${[...topProfit, ...topCost.filter(c => !topProfit.some(p => p.id === c.id))].slice(0,6).map(car => `
-            <div class="tableRow">
-              <div><strong>${escapeHTML(car.name)}</strong></div>
-              <div>${moneyFmt(car.buyPrice)}</div>
-              <div>${car.status === 'parduotas' ? (car.netProfit >= 0 ? '+' : '') + moneyFmt(car.netProfit) : moneyFmt(carTotalCost(car))}</div>
-              <div class="muted">${escapeHTML(car.status)}</div>
-            </div>
-          `).join('')}
-        `;
-      }
-      const garageStatsRoot = document.getElementById('garageStatsGrid');
-      if(garageStatsRoot){
-        garageStatsRoot.innerHTML = '';
-      }
-      const activeCount = document.getElementById('activeCarCount');
-      if(activeCount) activeCount.textContent = `${state.cars.filter(c => c.status !== 'parduotas').length} auto`;
-    }
+        <div class="miniBar"><div class="fill" style="width:${s.xp % 100}%"></div></div>
+        <div class="skillDesc">${escapeHTML(s.desc)}</div>
+      </div>
+    `).join('');
 
-    // Finance page
-    const financeTopGrid = document.getElementById('financeTopGrid');
-    if(financeTopGrid){
-      const range = state.ui?.financeRange || 'month';
-      const summary = financeSummary(range);
-      const periodLabel = document.getElementById('financeRangeLabel');
-      if(periodLabel) periodLabel.textContent = formatTimeRangeLabel(range);
-      financeTopGrid.innerHTML = [
-        {label:'Biudžetas', value: moneyFmt(summary.budget), hint:'Tvarkomas ranka'},
-        {label:'Cash', value: moneyFmt(summary.cash), hint:'Biudžetas + rezultatas - skolos'},
-        {label:'Skolos', value: moneyFmt(summary.debtTotal), hint:'Vis dar nepadengta'},
-        {label:'Laikotarpio pelnas', value: (summary.net >= 0 ? '+' : '') + moneyFmt(summary.net), hint:'Pagal filtrą'},
-        {label:'Automobiliams', value: moneyFmt(summary.carPurchases), hint:'Pirkimai garaže'},
-        {label:'Darbai', value: moneyFmt(summary.checklistCost), hint:'Išlaidos darbams'}
-      ].map(s => `
-        <div class="smallStatBox">
-          <div class="label">${s.label}</div>
-          <div class="value">${escapeHTML(String(s.value))}</div>
-          <div class="hint">${escapeHTML(s.hint)}</div>
+
+    // svarbios užduotys
+    const importantRoot = document.getElementById('importantTasksRoot');
+    if(importantRoot){
+      importantRoot.innerHTML = state.importantTasks.length ? state.importantTasks.map(task => `
+        <div class="taskCard ${task.done ? 'done' : ''}">
+          <div class="check">${task.done ? '✓' : ''}</div>
+          <div class="taskMain">
+            <strong>⭐ ${escapeHTML(task.title)}</strong>
+            <div class="taskMeta">
+              <span>${task.done ? 'Atlikta' : 'Svarbi užduotis'}</span>
+              <span>${task.completedAt ? `Baigta: ${escapeHTML(task.completedAt)}` : 'Pridėta ranka'}</span>
+            </div>
+          </div>
+          <div class="rewardPills">
+            <div class="xp">+${task.xp} XP</div>
+            <div class="coins">+${task.coins} 🪙</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-left:10px">
+            <button class="smallBtn" data-important-complete="${task.id}" ${task.done ? 'disabled' : ''}>✓</button>
+            <button class="smallBtn danger" data-important-delete="${task.id}">✕</button>
+          </div>
         </div>
-      `).join('');
-
-      const debtSummaryRoot = document.getElementById('debtSummaryRoot');
-      if(debtSummaryRoot){
-        const debts = financeDebtSummary();
-        const debtCount = document.getElementById('debtCount');
-        if(debtCount) debtCount.textContent = `${debts.length}`;
-        debtSummaryRoot.innerHTML = debts.length ? debts.map(d => `
-          <div class="financeItem">
-            <div class="top">
-              <div>
-                <strong>${escapeHTML(d.person)}</strong>
-                <div class="meta">${escapeHTML(d.lastDate || d.dueDate || 'be datos')} • ${escapeHTML(d.lastNote || '')}</div>
-              </div>
-              <div class="amount ${d.balance > 0 ? 'danger' : 'good'}">${d.balance > 0 ? moneyFmt(d.balance) : '0 €'}</div>
-            </div>
-            <div class="chipRow">
-              <span class="chip ${d.balance > 0 ? 'warn' : 'good'}">${d.entries} įrašai</span>
-              <span class="chip">Priminti: ${escapeHTML(d.dueDate || '—')}</span>
-            </div>
-          </div>
-        `).join('') : `<div class="emptyState">Skolų dar nėra.</div>`;
-      }
-
-      const financeLedgerRoot = document.getElementById('financeLedgerRoot');
-      if(financeLedgerRoot){
-        const ledger = financeLedgerInRange(range);
-        const financeLogCount = document.getElementById('financeLogCount');
-        if(financeLogCount) financeLogCount.textContent = `${ledger.length}`;
-        financeLedgerRoot.innerHTML = ledger.length ? ledger.map(item => `
-          <div class="financeItem">
-            <div class="top">
-              <div>
-                <strong>${escapeHTML(item.title)}</strong>
-                <div class="meta">${escapeHTML(item.date)} • ${escapeHTML(item.note || '')}</div>
-              </div>
-              <div class="amount ${item.sign === 'in' ? 'good' : 'danger'}">${item.sign === 'in' ? '+' : '-'}${moneyFmt(item.amount)}</div>
-            </div>
-            <div class="chipRow">
-              <span class="chip">${escapeHTML(item.kind)}</span>
-              <span class="chip">${escapeHTML(item.time)}</span>
-            </div>
-          </div>
-        `).join('') : `<div class="emptyState">Įrašų nėra.</div>`;
-      }
+      `).join('') : `<div class="emptyState">Kol kas nėra svarbių užduočių. Pridėk pirmą darbą, pvz. mokesčiai ar vizitas pas gydytoją.</div>`;
+      importantRoot.querySelectorAll('[data-important-complete]').forEach(btn => {
+        btn.onclick = () => completeImportantTask(btn.dataset.importantComplete);
+      });
+      importantRoot.querySelectorAll('[data-important-delete]').forEach(btn => {
+        btn.onclick = () => deleteImportantTask(btn.dataset.importantDelete);
+      });
     }
 
     // achievements
-    const achievementsRoot = document.getElementById('achievementsRoot');
-    if(achievementsRoot){
-      achievementsRoot.innerHTML = achievementDefs.map(a => {
-        const ok = !!state.unlockedAchievements[a.id];
-        return `
-          <div class="achievement ${ok ? '' : 'locked'}">
-            <div class="ico">${a.icon}</div>
-            <strong>${escapeHTML(a.title)}</strong>
-            <span>${escapeHTML(a.desc)}</span>
-            <div style="margin-top:12px"><span class="badge ${ok ? 'good' : 'warn'}">${ok ? `+${a.atlygis.coins} 🪙` : 'Užrakinta'}</span></div>
-          </div>
-        `;
-      }).join('');
-    }
+    document.getElementById('achievementsRoot').innerHTML = achievementDefs.map(a => {
+      const ok = !!state.unlockedAchievements[a.id];
+      return `
+        <div class="achievement ${ok ? '' : 'locked'}">
+          <div class="ico">${a.icon}</div>
+          <strong>${escapeHTML(a.title)}</strong>
+          <span>${escapeHTML(a.desc)}</span>
+          <div style="margin-top:12px"><span class="badge ${ok ? 'good' : 'warn'}">${ok ? `+${a.atlygis.coins} 🪙` : 'Užrakinta'}</span></div>
+        </div>
+      `;
+    }).join('');
 
-    const allowedViews = new Set(['home','garage','garage-leads','garage-stats','finance','menu','achievements','settings']);
+    const allowedViews = new Set(['home','garage','garage-leads','menu','achievements','settings']);
     if(!allowedViews.has(state.selectedView)) state.selectedView = 'home';
-    const navActiveView = (state.selectedView === 'garage-leads' || state.selectedView === 'garage-stats') ? 'garage' : (state.selectedView === 'finance' ? 'menu' : state.selectedView);
+    const navActiveView = state.selectedView === 'garage-leads' ? 'garage' : state.selectedView;
     document.querySelectorAll('.navBtn').forEach(btn => btn.classList.toggle('active', btn.dataset.view === navActiveView));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     const activeView = document.getElementById(`view-${state.selectedView}`) || document.getElementById('view-home');
@@ -3251,7 +2749,6 @@
 
     saveState();
   }
-
 
   // events
   document.querySelectorAll('.navBtn').forEach(btn => btn.addEventListener('click', () => {
@@ -3261,31 +2758,23 @@
   }));
 
   document.addEventListener('click', (e) => {
-    const viewBtn = e.target.closest('[data-go-view]');
-    if(viewBtn){
-      state.selectedView = viewBtn.dataset.goView;
-      saveState();
-      render();
-      return;
-    }
-    const jumpBtn = e.target.closest('[data-jump]');
-    if(jumpBtn){
-      const target = document.getElementById(jumpBtn.dataset.jump);
-      if(target){
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-        toast('Atidaryta iš meniu', '↘️');
-      }
+    const btn = e.target.closest('[data-jump]');
+    if(!btn) return;
+    const target = document.getElementById(btn.dataset.jump);
+    if(target){
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+      toast('Atidaryta iš meniu', '↘️');
     }
   });
 
-  document.getElementById('claimDailyBtn')?.addEventListener('click', claimDailyQuest);
-  document.getElementById('rerollDailyBtn')?.addEventListener('click', rerollDailyQuest);
-  document.getElementById('historyToggleBtn')?.addEventListener('click', () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+  document.getElementById('claimDailyBtn').onclick = claimDailyQuest;
+  document.getElementById('rerollDailyBtn').onclick = rerollDailyQuest;
+  document.getElementById('historyToggleBtn').onclick = () => {
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
     state.ui.historyOpen = !state.ui.historyOpen;
     saveState();
     render();
-  });
+  };
 
   document.addEventListener('click', (e) => {
     const actionBtn = e.target.closest('[data-garage-action]');
@@ -3298,7 +2787,7 @@
     }
     const toggleBtn = e.target.closest('[data-garage-toggle]');
     if(toggleBtn){
-      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+      state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
       state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false};
       const key = toggleBtn.dataset.garageToggle;
       state.ui.garageTaskGroups[key] = !state.ui.garageTaskGroups[key];
@@ -3307,7 +2796,7 @@
     }
   });
 
-  document.getElementById('addGarageTaskBtn')?.addEventListener('click', () => {
+  document.getElementById('addGarageTaskBtn').onclick = () => {
     const title = document.getElementById('garageTaskTitle').value.trim();
     const xp = Number(document.getElementById('garageTaskXp').value || 0);
     const coins = Number(document.getElementById('garageTaskCoins').value || 0);
@@ -3319,9 +2808,9 @@
     document.getElementById('garageTaskTitle').value = '';
     document.getElementById('garageTaskXp').value = '10';
     document.getElementById('garageTaskCoins').value = '5';
-  });
+  };
 
-  document.getElementById('addCarBtn')?.addEventListener('click', async () => {
+  document.getElementById('addCarBtn').onclick = async () => {
     const name = document.getElementById('carName').value.trim();
     const buyPrice = Number(document.getElementById('carBuyPrice').value || 0);
     const file = document.getElementById('carPhoto').files[0];
@@ -3345,44 +2834,44 @@
       document.getElementById('carPhoto').value = '';
     };
     reader.readAsDataURL(file);
-  });
+  };
 
-  document.getElementById('addGarageLeadBtn')?.addEventListener('click', addGarageLead);
-  document.getElementById('backToGarageBtn')?.addEventListener('click', () => {
+  document.getElementById('addGarageLeadBtn').onclick = () => addGarageLead();
+  document.getElementById('backToGarageBtn').onclick = () => {
     state.selectedView = 'garage';
     saveState();
     render();
-  });
-  document.getElementById('leadSearch')?.addEventListener('input', (e) => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+  };
+  document.getElementById('leadSearch').oninput = (e) => {
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
     state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
     state.ui.leadFilters.query = e.target.value;
     saveState();
     render();
-  });
-  document.getElementById('leadDueFilter')?.addEventListener('change', (e) => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+  };
+  document.getElementById('leadDueFilter').onchange = (e) => {
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
     state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
     state.ui.leadFilters.due = e.target.value;
     saveState();
     render();
-  });
-  document.getElementById('leadSort')?.addEventListener('change', (e) => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+  };
+  document.getElementById('leadSort').onchange = (e) => {
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
     state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
     state.ui.leadFilters.sort = e.target.value;
     saveState();
     render();
-  });
-  document.getElementById('leadOnlyDueBtn')?.addEventListener('click', () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+  };
+  document.getElementById('leadOnlyDueBtn').onclick = () => {
+    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
     state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
     state.ui.leadFilters.due = '0';
     saveState();
     render();
-  });
+  };
 
-  document.getElementById('addImportantBtn')?.addEventListener('click', () => {
+  document.getElementById('addImportantBtn').onclick = () => {
     const title = document.getElementById('importantTitle').value.trim();
     const xp = Number(document.getElementById('importantXp').value || 0);
     const coins = Number(document.getElementById('importantCoins').value || 0);
@@ -3394,79 +2883,24 @@
     document.getElementById('importantTitle').value = '';
     document.getElementById('importantXp').value = '20';
     document.getElementById('importantCoins').value = '10';
-  });
+  };
 
-  document.getElementById('addBudgetBtn')?.addEventListener('click', () => {
-    const amount = Number(document.getElementById('budgetAmount').value || 0);
-    const sign = document.getElementById('budgetSign').value || 'in';
-    const date = document.getElementById('budgetDate').value || todayISO();
-    const note = document.getElementById('budgetNote').value.trim();
-    if(!amount || amount <= 0){
-      toast('Įrašyk sumą', '💰');
-      return;
-    }
-    addSignedBudget(sign === 'out' ? -amount : amount);
-    addFinanceLedgerEntry({kind:'budget', title: sign === 'out' ? 'Biudžeto išėmimas' : 'Biudžeto papildymas', amount, sign, date, note});
-    saveState();
-    render();
-    document.getElementById('budgetAmount').value = '';
-    document.getElementById('budgetNote').value = '';
-  });
-
-  document.getElementById('addDebtBtn')?.addEventListener('click', () => {
-    const person = document.getElementById('debtPerson').value.trim();
-    const amount = Number(document.getElementById('debtAmount').value || 0);
-    const sign = document.getElementById('debtSign').value || 'add';
-    const date = document.getElementById('debtDate').value || todayISO();
-    const note = document.getElementById('debtNote').value.trim();
-    const dueDate = document.getElementById('debtDueDate').value || '';
-    if(!person){
-      toast('Įrašyk kam skola', '✍️');
-      return;
-    }
-    if(!amount || amount <= 0){
-      toast('Įrašyk skolą', '💰');
-      return;
-    }
-    addDebtLedgerEntry({person, amount, sign, date, note, dueDate});
-    saveState();
-    render();
-    document.getElementById('debtPerson').value = '';
-    document.getElementById('debtAmount').value = '';
-    document.getElementById('debtNote').value = '';
-    document.getElementById('debtDueDate').value = '';
-  });
-
-  document.querySelectorAll('[data-garage-range]').forEach(btn => btn.addEventListener('click', () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
-    state.ui.garageStatsRange = btn.dataset.garageRange;
-    saveState();
-    render();
-  }));
-
-  document.querySelectorAll('[data-finance-range]').forEach(btn => btn.addEventListener('click', () => {
-    state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
-    state.ui.financeRange = btn.dataset.financeRange;
-    saveState();
-    render();
-  }));
-
-  document.getElementById('themeToggle')?.addEventListener('click', () => {
+  document.getElementById('themeToggle').onclick = () => {
     state.theme = state.theme === 'light' ? 'dark' : 'light';
     toast(state.theme === 'light' ? 'Šviesus režimas' : 'Tamsus režimas', '🎨');
     saveState(); render();
-  });
-  document.getElementById('soundToggle')?.addEventListener('click', () => {
+  };
+  document.getElementById('soundToggle').onclick = () => {
     state.sound = !state.sound;
     toast(`Garsas ${state.sound ? 'įjungtas' : 'išjungtas'}`, '🔊');
     saveState(); render();
-  });
-  document.getElementById('vibrateToggle')?.addEventListener('click', () => {
+  };
+  document.getElementById('vibrateToggle').onclick = () => {
     state.vibrate = !state.vibrate;
     toast(`Vibracija ${state.vibrate ? 'įjungta' : 'išjungta'}`, '📳');
     saveState(); render();
-  });
-  document.getElementById('resetBtn')?.addEventListener('click', () => {
+  };
+  document.getElementById('resetBtn').onclick = () => {
     const ok = window.confirm('Ar tikrai visiškai ištrinti žaidimą ir pradėti iš naujo?');
     if(!ok) return;
     localStorage.removeItem(STORAGE_KEY);
@@ -3478,9 +2912,9 @@
     saveState();
     render();
     toast('Žaidimas visiškai nuresetintas', '🧹');
-  });
+  };
 
-  document.getElementById('modalBackdrop')?.addEventListener('click', (e) => {
+  document.getElementById('modalBackdrop').addEventListener('click', (e) => {
     if(e.target.id === 'modalBackdrop') closeSheet();
   });
   window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeSheet(); });
@@ -3490,13 +2924,9 @@
   if(!state.dailyQuestDate) state.dailyQuestDate = todayISO();
   if(state.selectedView === 'skills') state.selectedView = 'menu';
   if(!state.history.length) state.history.push({title:'Sveiki atvykę', desc:'Žaidimas paruoštas startui', icon:'🎮', time: nowLabel()});
-  state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}, garageStatsRange:'month', financeRange:'month'};
+  state.ui = state.ui || {taskGroups:{Sveikata:false, Produktyvumas:false, Tobulėjimas:false}, historyOpen:false, garageTaskGroups:{autos:false, custom:false}, leadFilters:{query:'', due:'all', sort:'due'}};
   state.ui.garageTaskGroups = state.ui.garageTaskGroups || {autos:false, custom:false};
   state.ui.leadFilters = state.ui.leadFilters || {query:'', due:'all', sort:'due'};
-  state.ui.garageStatsRange = state.ui.garageStatsRange || 'month';
-  state.ui.financeRange = state.ui.financeRange || 'month';
-  if(document.getElementById('budgetDate') && !document.getElementById('budgetDate').value) document.getElementById('budgetDate').value = todayISO();
-  if(document.getElementById('debtDate') && !document.getElementById('debtDate').value) document.getElementById('debtDate').value = todayISO();
   checkDateReset();
   ensureMonthlyCycle();
   checkWorldUnlocks();
