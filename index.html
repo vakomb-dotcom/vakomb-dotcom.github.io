@@ -1468,6 +1468,147 @@
       margin-top:12px;
     }
 
+    /* Compact dominant variants layout */
+    .leadCompactForm{display:grid;gap:10px;margin-top:4px}
+    .leadCompactGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .leadFull{grid-column:1/-1}
+    .garageLeadGrid{gap:10px}
+    .garageLeadCard{
+      width:100%;
+      text-align:left;
+      appearance:none;
+      border:none;
+      padding:13px 14px;
+      min-height:112px;
+      display:grid;
+      gap:8px;
+      cursor:pointer;
+    }
+    .garageLeadCard:focus-visible{
+      outline:3px solid rgba(37,99,235,.26);
+      outline-offset:2px;
+    }
+    .garageLeadTop{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .garageLeadTitle{
+      display:block;
+      font-size:15px;
+      line-height:1.2;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .garageLeadYear{
+      display:inline-flex;
+      align-items:center;
+      margin-left:6px;
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+    }
+    .garageLeadMeta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:5px;
+    }
+    .garageLeadMeta .garageLeadTag{
+      padding:5px 9px;
+      font-size:10px;
+    }
+    .garageLeadPriceBlock{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap:6px;
+      flex:0 0 auto;
+    }
+    .garageLeadPrice{
+      font-size:18px;
+      line-height:1;
+      font-weight:900;
+      letter-spacing:-.03em;
+      color:var(--accent);
+    }
+    .garageLeadStatus{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:5px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--surface-2);
+      font-size:10px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .garageLeadStatus.good{background:#dcfce7;border-color:#bbf7d0}
+    .garageLeadStatus.warn{background:#fef3c7;border-color:#fde68a}
+    .garageLeadStatus.danger{background:#fee2e2;border-color:#fecaca}
+    .garageLeadNote{
+      font-size:12px;
+      line-height:1.35;
+      color:var(--muted);
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      min-height:32px;
+    }
+    .garageLeadSheetHero{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    .garageLeadSheetMain{
+      width:100%;
+      aspect-ratio:16/10;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:var(--surface-2);
+      background-size:cover;
+      background-position:center;
+    }
+    .garageLeadSheetMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .garageLeadSheetText{
+      padding:12px 14px;
+      border-radius:16px;
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      font-size:12px;
+      line-height:1.45;
+      color:var(--muted);
+    }
+    .garageLeadSheetThumbs{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+    .garageLeadSheetThumbs button{
+      border:none;
+      padding:0;
+      background:transparent;
+      appearance:none;
+    }
+    .garageLeadSheetThumbs .img{
+      aspect-ratio:1/1;
+      border-radius:14px;
+      background-size:cover;
+      background-position:center;
+      border:1px solid var(--line);
+    }
+    .leadEditGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    .leadEditGrid .field{margin-bottom:0}
+    .leadEditFull{grid-column:1/-1}
+    .sheetActions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+
   </style>
 </head>
 <body>
@@ -1641,7 +1782,7 @@
         <div class="garageMenuTitle" style="margin-bottom:12px">
           <div>
             <strong>Įkelti variantai</strong>
-            <span>Variantų sąrašas viršuje, naujas įkėlimas apačioje.</span>
+            <span>Variantai viršuje, įkėlimas apačioje. Paspausk ant varianto – atsivers nuotraukos ir redagavimas.</span>
           </div>
           <div class="badge info" id="garageLeadCount">0 variantų</div>
         </div>
@@ -1654,35 +1795,24 @@
         <div class="garageMenuTitle">
           <div>
             <strong>Naujas dominantis variantas</strong>
-            <span>Vienas laukas defektams ir pastaboms, kad pildymas būtų greitas ir aiškus.</span>
+            <span>Pildymas sutrumpintas – tik svarbiausi laukai.</span>
           </div>
           <button class="btn secondary" type="button" id="backToGarageBtn">← Į garažą</button>
         </div>
-        <div class="field"><label>Markė</label><input class="input" id="leadMake" placeholder="Nissan" /></div>
-        <div class="grid2">
-          <div class="field"><label>Modelis</label><input class="input" id="leadModel" placeholder="X-Trail" /></div>
-          <div class="field"><label>Metai</label><input class="input" id="leadYear" type="number" min="1900" step="1" placeholder="2008" /></div>
-        </div>
-        <div class="grid2">
-          <div class="field"><label>Kuras</label><input class="input" id="leadFuel" placeholder="Dyzelis" /></div>
-          <div class="field"><label>Tel. nr.</label><input class="input" id="leadPhone" placeholder="+370..." /></div>
-        </div>
-        <div class="grid2">
-          <div class="field"><label>Miestas</label><input class="input" id="leadCity" placeholder="Vilnius" /></div>
-          <div class="field"><label>Pradinė kaina</label><input class="input" id="leadInitialPrice" type="number" min="0" step="1" placeholder="2000" /></div>
-        </div>
-        <div class="grid2">
-          <div class="field"><label>Mūsų siūlyta kaina</label><input class="input" id="leadTargetPrice" type="number" min="0" step="1" placeholder="1500" /></div>
-          <div class="field"><label>Po kiek dienų skambinti</label><input class="input" id="leadFollowDays" type="number" min="0" step="1" value="2" /></div>
-        </div>
-        <div class="field"><label>Defektai ir pastabos</label><textarea class="input" id="leadNotes" rows="4" placeholder="Variklis, kėbulas, derybų stadija, ką sakė, kada skambinti..."></textarea></div>
-        <div class="field"><label>Nuotraukos</label><input class="input" id="leadPhotos" type="file" accept="image/*" multiple /></div>
-        <button class="btn" id="addGarageLeadBtn" style="width:100%">Įkelti variantą</button>
+        <form class="leadCompactForm" id="garageLeadForm">
+          <div class="field leadFull"><label>Pavadinimas</label><input class="input" id="leadTitle" placeholder="Toyota RAV4" /></div>
+          <div class="leadCompactGrid">
+            <div class="field"><label>Metai</label><input class="input" id="leadYear" type="number" min="1900" step="1" placeholder="2008" /></div>
+            <div class="field"><label>Kaina</label><input class="input" id="leadPrice" type="number" min="0" step="1" placeholder="2000" /></div>
+          </div>
+          <div class="field leadFull"><label>Kontaktas</label><input class="input" id="leadContact" placeholder="+370..." /></div>
+          <div class="field leadFull"><label>Defektai ir pastabos</label><textarea class="input" id="leadNotes" rows="3" placeholder="Ką pasakė, silpnos vietos, derybų pastabos..."></textarea></div>
+          <div class="field leadFull"><label>Nuotraukos</label><input class="input" id="leadPhotos" type="file" accept="image/*" multiple /></div>
+          <button class="btn leadFull" id="addGarageLeadBtn" type="submit" style="width:100%">Įkelti variantą</button>
+        </form>
       </div>
     </div>
   </div>
-
-
 
   <div class="view" id="view-garage-stats">
     <div class="sectionHead">
@@ -2030,6 +2160,26 @@
     return days === Number(filter);
   }
 
+  function garageLeadLabel(lead){
+    const title = String(lead?.title || [lead?.make, lead?.model].filter(Boolean).join(' ').trim() || '').trim();
+    return title || 'Be pavadinimo';
+  }
+
+  function garageLeadPrice(lead){
+    const price = Number(lead?.initialPrice || lead?.targetPrice || 0);
+    return Number.isFinite(price) ? price : 0;
+  }
+
+  function garageLeadContact(lead){
+    return String(lead?.contact || lead?.phone || '').trim();
+  }
+
+  function garageLeadCompactNote(lead){
+    const note = String(lead?.notes || lead?.defects || '').trim();
+    if(!note) return 'Pastabų nėra.';
+    return note.length > 120 ? `${note.slice(0,117).trim()}…` : note;
+  }
+
   function garageTaskStatsList(){
     const today = todayISO();
     const weekCutoff = new Date();
@@ -2128,18 +2278,13 @@
   }
 
   function garageLeadFromFormValues(){
-    const make = document.getElementById('leadMake')?.value.trim();
-    const model = document.getElementById('leadModel')?.value.trim();
-    const year = Number(document.getElementById('leadYear')?.value || 0);
-    const fuel = document.getElementById('leadFuel')?.value.trim();
-    const phone = document.getElementById('leadPhone')?.value.trim();
-    const city = document.getElementById('leadCity')?.value.trim();
-    const initialPrice = Number(document.getElementById('leadInitialPrice')?.value || 0);
-    const targetPrice = Number(document.getElementById('leadTargetPrice')?.value || 0);
-    const followDays = Math.max(0, Number(document.getElementById('leadFollowDays')?.value || 0));
+    const title = document.getElementById('leadTitle')?.value.trim();
+    const year = Number(document.getElementById('leadYear')?.value || 0) || '';
+    const price = Number(document.getElementById('leadPrice')?.value || 0);
+    const contact = document.getElementById('leadContact')?.value.trim();
     const notes = document.getElementById('leadNotes')?.value.trim();
     const files = Array.from(document.getElementById('leadPhotos')?.files || []);
-    return {make, model, year, fuel, phone, city, initialPrice, targetPrice, followDays, notes, files};
+    return {title, year, price, contact, notes, files};
   }
 
   function leadPhotosToDataUrls(files){
@@ -2177,43 +2322,49 @@
   }
 
   function addGarageLead(){
-    const data = garageLeadFromFormValues();
-    if(!data.make || !data.model){
-      toast('Įrašyk markę ir modelį', '✍️');
+    const title = document.getElementById('leadTitle').value.trim();
+    const year = Number(document.getElementById('leadYear').value || 0) || '';
+    const price = Number(document.getElementById('leadPrice').value || 0);
+    const contact = document.getElementById('leadContact').value.trim();
+    const notes = document.getElementById('leadNotes').value.trim();
+    const files = Array.from(document.getElementById('leadPhotos').files || []);
+    if(!title){
+      toast('Įrašyk varianto pavadinimą', '✍️');
       return;
     }
-    leadPhotosToDataUrls(data.files).then(photos => {
+    leadPhotosToDataUrls(files).then(photos => {
       const lead = {
         id: uid(),
-        make: data.make,
-        model: data.model,
-        year: data.year || '',
-        fuel: data.fuel,
-        phone: data.phone,
-        city: data.city,
-        initialPrice: data.initialPrice || 0,
-        targetPrice: data.targetPrice || 0,
-        notes: data.notes,
+        title,
+        make: title,
+        model: '',
+        year,
+        contact,
+        phone: contact,
+        city: '',
+        fuel: '',
+        initialPrice: Math.max(0, Number(price) || 0),
+        targetPrice: 0,
+        notes,
         defects: '',
-        followUpDays: data.followDays,
+        followUpDays: 2,
         createdAt: nowLabel(),
         createdDateISO: todayISO(),
         lastCalledAt: '',
-        nextCallDate: addDaysISO(todayISO(), data.followDays || 0),
+        nextCallDate: addDaysISO(todayISO(), 2),
         photos,
         calls: 0,
         status: 'aktyvus'
       };
       state.leadVariants.unshift(lead);
-      addHistory('Dominantis variantas', `${lead.make} ${lead.model} įkeltas`, '📋');
+      addHistory('Dominantis variantas', `${garageLeadLabel(lead)} įkeltas`, '📋');
       toast('Variantas įkeltas', '📋');
       saveState();
       render();
-      ['leadMake','leadModel','leadYear','leadFuel','leadPhone','leadCity','leadInitialPrice','leadTargetPrice','leadFollowDays','leadNotes','leadPhotos'].forEach(id => {
+      ['leadTitle','leadYear','leadPrice','leadContact','leadNotes','leadPhotos'].forEach(id => {
         const el = document.getElementById(id);
         if(!el) return;
         if(el.type === 'file') el.value = '';
-        else if(id === 'leadFollowDays') el.value = '2';
         else el.value = '';
       });
     });
@@ -2226,7 +2377,7 @@
     lead.lastCalledAt = nowLabel();
     lead.updatedAt = nowLabel();
     lead.nextCallDate = addDaysISO(todayISO(), lead.followUpDays || 0);
-    addHistory('Skambutis variantui', `${lead.make} ${lead.model} — kitas skambutis po ${lead.followUpDays || 0} d.`, '📞');
+    addHistory('Skambutis variantui', `${garageLeadLabel(lead)} — kitas skambutis po ${lead.followUpDays || 0} d.`, '📞');
     toast(`Paskambinta. Kitas skambutis po ${lead.followUpDays || 0} d.`, '📞');
     saveState();
     render();
@@ -2235,10 +2386,10 @@
   function deleteGarageLead(leadId){
     const lead = state.leadVariants.find(v => v.id === leadId);
     if(!lead) return;
-    const ok = window.confirm(`Ištrinti variantą „${lead.make} ${lead.model}“?`);
+    const ok = window.confirm(`Ištrinti variantą „${garageLeadLabel(lead)}“?`);
     if(!ok) return;
     state.leadVariants = state.leadVariants.filter(v => v.id !== leadId);
-    addHistory('Dominantis variantas', `Ištrintas: ${lead.make} ${lead.model}`, '🗑️');
+    addHistory('Dominantis variantas', `Ištrintas: ${garageLeadLabel(lead)}`, '🗑️');
     toast('Variantas ištrintas', '🗑️');
     saveState();
     render();
@@ -2247,15 +2398,17 @@
   function updateGarageLead(leadId, data, photos=[]){
     const lead = state.leadVariants.find(v => v.id === leadId);
     if(!lead) return false;
-    lead.make = (data.make || '').trim();
-    lead.model = (data.model || '').trim();
+    lead.title = (data.title || '').trim();
+    lead.make = lead.title;
+    lead.model = '';
     lead.year = data.year || '';
-    lead.fuel = (data.fuel || '').trim();
-    lead.phone = (data.phone || '').trim();
-    lead.city = (data.city || '').trim();
-    lead.initialPrice = Math.max(0, Number(data.initialPrice) || 0);
-    lead.targetPrice = Math.max(0, Number(data.targetPrice) || 0);
-    lead.followUpDays = Math.max(0, Number(data.followUpDays) || 0);
+    lead.contact = (data.contact || '').trim();
+    lead.phone = lead.contact;
+    lead.city = '';
+    lead.fuel = '';
+    lead.initialPrice = Math.max(0, Number(data.price) || 0);
+    lead.targetPrice = 0;
+    lead.followUpDays = 2;
     lead.notes = (data.notes || '').trim();
     lead.defects = '';
     if(Array.isArray(photos) && photos.length){
@@ -2306,83 +2459,65 @@
     const lead = state.leadVariants.find(v => v.id === leadId);
     if(!lead) return;
     const photos = (lead.photos || []).slice(0,6);
+    const title = garageLeadLabel(lead);
+    const price = garageLeadPrice(lead);
+    const days = garageLeadDaysLeft(lead);
+    const daysClass = days < 0 ? 'danger' : days === 0 ? 'warn' : 'good';
+    const mainPhoto = photos[0] || '';
     const html = `
       <div class="sheetHead">
-        <h3>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h3>
+        <h3>${escapeHTML(title)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h3>
         <button class="closeBtn" id="closeLeadSheet">✕</button>
       </div>
-      <div class="garageLeadCard" style="margin:0">
-        <div class="garageLeadHero" style="${photos[0] ? `background-image:url('${photos[0]}')` : ''}">
-          <div class="leadPill">${garageLeadDaysText(lead)}</div>
-          <div class="leadPill">${escapeHTML(lead.city || 'Be miesto')}</div>
+      <div class="garageLeadSheetHero">
+        <div class="garageLeadSheetMain" style="${mainPhoto ? `background-image:url('${mainPhoto}')` : ''}"></div>
+        <div class="garageLeadSheetMeta">
+          <span class="garageLeadTag good">Kaina ${moneyFmt(price)}</span>
+          <span class="garageLeadTag ${daysClass}">${garageLeadDaysText(lead)}</span>
+          ${garageLeadContact(lead) ? `<span class="garageLeadTag">${escapeHTML(garageLeadContact(lead))}</span>` : ''}
         </div>
-        <div class="garageLeadBody">
-          <div class="garageLeadTags">
-            <span class="garageLeadTag good">Pradinė ${moneyFmt(lead.initialPrice)}</span>
-            <span class="garageLeadTag">Mūsų kaina ${moneyFmt(lead.targetPrice)}</span>
-            <span class="garageLeadTag">${escapeHTML(lead.fuel || 'Nenurodyta')}</span>
-          </div>
-
-          <div class="panel pad" style="margin-top:12px">
-            <div class="field"><label>Markė</label><input class="input" id="editLeadMake" value="${escapeHTML(lead.make || '')}" /></div>
-            <div class="field"><label>Modelis</label><input class="input" id="editLeadModel" value="${escapeHTML(lead.model || '')}" /></div>
-            <div class="leadEditGrid">
-              <div class="field"><label>Metai</label><input class="input" id="editLeadYear" type="number" min="1900" step="1" value="${escapeHTML(String(lead.year || ''))}" /></div>
-              <div class="field"><label>Kuras</label><input class="input" id="editLeadFuel" value="${escapeHTML(lead.fuel || '')}" /></div>
-              <div class="field"><label>Tel. nr.</label><input class="input" id="editLeadPhone" value="${escapeHTML(lead.phone || '')}" /></div>
-              <div class="field"><label>Miestas</label><input class="input" id="editLeadCity" value="${escapeHTML(lead.city || '')}" /></div>
-              <div class="field"><label>Pradinė kaina</label><input class="input" id="editLeadInitialPrice" type="number" min="0" step="1" value="${Number(lead.initialPrice || 0)}" /></div>
-              <div class="field"><label>Mūsų kaina</label><input class="input" id="editLeadTargetPrice" type="number" min="0" step="1" value="${Number(lead.targetPrice || 0)}" /></div>
-              <div class="field"><label>Po kiek dienų skambinti</label><input class="input" id="editLeadFollowDays" type="number" min="0" step="1" value="${Number(lead.followUpDays || 0)}" /></div>
-              <div class="field leadEditFull"><label>Defektai ir pastabos</label><textarea class="input" id="editLeadNotes" rows="4">${escapeHTML((lead.notes || lead.defects || '').trim())}</textarea></div>
-              <div class="field leadEditFull"><label>Pridėti nuotraukų</label><input class="input" id="editLeadPhotos" type="file" accept="image/*" multiple /></div>
-            </div>
-            <div class="leadEditNote">Naujos nuotraukos bus pridėtos prie esamų. Jei nekeisi nuotraukų, jos liks tokios pat.</div>
-          </div>
-
-          <div class="leadDetailBox" style="margin-top:12px">
-            <strong style="color:var(--text);display:block;margin-bottom:6px">Kontaktai ir būsena</strong>
-            Skambinta: ${escapeHTML(lead.lastCalledAt || 'dar ne')}<br>
-            Kitas skambutis: ${escapeHTML(lead.nextCallDate || '—')}<br>
-            Po ${Number(lead.followUpDays || 0)} dienų.
-          </div>
-
-          <div class="leadGallery">${photos.length ? photos.map((src, i) => `<button type="button" class="leadThumbBtn" data-open-gallery-index="${i}"><div class="img" style="background-image:url('${src}')"></div></button>`).join('') : '<div class="leadDetailBox" style="grid-column:1/-1">Nuotraukų dar nėra.</div>'}</div>
-
-          <div class="sheetActions">
-            <button class="btn" id="leadSaveBtn">Išsaugoti pakeitimus</button>
-            <button class="btn secondary" id="leadGalleryBtn">Nuotraukos</button>
-            <button class="btn secondary" id="leadCallNowBtn">📞 Paskambinta</button>
-            <button class="btn danger" id="leadDeleteBtn">Ištrinti variantą</button>
-          </div>
+        <div class="garageLeadSheetText">
+          <strong style="color:var(--text);display:block;margin-bottom:6px">Defektai ir pastabos</strong>
+          ${escapeHTML(String(lead.notes || lead.defects || '—').trim() || '—')}
         </div>
+        <div class="garageLeadSheetThumbs">${photos.length ? photos.map((src, i) => `<button type="button" data-open-gallery-index="${i}"><div class="img" style="background-image:url('${src}')"></div></button>`).join('') : '<div class="garageLeadSheetText" style="grid-column:1/-1">Nuotraukų dar nėra.</div>'}</div>
+      </div>
+      <div class="panel pad" style="margin-top:12px">
+        <div class="field leadFull"><label>Pavadinimas</label><input class="input" id="editLeadTitle" value="${escapeHTML(lead.title || garageLeadLabel(lead) || '')}" /></div>
+        <div class="leadEditGrid">
+          <div class="field"><label>Metai</label><input class="input" id="editLeadYear" type="number" min="1900" step="1" value="${escapeHTML(String(lead.year || ''))}" /></div>
+          <div class="field"><label>Kaina</label><input class="input" id="editLeadPrice" type="number" min="0" step="1" value="${Number(price || 0)}" /></div>
+          <div class="field leadEditFull"><label>Kontaktas</label><input class="input" id="editLeadContact" value="${escapeHTML(garageLeadContact(lead) || '')}" /></div>
+          <div class="field leadEditFull"><label>Defektai ir pastabos</label><textarea class="input" id="editLeadNotes" rows="3">${escapeHTML(String(lead.notes || lead.defects || '').trim())}</textarea></div>
+          <div class="field leadEditFull"><label>Pridėti nuotraukų</label><input class="input" id="editLeadPhotos" type="file" accept="image/*" multiple /></div>
+        </div>
+        <div class="leadEditNote">Nuotraukos pridedamos prie esamų. Viskas išsaugoma vienu mygtuku.</div>
+      </div>
+      <div class="sheetActions">
+        <button class="btn" id="leadSaveBtn">Išsaugoti</button>
+        <button class="btn secondary" id="leadCallNowBtn">📞 Paskambinta</button>
+        <button class="btn danger" id="leadDeleteBtn">Ištrinti</button>
       </div>
     `;
     openSheet(html);
     document.getElementById('closeLeadSheet').onclick = closeSheet;
     document.getElementById('leadSaveBtn').onclick = async () => {
-      const make = document.getElementById('editLeadMake').value.trim();
-      const model = document.getElementById('editLeadModel').value.trim();
-      if(!make || !model){
-        toast('Įrašyk markę ir modelį', '✍️');
+      const title = document.getElementById('editLeadTitle').value.trim();
+      if(!title){
+        toast('Įrašyk pavadinimą', '✍️');
         return;
       }
       const files = Array.from(document.getElementById('editLeadPhotos').files || []);
       const photos = files.length ? await leadPhotosToDataUrls(files) : [];
       const ok = updateGarageLead(lead.id, {
-        make,
-        model,
+        title,
         year: Number(document.getElementById('editLeadYear').value || 0) || '',
-        fuel: document.getElementById('editLeadFuel').value.trim(),
-        phone: document.getElementById('editLeadPhone').value.trim(),
-        city: document.getElementById('editLeadCity').value.trim(),
-        initialPrice: Number(document.getElementById('editLeadInitialPrice').value || 0),
-        targetPrice: Number(document.getElementById('editLeadTargetPrice').value || 0),
-        followUpDays: Number(document.getElementById('editLeadFollowDays').value || 0),
+        price: Number(document.getElementById('editLeadPrice').value || 0),
+        contact: document.getElementById('editLeadContact').value.trim(),
         notes: document.getElementById('editLeadNotes').value.trim()
       }, photos);
       if(!ok) return;
-      addHistory('Dominantis variantas', `${make} ${model} atnaujintas`, '✏️');
+      addHistory('Dominantis variantas', `${title} atnaujintas`, '✏️');
       toast('Pakeitimai išsaugoti', '✏️');
       saveState();
       render();
@@ -2396,11 +2531,8 @@
       deleteGarageLead(lead.id);
       closeSheet();
     };
-    const galleryBtn = document.getElementById('leadGalleryBtn');
-    if(galleryBtn) galleryBtn.onclick = () => openLeadGallery(lead.id, 0);
     document.querySelectorAll('[data-open-gallery-index]').forEach(btn => btn.onclick = () => openLeadGallery(lead.id, Number(btn.dataset.openGalleryIndex || 0)));
   }
-
 
   function openLeadGallery(leadId, startIndex=0){
     const lead = state.leadVariants.find(v => v.id === leadId);
@@ -2411,7 +2543,7 @@
     const active = photos[idx];
     const html = `
       <div class="sheetHead">
-        <h3>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h3>
+        <h3>${escapeHTML(garageLeadLabel(lead))}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h3>
         <button class="closeBtn" id="closeGallerySheet">✕</button>
       </div>
       <div class="gallerySheet">
@@ -3720,42 +3852,30 @@
       leadRoot.innerHTML = allLeads.length ? allLeads.map(lead => {
         const days = garageLeadDaysLeft(lead);
         const daysClass = days < 0 ? 'danger' : days === 0 ? 'warn' : 'good';
-        const heroStyle = lead.photos?.[0] ? `background-image:url('${lead.photos[0]}')` : '';
-        const contactLine = [lead.city || 'Be miesto', lead.fuel || '—', lead.phone || '—'].filter(Boolean).join(' • ');
-        const notesText = String(lead.notes || lead.defects || '—').trim();
+        const title = garageLeadLabel(lead);
+        const note = garageLeadCompactNote(lead);
+        const price = garageLeadPrice(lead);
+        const year = lead.year ? `<span class="garageLeadYear">${escapeHTML(String(lead.year))}</span>` : '';
+        const topMeta = [];
+        if(lead.calls) topMeta.push(`<span class="garageLeadTag">Skambinta ${Number(lead.calls || 0)}</span>`);
+        if(garageLeadContact(lead)) topMeta.push(`<span class="garageLeadTag">${escapeHTML(garageLeadContact(lead))}</span>`);
         return `
-          <div class="garageLeadCard" data-lead-id="${lead.id}">
-            <div class="garageLeadHero" style="${heroStyle}">
-              <div class="leadPill">${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</div>
-              <div class="leadPill">${garageLeadDaysText(lead)}</div>
-            </div>
-            <div class="garageLeadBody">
-              <h4>${escapeHTML(lead.make)} ${escapeHTML(lead.model)}${lead.year ? ' ' + escapeHTML(String(lead.year)) : ''}</h4>
-              <div class="garageLeadLine"><span>${escapeHTML(contactLine)}</span><span>${escapeHTML(lead.lastCalledAt || 'dar ne skambinta')}</span></div>
-              <div class="garageLeadTags">
-                <span class="garageLeadTag good">Pradinė ${moneyFmt(lead.initialPrice)}</span>
-                <span class="garageLeadTag">Mūsų kaina ${moneyFmt(lead.targetPrice)}</span>
-                <span class="garageLeadTag ${daysClass}">${garageLeadDaysText(lead)}</span>
+          <button type="button" class="garageLeadCard" data-lead-id="${lead.id}">
+            <div class="garageLeadTop">
+              <div style="min-width:0;flex:1">
+                <div class="garageLeadTitle">${escapeHTML(title)}${year}</div>
+                <div class="garageLeadMeta">${topMeta.join('')}</div>
               </div>
-              <div class="leadDetailBox" style="margin-top:12px">
-                <strong style="color:var(--text);display:block;margin-bottom:6px">Defektai ir pastabos</strong>
-                ${escapeHTML(notesText)}
-              </div>
-              <div class="garageLeadLine"><span>Skambinti po: ${Number(lead.followUpDays || 0)} d.</span><span>Atnaujinta: ${escapeHTML(lead.updatedAt || lead.createdAt || '')}</span></div>
-              <div class="leadGallery">${(lead.photos || []).map((src, i) => `<button type="button" class="leadThumbBtn" data-open-lead-gallery="${lead.id}" data-photo-index="${i}"><div class="img" style="background-image:url('${src}')"></div></button>`).join('') || '<div class="leadDetailBox" style="grid-column:1/-1">Nuotraukų dar nėra.</div>'}</div>
-              <div class="garageLeadActions">
-                <button class="btn secondary" type="button" data-call-lead="${lead.id}">📞 Skambinta</button>
-                <button class="btn secondary" type="button" data-edit-lead="${lead.id}">Redaguoti</button>
-                <button class="btn danger" type="button" data-delete-lead="${lead.id}">Ištrinti</button>
+              <div class="garageLeadPriceBlock">
+                <div class="garageLeadPrice">${moneyFmt(price)}</div>
+                <span class="garageLeadStatus ${daysClass}">${garageLeadDaysText(lead)}</span>
               </div>
             </div>
-          </div>
+            <div class="garageLeadNote">${escapeHTML(note)}</div>
+          </button>
         `;
       }).join('') : `<div class="emptyState">Dar nėra įkeltų variantų. Įkelk pirmą pasiūlymą ir jis atsiras čia viršuje.</div>`;
-      leadRoot.querySelectorAll('[data-call-lead]').forEach(btn => btn.onclick = () => callGarageLead(btn.dataset.callLead));
-      leadRoot.querySelectorAll('[data-delete-lead]').forEach(btn => btn.onclick = () => deleteGarageLead(btn.dataset.deleteLead));
-      leadRoot.querySelectorAll('[data-edit-lead]').forEach(btn => btn.onclick = () => openGarageLeadSheet(btn.dataset.editLead));
-      leadRoot.querySelectorAll('[data-open-lead-gallery]').forEach(btn => btn.onclick = () => openLeadGallery(btn.dataset.openLeadGallery, Number(btn.dataset.photoIndex || 0)));
+      leadRoot.querySelectorAll('[data-lead-id]').forEach(btn => btn.onclick = () => openGarageLeadSheet(btn.dataset.leadId));
     }
 
     // įgūdžiai
@@ -3986,10 +4106,13 @@
     reader.readAsDataURL(file);
   };
 
-  const addGarageLeadBtn = document.getElementById('addGarageLeadBtn');
-  if(addGarageLeadBtn && !addGarageLeadBtn.dataset.bound){
-    addGarageLeadBtn.dataset.bound = '1';
-    addGarageLeadBtn.onclick = () => addGarageLead();
+  const garageLeadForm = document.getElementById('garageLeadForm');
+  if(garageLeadForm && !garageLeadForm.dataset.bound){
+    garageLeadForm.dataset.bound = '1';
+    garageLeadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      addGarageLead();
+    });
   }
   document.getElementById('backToGarageBtn').onclick = () => {
     state.selectedView = 'garage';
